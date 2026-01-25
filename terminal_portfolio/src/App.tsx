@@ -27,7 +27,7 @@ const AppContent: React.FC = () => {
       case 'experience': return <MissionLog />;
       case 'projects': return <QuestBoard />;
       case 'comms': return <Comms />;
-      case 'ask-ai': return <AskAI />;
+      case 'ask-ai': return <AskAI onClose={() => setCurrentView('dashboard')} />;
       default: return <Dashboard onNavigate={setCurrentView} />;
     }
   };

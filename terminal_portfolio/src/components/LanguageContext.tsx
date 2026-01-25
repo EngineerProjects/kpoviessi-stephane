@@ -15,7 +15,21 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  // Initialize state with a function to detect browser language on first render
+  const [language, setLanguage] = useState<Language>(() => {
+    // Check if code is running in browser environment
+    if (typeof window !== 'undefined') {
+      // Get browser language (e.g., 'fr-FR', 'en-US', 'fr')
+      const browserLang = navigator.language || navigator.languages?.[0];
+
+      // If language starts with 'fr', set default to French
+      if (browserLang && browserLang.toLowerCase().startsWith('fr')) {
+        return 'fr';
+      }
+    }
+    // Default fallback to English
+    return 'en';
+  });
 
   const toggleLanguage = () => {
     setLanguage(prev => (prev === 'en' ? 'fr' : 'en'));
