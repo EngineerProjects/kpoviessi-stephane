@@ -76,7 +76,7 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
   },
   skills: [
     ...SKILLS_COMMON,
-    { name: "English", level: 5, category: "Languages" },
+    { name: "English", level: 3, category: "Languages" },
     { name: "French", level: 5, category: "Languages" },
     { name: "Yoruba", level: 5, category: "Languages" },
     { name: "Fon", level: 5, category: "Languages" },
