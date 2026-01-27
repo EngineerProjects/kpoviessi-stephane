@@ -7,6 +7,7 @@ import QuestBoard from './components/QuestBoard';
 import Comms from './components/Comms';
 import AskAI from './components/AskAI';
 import { LanguageProvider } from './components/LanguageContext';
+import { AIProvider } from './components/AIContext';
 
 const AppContent: React.FC = () => {
   const [currentView, setCurrentView] = useState('dashboard');
@@ -137,7 +138,9 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <LanguageProvider>
-      <AppContent />
+      <AIProvider>
+        <AppContent />
+      </AIProvider>
     </LanguageProvider>
   );
 };
