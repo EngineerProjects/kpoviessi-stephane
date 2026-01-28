@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Terminal, Code, Linkedin, Github, Mail } from 'lucide-react';
+import { MapPin, User, Terminal, Code, Linkedin, Github, Mail } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 interface DashboardProps {
@@ -13,13 +13,14 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
    const [introText, setIntroText] = useState('');
    const [outroText, setOutroText] = useState('');
    const [showPillars, setShowPillars] = useState(false);
-
+   const [, setStage] = useState<'intro' | 'pillars' | 'outro' | 'done'>('intro');
 
    useEffect(() => {
       // Reset state when data (language) changes
       setIntroText('');
       setOutroText('');
       setShowPillars(false);
+      setStage('intro');
 
       let currentStage = 'intro';
       let charIndex = 0;
@@ -36,6 +37,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                timer = setTimeout(typeWriter, 10);
             } else {
                currentStage = 'pillars';
+               setStage('pillars');
                setShowPillars(true);
                // Small delay before starting outro to let user digest pillars
                timer = setTimeout(typeWriter, 800);
@@ -43,6 +45,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
          } else if (currentStage === 'pillars') {
             // Pillars are shown via CSS transition, move to outro
             currentStage = 'outro';
+            setStage('outro');
             charIndex = 0;
             timer = setTimeout(typeWriter, 10);
          } else if (currentStage === 'outro') {
@@ -52,6 +55,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                timer = setTimeout(typeWriter, 10);
             } else {
                currentStage = 'done';
+               setStage('done');
             }
          }
       };
@@ -155,7 +159,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                   <div className="relative group">
                      <div className="w-40 h-40 md:w-56 md:h-56 lg:w-72 lg:h-72 border-2 border-neon-blue rounded-full overflow-hidden relative shadow-[0_0_30px_rgba(144,202,249,0.3)] transition-all duration-500">
                         <div className="absolute inset-0 bg-neon-blue/20 z-10 animate-pulse"></div>
-                        <img src="/profile.jpeg" alt="Profile" className="w-full h-full object-cover p-1 rounded-full opacity-80 hover:opacity-100 transition-opacity" />
+                        <div className="w-full h-full bg-deep-space flex items-center justify-center">
+                           <img
+                              src="/profile.png"
+                              alt="Profile"
+                              className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-300"
+                           />
+                        </div>
                         <div className="absolute w-full h-1 bg-neon-blue/50 top-0 animate-scan z-20 shadow-[0_0_10px_#90CAF9]"></div>
                      </div>
                      <div className="mt-4 md:mt-6 text-center">
@@ -191,7 +201,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                      </div>
                      <div className="flex items-center justify-center md:justify-start gap-2 md:gap-3 bg-white/5 p-2 rounded md:bg-transparent md:p-0">
                         <Code className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
-                        <span className="whitespace-nowrap">{data.ui.dashboard.stack}:</span> <span className="text-white">PYTHON / SPARK / AI</span>
+                        <span className="whitespace-nowrap">{data.ui.dashboard.stack}:</span> <span className="text-white">PYTHON / AI AGENTS / PYTORCH / PYSPARK / SQL</span>
                      </div>
                   </div>
                </div>

@@ -22,6 +22,10 @@ const SKILLS_COMMON: Skill[] = [
   { name: "GANs", level: 4, category: "ML/AI" },
   { name: "Reinforcement Learning", level: 3, category: "ML/AI" },
   { name: "Hugging Face", level: 4, category: "ML/AI" },
+  { name: "Pydantic AI", level: 4, category: "ML/AI" },
+  { name: "LangChain", level: 4, category: "ML/AI" },
+  { name: "Ollama", level: 4, category: "ML/AI" },
+  { name: "MCP", level: 4, category: "ML/AI" },
 
   // Data Eng
   { name: "Pandas", level: 5, category: "Data Engineering" },
@@ -45,26 +49,31 @@ export const DATA_EN: AppData = {
     email: "oastephanekpoviessi@gmail.com",
     phone: "+33 7 48 59 47 13",
     location: "Île-de-France, France",
-    bio: `I transform data complexity into concrete growth levers. My approach combines software rigor (Python, Go, SQL) and cutting-edge AI to build secure, scalable, and future-ready production infrastructures. My goal: automate your critical tasks and make your data immediately actionable.
+    bio: `I help companies explore and leverage their data. My work involves designing predictive models and artificial intelligence systems that address concrete business challenges.
 
-My pillars of expertise:
-Data Engineering: Architecture modernization and migration of legacy pipelines to high-performance, maintainable ecosystems.
-Generative AI & Agents: Designing RAG systems and orchestrating multi-agent workflows to automate complex business processes.
-Data Science: Predictive analytics and advanced modeling to transform uncertainty into data-driven decisions.
-Computer Vision: Developing computer vision algorithms for industry (Image generation, detection, video analysis...).
+Pillars of expertise:
 
-Looking to structure your Data ecosystem or deploy value-generating AI solutions? Let's tackle your technical challenges together.
+Generative AI & Agentic Systems: Creating agents capable of using your tools (web search, code, navigation). I develop autonomous systems and custom connectors (MCP) to automate your business processes.
+
+Data Science & Statistics: In-depth analysis and advanced modeling to identify trends and facilitate decision-making.
+
+Computer Vision: Development of vision algorithms (detection, video analysis, generation) tailored to your specific needs.
+
+Data Engineering (Support): Mastery of the technical environment (Python, Go, SQL) to build clean and actionable data pipelines.
+
+Do you have a project in mind or a data-related issue?
+Feel free to contact me to discuss it or to see a demo of my latest work.
 
 > [LETS_DISCUSS_YOUR_PROJECT]`,
     marketing: {
-      intro: "I transform data complexity into concrete growth levers. My approach combines software rigor (Python, Go, SQL) and cutting-edge AI to build secure, scalable, and future-ready production infrastructures. My goal: automate your critical tasks and make your data immediately actionable.\n\nMy pillars of expertise:",
+      intro: "I help companies explore and leverage their data. My work involves designing predictive models and artificial intelligence systems that address concrete business challenges.\n\nPillars of expertise:",
       pillars: [
-        { title: "Data Engineering", desc: "Architecture modernization and migration of legacy pipelines to high-performance, maintainable ecosystems." },
-        { title: "Generative AI & Agents", desc: "Designing RAG systems and orchestrating multi-agent workflows to automate complex business processes." },
-        { title: "Data Science", desc: "Predictive analytics and advanced modeling to transform uncertainty into data-driven decisions." },
-        { title: "Computer Vision", desc: "Developing computer vision algorithms for industry (Image generation, detection, video analysis...)." }
+        { title: "Generative AI & Agentic Systems", desc: "Creating agents capable of using your tools (web search, code, navigation). I develop autonomous systems and custom connectors (MCP) to automate your business processes." },
+        { title: "Data Science & Statistics", desc: "In-depth analysis and advanced modeling to identify trends and facilitate decision-making." },
+        { title: "Computer Vision", desc: "Development of vision algorithms (detection, video analysis, generation) tailored to your specific needs." },
+        { title: "Data Engineering (Support)", desc: "Mastery of the technical environment (Python, Go, SQL) to build clean and actionable data pipelines." }
       ],
-      outro: "Looking to structure your Data ecosystem or deploy value-generating AI solutions? Let's tackle your technical challenges together.\n\n> [LETS_DISCUSS_YOUR_PROJECT]"
+      outro: "Do you have a project in mind or a data-related issue?\nFeel free to contact me to discuss it or to see a demo of my latest work.\n\n> [LETS_DISCUSS_YOUR_PROJECT]"
     },
     hobbies: ["Music & Drumming", "Entrepreneurship", "Strategy Games", "Open Source", "AI Research", "Community Building"],
     socials: {
@@ -98,6 +107,22 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
         "Cataloged 150+ business rules and 45 datasets to create a comprehensive data dictionary."
       ],
       logo: "/allianz-france.png"
+    },
+    {
+      id: "exp-pulse",
+      role: "Co-founder & CTO",
+      company: "Hello Pulse",
+      location: "France",
+      date: "Sep 2023 - Present",
+      skills: ["Golang", "PostgreSQL", "RAG", "AI Agents", "Docker", "Product Strategy"],
+      description: [
+        "Co-founded a collaborative AI platform combining team workflows with intelligent assistance as a Student Entrepreneur.",
+        "Architected a scalable backend using Golang (Gin), PostgreSQL (pgvector), and MinIO within a Dockerized infrastructure.",
+        "Developed 'Pulse Studio' (2nd Product): An AI-powered market research and prototyping tool to validate business opportunities instantly.",
+        "Created specialized 'Facilitator' and 'Orchestrator' agents for real-time meeting guidance and automated deliverable generation.",
+        "Led technical strategy from MVP to a production-ready solution supporting hierarchical project management."
+      ],
+      logo: "/hello_pulse.png"
     },
     {
       id: "exp-2",
@@ -260,7 +285,7 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
     },
     {
       id: "proj-15",
-      title: "Audio2Text Transcription",
+      title: "Transcription Audio2Text",
       description: "Simple web application for audio-to-text transcription using speech recognition technology with Gradio interface.",
       tags: ["Audio", "Speech Recognition", "Gradio", "Web App"],
       category: "AI",
@@ -353,12 +378,57 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
       ]
     }
   ],
+  services: [
+    {
+      id: "srv-2",
+      title: "Data Science & Modeling",
+      description: "Transformation of historical data into predictive models to anticipate needs and optimize decisions.",
+      features: ["Statistical & Exploratory Analysis", "Machine Learning Models", "Forecasting", "Algorithm Optimization"],
+      priceRange: "Hourly / Daily Rate",
+      icon: "DataScience"
+    },
+    {
+      id: "srv-1",
+      title: "AI Systems & Agents Design",
+      description: "Development of autonomous intelligent agents and RAG solutions capable of interacting with your business tools.",
+      features: ["Advanced RAG Implementation", "Autonomous Agents (LangChain/Pydantic AI)", "Custom Connectors (MCP)", "Complex Workflow Automation"],
+      priceRange: "Project-based",
+      icon: "AI"
+    },
+    {
+      id: "srv-3",
+      title: "Computer Vision & Deep Learning",
+      description: "Creation of image and video-based solutions for automation and intelligent analysis.",
+      features: ["Object Detection & Segmentation", "Real-time Video Analysis", "Image Generation (GANs/Diffusion)", "Specialized Model Fine-tuning"],
+      priceRange: "Daily Rate / Project",
+      icon: "ComputerVision"
+    }
+  ],
+  products: [
+    {
+      id: "prod-1",
+      title: "Data Engineering Starter Kit",
+      description: "A production-ready boilerplate for modern Data Engineering projects using Docker, Airflow, and PySpark.",
+      price: "$49",
+      tags: ["Template", "Code", "Docker"],
+      link: "#"
+    },
+    {
+      id: "prod-2",
+      title: "AI Project Checklist",
+      description: "The ultimate guide to planning, executing, and deploying AI projects successfully in enterprise environments.",
+      price: "Free / Donation",
+      tags: ["E-book", "Guide", "PDF"],
+      link: "#"
+    }
+  ],
   ui: {
     nav: {
       profile: "PROFILE",
       skills: "SKILLS",
       experience: "EXPERIENCE",
       projects: "PROJECTS",
+      services: "SERVICES",
       contact: "CONTACT",
       assistant: "ASSISTANT",
       ai_mode: "AI_MODE"
@@ -399,21 +469,30 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
       data: "Data",
       dev: "Dev"
     },
+    services: {
+      title: "SERVICES & ASSETS",
+      subtitle: "SUPPLY_MODULE_V1.0",
+      services_tab: "CONTRACT_SERVICES",
+      products_tab: "DIGITAL_ASSETS",
+      acquire: "ACQUIRE_ASSET",
+      inquire: "INITIATE_PROTOCOL",
+      features: "SPECS"
+    },
     comms: {
       header: "ESTABLISH_CONNECTION",
       direct_uplink: "DIRECT UPLINK",
-      protocol: "SELECT PREFERRED COMMUNICATION PROTOCOL",
+      protocol: "SÉLECTIONNER PROTOCOLE COMM",
       linkedin: "PROFESSIONAL_NET",
       github: "CODE_REPOSITORY",
       email: "DIRECT_MESSAGE",
       form_title: "TRANSMISSION_INTERFACE_V1.0",
       sender_id: "SENDER_ID",
-      enter_name: "ENTER_NAME",
+      enter_name: "VOTRE_NOM",
       return_addr: "RETURN_SIGNAL_ADDRESS",
-      enter_email: "ENTER_EMAIL",
-      content: "DATA_PACKET_CONTENT",
-      input_msg: "INPUT_MESSAGE_DATA...",
-      initiate: "INITIATE_TRANSMISSION",
+      enter_email: "VOTRE_EMAIL",
+      content: "CONTENU_PAQUET_DONNÉES",
+      input_msg: "SAISIR_MESSAGE...",
+      initiate: "INITIER_TRANSMISSION",
       uploading: "UPLOADING DATA PACKETS...",
       complete: "TRANSMISSION COMPLETE",
       failed: "TRANSMISSION FAILED. RETRY?",
@@ -425,11 +504,13 @@ Looking to structure your Data ecosystem or deploy value-generating AI solutions
       placeholder: "ENTER QUERY...",
       processing: "PROCESSING_NEURAL_NETWORK...",
       warning: "AI MODEL: GEMINI-3-FLASH // RESTRICTED ACCESS: PORTFOLIO DATA ONLY",
-      initial_msg: `GREETINGS. I AM SK_CORE_AI, THE VIRTUAL ASSISTANT FOR STÉPHANE KPOVIESSI.
-I HAVE FULL ACCESS TO THE CAREER DATABASE. 
-YOU MAY QUERY ME ABOUT **SKILLS**, **PROJECTS**, **EXPERIENCE**, OR **CERTIFICATIONS**.
+      // UPDATED EN INITIAL MSG
+      initial_msg: `// SK_CORE_AI ONLINE. 
 
-> HOW CAN I ASSIST YOU TODAY?`
+I'm ready. Accessing Stéphane's neural archives. 
+Ask me about his stack, his time at Allianz, or what he's building right now.
+
+> Ready to explore?`
     }
   }
 };
@@ -441,31 +522,42 @@ export const DATA_FR: AppData = {
     ...DATA_EN.personalInfo,
     title: "Ingénieur Big Data | Spécialiste IA",
     location: "Île-de-France, France",
-    bio: `Je transforme la complexité de vos données en leviers de croissance concrets. Mon approche combine rigueur logicielle (Python, Go, SQL) et IA de pointe pour bâtir des infrastructures de production sécurisées, scalables et prêtes pour le futur. Mon objectif : automatiser vos tâches critiques et rendre vos données immédiatement actionnables.
+    bio: `J'accompagne les entreprises dans l'exploration et la valorisation de leurs données. Mon travail consiste à concevoir des modèles prédictifs et des systèmes d'intelligence artificielle qui répondent à des problématiques métiers concrètes.
 
-Mes piliers d'expertise :
-Data Engineering : Modernisation d'architectures et migration de pipelines legacy vers des écosystèmes performants et maintenables.
-IA Générative & Agents : Conception de systèmes RAG et orchestration de workflows multi-agents pour automatiser les processus métier complexes.
-Data Science : Analyse prédictive et modélisation avancée pour transformer l'incertitude en décisions basées sur la donnée.
-Computer Vision : Développement d'algorithmes de vision par ordinateur pour l'industrie (Génération d'image, détection, analyse vidéo, ...).
+Piliers d'expertise :
 
-Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'IA qui génèrent de la valeur ? Relevons vos défis techniques ensemble.
+IA Générative & Systèmes Agentiques : Création d'agents capables d'utiliser vos outils (recherche web, code, navigation). Je développe des systèmes autonomes et des connecteurs personnalisés (MCP) pour automatiser vos processus métier.
+
+Data Science & Statistique : Analyse approfondie et modélisation avancée pour identifier des tendances et faciliter vos prises de décision.
+
+Computer Vision : Développement d'algorithmes de vision (détection, analyse vidéo, génération) adaptés à vos besoins spécifiques.
+
+Data Engineering (Support) : Maîtrise de l'environnement technique (Python, Go, SQL) pour construire des pipelines de données propres et exploitables.
+
+Vous avez un projet en tête ou une problématique liée à vos données ?
+N'hésitez pas à me contacter pour en discuter ou pour voir une démonstration de mes derniers travaux.
 
 > [DISCUTONS_DE_VOTRE_PROJET]`,
     marketing: {
-      intro: "Je transforme la complexité de vos données en leviers de croissance concrets. Mon approche combine rigueur logicielle (Python, Go, SQL) et IA de pointe pour bâtir des infrastructures de production sécurisées, scalables et prêtes pour le futur. Mon objectif : automatiser vos tâches critiques et rendre vos données immédiatement actionnables.\n\nMes piliers d'expertise :",
+      intro: "J'accompagne les entreprises dans l'exploration et la valorisation de leurs données. Mon travail consiste à concevoir des modèles prédictifs et des systèmes d'intelligence artificielle qui répondent à des problématiques métiers concrètes.\n\nPiliers d'expertise :",
       pillars: [
-        { title: "Data Engineering", desc: "Modernisation d'architectures et migration de pipelines legacy vers des écosystèmes performants et maintenables." },
-        { title: "IA Générative & Agents", desc: "Conception de systèmes RAG et orchestration de workflows multi-agents pour automatiser les processus métier complexes." },
-        { title: "Data Science", desc: "Analyse prédictive et modélisation avancée pour transformer l'incertitude en décisions basées sur la donnée." },
-        { title: "Computer Vision", desc: "Développement d'algorithmes de vision par ordinateur pour l'industrie (Génération d'image, détection, analyse vidéo, ...)." }
+        { title: "IA Générative & Systèmes Agentiques", desc: "Création d'agents capables d'utiliser vos outils (recherche web, code, navigation). Je développe des systèmes autonomes et des connecteurs personnalisés (MCP) pour automatiser vos processus métier." },
+        { title: "Data Science & Statistique", desc: "Analyse approfondie et modélisation avancée pour identifier des tendances et faciliter vos prises de décision." },
+        { title: "Computer Vision", desc: "Développement d'algorithmes de vision (détection, analyse vidéo, génération) adaptés à vos besoins spécifiques." },
+        { title: "Data Engineering (Support)", desc: "Maîtrise de l'environnement technique (Python, Go, SQL) pour construire des pipelines de données propres et exploitables." }
       ],
-      outro: "Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'IA qui génèrent de la valeur ? Relevons vos défis techniques ensemble.\n\n> [DISCUTONS_DE_VOTRE_PROJET]"
+      outro: "Vous avez un projet en tête ou une problématique liée à vos données ?\nN'hésitez pas à me contacter pour en discuter ou pour voir une démonstration de mes derniers travaux.\n\n> [DISCUTONS_DE_VOTRE_PROJET]"
+    },
+    socials: {
+      linkedin: "https://linkedin.com/in/stephanekpoviessi",
+      github: "https://github.com/Amiche02",
+      github_org: "https://github.com/EngineerProjects",
+      email: "mailto:oastephanekpoviessi@gmail.com"
     }
   },
   skills: [
     ...SKILLS_COMMON,
-    { name: "Anglais", level: 5, category: "Languages" },
+    { name: "Anglais", level: 3, category: "Languages" },
     { name: "Français", level: 5, category: "Languages" },
     { name: "Yoruba", level: 5, category: "Languages" },
     { name: "Fon", level: 5, category: "Languages" },
@@ -487,6 +579,22 @@ Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'I
         "Catalogage de plus de 150 règles métier et 45 jeux de données pour créer un dictionnaire de données complet."
       ],
       logo: "/allianz-france.png"
+    },
+    {
+      id: "exp-pulse",
+      role: "Co-fondateur & CTO",
+      company: "Hello Pulse",
+      location: "France",
+      date: "Sep 2023 - Présent",
+      skills: ["Golang", "PostgreSQL", "RAG", "Agents IA", "Docker", "Stratégie Produit"],
+      description: [
+        "Co-fondation d'une plateforme collaborative alliant flux de travail d'équipe et assistance IA en tant qu'Étudiant-Entrepreneur.",
+        "Architecture backend évolutive utilisant Golang (Gin), PostgreSQL (pgvector) et MinIO sur une infrastructure Docker.",
+        "Développement de 'Pulse Studio' (Second Produit) : un outil de prototypage et d'étude de marché propulsé par l'IA pour valider les opportunités.",
+        "Développement des agents 'Facilitateur' et 'Orchestrateur' pour le guidage en temps réel et la génération automatisée de livrables.",
+        "Pilotage de la stratégie technique du MVP vers une solution de production gérant des projets hiérarchiques complexes."
+      ],
+      logo: "/hello_pulse.png"
     },
     {
       id: "exp-2",
@@ -706,12 +814,59 @@ Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'I
       ]
     }
   ],
+  // SERVICES FR
+  services: [
+    {
+      id: "srv-2",
+      title: "Data Science & Modélisation",
+      description: "Transformation de vos données historiques en modèles de prédiction pour anticiper vos besoins et optimiser vos décisions.",
+      features: ["Analyse Statistique & Exploratoire", "Modèles de Machine Learning", "Prévisions & Forecasting", "Optimisation d'Algorithmes"],
+      priceRange: "Taux Horaire / TJM",
+      icon: "DataScience"
+    },
+    {
+      id: "srv-1",
+      title: "Conception de Systèmes IA & Agents",
+      description: "Développement d'agents intelligents autonomes et de solutions RAG capables d'interagir avec vos outils métier.",
+      features: ["Implémentation RAG Avancée", "Agents Autonomes (LangChain/Pydantic AI)", "Connecteurs Personnalisés (MCP)", "Automatisation de Workflows complexes"],
+      priceRange: "Sur Devis",
+      icon: "AI"
+    },
+    {
+      id: "srv-3",
+      title: "Computer Vision & Deep Learning",
+      description: "Création de solutions basées sur l'image et la vidéo pour l'automatisation et l'analyse intelligente.",
+      features: ["Détection & Segmentation d'objets", "Analyse Vidéo Temps Réel", "Génération d'Images (GANs/Diffusion)", "Fine-tuning de Modèles spécialisés"],
+      priceRange: "TJM / Projet",
+      icon: "ComputerVision"
+    }
+  ],
+  // PRODUCTS FR
+  products: [
+    {
+      id: "prod-1",
+      title: "Kit Démarrage Data Engineering",
+      description: "Un boilerplate prêt pour la production pour les projets Data Engineering modernes utilisant Docker, Airflow et PySpark.",
+      price: "49€",
+      tags: ["Template", "Code", "Docker"],
+      link: "#"
+    },
+    {
+      id: "prod-2",
+      title: "Checklist Projet IA",
+      description: "Le guide ultime pour planifier, exécuter et déployer des projets d'IA avec succès en environnement d'entreprise.",
+      price: "Gratuit / Don",
+      tags: ["E-book", "Guide", "PDF"],
+      link: "#"
+    }
+  ],
   ui: {
     nav: {
       profile: "PROFIL",
       skills: "COMPÉTENCES",
       experience: "EXPÉRIENCE",
       projects: "PROJETS",
+      services: "SERVICES", // Added
       contact: "CONTACT",
       assistant: "ASSISTANT",
       ai_mode: "MODE_IA"
@@ -752,6 +907,15 @@ Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'I
       data: "Data",
       dev: "Dev"
     },
+    services: { // New UI Labels FR
+      title: "SERVICES & ASSETS",
+      subtitle: "MODULE_APPROVISIONNEMENT_V1.0",
+      services_tab: "SERVICES_CONTRACTUELS",
+      products_tab: "ACTIFS_NUMÉRIQUES",
+      acquire: "ACQUÉRIR_ASSET",
+      inquire: "LANCER_PROTOCOLE",
+      features: "SPECS"
+    },
     comms: {
       header: "ÉTABLIR_CONNEXION",
       direct_uplink: "LIAISON DIRECTE",
@@ -778,11 +942,13 @@ Vous souhaitez structurer votre écosystème Data ou déployer des solutions d'I
       placeholder: "ENTREZ REQUÊTE...",
       processing: "TRAITEMENT_RÉSEAU_NEURAL...",
       warning: "MODÈLE IA: GEMINI-3-FLASH // ACCÈS RESTREINT: DONNÉES PORTFOLIO",
-      initial_msg: `SALUTATIONS. JE SUIS SK_CORE_AI, L'ASSISTANT VIRTUEL DE STÉPHANE KPOVIESSI.
-J'AI UN ACCÈS COMPLET À LA BASE DE DONNÉES DE CARRIÈRE.
-VOUS POUVEZ M'INTERROGER SUR LES **COMPÉTENCES**, **PROJETS**, **EXPÉRIENCES** OU **CERTIFICATIONS**.
+      // UPDATED FR INITIAL MSG
+      initial_msg: `// SK_CORE_AI EN LIGNE.
 
-> COMMENT PUIS-JE VOUS AIDER AUJOURD'HUI ?`
+Système prêt. J'ai accès aux archives de Stéphane. 
+Posez-moi des questions sur sa stack technique, son expérience chez Allianz ou ses projets actuels.
+
+> Par quoi voulez-vous commencer ?`
     }
   }
 };

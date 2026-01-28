@@ -93,6 +93,25 @@ export interface UI_LABELS {
   projects: { [key: string]: string };
   comms: { [key: string]: string };
   ai: { [key: string]: string };
+  services: { [key: string]: string };
+}
+
+export interface Service {
+  id: string;
+  title: string;
+  description: string;
+  features: string[];
+  priceRange: string;
+  icon: string;
+}
+
+export interface Product {
+  id: string;
+  title: string;
+  description: string;
+  price: string;
+  tags: string[];
+  link: string;
 }
 
 export interface AppData {
@@ -100,6 +119,8 @@ export interface AppData {
   skills: Skill[];
   experience: Experience[];
   projects: Project[];
+  services: Service[];
+  products: Product[];
   education: Education[];
   certifications: Certification[];
   associations: Association[];

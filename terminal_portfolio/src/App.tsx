@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard';
 import SkillTree from './components/SkillTree';
 import MissionLog from './components/MissionLog';
 import QuestBoard from './components/QuestBoard';
+import Services from './components/Services';
 import Comms from './components/Comms';
 import AskAI from './components/AskAI';
 import { LanguageProvider } from './components/LanguageContext';
@@ -27,6 +28,7 @@ const AppContent: React.FC = () => {
       case 'skills': return <SkillTree />;
       case 'experience': return <MissionLog />;
       case 'projects': return <QuestBoard />;
+      case 'services': return <Services />;
       case 'comms': return <Comms />;
       case 'ask-ai': return <AskAI onClose={() => setCurrentView('dashboard')} />;
       default: return <Dashboard onNavigate={setCurrentView} />;
