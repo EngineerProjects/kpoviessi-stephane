@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, User, Terminal, Code, Linkedin, Github, Mail } from 'lucide-react';
+import { MapPin, Terminal, Code, Linkedin, Github, Mail } from 'lucide-react';
 import { useLanguage } from './LanguageContext';
 
 interface DashboardProps {
