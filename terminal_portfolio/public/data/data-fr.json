@@ -1,0 +1,820 @@
+{
+  "personalInfo": {
+    "name": "Stéphane KPOVIESSI",
+    "title": "Ingénieur Big Data | Spécialiste IA",
+    "email": "oastephanekpoviessi@gmail.com",
+    "phone": "+33 7 48 59 47 13",
+    "location": "Île-de-France, France",
+    "bio": "J'accompagne les entreprises dans l'exploration et la valorisation de leurs données. Mon travail consiste à concevoir des modèles prédictifs et des systèmes d'intelligence artificielle qui répondent à des problématiques métiers concrètes.\n\nPiliers d'expertise :\n\nIA Générative & Systèmes Agentiques : Création d'agents capables d'utiliser vos outils (recherche web, code, navigation). Je développe des systèmes autonomes et des connecteurs personnalisés (MCP) pour automatiser vos processus métier.\n\nData Science & Statistique : Analyse approfondie et modélisation avancée pour identifier des tendances et faciliter vos prises de décision.\n\nComputer Vision : Développement d'algorithmes de vision (détection, analyse vidéo, génération) adaptés à vos besoins spécifiques.\n\nData Engineering (Support) : Maîtrise de l'environnement technique (Python, Go, SQL) pour construire des pipelines de données propres et exploitables.\n\nVous avez un projet en tête ou une problématique liée à vos données ?\nN'hésitez pas à me contacter pour en discuter ou pour voir une démonstration de mes derniers travaux.\n\n> [DISCUTONS_DE_VOTRE_PROJET]",
+    "marketing": {
+      "intro": "J'accompagne les entreprises dans l'exploration et la valorisation de leurs données. Mon travail consiste à concevoir des modèles prédictifs et des systèmes d'intelligence artificielle qui répondent à des problématiques métiers concrètes.\n\nPiliers d'expertise :",
+      "pillars": [
+        {
+          "title": "IA Générative & Systèmes Agentiques",
+          "desc": "Création d'agents capables d'utiliser vos outils (recherche web, code, navigation). Je développe des systèmes autonomes et des connecteurs personnalisés (MCP) pour automatiser vos processus métier."
+        },
+        {
+          "title": "Data Science & Statistique",
+          "desc": "Analyse approfondie et modélisation avancée pour identifier des tendances et faciliter vos prises de décision."
+        },
+        {
+          "title": "Computer Vision",
+          "desc": "Développement d'algorithmes de vision (détection, analyse vidéo, génération) adaptés à vos besoins spécifiques."
+        },
+        {
+          "title": "Data Engineering (Support)",
+          "desc": "Maîtrise de l'environnement technique (Python, Go, SQL) pour construire des pipelines de données propres et exploitables."
+        }
+      ],
+      "outro": "Vous avez un projet en tête ou une problématique liée à vos données ?\nN'hésitez pas à me contacter pour en discuter ou pour voir une démonstration de mes derniers travaux.\n\n> [DISCUTONS_DE_VOTRE_PROJET]"
+    },
+    "hobbies": [
+      "Music & Drumming",
+      "Entrepreneurship",
+      "Strategy Games",
+      "Open Source",
+      "AI Research",
+      "Community Building"
+    ],
+    "socials": {
+      "linkedin": "https://linkedin.com/in/stephanekpoviessi",
+      "github": "https://github.com/Amiche02",
+      "github_org": "https://github.com/EngineerProjects",
+      "email": "mailto:oastephanekpoviessi@gmail.com"
+    }
+  },
+  "skills": [
+    {
+      "name": "Python",
+      "level": 5,
+      "category": "Programming"
+    },
+    {
+      "name": "R",
+      "level": 4,
+      "category": "Programming"
+    },
+    {
+      "name": "SQL",
+      "level": 4,
+      "category": "Programming"
+    },
+    {
+      "name": "Bash",
+      "level": 4,
+      "category": "Programming"
+    },
+    {
+      "name": "C",
+      "level": 3,
+      "category": "Programming"
+    },
+    {
+      "name": "Golang",
+      "level": 3,
+      "category": "Programming"
+    },
+    {
+      "name": "TypeScript",
+      "level": 2,
+      "category": "Programming"
+    },
+    {
+      "name": "HTML/CSS",
+      "level": 3,
+      "category": "Programming"
+    },
+    {
+      "name": "React",
+      "level": 2,
+      "category": "Programming"
+    },
+    {
+      "name": "PyTorch",
+      "level": 5,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Scikit-learn",
+      "level": 5,
+      "category": "ML/AI"
+    },
+    {
+      "name": "TensorFlow",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Computer Vision",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "NLP / LLMs",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Transformers",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "GANs",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Reinforcement Learning",
+      "level": 3,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Hugging Face",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Pydantic AI",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "LangChain",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Ollama",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "MCP",
+      "level": 4,
+      "category": "ML/AI"
+    },
+    {
+      "name": "Pandas",
+      "level": 5,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "NumPy",
+      "level": 5,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Docker",
+      "level": 4,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "PostgreSQL",
+      "level": 4,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "PySpark",
+      "level": 3,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "AWS",
+      "level": 3,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Azure",
+      "level": 3,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "MongoDB",
+      "level": 3,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Streamlit",
+      "level": 4,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Power BI",
+      "level": 3,
+      "category": "Data Engineering"
+    },
+    {
+      "name": "Anglais",
+      "level": 3,
+      "category": "Languages"
+    },
+    {
+      "name": "Français",
+      "level": 5,
+      "category": "Languages"
+    },
+    {
+      "name": "Yoruba",
+      "level": 5,
+      "category": "Languages"
+    },
+    {
+      "name": "Fon",
+      "level": 5,
+      "category": "Languages"
+    },
+    {
+      "name": "Goun",
+      "level": 5,
+      "category": "Languages"
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-1",
+      "role": "Data Scientist - Stagiaire",
+      "company": "Allianz France",
+      "location": "Paris, France",
+      "date": "Nov 2025 - Présent",
+      "skills": [
+        "Python",
+        "PySpark",
+        "SAS",
+        "SQL",
+        "Architecture Médaillon",
+        "Git"
+      ],
+      "description": [
+        "Pilotage de la migration de bout en bout des pipelines 'Construction Data Mart' de SAS vers une architecture PySpark moderne.",
+        "Conception et mise en œuvre d'une Architecture Médaillon (Bronze/Silver/Gold) évolutive pour traiter les données d'assurance.",
+        "Rétro-ingénierie et documentation de plus de 15 000 lignes de code SAS existant sur 19 fichiers complexes.",
+        "Développement de processeurs PySpark modulaires et réutilisables, et mise en place d'une stratégie de test rigoureuse.",
+        "Catalogage de plus de 150 règles métier et 45 jeux de données pour créer un dictionnaire de données complet."
+      ],
+      "logo": "/allianz-france.png"
+    },
+    {
+      "id": "exp-pulse",
+      "role": "Co-fondateur & CTO",
+      "company": "Hello Pulse",
+      "location": "France",
+      "date": "Sep 2023 - Présent",
+      "skills": [
+        "Golang",
+        "PostgreSQL",
+        "RAG",
+        "Agents IA",
+        "Docker",
+        "Stratégie Produit"
+      ],
+      "description": [
+        "Co-fondation d'une plateforme collaborative alliant flux de travail d'équipe et assistance IA en tant qu'Étudiant-Entrepreneur.",
+        "Architecture backend évolutive utilisant Golang (Gin), PostgreSQL (pgvector) et MinIO sur une infrastructure Docker.",
+        "Développement de 'Pulse Studio' (Second Produit) : un outil de prototypage et d'étude de marché propulsé par l'IA pour valider les opportunités.",
+        "Développement des agents 'Facilitateur' et 'Orchestrateur' pour le guidage en temps réel et la génération automatisée de livrables.",
+        "Pilotage de la stratégie technique du MVP vers une solution de production gérant des projets hiérarchiques complexes."
+      ],
+      "logo": "/hello_pulse.png"
+    },
+    {
+      "id": "exp-2",
+      "role": "Ingénieur Machine Learning - Stagiaire",
+      "company": "Groupe Sylvagreg",
+      "location": "Lille, France",
+      "date": "Mai 2024 - Août 2024",
+      "skills": [
+        "PyTorch",
+        "GANs",
+        "Vision par Ordinateur",
+        "Modélisation 3D",
+        "AWS",
+        "Docker"
+      ],
+      "description": [
+        "Développement d'algorithmes de Deep Learning avancés (GANs) pour générer des modèles 3D à partir d'images 2D.",
+        "Conception et optimisation de pipelines de traitement d'images combinant photogrammétrie 3D et réseaux de neurones.",
+        "Mise en œuvre d'une solution cloud pour le traitement massif de données et déploiement d'une application avec interface utilisateur.",
+        "Recherche de pointe sur les solutions existantes de modélisation 3D à partir d'images 2D."
+      ],
+      "logo": "/sylvagreg.png"
+    },
+    {
+      "id": "exp-3",
+      "role": "Analyste de Données Commerciales - Stagiaire",
+      "company": "LYNE ET FRERES SARL",
+      "location": "Cotonou, Bénin",
+      "date": "Juin 2022 - Août 2022",
+      "skills": [
+        "Analyse de Données",
+        "BI",
+        "Python",
+        "Pandas",
+        "SQL",
+        "Tableaux de Bord"
+      ],
+      "description": [
+        "Analyse des données de vente et d'import/export pour identifier les tendances et les opportunités commerciales.",
+        "Création de tableaux de bord interactifs pour la visualisation des KPI et l'aide à la décision.",
+        "Identification des produits, marchés et tendances saisonnières les plus rentables.",
+        "Optimisation de la gestion des stocks et de la chaîne d'approvisionnement grâce à des insights basés sur les données."
+      ],
+      "logo": "https://ui-avatars.com/api/?name=LF&background=ffffff&color=d00&bold=true&size=128"
+    },
+    {
+      "id": "exp-4",
+      "role": "Gestion & Maintenance Informatique",
+      "company": "ONIP",
+      "location": "Bénin",
+      "date": "Juin 2021 - Juil 2021",
+      "skills": [
+        "Support IT",
+        "Gestion de Contenu",
+        "Réseaux",
+        "Audit"
+      ],
+      "description": [
+        "Travail au sein du Bureau d'Audit des Systèmes d'Information, des Achats et de la Logistique.",
+        "Contribution active à la gestion des systèmes d'information et à la maintenance informatique.",
+        "Travail sur le traitement d'images et participation à la gestion du site web de l'ONIP.",
+        "Expérience pratique dans le sertissage de câbles réseau RJ45 et la maintenance des équipements."
+      ],
+      "logo": "/onip-benin.png"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-1",
+      "title": "Agents IA d'Entreprise",
+      "description": "Construction d'organisations d'IA multi-agents qui collaborent comme des humains pour des forces de travail autonomes.",
+      "tags": [
+        "Multi-Agent",
+        "LLM",
+        "Python",
+        "Enterprise AI"
+      ],
+      "category": "AI",
+      "link": "https://github.com/EngineerProjects/Enterprise-AI"
+    },
+    {
+      "id": "proj-2",
+      "title": "Classification Tumeurs Cérébrales",
+      "description": "Système d'IA pour la classification des tumeurs cérébrales dans les images IRM utilisant des techniques avancées de vision par ordinateur.",
+      "tags": [
+        "Vision par Ordinateur",
+        "IA Médicale",
+        "CNN",
+        "Deep Learning"
+      ],
+      "category": "AI",
+      "link": "https://www.kaggle.com/code/kpoviesistphane/ia-sant-project"
+    },
+    {
+      "id": "proj-3",
+      "title": "Système Chatbot RAG",
+      "description": "Chatbot avancé avec Génération Augmentée par Récupération (RAG), intégration de recherche web et support multi-langues.",
+      "tags": [
+        "RAG",
+        "LLM",
+        "NLP",
+        "Base Vectorielle",
+        "FastAPI"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/ollama"
+    },
+    {
+      "id": "proj-4",
+      "title": "Traitement Doc PulseRAG",
+      "description": "Composant central pour Hello Pulse avec traitement de documents, recherche web et fonctionnalités TTS/STT.",
+      "tags": [
+        "RAG",
+        "Embeddings",
+        "TTS",
+        "STT",
+        "Recherche"
+      ],
+      "category": "Data",
+      "link": "https://github.com/EngineerProjects/PulseRAG"
+    },
+    {
+      "id": "proj-5",
+      "title": "Analyse Vidéo Football",
+      "description": "Système d'IA pour analyser les vidéos de matchs de football amateur utilisant la vision par ordinateur et une infrastructure Big Data.",
+      "tags": [
+        "CV",
+        "YOLO",
+        "Sports Analytics",
+        "OpenCV"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/Grassroot_football_video_analysis"
+    },
+    {
+      "id": "proj-6",
+      "title": "Détection Maladies Plantes",
+      "description": "Système de détection de maladies des plantes en temps réel utilisant YOLOv8 avec 96% de précision pour l'agriculture.",
+      "tags": [
+        "CV",
+        "YOLOv8",
+        "Agriculture",
+        "Web App"
+      ],
+      "category": "AI",
+      "link": "https://huggingface.co/spaces/Amiche02/Plant-Disease-Detector"
+    },
+    {
+      "id": "proj-7",
+      "title": "Solution BI Retail",
+      "description": "Solution BI complète pour la chaîne d'approvisionnement et l'analyse des ventes utilisant Docker, Airflow et PowerBI.",
+      "tags": [
+        "ETL",
+        "Airflow",
+        "PowerBI",
+        "Docker",
+        "PostgreSQL"
+      ],
+      "category": "Data",
+      "link": "https://github.com/Amiche02/BI_Retail"
+    },
+    {
+      "id": "proj-8",
+      "title": "Analyse Sentiment BERT",
+      "description": "Implémentation PyTorch pour l'extraction de sentiment de tweets utilisant des modèles BERT et Transformers modernes.",
+      "tags": [
+        "BERT",
+        "NLP",
+        "PyTorch",
+        "Transformers"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/Bert-sentiment"
+    },
+    {
+      "id": "proj-9",
+      "title": "Sylva3D Photogrammétrie",
+      "description": "Application GUI dockerisée pour les tâches de photogrammétrie utilisant COLMAP et OpenMVS avec accélération CUDA.",
+      "tags": [
+        "Photogrammétrie",
+        "3D",
+        "CUDA",
+        "Docker",
+        "GUI"
+      ],
+      "category": "Dev",
+      "link": "https://github.com/Amiche02/Sylva3dGUI"
+    },
+    {
+      "id": "proj-10",
+      "title": "Prix Immobiliers Avancés",
+      "description": "Solution de compétition Kaggle utilisant des méthodes d'ensemble et une ingénierie de fonctionnalités avancée.",
+      "tags": [
+        "ML",
+        "Méthodes Ensemble",
+        "XGBoost",
+        "Feature Eng"
+      ],
+      "category": "Data",
+      "link": "https://www.kaggle.com/code/kpoviesistphane/house-prices-analysis-with-python"
+    },
+    {
+      "id": "proj-11",
+      "title": "Analyse Code LocalIngest",
+      "description": "Outil CLI et TUI pour analyser les dépôts de code et générer des rapports Markdown complets.",
+      "tags": [
+        "CLI",
+        "Go/Python",
+        "TUI",
+        "Outils Développeur"
+      ],
+      "category": "Dev",
+      "link": "https://github.com/EngineerProjects/LocalIngest"
+    },
+    {
+      "id": "proj-12",
+      "title": "API E-commerce Shop-App",
+      "description": "API backend e-commerce robuste construite avec Golang, Gin, PostgreSQL et Docker avec authentification JWT.",
+      "tags": [
+        "Golang",
+        "API",
+        "PostgreSQL",
+        "Docker",
+        "JWT"
+      ],
+      "category": "Dev",
+      "link": "https://github.com/Amiche02/Shop-app-service"
+    },
+    {
+      "id": "proj-13",
+      "title": "Collection Pipelines ML",
+      "description": "Collection complète de projets d'apprentissage automatique de bout en bout couvrant divers domaines.",
+      "tags": [
+        "ML",
+        "Data Science",
+        "Santé",
+        "Recommandation"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/ML_Pipeline"
+    },
+    {
+      "id": "proj-14",
+      "title": "Extraction Table Gemini OCR",
+      "description": "Système OCR avancé combinant Tesseract et Gemini LLM pour l'extraction précise de tableaux à partir d'images.",
+      "tags": [
+        "OCR",
+        "Gemini",
+        "LLM",
+        "CV",
+        "Python"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/Gemini-OCR"
+    },
+    {
+      "id": "proj-15",
+      "title": "Transcription Audio2Text",
+      "description": "Application web simple pour la transcription audio-texte utilisant la reconnaissance vocale avec interface Gradio.",
+      "tags": [
+        "Audio",
+        "Reconnaissance Vocale",
+        "Gradio",
+        "Web App"
+      ],
+      "category": "AI",
+      "link": "https://github.com/Amiche02/Audio2text"
+    }
+  ],
+  "education": [
+    {
+      "degree": "Diplôme d'Ingénieur - Big Data & DS",
+      "institution": "JUNIA ISEN",
+      "location": "Lille, France",
+      "date": "Sep 2024 - Juil 2025",
+      "description": "Spécialisation en systèmes distribués, cloud computing et architectures avancées de machine learning."
+    },
+    {
+      "degree": "Diplôme d'Ingénieur - Électronique",
+      "institution": "JUNIA ISEN",
+      "location": "Rabat, Maroc",
+      "date": "Sep 2022 - Juil 2023",
+      "description": "Bases de l'ingénierie axées sur les systèmes numériques, le traitement du signal et l'électronique embarquée."
+    },
+    {
+      "degree": "CPGE MPSI (Maths/Physique)",
+      "institution": "Marie Stella",
+      "location": "Cotonou, Bénin",
+      "date": "Sep 2020 - Juil 2022",
+      "description": "Programme préparatoire intensif axé sur les mathématiques avancées, la physique et les fondamentaux de l'ingénierie."
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Create Machine Learning Models in Microsoft Azure",
+      "organization": "Microsoft",
+      "date": "May 2023",
+      "skills": [
+        "Azure",
+        "Machine Learning",
+        "Python",
+        "Data Analysis"
+      ],
+      "link": "https://coursera.org/verify/LU2ZQ972BWNF"
+    },
+    {
+      "name": "Data Analysis with Python",
+      "organization": "freeCodeCamp",
+      "date": "May 2023",
+      "skills": [
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Data Viz"
+      ],
+      "link": "https://freecodecamp.org/certification/Amiche/data-analysis-with-python-v7"
+    },
+    {
+      "name": "Supervised Machine Learning",
+      "organization": "DeepLearning.AI (Coursera)",
+      "date": "2024",
+      "skills": [
+        "Regression",
+        "Classification",
+        "Neural Networks"
+      ],
+      "link": "https://coursera.org/verify/MWJS4Q3S2C3L"
+    },
+    {
+      "name": "Intelligence Artificielle de A à Z",
+      "organization": "Udemy",
+      "date": "2024",
+      "skills": [
+        "AI",
+        "Deep Learning",
+        "NLP",
+        "CV"
+      ],
+      "link": "https://www.udemy.com/certificate/UC-f0f26f78-fc5e-4cd5-a5f8-7c7f64680774/"
+    },
+    {
+      "name": "Préparation au métier d'analyste de données",
+      "organization": "Microsoft (LinkedIn Learning)",
+      "date": "2024",
+      "skills": [
+        "Power BI",
+        "SQL",
+        "Data Viz",
+        "BI"
+      ],
+      "link": "https://www.linkedin.com/learning/certificates/fed380ef1713eb9d1633ac7cd02b74bf58cf5f4bcf7e5fd47cb39bce19649bae"
+    }
+  ],
+  "associations": [
+    {
+      "role": "Vice-Président",
+      "organization": "Commission Réseau JUNIA ALUMNI",
+      "location": "Lille, France",
+      "date": "Sep 2024 - Présent",
+      "skills": [
+        "Leadership",
+        "Gestion d'Événements",
+        "Coordination",
+        "Gestion de Projet"
+      ],
+      "description": [
+        "Coordination des travaux de la commission et organisation des événements alumni.",
+        "Gestion des réservations de salles et collaboration avec le BDE.",
+        "Planification des dates d'événements et supervision des responsables communication."
+      ]
+    },
+    {
+      "role": "Responsable Communication",
+      "organization": "Commission Réseau JUNIA ALUMNI",
+      "location": "Lille, France",
+      "date": "Sep 2023 - Juil 2024",
+      "skills": [
+        "Communication",
+        "Relations Alumni",
+        "Réseautage",
+        "Réseaux Sociaux"
+      ],
+      "description": [
+        "Contact des anciens de JUNIA ISEN pour partager leurs expériences lors d'afterworks.",
+        "Communication des dates et événements aux étudiants.",
+        "Liaison entre les anciens et les étudiants actuels."
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "srv-2",
+      "title": "Data Science & Modélisation",
+      "description": "Transformation de vos données historiques en modèles de prédiction pour anticiper vos besoins et optimiser vos décisions.",
+      "features": [
+        "Analyse Statistique & Exploratoire",
+        "Modèles de Machine Learning",
+        "Prévisions & Forecasting",
+        "Optimisation d'Algorithmes"
+      ],
+      "priceRange": "Taux Horaire / TJM",
+      "icon": "DataScience"
+    },
+    {
+      "id": "srv-1",
+      "title": "Conception de Systèmes IA & Agents",
+      "description": "Développement d'agents intelligents autonomes et de solutions RAG capables d'interagir avec vos outils métier.",
+      "features": [
+        "Implémentation RAG Avancée",
+        "Agents Autonomes (LangChain/Pydantic AI)",
+        "Connecteurs Personnalisés (MCP)",
+        "Automatisation de Workflows complexes"
+      ],
+      "priceRange": "Sur Devis",
+      "icon": "AI"
+    },
+    {
+      "id": "srv-3",
+      "title": "Computer Vision & Deep Learning",
+      "description": "Création de solutions basées sur l'image et la vidéo pour l'automatisation et l'analyse intelligente.",
+      "features": [
+        "Détection & Segmentation d'objets",
+        "Analyse Vidéo Temps Réel",
+        "Génération d'Images (GANs/Diffusion)",
+        "Fine-tuning de Modèles spécialisés"
+      ],
+      "priceRange": "TJM / Projet",
+      "icon": "ComputerVision"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod-1",
+      "title": "Kit Démarrage Data Engineering",
+      "description": "Un boilerplate prêt pour la production pour les projets Data Engineering modernes utilisant Docker, Airflow et PySpark.",
+      "price": "49€",
+      "tags": [
+        "Template",
+        "Code",
+        "Docker"
+      ],
+      "link": "#"
+    },
+    {
+      "id": "prod-2",
+      "title": "Checklist Projet IA",
+      "description": "Le guide ultime pour planifier, exécuter et déployer des projets d'IA avec succès en environnement d'entreprise.",
+      "price": "Gratuit / Don",
+      "tags": [
+        "E-book",
+        "Guide",
+        "PDF"
+      ],
+      "link": "#"
+    }
+  ],
+  "ui": {
+    "nav": {
+      "profile": "PROFIL",
+      "skills": "COMPÉTENCES",
+      "experience": "EXPÉRIENCE",
+      "projects": "PROJETS",
+      "services": "SERVICES",
+      "contact": "CONTACT",
+      "assistant": "ASSISTANT",
+      "ai_mode": "MODE_IA"
+    },
+    "dashboard": {
+      "sys_integrity": "INTÉGRITÉ_SYS",
+      "power_cell": "BATTERIE",
+      "uplink": "LIAISON",
+      "storage": "STOCKAGE",
+      "admin": "ADMIN",
+      "admin_access": "ACCÈS ADMIN",
+      "location": "LOCALISATION",
+      "stack": "STACK",
+      "hobbies": "LOISIRS & INTÉRÊTS",
+      "status_log": "JOURNAL STATUT",
+      "last_login": "DERNIÈRE_CX",
+      "firewall": "PARE-FEU",
+      "root_access": "ACCÈS_ROOT"
+    },
+    "skills": {
+      "title": "COMPÉTENCES TECHNIQUES",
+      "scan": "SCAN_PILOTES_NOYAU...",
+      "loaded": "MODULES_TOTAL_CHARGÉS"
+    },
+    "experience": {
+      "title": "EXPÉRIENCE PROFESSIONNELLE",
+      "path": "/VAR/LOG/HISTORIQUE_CARRIÈRE",
+      "mode": "MODE: LECTURE_SEULE",
+      "assoc_title": "LEADERSHIP & ASSOCIATIONS",
+      "edu_title": "FORMATION ACADÉMIQUE",
+      "cert_title": "LICENCES & CERTIFICATIONS"
+    },
+    "projects": {
+      "title": "PROJETS",
+      "access": "ACCÈS FICHIERS PROJETS...",
+      "all": "Tout",
+      "ai": "IA",
+      "data": "Data",
+      "dev": "Dev"
+    },
+    "services": {
+      "title": "SERVICES & ASSETS",
+      "subtitle": "MODULE_APPROVISIONNEMENT_V1.0",
+      "services_tab": "SERVICES_CONTRACTUELS",
+      "products_tab": "ACTIFS_NUMÉRIQUES",
+      "acquire": "ACQUÉRIR_ASSET",
+      "inquire": "LANCER_PROTOCOLE",
+      "features": "SPECS"
+    },
+    "comms": {
+      "header": "ÉTABLIR_CONNEXION",
+      "direct_uplink": "LIAISON DIRECTE",
+      "protocol": "SÉLECTIONNER PROTOCOLE COMM",
+      "linkedin": "RÉSEAU_PRO",
+      "github": "DÉPÔT_CODE",
+      "email": "MESSAGE_DIRECT",
+      "form_title": "INTERFACE_TRANSMISSION_V1.0",
+      "sender_id": "ID_EXPÉDITEUR",
+      "enter_name": "VOTRE_NOM",
+      "return_addr": "ADRESSE_RETOUR",
+      "enter_email": "VOTRE_EMAIL",
+      "content": "CONTENU_PAQUET_DONNÉES",
+      "input_msg": "SAISIR_MESSAGE...",
+      "initiate": "INITIER_TRANSMISSION",
+      "uploading": "ENVOI PAQUETS DONNÉES...",
+      "complete": "TRANSMISSION TERMINÉE",
+      "failed": "ÉCHEC TRANSMISSION. RÉESSAYER?",
+      "connecting": "CONNEXION..."
+    },
+    "ai": {
+      "header": "TERMINAL_INTERROGATION_IA",
+      "status": "ÉTAT_CX: STABLE // LATENCE: 12ms",
+      "placeholder": "ENTREZ REQUÊTE...",
+      "processing": "TRAITEMENT_RÉSEAU_NEURAL...",
+      "warning": "MODÈLE IA: GEMINI-3-FLASH // ACCÈS RESTREINT: DONNÉES PORTFOLIO",
+      "initial_msg": "// SK_CORE_AI EN LIGNE.\n\nSystème prêt. J'ai accès aux archives de Stéphane. \nPosez-moi des questions sur sa stack technique, son expérience chez Allianz ou ses projets actuels.\n\n> Par quoi voulez-vous commencer ?"
+    }
+  }
+}

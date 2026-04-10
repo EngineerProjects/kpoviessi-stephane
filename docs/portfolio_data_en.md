@@ -1,300 +1,225 @@
-# Portfolio Data (English)
+STÉPHANE KPOVIESSI  
+Ingénieur Big Data & Intelligence Artificielle  
+Île-de-France, France  
 
-## Personal Information
-**Name:** Stéphane KPOVIESSI
-**Title:** Big Data Engineer
-**Email:** oastephanekpoviessi@gmail.com
-**Phone:** +33 7 48 59 47 13
-**Location:** Île-de-France, France
+CONTACT  
+Email : oastephanekpoviessi@gmail.com  
+Téléphone : +33 7 48 59 47 13  
+LinkedIn : https://linkedin.com/in/stephanekpoviessi  
+GitHub : https://github.com/Amiche02  
+Organisation GitHub : https://github.com/EngineerProjects  
 
-**Bio:**
-I transform data complexity into concrete growth levers. My approach combines software rigor (Python, Go, SQL) and cutting-edge AI to build secure, scalable, and future-ready production infrastructures. My goal: automate your critical tasks and make your data immediately actionable.
+PROFIL  
 
-My pillars of expertise:
-• Data Engineering :
-Architecture modernization and migration of legacy pipelines to high-performance, maintainable ecosystems.
-• Generative AI & Agents :
-Designing RAG systems and orchestrating multi-agent workflows to automate complex business processes.
-• Data Science :
-Predictive analytics and advanced modeling to transform uncertainty into data-driven decisions.
-• Computer Vision :
-Developing computer vision algorithms for industry (Image generation, detection, video analysis...).
-Looking to structure your Data ecosystem or deploy value-generating AI solutions? Let's tackle your technical challenges together.
+Ingénieur spécialisé en Big Data et Intelligence Artificielle, j’accompagne les organisations dans l’exploitation stratégique de leurs données. Mon expertise repose sur la conception de pipelines data robustes, le développement de modèles intelligents et la mise en place de systèmes scalables en production.
 
-**Hobbies:**
-- Music & Drumming
-- Entrepreneurship & Innovation
-- Gaming & Strategy Games
-- Open Source Technology
-- AI Research & Experimentation
-- Community Building
-- Tech Meetups & Conferences
-- Continuous Learning
+Je conçois des systèmes d’IA capables d’interagir avec des outils métiers, d’automatiser des processus complexes et de produire des résultats directement exploitables. Mon approche combine rigueur technique, vision produit et capacité à transformer des problématiques métier en solutions concrètes.
 
-**Social Links:**
-- [LinkedIn](https://linkedin.com/in/stephanekpoviessi)
-- [GitHub](https://github.com/Amiche02)
-- [GitHub Projects](https://github.com/EngineerProjects)
-- [Email](mailto:oastephanekpoviessi@gmail.com)
+DOMAINES D’EXPERTISE  
 
----
+Data Engineering  
+Conception de pipelines de données fiables, scalables et orientés métier, avec une maîtrise des architectures modernes (batch et distribuées).
 
-## Experience
+Data Science & Machine Learning  
+Analyse avancée de données, modélisation prédictive et extraction d’insights pour la prise de décision.
 
-### Data Scientist - Intern
-**Company:** Allianz France
-**Location:** Paris, Île-de-France, France
-**Date:** Nov 2025 - Present
-**Skills:** Python, PySpark, SAS, SQL, Parquet, Git, Medallion Architecture
+Intelligence Artificielle & Systèmes Agentiques  
+Conception d’agents intelligents, systèmes RAG et architectures basées sur les LLMs pour automatiser des workflows complexes.
 
-**Description:**
-- Led the end-to-end migration of the "Construction Data Mart" pipelines from legacy SAS to a modern PySpark architecture
-- Designed and implemented a scalable Medallion Architecture (Bronze/Silver/Gold) to process insurance data (Portfolios, Capitals, Issuances)
-- Reverse-engineered and documented over 15,000 lines of legacy SAS code across 19 complex files to ensure zero loss of business logic during migration
-- Developed modular and reusable PySpark processors (Python 3.9+) for 3 critical data pipelines, handling complex transformations and business rules
-- Established a rigorous testing strategy, including functional parity testing between SAS and Python outputs and automated schema validation
-- Cataloged 150+ business rules and 45 datasets to create a comprehensive data dictionary and mapping strategy
+Computer Vision  
+Développement de solutions de vision par ordinateur pour la détection, l’analyse vidéo et la génération de contenu.
 
-### Machine Learning Engineer - Intern
-**Company:** Groupe Sylvagreg
-**Location:** Lille, Hauts-de-France, France
-**Date:** May 2024 - August 2024
-**Skills:** PyTorch, GANs, Computer Vision, 3D Modeling, AWS, Streamlit, Docker, Deep Learning
+COMPÉTENCES TECHNIQUES  
 
-**Description:**
-- Developed advanced deep learning algorithms (GANs) for generating 3D models from 2D images and enabling 360° object views from single images
-- Designed and optimized image processing pipeline combining 3D photogrammetry techniques with neural networks
-- Implemented cloud solution for massive data processing and deployed application with user interface
-- Conducted state-of-the-art research on existing 3D modeling solutions from 2D images
-- Documented comprehensive technical findings and wrote detailed research reports
+Programmation  
+- Python (Expert)  
+- R (Avancé)  
+- SQL (Avancé)  
+- Bash (Avancé)  
+- C (Intermédiaire)  
+- Golang (Intermédiaire)  
+- TypeScript (Intermédiaire)  
+- HTML / CSS (Intermédiaire)  
+- React (Intermédiaire)  
 
-### Commercial Data Analyst - Intern
-**Company:** LYNE ET FRERES SARL
-**Location:** Cotonou, Benin
-**Date:** June 2022 - August 2022
-**Skills:** Data Analysis, Business Intelligence, Python, Pandas, Matplotlib, SQL, Dashboard Development
+Machine Learning & IA  
+- PyTorch (Expert)  
+- Scikit-learn (Expert)  
+- TensorFlow (Avancé)  
+- Computer Vision (Avancé)  
+- NLP / LLMs (Avancé)  
+- Transformers (Avancé)  
+- GANs (Avancé)  
+- Reinforcement Learning (Intermédiaire)  
+- Hugging Face (Avancé)  
+- LangChain (Avancé)  
+- Pydantic AI (Avancé)  
+- Ollama (Avancé)  
+- MCP (Model Context Protocol) (Avancé)  
 
-**Description:**
-- Analyzed sales and import/export data to identify trends and commercial opportunities
-- Created interactive dashboards for KPI visualization and decision-making support
-- Processed historical sales, delivery, and order data by product, customer, and country
-- Identified most profitable products, markets, and seasonal patterns
-- Optimized inventory and supply chain management through data-driven insights
-- Developed comprehensive reporting system for activity monitoring
+Data Engineering & Outils  
+- Pandas / NumPy (Expert)  
+- Docker (Avancé)  
+- PostgreSQL (Avancé)  
+- PySpark (Intermédiaire)  
+- AWS (Intermédiaire)  
+- Azure (Intermédiaire)  
+- MongoDB (Intermédiaire)  
+- Streamlit (Avancé)  
+- Power BI (Intermédiaire)  
 
-### Information Systems Management and Computer Maintenance
-**Company:** Office National d'Imprimerie et de Presse (ONIP)
-**Location:** Benin
-**Date:** June 2021 - July 2021
-**Skills:** Computer Maintenance, Web Content Management, Social Media Management, Professional Communication, Relationship Management, Troubleshooting, Team Collaboration
+LANGUES  
+- Français (natif)  
+- Anglais (B2 – usage professionnel)  
+- Yoruba (natif)  
+- Fon (natif)  
+- Goun (natif)  
 
-**Description:**
-- Worked in the Information Systems, Procurement, and Logistics Audit Office
-- Actively contributed to information systems management and computer maintenance
-- Worked on image processing and participated in the management of the ONIP website
-- Gained practical experience in crimping RJ45 network cables, antivirus management, and computer equipment maintenance
+EXPÉRIENCE PROFESSIONNELLE  
 
----
+Data Scientist (Stage)  
+Allianz France – Paris, France  
+Novembre 2025 – Avril 2026  
 
-## Education
+Responsable de la migration de bout en bout des pipelines du DataMart Construction (Assurance), depuis un environnement legacy SAS vers une architecture moderne PySpark.
 
-### Engineer's degree (Master's) - Big Data and Data Science
-**Institution:** JUNIA ISEN
-**Location:** Lille, France
-**Date:** September 2024 - July 2025
+Réalisations clés  
 
-### Engineer's degree - Electronics and Digital Sciences
-**Institution:** JUNIA ISEN
-**Location:** Rabat, Morocco
-**Date:** September 2022 - July 2023
+• Architecture Data  
+Conception et implémentation d’une architecture Médaillon (Bronze / Silver / Gold) scalable pour structurer les données de portefeuilles, capitaux et émissions.
 
-### Preparatory Classes - Mathematics, Physics and Engineering Sciences (MPSI)
-**Institution:** Marie Stella
-**Location:** Cotonou, Benin
-**Date:** September 2020 - July 2022
+• Modernisation Legacy  
+Rétro-ingénierie et documentation de plus de 15 000 lignes de code SAS (19 fichiers) afin de préserver intégralement la logique métier.
+
+• Développement ETL  
+Développement de pipelines PySpark modulaires et réutilisables (Python 3.9+) couvrant 3 flux critiques et intégrant plus de 150 règles métier.
+
+• Assurance Qualité  
+Mise en place de :
+- validation automatique des schémas  
+- tests de parité fonctionnelle stricts SAS vs Python  
+
+• Data Quality  
+Conception d’un pipeline de contrôle qualité des données de localisation :
+- validation GPS  
+- reconstitution d’adresses  
+- détection d’anomalies métier  
+
+Refonte de la validation d’adresse permettant de réduire les faux positifs et d’améliorer la fiabilité du reporting.
+
+Environnement technique  
+Python, PySpark, SAS, SQL, Parquet, Git, Architecture Médaillon  
 
 ---
 
-## Skills
+Co-fondateur & CTO  
+Hello Pulse – France  
+Septembre 2023 – Présent  
 
-### Programming
-- Python (Level: 5)
-- R (Level: 4)
-- SQL (Level: 4)
-- Bash (Level: 4)
-- C (Level: 3)
-- Golang (Level: 3)
-- TypeScript (Level: 2)
-- HTML (Level: 3)
-- CSS (Level: 3)
-- React (Level: 2)
-
-### Machine Learning & AI
-- PyTorch (Level: 5)
-- TensorFlow (Level: 4)
-- Scikit-learn (Level: 5)
-- Ultralytics (Level: 4)
-- OpenCV (Level: 4)
-- Hugging Face (Level: 4)
-- LLM (Level: 4)
-- Transformers (Level: 4)
-- GANs (Level: 4)
-- CNN (Level: 4)
-- Computer Vision (Level: 4)
-- NLP (Level: 4)
-- Reinforcement Learning (Level: 3)
-
-### Data Engineering
-- Pandas (Level: 5)
-- NumPy (Level: 5)
-- SciPy (Level: 4)
-- Matplotlib (Level: 4)
-- Seaborn (Level: 4)
-- Plotly (Level: 4)
-- Streamlit (Level: 4)
-- Power BI (Level: 3)
-- PySpark (Level: 3)
-- AWS (Level: 3)
-- Azure (Level: 3)
-- PostgreSQL (Level: 4)
-- MongoDB (Level: 3)
-- Docker (Level: 4)
-
-### Documentation
-- LaTeX (Level: 3)
-- Markdown (Level: 4)
+- Co-fondation d’une plateforme collaborative augmentée par l’IA  
+- Conception d’une architecture backend scalable (Golang, PostgreSQL, Docker)  
+- Développement de systèmes multi-agents  
+- Création d’un outil de validation produit basé sur l’IA  
+- Pilotage de la stratégie technique du MVP à la production  
 
 ---
 
-## Projects
+Ingénieur Machine Learning (Stage)  
+Groupe Sylvagreg – Lille, France  
+Mai 2024 – Août 2024  
 
-### Enterprise-AI: Multi-Agent AI Systems
-**Description:** Building multi-agent AI organizations that collaborate like humans for enterprise-grade autonomous AI workforces.
-**Tags:** Multi-Agent Systems, LLM, AI Collaboration, Autonomous Agents, Enterprise AI, Python
-[GitHub Link](https://github.com/EngineerProjects/Enterprise-AI)
+Développement d’une solution de génération et d’impression 3D à partir d’images 2D.
 
-### Brain Tumor Classification using AI
-**Description:** AI system for classifying brain tumors in MRI images using advanced computer vision techniques.
-**Tags:** Computer Vision, Medical AI, Deep Learning, CNN, Vision Transformer, Healthcare
-[Project Link](https://www.kaggle.com/code/kpoviesistphane/ia-sant-project)
+Réalisations clés  
 
-### RAG Chatbot System with LLM
-**Description:** Advanced chatbot with Retrieval-Augmented Generation, web search integration, and multi-language support.
-**Tags:** RAG, LLM, NLP, Vector Database, Web Search, Streamlit, FastAPI
-[GitHub Link](https://github.com/Amiche02/ollama)
+• Analyse de l’état de l’art  
+• Benchmark d’algorithmes IA  
+• Développement de modèles GANs avec PyTorch  
+• Pipeline de traitement d’images (PIL)  
+• Pipeline complet de génération 3D  
+• Génération de modèles imprimables  
+• Documentation technique  
 
-### PulseRAG: Advanced Document Processing System
-**Description:** Core component for Hello Pulse with document processing, web search integration, and TTS/STT functionalities.
-**Tags:** RAG, Document Processing, TTS, STT, Web Search, Embeddings, Innovation Platform
-[GitHub Link](https://github.com/EngineerProjects/PulseRAG)
-
-### Grassroot Football Video Analysis
-**Description:** AI system for analyzing grassroots football match videos using advanced computer vision and big data infrastructure.
-**Tags:** Computer Vision, Object Detection, Sports Analytics, YOLO, OpenCV, Big Data
-[GitHub Link](https://github.com/Amiche02/Grassroot_football_video_analysis)
-
-### Early Plants Disease Detection System
-**Description:** Real-time plant disease detection system using YOLOv8 with 96% accuracy for agricultural applications.
-**Tags:** Computer Vision, YOLOv8, Agriculture, Disease Detection, Web Application, Hugging Face
-[GitHub Link](https://huggingface.co/spaces/Amiche02/Plant-Disease-Detector)
-
-### BI_Retail: Business Intelligence Solution
-**Description:** Comprehensive BI solution for retail supply chain and sales data analysis using Docker, Airflow, and PowerBI.
-**Tags:** Business Intelligence, ETL, Apache Airflow, PostgreSQL, PowerBI, Docker, Data Warehouse
-[GitHub Link](https://github.com/Amiche02/BI_Retail)
-
-### BERT Sentiment Analysis System
-**Description:** PyTorch implementation for tweet sentiment extraction using BERT-based models with modern Transformers.
-**Tags:** BERT, NLP, Sentiment Analysis, PyTorch, Transformers, Docker
-[GitHub Link](https://github.com/Amiche02/Bert-sentiment)
-
-### Sylva3D: Photogrammetry GUI
-**Description:** Dockerized GUI application for photogrammetry tasks using COLMAP and OpenMVS with CUDA acceleration.
-**Tags:** Photogrammetry, 3D Modeling, COLMAP, OpenMVS, CUDA, GUI, Docker
-[GitHub Link](https://github.com/Amiche02/Sylva3dGUI)
-
-### Advanced House Prices Prediction
-**Description:** Kaggle competition solution using ensemble methods and advanced feature engineering for real estate price prediction.
-**Tags:** Machine Learning, Ensemble Methods, Feature Engineering, XGBoost, Kaggle, Real Estate
-[Project Link](https://www.kaggle.com/code/kpoviesistphane/house-prices-analysis-with-python)
-
-### LocalIngest: Code Analysis Tool
-**Description:** CLI and Terminal UI tool for analyzing code repositories and generating comprehensive Markdown reports.
-**Tags:** CLI Tools, Code Analysis, Documentation, Terminal UI, Developer Tools
-[GitHub Link](https://github.com/EngineerProjects/LocalIngest)
-
-### Shop-App: E-commerce Backend API
-**Description:** Robust e-commerce backend API built with Golang, Gin, PostgreSQL, and Docker with JWT authentication.
-**Tags:** Golang, E-commerce, REST API, PostgreSQL, Docker, Terraform, Azure
-[GitHub Link](https://github.com/Amiche02/Shop-app-service)
-
-### ML Pipeline: Machine Learning Projects Collection
-**Description:** Comprehensive collection of end-to-end machine learning projects covering various domains and applications.
-**Tags:** Machine Learning, Disease Prediction, Recommendation Systems, Data Science, Healthcare AI
-[GitHub Link](https://github.com/Amiche02/ML_Pipeline)
-
-### Gemini OCR: Table Extraction from Images
-**Description:** Advanced OCR system combining Tesseract and Gemini LLM for precise table extraction and interpretation from images.
-**Tags:** OCR, LLM, Table Extraction, Gemini, Computer Vision, Document Processing
-[GitHub Link](https://github.com/Amiche02/Gemini-OCR)
-
-### Audio2Text: Speech Recognition App
-**Description:** Simple web application for audio-to-text transcription using speech recognition technology with Gradio interface.
-**Tags:** Speech Recognition, Audio Processing, Gradio, Transcription, Web Application
-[GitHub Link](https://github.com/Amiche02/Audio2text)
+Technologies  
+Python, PyTorch, PIL, Computer Vision, GANs, Photogrammétrie  
 
 ---
 
-## Certifications
+Analyste de Données  
+LYNE ET FRERES SARL – Cotonou, Bénin  
+Juin 2021 – Août 2022  
 
-### Create Machine Learning Models in Microsoft Azure
-**Organization:** Microsoft
-**Issued:** May 2023
-**Skills:** Matplotlib, Artificial Neural Networks, Databases, Analyse de données statistiques, EDA, Mathematical Programming, Mathematics, Pandas, Data Manipulation, Machine Learning, PyCharm, Problem Solving, Ingénierie des données, Analyse prédictive, NumPy, Data Visualization, Python (Programming Language)
-[Credential Link](https://coursera.org/verify/LU2ZQ972BWNF)
+- Analyse des données de ventes et d’import/export  
+- Identification des tendances et produits rentables  
+- Optimisation des stocks et de la supply chain  
+- Analyse logistique et simulation de scénarios  
+- Segmentation clients et recommandations  
+- Développement de dashboards et reporting  
 
-### Data Analysis with Python
-**Organization:** freeCodeCamp
-**Issued:** May 2023
-**Skills:** Matplotlib, SciPy, Databases, Analyse de données statistiques, Seaborn, Statistics, EDA, Analyse exploratoire des données, Mathematical Programming, Probabilités, Mathematics, Pandas, Data Engineering, Data Manipulation, PyCharm, Problem Solving, Data Analysis, Analyse des données, Ingénierie des données, Statistical Analysis, Gestion des données, Analyse prédictive, NumPy, Data Visualization, Python (Programming Language)
-[Credential Link](https://freecodecamp.org/certification/Amiche/data-analysis-with-python-v7)
+Référence : ICOUTCHIKA Jean-Marc Salomon Dègnon  
+Contact : lyneetfreressarl@gmail.com  
 
-### Supervised Machine Learning
-**Organization:** DeepLearning.AI (Coursera)
-**Issued:** 2024
-**Skills:** Machine Learning, Supervised Learning, Python, Regression, Classification, Neural Networks
-[Credential Link](https://coursera.org/verify/MWJS4Q3S2C3L)
+PROJETS PRINCIPAUX  
 
-### Intelligence Artificielle de A à Z
-**Organization:** Udemy
-**Issued:** 2024
-**Skills:** Artificial Intelligence, Machine Learning, Deep Learning, Python, Neural Networks, Computer Vision, NLP
-[Credential Link](https://www.udemy.com/certificate/UC-f0f26f78-fc5e-4cd5-a5f8-7c7f64680774/)
+Intelligence Artificielle  
+- Agents IA d’entreprise (https://github.com/EngineerProjects/Enterprise-AI)  
+- Classification tumeurs cérébrales (https://www.kaggle.com/code/kpoviesistphane/ia-sant-project)  
+- Chatbot RAG (https://github.com/Amiche02/ollama)  
+- Analyse vidéo football (https://github.com/Amiche02/Grassroot_football_video_analysis)  
+- Détection maladies plantes (https://huggingface.co/spaces/Amiche02/Plant-Disease-Detector)  
+- Analyse de sentiment BERT (https://github.com/Amiche02/Bert-sentiment)  
+- OCR avec LLM (https://github.com/Amiche02/Gemini-OCR)  
 
-### Préparation au métier d'analyste de données
-**Organization:** Microsoft (LinkedIn Learning)
-**Issued:** 2024
-**Skills:** Data Analysis, Microsoft Power BI, SQL, Data Visualization, Business Intelligence
-[Credential Link](https://www.linkedin.com/learning/certificates/fed380ef1713eb9d1633ac7cd02b74bf58cf5f4bcf7e5fd47cb39bce19649bae)
+Data & Analytics  
+- Solution BI retail (https://github.com/Amiche02/BI_Retail)  
+- Modélisation prix immobiliers (https://www.kaggle.com/code/kpoviesistphane/house-prices-analysis-with-python)  
+- Pipelines ML (https://github.com/Amiche02/ML_Pipeline)  
 
----
+Développement & Outils  
+- API e-commerce Golang (https://github.com/Amiche02/Shop-app-service)  
+- Analyseur de code CLI (https://github.com/EngineerProjects/LocalIngest)  
+- Photogrammétrie 3D (https://github.com/Amiche02/Sylva3dGUI)  
+- Transcription audio (https://github.com/Amiche02/Audio2text)  
 
-## Associations
+FORMATION  
 
-### Vice President - Commission Réseau JUNIA ALUMNI
-**Location:** Lille, Hauts-de-France, France
-**Date:** Sep 2024 - Present
-**Skills:** Leadership, Event Management, Team Coordination, Communication, Project Management
+Diplôme d’Ingénieur – Big Data & Data Science  
+JUNIA ISEN – Lille, France  
+2024 – 2025  
 
-**Description:**
-- Primarily responsible for coordinating commission work, organizing events and ensuring rooms are properly reserved and available in collaboration with the Student Union (BDE).
-- I also ensure that event dates are well planned and that communication and event managers fulfill their missions effectively.
+Licence – Électronique  
+JUNIA ISEN – Rabat, Maroc  
+2022 – 2023  
 
-### Communication Manager - Commission Réseau JUNIA ALUMNI
-**Location:** Lille, Hauts-de-France, France
-**Date:** Sep 2023 - Jul 2024
-**Skills:** Communication, Alumni Relations, Event Coordination, Networking, Social Media Management
+Classe Préparatoire MPSI  
+Marie Stella – Cotonou, Bénin  
+2020 – 2022  
 
-**Description:**
-- Responsible, with the help of other members, for contacting JUNIA ISEN alumni according to their field of expertise to share their experiences during various afterworks organized by the association.
-- Communicate dates and events to students and ensure liaison between alumni and current students.
+CERTIFICATIONS  
+
+- Microsoft Azure ML (https://coursera.org/verify/LU2ZQ972BWNF)  
+- Data Analysis with Python (https://freecodecamp.org/certification/Amiche/data-analysis-with-python-v7)  
+- Supervised Machine Learning (https://coursera.org/verify/MWJS4Q3S2C3L)  
+- Intelligence Artificielle A-Z (https://www.udemy.com/certificate/UC-f0f26f78-fc5e-4cd5-a5f8-7c7f64680774/)  
+- Data Analyst Preparation (https://www.linkedin.com/learning/certificates/fed380ef1713eb9d1633ac7cd02b74bf58cf5f4bcf7e5fd47cb39bce19649bae)  
+
+EXPÉRIENCES ASSOCIATIVES  
+
+Vice-Président  
+JUNIA Alumni – Lille  
+2024 – Présent  
+Coordination des activités, organisation des événements et supervision des équipes.
+
+Responsable Communication  
+JUNIA Alumni – Lille  
+2023 – 2024  
+Animation du réseau alumni et organisation d’événements étudiants.
+
+CENTRES D’INTÉRÊT  
+
+- Intelligence artificielle  
+- Entrepreneuriat  
+- Open source  
+- Jeux de stratégie  
+- Musique (batterie)  
+- Construction de communautés  

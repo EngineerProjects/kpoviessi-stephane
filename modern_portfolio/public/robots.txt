@@ -1,9 +1,0 @@
-# robots.txt
-User-agent: *
-Allow: /
-
-# Sitemap
-Sitemap: https://your-domain.com/sitemap.xml
-
-# Crawl-delay for respectful crawling
-Crawl-delay: 1
