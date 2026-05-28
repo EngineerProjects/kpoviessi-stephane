@@ -1,14 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Code2, Cpu, Database, Eye } from "lucide-react";
+import { ExternalLink, Code2, Cpu, Database, Eye, Box, Wrench, Server, Sparkles, LineChart } from "lucide-react";
 import { GithubIcon } from "./Icons";
 import { projects } from "@/data/content";
 
 const categoryIcons = {
   "AI Systems": Cpu,
   "Data Engineering": Database,
+  "Data Science": LineChart,
   "Computer Vision": Eye,
+  "3D Systems": Box,
+  "AI Product": Sparkles,
+  "Developer Tooling": Wrench,
+  Backend: Server,
 };
 
 function ProjectCard({
@@ -100,7 +105,7 @@ export default function Projects() {
             </h2>
             <p className="text-text-dim text-base md:text-xl font-medium">
               Une sélection de projets spécialisés dans les systèmes multi-agents, 
-              les pipelines RAG et les architectures avancées de vision par ordinateur.
+              les pipelines RAG, le data engineering, la vision par ordinateur et les outils développeurs IA.
             </p>
           </div>
           <div className="flex flex-col items-start md:items-end gap-4">

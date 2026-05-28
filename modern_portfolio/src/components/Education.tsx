@@ -38,9 +38,58 @@ export default function Education() {
                     <span className="text-[10px] font-mono text-text-dim bg-accent/5 px-3 py-1 rounded-full border border-accent/10">
                       {item.period}
                     </span>
+                    {item.level && (
+                      <span className="text-[10px] font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
+                        {item.level}
+                      </span>
+                    )}
                   </div>
                   <p className="text-accent font-bold mb-3">{item.school}</p>
                   <p className="text-base text-text-dim mb-6 font-medium">{item.specialization}</p>
+
+                  {item.description && (
+                    <p className="text-sm text-text-dim leading-relaxed mb-6 font-medium">
+                      {item.description}
+                    </p>
+                  )}
+
+                  {item.courses && (
+                    <div className="mb-6">
+                      <h4 className="text-[10px] font-black text-text-main uppercase tracking-widest mb-3 opacity-70">
+                        Principaux enseignements
+                      </h4>
+                      <ul className="space-y-2">
+                        {item.courses.map((course) => (
+                          <li
+                            key={course}
+                            className="text-xs md:text-sm text-text-dim leading-relaxed flex items-start gap-3"
+                          >
+                            <div className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
+                            {course}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {item.keySkills && (
+                    <div className="mb-6 flex flex-wrap gap-2">
+                      {item.keySkills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2.5 py-1 rounded-lg bg-accent/5 text-accent text-[9px] font-black uppercase tracking-widest border border-accent/10"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+
+                  {item.distinction && (
+                    <p className="text-sm text-text-main leading-relaxed mb-6 font-bold border-l-2 border-accent pl-4">
+                      Distinction : {item.distinction}
+                    </p>
+                  )}
                   
                   {item.link && (
                     <a

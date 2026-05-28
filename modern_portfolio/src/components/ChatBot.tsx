@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, User, Loader2, Sparkles, Trash2 } from "lucide-react";
+import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Message {

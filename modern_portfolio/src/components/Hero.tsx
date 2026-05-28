@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, MapPin, Download } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
-import { personalInfo } from "@/data/content";
+import { personalInfo, resumeLinks } from "@/data/content";
 
 export default function Hero() {
   return (
@@ -57,7 +57,7 @@ export default function Hero() {
               className="w-full"
             >
               <h2 className="text-accent font-black text-[10px] md:text-lg tracking-[0.2em] md:tracking-[0.3em] uppercase mb-3 leading-tight">
-                INGÉNIEUR BIG DATA & IA ARCHITECT
+                DATA ENGINEER / DATA SCIENTIST
               </h2>
               {/* Correction : suppression du whitespace-nowrap global et gestion précise du wrap */}
               <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-text-main mb-6 md:mb-8 leading-[1.1] md:leading-[1.2] lg:leading-[1.1] px-1">
@@ -75,7 +75,7 @@ export default function Hero() {
               className="max-w-xl"
             >
               <p className="text-base md:text-xl text-text-dim leading-relaxed font-medium px-4 md:px-0">
-                Expert en <span className="text-text-main font-bold">Data Engineering</span>, Data Science (AI) et dans la conception de <span className="text-text-main font-bold">systèmes intelligents</span> de bout en bout.
+                Spécialisé en <span className="text-text-main font-bold">Data Engineering</span>, Machine Learning et conception de <span className="text-text-main font-bold">systèmes IA</span> de bout en bout.
               </p>
             </motion.div>
 
@@ -95,15 +95,20 @@ export default function Hero() {
                 </span>
               </a>
               
-              <a
-                href="/cv-stephane-kpoviessi.pdf"
-                target="_blank"
-                className="group px-8 py-4 md:px-10 md:py-5 rounded-2xl glass text-text-main text-sm font-black hover:border-accent/30 transition-all hover:scale-105 active:scale-95 shadow-lg flex justify-center items-center"
-              >
-                <span className="flex items-center gap-2 uppercase tracking-widest">
-                  Mon CV <Download size={18} className="text-accent group-hover:translate-y-0.5 transition-transform" />
-                </span>
-              </a>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {resumeLinks.map((resume) => (
+                  <a
+                    key={resume.href}
+                    href={resume.href}
+                    target="_blank"
+                    className="group px-5 py-4 md:px-6 md:py-5 rounded-2xl glass text-text-main text-xs md:text-sm font-black hover:border-accent/30 transition-all hover:scale-105 active:scale-95 shadow-lg flex justify-center items-center"
+                  >
+                    <span className="flex items-center gap-2 uppercase tracking-widest">
+                      {resume.label} <Download size={18} className="text-accent group-hover:translate-y-0.5 transition-transform" />
+                    </span>
+                  </a>
+                ))}
+              </div>
             </motion.div>
 
             {/* Social Links */}

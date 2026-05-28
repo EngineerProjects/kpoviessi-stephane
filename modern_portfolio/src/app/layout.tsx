@@ -1,24 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import ChatBot from "@/components/ChatBot";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://kpoviessi-stephane.vercel.app/"),
-  title: "Stéphane KPOVIESSI | Ingénieur Big Data & Expert IA",
+  title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
   description:
-    "Big Data Engineer and AI Specialist. I transform data complexity into concrete growth levers using Python, Go, SQL, and cutting-edge AI.",
+    "Portfolio de Stéphane KPOVIESSI, Data Engineer / Data Scientist spécialisé en Big Data, PySpark, IA, systèmes multi-agents, RAG et computer vision.",
   keywords: [
     "Stéphane Kpoviessi",
     "Stephane Kpoviessi",
@@ -27,6 +16,8 @@ export const metadata: Metadata = {
     "Olaolouwa",
     "Big Data Engineer",
     "Ingénieur Big Data",
+    "Data Engineer PySpark",
+    "Data Scientist IA",
     "AI Specialist",
     "Expert IA",
     "Machine Learning Engineer",
@@ -40,6 +31,7 @@ export const metadata: Metadata = {
     "Paris",
     "Hauts-de-France",
     "Île-de-France",
+    "Cergy",
     "Europe",
     "Junia ISEN",
     "Allianz",
@@ -59,8 +51,8 @@ export const metadata: Metadata = {
     "Azure",
     "AWS",
     "Docker",
-    "Airflow",
     "Databricks",
+    "Azure Data Lake",
     "Vector DB",
     "PyTorch",
     "TensorFlow",
@@ -91,16 +83,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://kpoviessi-stephane.vercel.app/",
-    title: "Stéphane KPOVIESSI | Ingénieur Big Data & Expert IA",
+    title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
     description:
-      "Explore the portfolio of a Big Data Engineer & AI Specialist transforming data complexity into growth.",
+      "Découvrez ses expériences en Data Engineering, PySpark, IA, RAG, systèmes multi-agents et computer vision.",
     images: [{ url: "/images/profile.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "SK-OS | Stéphane Kpoviessi",
+    title: "Stéphane Kpoviessi | Data Engineer & Data Scientist",
     description:
-      "Big Data Engineer & AI Specialist. Building secure, scalable, and future-ready production infrastructures.",
+      "Data Engineer / Data Scientist spécialisé en Big Data, IA, PySpark, RAG et systèmes multi-agents.",
     images: ["/images/profile.png"],
   },
 };
@@ -117,7 +109,7 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500`}
+        className="antialiased transition-colors duration-500"
       >
         <ThemeProvider
           attribute="class"
