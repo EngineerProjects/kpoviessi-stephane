@@ -1,9 +1,10 @@
 "use client";
 
-import { personalInfo } from "@/data/content";
+import { useContent } from "@/lib/useContent";
 import { Terminal } from "lucide-react";
 
 export default function Footer() {
+  const { personalInfo, ui } = useContent();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -18,10 +19,10 @@ export default function Footer() {
             </div>
             <div>
               <span className="text-text-main font-bold uppercase tracking-widest block leading-tight">
-                STÉPHANE KPOVIESSI
+                {personalInfo.name.toUpperCase()}
               </span>
               <span className="tracking-wider uppercase opacity-80 mt-0.5 block">
-                &copy; {currentYear} // REGISTRY RECORD 4022A
+                &copy; {currentYear} {"//"} {ui.footer.record}
               </span>
             </div>
           </div>
@@ -29,7 +30,7 @@ export default function Footer() {
           {/* Core Links */}
           <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 font-bold">
             <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent uppercase tracking-wider transition-colors">
-              GITHUB // SOURCE
+              GITHUB {"//"} {ui.footer.registry}
             </a>
             <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent uppercase tracking-wider transition-colors">
               LINKEDIN // HUB
@@ -41,17 +42,17 @@ export default function Footer() {
 
           {/* Right telemetry details */}
           <div className="text-center md:text-right font-medium opacity-65">
-            <span>COMPILED TARGET: TARGET_X86_64</span>
+            <span>{ui.footer.compiled}</span>
             <br />
-            <span>RENDERED IN CUSP LAYOUT ENGINE</span>
+            <span>{ui.footer.rendered}</span>
           </div>
 
         </div>
 
         {/* Dynamic sub-footer grid lines */}
         <div className="border-t border-border-main/50 pt-6 flex flex-col sm:flex-row items-center justify-between text-[8px] opacity-60">
-          <span>HOSTED PLATFORM // SECURE CLUSTER</span>
-          <span className="mt-2 sm:mt-0">DESIGN & CORE ARCHITECTURE BY S. KPOVIESSI</span>
+          <span>{ui.footer.hosted}</span>
+          <span className="mt-2 sm:mt-0">{ui.footer.design}</span>
         </div>
 
       </div>

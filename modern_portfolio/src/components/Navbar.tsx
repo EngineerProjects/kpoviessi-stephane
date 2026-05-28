@@ -2,30 +2,32 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Mail, Layers, Cpu, Terminal } from "lucide-react";
+import { Menu, X, Mail, Terminal } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
-import { personalInfo } from "@/data/content";
-
-const navLinks = [
-  { num: "01", label: "SCOPE", href: "#about" },
-  { num: "02", label: "STACK", href: "#skills" },
-  { num: "03", label: "BLUEPRINTS", href: "#projects" },
-  { num: "04", label: "RECORDS", href: "#experience" },
-  { num: "05", label: "HANDSHAKE", href: "#contact" },
-];
+import { useContent } from "@/lib/useContent";
+import { useLanguage } from "@/lib/LanguageContext";
 
 export default function Navbar() {
+  const { personalInfo, ui } = useContent();
+  const { language, toggleLanguage } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [time, setTime] = useState("");
 
+  const navLinks = [
+    { num: "01", label: ui.nav.scope, href: "#about" },
+    { num: "02", label: ui.nav.stack, href: "#skills" },
+    { num: "03", label: ui.nav.blueprints, href: "#projects" },
+    { num: "04", label: ui.nav.records, href: "#experience" },
+    { num: "05", label: ui.nav.handshake, href: "#contact" },
+  ];
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
-    
-    // Technical clock for the HUD navigation
+
     const updateClock = () => {
       const d = new Date();
       const hrs = String(d.getHours()).padStart(2, "0");
@@ -35,7 +37,7 @@ export default function Navbar() {
     };
     updateClock();
     const interval = setInterval(updateClock, 1000);
-    
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       clearInterval(interval);
@@ -72,7 +74,7 @@ export default function Navbar() {
               </span>
               <span className="text-[8px] font-mono text-text-dim/70 tracking-widest leading-none flex items-center gap-1.5 mt-0.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                SYS: ACTIVE
+                {ui.nav.status}
               </span>
             </div>
           </a>
@@ -104,7 +106,7 @@ export default function Navbar() {
             </span>
 
             <div className="w-px h-4 bg-border-main" />
-            
+
             <div className="flex items-center gap-1">
               <a
                 href={personalInfo.github}
@@ -128,11 +130,34 @@ export default function Navbar() {
 
             <div className="w-px h-4 bg-border-main" />
 
+            {/* Language Toggle */}
+            <button
+              onClick={toggleLanguage}
+              aria-label="Toggle language"
+              className="flex items-center gap-0.5 px-2 py-1 border border-border-main/60 rounded font-mono text-[9px] font-bold tracking-widest hover:border-accent/40 hover:bg-accent-soft transition-all duration-200"
+            >
+              <span className={language === "en" ? "text-accent" : "text-text-dim/50"}>EN</span>
+              <span className="text-border-main mx-0.5">|</span>
+              <span className={language === "fr" ? "text-accent" : "text-text-dim/50"}>FR</span>
+            </button>
+
+            <div className="w-px h-4 bg-border-main" />
+
             <ThemeToggle />
           </div>
 
           {/* Mobile HUD actions */}
           <div className="flex items-center gap-2 lg:hidden">
+            {/* Language Toggle Mobile */}
+            <button
+              onClick={toggleLanguage}
+              aria-label="Toggle language"
+              className="flex items-center gap-0.5 px-2 py-1 border border-border-main/60 rounded font-mono text-[9px] font-bold tracking-widest hover:border-accent/40 hover:bg-accent-soft transition-all duration-200"
+            >
+              <span className={language === "en" ? "text-accent" : "text-text-dim/50"}>EN</span>
+              <span className="text-border-main mx-0.5">|</span>
+              <span className={language === "fr" ? "text-accent" : "text-text-dim/50"}>FR</span>
+            </button>
             <ThemeToggle />
             <button
               className="p-2 border border-border-main/50 rounded-lg text-text-main hover:bg-accent-soft transition-colors"
@@ -156,10 +181,10 @@ export default function Navbar() {
             className="absolute top-[72px] left-4 right-4 lg:hidden glass rounded-xl p-4 shadow-xl z-50 border-border-main bg-bg-main/98"
           >
             <div className="flex items-center justify-between border-b border-border-main/60 pb-3 mb-3">
-              <span className="text-[9px] font-mono text-text-dim tracking-widest uppercase">HUD NAVIGATION SYSTEM</span>
+              <span className="text-[9px] font-mono text-text-dim tracking-widest uppercase">{ui.nav.mobile_title}</span>
               <span className="text-[9px] font-mono text-accent">{time || "UTC"}</span>
             </div>
-            
+
             <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
@@ -174,9 +199,9 @@ export default function Navbar() {
                 </li>
               ))}
             </ul>
-            
+
             <div className="mt-4 pt-3 border-t border-border-main/60 flex items-center justify-between px-3">
-              <span className="text-[9px] font-mono text-text-dim">CONNECT LINKS:</span>
+              <span className="text-[9px] font-mono text-text-dim">{ui.nav.connect_links}</span>
               <div className="flex items-center gap-3">
                 <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent">
                   <GithubIcon className="w-4 h-4" />

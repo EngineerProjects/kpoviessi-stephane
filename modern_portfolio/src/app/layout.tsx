@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { LanguageProvider } from "@/lib/LanguageContext";
 import ChatBot from "@/components/ChatBot";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kpoviessi-stephane.vercel.app/"),
   title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
   description:
-    "Portfolio de Stéphane KPOVIESSI, Data Engineer / Data Scientist spécialisé en Big Data, PySpark, IA, systèmes multi-agents, RAG et computer vision.",
+    "Portfolio of Stéphane KPOVIESSI, AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, multi-agent systems, RAG, and computer vision.",
   keywords: [
     "Stéphane Kpoviessi",
     "Stephane Kpoviessi",
@@ -85,14 +86,14 @@ export const metadata: Metadata = {
     url: "https://kpoviessi-stephane.vercel.app/",
     title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
     description:
-      "Découvrez ses expériences en Data Engineering, PySpark, IA, RAG, systèmes multi-agents et computer vision.",
+      "Explore his work in Data Engineering, PySpark, AI systems, RAG, multi-agent architectures, and computer vision.",
     images: [{ url: "/images/profile.png" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Stéphane Kpoviessi | Data Engineer & Data Scientist",
     description:
-      "Data Engineer / Data Scientist spécialisé en Big Data, IA, PySpark, RAG et systèmes multi-agents.",
+      "AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, RAG, and multi-agent systems.",
     images: ["/images/profile.png"],
   },
 };
@@ -107,18 +108,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" suppressHydrationWarning className="scroll-smooth">
-      <body
-        className="antialiased transition-colors duration-500"
-      >
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
+      <body className="antialiased transition-colors duration-500">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
-          {children}
-          <ChatBot />
+          <LanguageProvider>
+            {children}
+            <ChatBot />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

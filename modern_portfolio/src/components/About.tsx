@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Database, Eye, Wrench, Sparkles, Terminal, Activity } from "lucide-react";
-import { about } from "@/data/content";
+import { Brain, Database, Eye, Wrench, Terminal, Activity } from "lucide-react";
+import { useContent } from "@/lib/useContent";
 
 const iconMap = {
   database: Database,
@@ -13,6 +13,8 @@ const iconMap = {
 };
 
 export default function About() {
+  const { about, ui } = useContent();
+
   return (
     <section id="about" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/30">
       {/* Decorative vertical hairline for architectural framing */}
@@ -24,14 +26,14 @@ export default function About() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <Terminal size={10} /> 01 // CORE RESEARCH SCOPE
+              <Terminal size={10} /> {ui.about.badge}
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter text-text-main leading-none whitespace-nowrap">
-              Engineering <span className="text-text-dim">Deterministic</span> Systems<span className="text-accent">.</span>
+              {ui.about.heading_1} <span className="text-text-dim">{ui.about.heading_2}</span> {ui.about.heading_suffix}<span className="text-accent">.</span>
             </h2>
           </div>
           <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            FOCUS: SCALE & DETAILED PARITY
+            {ui.about.focus_label}
           </div>
         </div>
 
@@ -64,12 +66,12 @@ export default function About() {
                   <Activity size={18} />
                 </div>
                 <div>
-                  <h3 className="text-text-main font-mono font-bold text-xs uppercase tracking-wider">Systems Architecture Rule</h3>
-                  <span className="text-[8px] font-mono text-text-dim tracking-widest uppercase">FROM METRIC TO MACHINE</span>
+                  <h3 className="text-text-main font-mono font-bold text-xs uppercase tracking-wider">{ui.about.philosophy_title}</h3>
+                  <span className="text-[8px] font-mono text-text-dim tracking-widest uppercase">{ui.about.philosophy_sub}</span>
                 </div>
               </div>
               <p className="text-xs md:text-sm text-text-dim leading-relaxed italic border-l border-border-main pl-4 py-0.5">
-                &quot;I do not merely train models or run queries. I architect complete, self-healing platforms that ensure functional parity, schema safety, and micro-second reliability.&quot;
+                &quot;{ui.about.philosophy_quote}&quot;
               </p>
             </div>
           </motion.div>

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Code2, Cpu, Database, Eye, Box, Wrench, Server, Sparkles, LineChart, Terminal, Layers } from "lucide-react";
 import { GithubIcon } from "./Icons";
-import { projects } from "@/data/content";
+import { useContent } from "@/lib/useContent";
 
 const categoryIcons = {
   "AI Systems": Cpu,
@@ -14,10 +14,14 @@ const categoryIcons = {
   "AI Product": Sparkles,
   "Developer Tooling": Wrench,
   Backend: Server,
+  "Systèmes IA": Cpu,
+  "Science des Données": LineChart,
+  "Systèmes 3D": Box,
+  "Outils Développeur": Wrench,
 };
 
 // Simplified Pure CSS/SVG Architecture Diagrams for each primary project
-function SystemDiagram({ category, title }: { category: string; title: string }) {
+function SystemDiagram({ title }: { title: string }) {
   if (title === "Nexus AI") {
     return (
       <div className="w-full h-24 border border-border-main/40 bg-bg-main/30 rounded font-mono text-[8px] flex items-center justify-around px-3 mb-6 relative overflow-hidden">
@@ -106,7 +110,7 @@ function SystemDiagram({ category, title }: { category: string; title: string })
     );
   }
 
-  if (title === "Advanced Football Video Analysis") {
+  if (title === "Advanced Football Video Analysis" || title === "Analyse Vidéo Football Avancée") {
     return (
       <div className="w-full h-24 border border-border-main/40 bg-bg-main/30 rounded font-mono text-[8px] flex items-center justify-around px-3 mb-6 relative overflow-hidden">
         <div className="absolute top-1 left-2 text-[7px] text-text-dim/50 tracking-wider">SYSTEM DIAGRAM // CV DEPLOYMENT</div>
@@ -150,9 +154,11 @@ function SystemDiagram({ category, title }: { category: string; title: string })
 function ProjectCard({
   project,
   index,
+  ui,
 }: {
-  project: (typeof projects)[0];
+  project: ReturnType<typeof useContent>["projects"][0];
   index: number;
+  ui: ReturnType<typeof useContent>["ui"];
 }) {
   const Icon = categoryIcons[project.category as keyof typeof categoryIcons] || Code2;
 
@@ -200,22 +206,22 @@ function ProjectCard({
       </div>
 
       {/* Embedded Visual System Diagram */}
-      <SystemDiagram category={project.category} title={project.title} />
+      <SystemDiagram title={project.title} />
 
       {/* Technical Specifications Columns */}
       <div className="space-y-4 font-mono text-[10px] text-text-dim leading-relaxed mb-6">
         <div>
-          <span className="text-accent font-bold mr-1.5 uppercase">■ SYSTEM CONTEXT:</span>
+          <span className="text-accent font-bold mr-1.5 uppercase">■ {ui.projects.context_label}</span>
           <span className="text-text-main font-medium">{project.context}</span>
         </div>
         <div className="border-t border-border-main/30 pt-3">
-          <span className="text-accent font-bold mr-1.5 uppercase">■ TECHNICAL SOLUTION:</span>
+          <span className="text-accent font-bold mr-1.5 uppercase">■ {ui.projects.solution_label}</span>
           <span className="text-text-main font-medium">{project.solution}</span>
         </div>
         
         {project.impact && project.impact.length > 0 && (
           <div className="border-t border-border-main/30 pt-3">
-            <span className="text-accent font-bold block mb-1.5 uppercase">■ VERIFIED PRODUCTION IMPACT:</span>
+            <span className="text-accent font-bold block mb-1.5 uppercase">■ {ui.projects.impact_label}</span>
             <ul className="list-none space-y-1 pl-3 text-text-main font-medium">
               {project.impact.map((imp, i) => (
                 <li key={i} className="relative before:content-['•'] before:absolute before:left-[-10px] before:text-accent">
@@ -243,6 +249,7 @@ function ProjectCard({
 }
 
 export default function Projects() {
+  const { projects, ui } = useContent();
   // We only showcase the primary technical cases in the grid
   const featuredProjects = projects.filter(p => p.featured);
   const otherProjects = projects.filter(p => !p.featured);
@@ -255,21 +262,21 @@ export default function Projects() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <Layers size={10} /> 03 // ACTIVE PLATFORM BLUEPRINTS
+              <Layers size={10} /> {ui.projects.badge}
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-              Technical <span className="text-text-dim">Case Studies</span> & Systems<span className="text-accent">.</span>
+              {ui.projects.heading_1} <span className="text-text-dim">{ui.projects.heading_2}</span> {ui.projects.heading_3}<span className="text-accent">.</span>
             </h2>
           </div>
           <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            {featuredProjects.length} SPECIFIED BLUEPRINTS
+            {featuredProjects.length} {ui.projects.specified_blueprints}
           </div>
         </div>
 
         {/* Primary Schematic grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10">
           {featuredProjects.map((project, i) => (
-            <ProjectCard key={project.title} project={project} index={i} />
+            <ProjectCard key={project.title} project={project} index={i} ui={ui} />
           ))}
         </div>
 
@@ -277,10 +284,10 @@ export default function Projects() {
         {otherProjects.length > 0 && (
           <div className="mt-20 border border-border-main rounded bg-bg-card/25 p-6 md:p-10 relative overflow-hidden">
             <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/35 tracking-wider">
-              AUXILIARY CATALOGUE // OPTIMIZATIONS
+              {ui.projects.auxiliary_badge}
             </div>
             <h3 className="text-sm font-mono font-bold text-accent uppercase tracking-widest mb-6 border-b border-border-main/50 pb-3 flex items-center gap-2">
-              <Terminal size={12} /> AUXILIARY EXPERIMENTAL NODES
+              <Terminal size={12} /> {ui.projects.auxiliary_title}
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -339,10 +346,10 @@ export default function Projects() {
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8 text-center lg:text-left">
             <div className="max-w-4xl">
               <h3 className="text-2xl md:text-3xl font-display font-extrabold text-text-main mb-3 tracking-tighter uppercase leading-none">
-                EXPLORE COMPLETE CLUSTER NODES
+                {ui.projects.cta_heading}
               </h3>
               <p className="text-text-dim text-sm font-medium leading-relaxed">
-                I actively contribute to open-source software, testing local sandboxes and structural parsing strategies. Explore my global GitHub organization for full implementation scripts.
+                {ui.projects.cta_body}
               </p>
             </div>
             <a
@@ -351,7 +358,7 @@ export default function Projects() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-text-main text-bg-main hover:bg-bg-main hover:text-text-main border border-text-main transition-all duration-300 font-mono font-bold text-xs uppercase tracking-widest active:scale-98 shadow-sm hover:shadow"
             >
-              Access Github Org <GithubIcon className="w-4 h-4" />
+              {ui.projects.cta_button} <GithubIcon className="w-4 h-4" />
             </a>
           </div>
         </motion.div>

@@ -2,8 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, Sparkles, Trash2, Terminal } from "lucide-react";
+import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useContent } from "@/lib/useContent";
+import { useLanguage } from "@/lib/LanguageContext";
 
 interface Message {
   role: "user" | "assistant";
@@ -11,6 +13,8 @@ interface Message {
 }
 
 export default function ChatBot() {
+  const { ui } = useContent();
+  const { language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -19,25 +23,25 @@ export default function ChatBot() {
 
   // Load chat memory on mount
   useEffect(() => {
-    const saved = localStorage.getItem("assistant_memory");
+    const saved = localStorage.getItem(`assistant_memory_${language}`);
     if (saved) {
       setMessages(JSON.parse(saved));
     } else {
       setMessages([
         {
           role: "assistant",
-          content: "Hello! I am Stéphane's System Assistant. I can describe his Big Data pipelines at Allianz, Go backend architectures at Hello Pulse, generative PyTorch modeling, and agentic multi-agent systems. What coordinate would you like to explore?",
+          content: ui.chat.initial,
         },
       ]);
     }
-  }, []);
+  }, [language, ui.chat.initial]);
 
   // Save chat memory on updates
   useEffect(() => {
     if (messages.length > 0) {
-      localStorage.setItem("assistant_memory", JSON.stringify(messages));
+      localStorage.setItem(`assistant_memory_${language}`, JSON.stringify(messages));
     }
-  }, [messages]);
+  }, [messages, language]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -50,10 +54,10 @@ export default function ChatBot() {
   const clearChat = () => {
     const initialMessage: Message[] = [{
       role: "assistant",
-      content: "Conversation history cleared. System standby. How can I assist you?",
+      content: ui.chat.cleared,
     }];
     setMessages(initialMessage);
-    localStorage.removeItem("assistant_memory");
+    localStorage.removeItem(`assistant_memory_${language}`);
   };
 
   const handleSend = async () => {
@@ -69,14 +73,14 @@ export default function ChatBot() {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages }),
+        body: JSON.stringify({ messages: newMessages, language }),
       });
 
       const data = await response.json();
       setMessages([...newMessages, { role: "assistant", content: data.content }]);
     } catch (error) {
       console.error("Chat Error:", error);
-      setMessages([...newMessages, { role: "assistant", content: "Apologies, a communication timeout occurred. Let us re-try the query." }]);
+      setMessages([...newMessages, { role: "assistant", content: ui.chat.error }]);
     } finally {
       setIsLoading(false);
     }
@@ -123,7 +127,7 @@ export default function ChatBot() {
                   <Bot size={16} />
                 </div>
                 <div className="font-mono">
-                  <h3 className="text-[10px] font-bold text-text-main uppercase tracking-wider leading-none">SYSTEM ASSISTANT</h3>
+                  <h3 className="text-[10px] font-bold text-text-main uppercase tracking-wider leading-none">{ui.chat.title}</h3>
                   <div className="flex items-center gap-1.5 mt-1 leading-none">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                     <span className="text-[7px] font-bold text-text-dim/80 tracking-widest uppercase">NODE: ACTIVE // PORT_443</span>
@@ -134,7 +138,7 @@ export default function ChatBot() {
                 <button 
                   onClick={clearChat} 
                   className="p-1.5 border border-border-main/50 rounded text-text-dim hover:text-accent hover:bg-accent-soft transition-colors" 
-                  title="Reset System Cache"
+                  title={ui.chat.reset_title}
                 >
                   <Trash2 size={12} />
                 </button>
@@ -157,7 +161,7 @@ export default function ChatBot() {
                   className={cn("flex flex-col gap-1.5", msg.role === "user" ? "items-end" : "items-start")}
                 >
                   <span className="font-mono text-[7px] text-text-dim/70 uppercase tracking-widest px-1">
-                    {msg.role === "assistant" ? "■ TELEMETRY_OUT" : "■ CONSOLE_IN"}
+                    {msg.role === "assistant" ? ui.chat.assistant_label : ui.chat.user_label}
                   </span>
                   
                   <div className={cn(
@@ -173,7 +177,7 @@ export default function ChatBot() {
               
               {isLoading && (
                 <div className="flex flex-col gap-1.5 items-start">
-                  <span className="font-mono text-[7px] text-accent uppercase tracking-widest px-1">■ PROCESS: COMPUTE_WEIGHTS</span>
+                  <span className="font-mono text-[7px] text-accent uppercase tracking-widest px-1">{ui.chat.loading_label}</span>
                   <div className="bg-bg-card text-text-main p-4 border border-border-main rounded-r rounded-tl-none flex gap-1.5">
                     <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" />
                     <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce [animation-delay:0.2s]" />
@@ -192,7 +196,7 @@ export default function ChatBot() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  placeholder="Enter system query specs..."
+                  placeholder={ui.chat.placeholder}
                   className="w-full pl-3 pr-12 py-3 rounded border border-border-main bg-bg-main/50 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 font-mono text-xs"
                 />
                 <button
@@ -204,7 +208,7 @@ export default function ChatBot() {
                 </button>
               </div>
               <p className="mt-3 text-[7px] text-text-dim/80 text-center uppercase tracking-[0.15em] flex items-center justify-center gap-1.5 opacity-65">
-                <Sparkles size={8} className="text-accent" /> SECURE TUNNEL AUGMENTED BY STÉPHANE
+                <Sparkles size={8} className="text-accent" /> {ui.chat.footer}
               </p>
             </div>
           </motion.div>

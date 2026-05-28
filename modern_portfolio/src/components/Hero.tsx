@@ -2,11 +2,12 @@
 
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, MapPin, Download, Terminal, Cpu, Database } from "lucide-react";
+import { ArrowRight, MapPin, Download, Terminal, Cpu } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
-import { personalInfo, resumeLinks } from "@/data/content";
+import { useContent } from "@/lib/useContent";
 
 export default function Hero() {
+  const { personalInfo, resumeLinks, ui } = useContent();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -89,7 +90,7 @@ export default function Hero() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
                 <span className="text-[8px] font-mono font-bold tracking-widest text-text-main uppercase">
-                  READY_FOR_DEPLOY
+                  {ui.hero.status_ready}
                 </span>
               </div>
             </div>
@@ -98,20 +99,20 @@ export default function Hero() {
             <div className="mt-8 w-full max-w-[240px] md:max-w-[270px] border border-border-main bg-bg-card/45 p-4 rounded font-mono text-[9px] text-text-dim/80 space-y-2.5">
               <div className="flex justify-between pb-1.5 border-b border-border-main/50">
                 <span className="text-accent uppercase font-bold tracking-wider flex items-center gap-1">
-                  <Cpu size={10} /> ENGINE STATS
+                  <Cpu size={10} /> {ui.hero.telemetry_title}
                 </span>
                 <span className="text-text-main font-bold">V1.2.6</span>
               </div>
               <div className="flex justify-between">
-                <span>RUNTIME ENVIRONMENT</span>
+                <span>{ui.hero.telemetry_runtime}</span>
                 <span className="text-text-main font-semibold">NodeJS / Go / Py3</span>
               </div>
               <div className="flex justify-between">
-                <span>ORCHESTRATION PIPELINES</span>
+                <span>{ui.hero.telemetry_orchestration}</span>
                 <span className="text-text-main font-semibold">LangGraph & Pydantic AI</span>
               </div>
               <div className="flex justify-between">
-                <span>DATA CLUSTER ENGINE</span>
+                <span>{ui.hero.telemetry_data_engine}</span>
                 <span className="text-text-main font-semibold">PySpark / Databricks</span>
               </div>
               <div className="flex justify-between pt-1.5 border-t border-border-main/50 text-[8px] opacity-60">
@@ -125,22 +126,22 @@ export default function Hero() {
           <div className="lg:col-span-8 flex flex-col text-center lg:text-left">
             <motion.div variants={itemVariants} className="space-y-4">
               <div className="inline-flex items-center gap-2 px-3 py-1 border border-accent/20 bg-accent-soft rounded text-[9px] font-mono font-bold text-accent uppercase tracking-[0.2em] mx-auto lg:mx-0">
-                <Terminal size={10} /> CORE SYSTEMS PLATFORM
+                <Terminal size={10} /> {ui.hero.badge}
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-extrabold tracking-tighter text-text-main leading-[1.05]">
-                Stéphane <span className="text-text-dim">KPOVIESSI</span><span className="text-accent">.</span>
+                {personalInfo.name.split(" ")[0]} <span className="text-text-dim">KPOVIESSI</span><span className="text-accent">.</span>
               </h1>
               
               <p className="text-lg sm:text-xl md:text-2xl font-mono text-accent font-bold tracking-tight mt-2 uppercase">
-                AI Systems & Data Infrastructure Engineer
+                {personalInfo.title}
               </p>
             </motion.div>
 
             {/* Hook statement */}
             <motion.div variants={itemVariants} className="mt-6 max-w-2xl mx-auto lg:mx-0">
               <p className="text-base md:text-lg text-text-dim leading-relaxed font-medium">
-                Designing scalable multi-agent platforms, deterministic big data pipelines, and high-performance execution runtimes. Dedicated to transforming volatile models into production-grade pipelines.
+                {ui.hero.hook}
               </p>
             </motion.div>
 
@@ -153,7 +154,7 @@ export default function Hero() {
                 href="#projects"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-text-main text-bg-main border border-text-main hover:bg-bg-main hover:text-text-main transition-all duration-300 font-mono font-bold text-xs uppercase tracking-widest shadow-md hover:shadow-lg active:scale-98"
               >
-                Explore Blueprints
+                {ui.hero.cta_explore}
                 <ArrowRight size={14} />
               </a>
 

@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Code2, Cpu, Database, Terminal, Settings } from "lucide-react";
-import { skills } from "@/data/content";
+import { useContent } from "@/lib/useContent";
 
 const categoryIcons = {
   programming: Terminal,
@@ -11,6 +10,8 @@ const categoryIcons = {
 };
 
 export default function Skills() {
+  const { skills, ui } = useContent();
+
   return (
     <section id="skills" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/20">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -19,14 +20,14 @@ export default function Skills() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <Settings size={10} /> 02 // ENGINE CALIBRATION SPECIFICATIONS
+              <Settings size={10} /> {ui.skills.badge}
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-              Technical <span className="text-text-dim">Specifications</span> Grid<span className="text-accent">.</span>
+              {ui.skills.heading_1} <span className="text-text-dim">{ui.skills.heading_2}</span> {ui.skills.heading_3}<span className="text-accent">.</span>
             </h2>
           </div>
           <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            HARDWARE & SOFTWARE STACK
+            {ui.skills.subheading}
           </div>
         </div>
 
@@ -51,7 +52,7 @@ export default function Skills() {
                       {category.label}
                     </h3>
                     <span className="text-[7px] font-mono text-text-dim/80 tracking-widest uppercase">
-                      READY FOR EXECUTION
+                      {ui.skills.ready}
                     </span>
                   </div>
                 </div>

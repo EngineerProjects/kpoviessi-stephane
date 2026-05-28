@@ -1,13 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  about,
-  education,
-  experiences,
-  personalInfo,
-  projects,
-  resumeLinks,
-  skills,
-} from "@/data/content";
+import * as EN from "@/data/content";
+import * as FR from "@/data/content.fr";
+
+type Language = "en" | "fr";
+
+type PortfolioContent = typeof EN;
 
 type ChatMessage = {
   role: "user" | "assistant" | "system";
@@ -16,6 +13,7 @@ type ChatMessage = {
 
 type ChatRequestBody = {
   messages?: ChatMessage[];
+  language?: Language;
 };
 
 type ZhipuResponse = {
@@ -29,7 +27,13 @@ type ZhipuResponse = {
   };
 };
 
-function buildPortfolioContext() {
+function getContent(language: Language): PortfolioContent {
+  return language === "fr" ? FR : EN;
+}
+
+function buildPortfolioContext(content: PortfolioContent) {
+  const { about, education, experiences, personalInfo, projects, resumeLinks, skills } = content;
+
   const skillSummary = Object.values(skills)
     .map((category) => `${category.label}: ${category.items.map((item) => item.name).join(", ")}`)
     .join("\n");
@@ -41,7 +45,7 @@ function buildPortfolioContext() {
         .slice(0, 4)
         .join("; ");
 
-      return `${experience.role} - ${experience.company} (${experience.period}, ${experience.location}): ${experience.summary} Points clés: ${highlights}.`;
+      return `${experience.role} - ${experience.company} (${experience.period}, ${experience.location}): ${experience.summary} Key points: ${highlights}.`;
     })
     .join("\n");
 
@@ -56,8 +60,8 @@ function buildPortfolioContext() {
     .map((item) => {
       const details = [
         item.description,
-        item.courses ? `Enseignements: ${item.courses.join("; ")}` : undefined,
-        item.keySkills ? `Compétences: ${item.keySkills.join(", ")}` : undefined,
+        item.courses ? `Courses: ${item.courses.join("; ")}` : undefined,
+        item.keySkills ? `Skills: ${item.keySkills.join(", ")}` : undefined,
         item.distinction ? `Distinction: ${item.distinction}` : undefined,
       ]
         .filter(Boolean)
@@ -68,29 +72,29 @@ function buildPortfolioContext() {
     .join("\n");
 
   return `
-PROFIL
-Nom: ${personalInfo.name}
-Titre: ${personalInfo.title}
-Localisation: ${personalInfo.location}
+PROFILE
+Name: ${personalInfo.name}
+Title: ${personalInfo.title}
+Location: ${personalInfo.location}
 Email: ${personalInfo.email}
 LinkedIn: ${personalInfo.linkedin}
 GitHub: ${personalInfo.github}
-CV: ${resumeLinks.map((resume) => `${resume.label} (${resume.href})`).join(", ")}
+Resumes: ${resumeLinks.map((resume) => `${resume.label} (${resume.href})`).join(", ")}
 
-Résumé
+Summary
 ${about.summary}
 ${about.detail}
 
-Compétences
+Skills
 ${skillSummary}
 
-Expériences
+Experiences
 ${experienceSummary}
 
-Projets
+Projects
 ${projectSummary}
 
-Formation
+Education
 ${educationSummary}
 `;
 }
@@ -99,24 +103,34 @@ export async function POST(req: NextRequest) {
   try {
     const body = (await req.json()) as ChatRequestBody;
     const messages = body.messages ?? [];
+    const language = body.language === "fr" ? "fr" : "en";
+    const content = getContent(language);
 
     if (!process.env.ZHIPUAI_API_KEY) {
-      return NextResponse.json({ content: "Config Error: API Key manquante." }, { status: 500 });
+      return NextResponse.json({ content: "Config Error: API key missing." }, { status: 500 });
     }
 
-    const systemPrompt = `
-Tu es l'assistant professionnel de ${personalInfo.name}.
-Ton objectif est d'aider les visiteurs à comprendre son profil, ses expériences, ses projets et ses compétences.
-
-Règles:
-- Réponds en français, avec un ton clair, professionnel et concis.
-- Base tes réponses sur le contexte portfolio ci-dessous.
-- Si un recruteur montre un intérêt professionnel, propose de laisser un nom et un email ou LinkedIn.
-- Ne promets pas de disponibilité ou d'information qui n'apparaît pas dans le contexte.
-- Pour les projets et expériences, explique l'impact technique et métier.
+    const systemPrompt =
+      language === "fr"
+        ? `
+Tu es l'assistant professionnel de ${content.personalInfo.name}.
+Réponds en français, avec un ton clair, professionnel et concis.
+Base tes réponses uniquement sur le contexte portfolio ci-dessous.
+Si un recruteur montre un intérêt professionnel, propose de laisser un nom et un email ou LinkedIn.
+Ne promets pas de disponibilité ou d'information qui n'apparaît pas dans le contexte.
 
 CONTEXTE PORTFOLIO
-${buildPortfolioContext()}
+${buildPortfolioContext(content)}
+`
+        : `
+You are the professional assistant for ${content.personalInfo.name}.
+Answer in English with a clear, professional, concise tone.
+Base your answers only on the portfolio context below.
+If a recruiter shows professional interest, suggest leaving a name and email or LinkedIn.
+Do not promise availability or information that does not appear in the context.
+
+PORTFOLIO CONTEXT
+${buildPortfolioContext(content)}
 `;
 
     const response = await fetch("https://open.bigmodel.cn/api/paas/v4/chat/completions", {
@@ -136,22 +150,22 @@ ${buildPortfolioContext()}
 
     if (!response.ok) {
       console.error("Zhipu API Error:", data);
-      throw new Error(data.error?.message || "Erreur API");
+      throw new Error(data.error?.message || "API error");
     }
 
-    const content = data.choices?.[0]?.message?.content;
+    const answer = data.choices?.[0]?.message?.content;
 
-    if (!content) {
-      throw new Error("Réponse API invalide");
+    if (!answer) {
+      throw new Error("Invalid API response");
     }
 
-    return NextResponse.json({ content });
+    return NextResponse.json({ content: answer });
   } catch (error) {
     console.error("Agent Error:", error);
     return NextResponse.json(
       {
         content:
-          "Je rencontre une turbulence technique, mais Stéphane reste disponible via son formulaire de contact ou sur LinkedIn.",
+          "A technical communication issue occurred. Stéphane remains reachable through the contact form or LinkedIn.",
       },
       { status: 200 },
     );

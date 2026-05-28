@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Phone, Send, MessageSquare, CheckCircle, AlertCircle, Loader2, Terminal } from "lucide-react";
+import { Mail, Phone, Send, MessageSquare, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
-import { personalInfo } from "@/data/content";
+import { useContent } from "@/lib/useContent";
 
 export default function Contact() {
+  const { personalInfo, ui } = useContent();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -64,14 +65,14 @@ export default function Contact() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
           <div className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <MessageSquare size={10} /> 05 // SECURE HANDSHAKE PROTOCOL
+              <MessageSquare size={10} /> {ui.contact.badge}
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-              Initiate <span className="text-text-dim">Connection</span> Gateway<span className="text-accent">.</span>
+              {ui.contact.heading_1} <span className="text-text-dim">{ui.contact.heading_2}</span> {ui.contact.heading_3}<span className="text-accent">.</span>
             </h2>
           </div>
           <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            ENCRYPTED COMMS TUNNEL
+            {ui.contact.subheading}
           </div>
         </div>
 
@@ -80,7 +81,7 @@ export default function Contact() {
           {/* Left Column: Coordinates */}
           <div className="lg:col-span-5 space-y-8 text-center lg:text-left">
             <p className="text-text-dim text-base leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
-              Open to collaborative development on autonomous agentic systems, PySpark migration audits, microservice designs, or other challenging engineering initiatives.
+              {ui.contact.intro}
             </p>
 
             <div className="space-y-4 max-w-md mx-auto lg:mx-0">
@@ -92,7 +93,7 @@ export default function Contact() {
                   <Mail size={16} />
                 </div>
                 <div className="text-left overflow-hidden font-mono">
-                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">REGISTRY EMAIL</p>
+                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">{ui.contact.email_label}</p>
                   <p className="text-xs font-bold text-text-main group-hover:text-accent transition-colors truncate">{personalInfo.email}</p>
                 </div>
               </a>
@@ -105,7 +106,7 @@ export default function Contact() {
                   <Phone size={16} />
                 </div>
                 <div className="text-left font-mono">
-                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">ENCRYPTED VOICE</p>
+                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">{ui.contact.phone_label}</p>
                   <p className="text-xs font-bold text-text-main group-hover:text-accent transition-colors">{personalInfo.phone}</p>
                 </div>
               </a>
@@ -137,7 +138,7 @@ export default function Contact() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                      // COMPLETE NAME
+                      {ui.contact.form_name}
                     </label>
                     <input 
                       type="text" 
@@ -147,13 +148,13 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       disabled={status === "SENDING"}
-                      placeholder="Ident: John Doe"
+                      placeholder={ui.contact.form_name_placeholder}
                       className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all font-mono text-xs disabled:opacity-50"
                     />
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                      // EMAIL ADDRESS
+                      {ui.contact.form_email}
                     </label>
                     <input 
                       type="email" 
@@ -163,7 +164,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       disabled={status === "SENDING"}
-                      placeholder="Ident: john@net.com"
+                      placeholder={ui.contact.form_email_placeholder}
                       className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all font-mono text-xs disabled:opacity-50"
                     />
                   </div>
@@ -171,7 +172,7 @@ export default function Contact() {
                 
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                    // RAW DATA PACK (MESSAGE)
+                    {ui.contact.form_message}
                   </label>
                   <textarea 
                     name="message"
@@ -181,7 +182,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     disabled={status === "SENDING"}
-                    placeholder="Enter payload message specs..."
+                    placeholder={ui.contact.form_message_placeholder}
                     className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all resize-none font-mono text-xs disabled:opacity-50"
                   />
                 </div>
@@ -198,22 +199,22 @@ export default function Contact() {
                   }`}
                 >
                   {status === "IDLE" && (
-                    <>Transmit Data Package <Send size={12} /></>
+                    <>{ui.contact.submit_idle} <Send size={12} /></>
                   )}
                   {status === "SENDING" && (
-                    <>Transmitting Datapack... <Loader2 size={12} className="animate-spin" /></>
+                    <>{ui.contact.submit_sending} <Loader2 size={12} className="animate-spin" /></>
                   )}
                   {status === "SENT" && (
-                    <>Handshake Established <CheckCircle size={12} /></>
+                    <>{ui.contact.submit_sent} <CheckCircle size={12} /></>
                   )}
                   {status === "ERROR" && (
-                    <>Transmission Interrupted <AlertCircle size={12} /></>
+                    <>{ui.contact.submit_error} <AlertCircle size={12} /></>
                   )}
                 </button>
 
                 {status === "SENT" && (
                   <p className="text-[9px] font-mono text-emerald-500 text-center font-bold uppercase tracking-widest animate-pulse">
-                    TRANSMISSION SUCCESSFUL. I WILL RESPOND ON THIS COORDINATE PROMPTLY.
+                    {ui.contact.success_msg}
                   </p>
                 )}
               </form>

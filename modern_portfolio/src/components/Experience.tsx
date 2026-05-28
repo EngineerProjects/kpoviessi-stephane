@@ -2,9 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin, GitBranch, GitCommit, FileText } from "lucide-react";
-import { experiences, associativeExperiences } from "@/data/content";
-import { cn } from "@/lib/utils";
+import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin, GitBranch } from "lucide-react";
+import { useContent } from "@/lib/useContent";
 
 // Mapping experience company to technical commit identifiers
 const commitMap: Record<string, string> = {
@@ -17,9 +16,11 @@ const commitMap: Record<string, string> = {
 function ExperienceCard({
   exp,
   index,
+  ui,
 }: {
-  exp: (typeof experiences)[0];
+  exp: ReturnType<typeof useContent>["experiences"][0];
   index: number;
+  ui: ReturnType<typeof useContent>["ui"];
 }) {
   const [isExpanded, setIsExpanded] = useState(index < 2); // First two expanded by default for maximum impact
   const commitHash = commitMap[exp.company] || `0xGEN_NODE_0${index}`;
@@ -75,9 +76,9 @@ function ExperienceCard({
           className="flex items-center gap-2 font-mono text-[9px] font-bold text-accent hover:text-text-main transition-colors uppercase tracking-widest mb-6"
         >
           {isExpanded ? (
-            <>Collapse Details <ChevronUp size={12} /></>
+            <>{ui.experience.collapse} <ChevronUp size={12} /></>
           ) : (
-            <>Expand Log Nodes <ChevronDown size={12} /></>
+            <>{ui.experience.expand} <ChevronDown size={12} /></>
           )}
         </button>
 
@@ -126,6 +127,8 @@ function ExperienceCard({
 }
 
 export default function Experience() {
+  const { experiences, associativeExperiences, ui } = useContent();
+
   return (
     <section id="experience" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/30">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -134,14 +137,14 @@ export default function Experience() {
         <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <GitBranch size={10} /> 04 // OPERATIONAL RECORDS & EXPERIENCE
+              <GitBranch size={10} /> {ui.experience.badge}
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-              Operational <span className="text-text-dim">Releases</span> & Experience<span className="text-accent">.</span>
+              {ui.experience.heading_1} <span className="text-text-dim">{ui.experience.heading_2}</span> {ui.experience.heading_3}<span className="text-accent">.</span>
             </h2>
           </div>
           <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            CHRONOLOGICAL CHANGELOG
+            {ui.experience.subheading}
           </div>
         </div>
 
@@ -152,7 +155,7 @@ export default function Experience() {
 
           <div className="space-y-4">
             {experiences.map((exp, i) => (
-              <ExperienceCard key={exp.company + exp.role} exp={exp} index={i} />
+              <ExperienceCard key={exp.company + exp.role} exp={exp} index={i} ui={ui} />
             ))}
           </div>
         </div>
@@ -163,11 +166,11 @@ export default function Experience() {
             <div className="max-w-4xl">
               <h3 className="text-xl md:text-3xl font-display font-extrabold text-text-main tracking-tight uppercase flex items-center gap-3">
                 <Briefcase size={20} className="text-accent stroke-[1.5]" />
-                Community & Leadership Changelog
+                {ui.experience.community_title}
               </h3>
             </div>
             <div className="mt-2 md:mt-0 font-mono text-[8px] text-text-dim uppercase tracking-widest">
-              JUNIA ALUMNI NETWORKS
+              {ui.experience.community_sub}
             </div>
           </div>
           

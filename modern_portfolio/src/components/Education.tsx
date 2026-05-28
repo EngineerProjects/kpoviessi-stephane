@@ -1,10 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Award, ExternalLink, Library, Terminal, ShieldAlert } from "lucide-react";
-import { education, certifications } from "@/data/content";
+import { Award, ExternalLink, Library } from "lucide-react";
+import { useContent } from "@/lib/useContent";
 
 export default function Education() {
+  const { education, certifications, ui } = useContent();
+
   return (
     <section id="education" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/20">
       <div className="max-w-7xl mx-auto px-6 md:px-8">
@@ -16,10 +18,10 @@ export default function Education() {
           <div className="lg:col-span-7 space-y-12">
             <div className="border-b border-border-main/50 pb-6">
               <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-                <Library size={10} /> 05 // SCIENTIFIC & MATHEMATICAL RIGOR
+                <Library size={10} /> {ui.education.badge}
               </div>
               <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-                Academic <span className="text-text-dim">Foundations</span><span className="text-accent">.</span>
+                {ui.education.heading_1} <span className="text-text-dim">{ui.education.heading_2}</span><span className="text-accent">.</span>
               </h2>
             </div>
 
@@ -52,7 +54,7 @@ export default function Education() {
                   </div>
                   
                   <p className="text-xs font-mono font-bold text-text-dim uppercase tracking-wider mb-2">
-                    {item.school} // {item.specialization}
+                    {item.school} {"//"} {item.specialization}
                   </p>
                   
                   <p className="text-xs text-text-dim leading-relaxed mb-4">
@@ -62,7 +64,7 @@ export default function Education() {
                   {/* Syllabus lists */}
                   {item.courses && (
                     <div className="mb-4 pl-3 border-l border-border-main/50 space-y-1.5 font-mono text-[9px] text-text-dim">
-                      <span className="text-accent font-bold block mb-1 text-[8px] tracking-wider uppercase">CORE TECHNICAL SYLLABUS:</span>
+                      <span className="text-accent font-bold block mb-1 text-[8px] tracking-wider uppercase">{ui.education.syllabus_label}</span>
                       {item.courses.map((course) => (
                         <div key={course} className="flex items-start gap-2 leading-relaxed">
                           <span className="text-accent font-bold">↳</span>
@@ -75,7 +77,7 @@ export default function Education() {
                   {/* Distinction telemetry */}
                   {item.distinction && (
                     <div className="border border-accent/20 bg-accent-soft p-3 rounded font-mono text-[9px] text-text-main font-bold tracking-wide mb-4">
-                      [DISTINCTION] {item.distinction.toUpperCase()}
+                      {ui.education.distinction_prefix} {item.distinction.toUpperCase()}
                     </div>
                   )}
 
@@ -86,7 +88,7 @@ export default function Education() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 font-mono text-[9px] font-bold text-text-dim hover:text-text-main uppercase tracking-widest transition-colors mt-2"
                     >
-                      Verify Institution <ExternalLink size={10} className="text-accent" />
+                      {ui.education.verify_link} <ExternalLink size={10} className="text-accent" />
                     </a>
                   )}
                 </motion.div>
@@ -98,10 +100,10 @@ export default function Education() {
           <div className="lg:col-span-5 space-y-12 lg:pl-6">
             <div className="border-b border-border-main/50 pb-6">
               <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-                <Award size={10} /> REGISTRY CREDENTIALS
+                <Award size={10} /> {ui.education.cert_badge}
               </div>
               <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
-                Verified <span className="text-text-dim">Registry</span><span className="text-accent">.</span>
+                {ui.education.cert_heading_1} <span className="text-text-dim">{ui.education.cert_heading_2}</span><span className="text-accent">.</span>
               </h2>
             </div>
 
@@ -120,7 +122,7 @@ export default function Education() {
                       {cert.name}
                     </h3>
                     <p className="text-[8px] font-mono text-text-dim uppercase tracking-wider font-bold">
-                      ISSUER: {cert.issuer}
+                      {ui.education.issuer_label} {cert.issuer}
                     </p>
                   </div>
                   <div className="w-8 h-8 border border-border-main/60 rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
@@ -134,7 +136,7 @@ export default function Education() {
             <div className="border border-border-main/50 border-dashed p-6 rounded relative overflow-hidden bg-bg-card/10">
               <div className="absolute top-0 right-0 w-8 h-8 bg-accent/5 pointer-events-none" />
               <p className="font-mono text-[10px] text-text-dim leading-relaxed italic text-center">
-                &quot;Continuous alignment with changing cloud paradigms, mathematical operations research, and automated workflow state machines.&quot;
+                &quot;{ui.education.continuous_quote}&quot;
               </p>
             </div>
           </div>
