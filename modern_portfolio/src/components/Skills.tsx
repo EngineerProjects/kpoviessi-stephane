@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Code2, Cpu, Database, Terminal } from "lucide-react";
+import { Code2, Cpu, Database, Terminal, Settings } from "lucide-react";
 import { skills } from "@/data/content";
-import { cn } from "@/lib/utils";
 
 const categoryIcons = {
   programming: Terminal,
@@ -13,61 +12,82 @@ const categoryIcons = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 md:py-40 relative">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="mb-20 md:mb-32">
-           <h2 className="text-3xl md:text-6xl font-black tracking-tighter text-text-main mb-6 leading-none">Stack <span className="text-text-dim">Technique.</span></h2>
-           <p className="text-text-dim max-w-xl text-lg md:text-xl font-medium">
-             Un ensemble complet d&apos;outils et de technologies que j&apos;utilise pour construire des solutions de données robustes et scalables.
-           </p>
+    <section id="skills" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/20">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        
+        {/* Section Header HUD */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
+              <Settings size={10} /> 02 // ENGINE CALIBRATION SPECIFICATIONS
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+              Technical <span className="text-text-dim">Specifications</span> Grid<span className="text-accent">.</span>
+            </h2>
+          </div>
+          <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
+            HARDWARE & SOFTWARE STACK
+          </div>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 md:gap-12">
+        {/* 3-Column Architectural Specs Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 border border-border-main rounded bg-bg-card/25 shadow-sm divide-y lg:divide-y-0 lg:divide-x divide-border-main">
           {Object.entries(skills).map(([key, category], catIndex) => {
             const Icon = categoryIcons[key as keyof typeof categoryIcons] || Code2;
+            
             return (
-              <motion.div
-                key={key}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-                className="group relative p-8 md:p-12 rounded-[3rem] glass hover:bg-white/50 dark:hover:bg-zinc-900/50 transition-all duration-700"
-              >
-                <div className="absolute top-0 right-0 p-12 text-text-main/5 group-hover:text-accent/10 transition-colors pointer-events-none">
-                  <Icon size={160} />
+              <div key={key} className="p-8 md:p-10 flex flex-col relative group">
+                {/* Visual grid indicators */}
+                <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/35 tracking-wider">
+                  SYSTEM LAYER // 0{catIndex + 1}
                 </div>
 
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-12">
-                    <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                      <Icon size={24} />
-                    </div>
-                    <h3 className="text-2xl font-black text-text-main tracking-tight uppercase">{category.label}</h3>
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="w-9 h-9 border border-border-main rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
+                    <Icon size={16} />
                   </div>
+                  <div>
+                    <h3 className="text-sm font-display font-extrabold text-text-main tracking-tight uppercase">
+                      {category.label}
+                    </h3>
+                    <span className="text-[7px] font-mono text-text-dim/80 tracking-widest uppercase">
+                      READY FOR EXECUTION
+                    </span>
+                  </div>
+                </div>
 
-                  <div className="flex flex-wrap gap-2.5">
-                    {category.items.map((skill) => (
+                {/* Highly structured list of capabilities */}
+                <div className="space-y-2 mt-auto">
+                  {category.items.map((skill) => {
+                    const isExpert = skill.level === "Expert";
+                    const isAdvanced = skill.level === "Advanced" || skill.level === "Advanced";
+                    
+                    return (
                       <div
                         key={skill.name}
-                        className={cn(
-                          "px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest border transition-all duration-300",
-                          skill.level === "Expert" 
-                            ? "bg-accent/10 border-accent/20 text-accent shadow-sm" 
-                            : skill.level === "Avancé"
-                            ? "bg-text-main/5 border-border-main text-text-main opacity-80"
-                            : "bg-text-main/[0.02] border-border-main text-text-dim opacity-60"
-                        )}
+                        className="flex items-center justify-between p-2 border border-border-main/40 bg-bg-main/30 hover:bg-bg-main/80 hover:border-accent/20 transition-all duration-200 rounded font-mono text-xs"
                       >
-                        <div className="flex items-center gap-2">
+                        <span className="text-text-main font-semibold flex items-center gap-2">
                           {skill.name}
-                          {skill.level === "Expert" && <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />}
-                        </div>
+                          {isExpert && (
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                          )}
+                        </span>
+                        
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded tracking-widest ${
+                          isExpert 
+                            ? "bg-accent-soft text-accent border border-accent/20"
+                            : isAdvanced
+                            ? "bg-text-main/5 text-text-main/80 border border-border-main"
+                            : "bg-text-main/[0.02] text-text-dim/60"
+                        }`}>
+                          {skill.level.slice(0, 3).toUpperCase()}
+                        </span>
                       </div>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
+import { MessageSquare, X, Send, Bot, Sparkles, Trash2, Terminal } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Message {
@@ -17,7 +17,7 @@ export default function ChatBot() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Charger la mémoire au montage
+  // Load chat memory on mount
   useEffect(() => {
     const saved = localStorage.getItem("assistant_memory");
     if (saved) {
@@ -26,13 +26,13 @@ export default function ChatBot() {
       setMessages([
         {
           role: "assistant",
-          content: "Bonjour ! Je suis l'assistant IA de Stéphane. Je peux vous parler de ses projets en Data Engineering, de son expertise en IA ou même faire une recherche en ligne pour vous. Comment puis-je vous aider ?",
+          content: "Hello! I am Stéphane's System Assistant. I can describe his Big Data pipelines at Allianz, Go backend architectures at Hello Pulse, generative PyTorch modeling, and agentic multi-agent systems. What coordinate would you like to explore?",
         },
       ]);
     }
   }, []);
 
-  // Sauvegarder la mémoire à chaque changement de message
+  // Save chat memory on updates
   useEffect(() => {
     if (messages.length > 0) {
       localStorage.setItem("assistant_memory", JSON.stringify(messages));
@@ -50,7 +50,7 @@ export default function ChatBot() {
   const clearChat = () => {
     const initialMessage: Message[] = [{
       role: "assistant",
-      content: "Conversation réinitialisée. Comment puis-je vous aider ?",
+      content: "Conversation history cleared. System standby. How can I assist you?",
     }];
     setMessages(initialMessage);
     localStorage.removeItem("assistant_memory");
@@ -76,7 +76,7 @@ export default function ChatBot() {
       setMessages([...newMessages, { role: "assistant", content: data.content }]);
     } catch (error) {
       console.error("Chat Error:", error);
-      setMessages([...newMessages, { role: "assistant", content: "Désolé, j'ai un petit souci technique. Réessayons !" }]);
+      setMessages([...newMessages, { role: "assistant", content: "Apologies, a communication timeout occurred. Let us re-try the query." }]);
     } finally {
       setIsLoading(false);
     }
@@ -84,116 +84,127 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* Floating Button */}
+      {/* Floating Activation Button */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-8 right-8 z-[60] w-16 h-16 rounded-full bg-accent text-white shadow-2xl flex items-center justify-center group border-4 border-white/20"
+        className="fixed bottom-6 right-6 z-[60] w-14 h-14 border border-accent bg-bg-card text-accent shadow-lg flex items-center justify-center group cursor-pointer"
+        style={{ borderRadius: "4px" }}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (
-            <motion.div key="close"><X size={28} /></motion.div>
+            <motion.div key="close"><X size={20} /></motion.div>
           ) : (
-            <motion.div key="open" className="relative">
-              <MessageSquare size={28} />
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 border-2 border-accent rounded-full animate-pulse" />
+            <motion.div key="open" className="relative flex items-center justify-center">
+              <MessageSquare size={20} />
+              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 border border-bg-card rounded-full animate-pulse" />
             </motion.div>
           )}
         </AnimatePresence>
       </motion.button>
 
-      {/* Chat Window */}
+      {/* CAD Terminal Chat Window */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95, transformOrigin: "bottom right" }}
+            initial={{ opacity: 0, y: 12, scale: 0.98, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-28 right-8 z-[60] w-[90vw] md:w-[450px] h-[650px] max-h-[75vh] rounded-[3rem] glass shadow-2xl overflow-hidden flex flex-col border border-white/20"
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
+            className="fixed bottom-24 right-6 z-[60] w-[92vw] sm:w-[420px] h-[580px] max-h-[72vh] border border-border-main bg-bg-main/98 backdrop-blur-md shadow-xl flex flex-col overflow-hidden"
+            style={{ borderRadius: "8px" }}
           >
-            {/* Header */}
-            <div className="p-8 bg-accent flex items-center justify-between text-white relative">
-              <div className="relative z-10 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-xl border border-white/30">
-                  <Bot size={28} />
+            {/* HUD Terminal Header */}
+            <div className="px-5 py-4 border-b border-border-main flex items-center justify-between bg-bg-card/45 relative">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-8 border border-accent/20 bg-accent-soft rounded flex items-center justify-center text-accent">
+                  <Bot size={16} />
                 </div>
-                <div>
-                  <h3 className="font-black text-xs uppercase tracking-[0.2em]">Assistant IA</h3>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span className="text-[10px] font-black opacity-80 uppercase tracking-widest">GLM-4 ONLINE</span>
+                <div className="font-mono">
+                  <h3 className="text-[10px] font-bold text-text-main uppercase tracking-wider leading-none">SYSTEM ASSISTANT</h3>
+                  <div className="flex items-center gap-1.5 mt-1 leading-none">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[7px] font-bold text-text-dim/80 tracking-widest uppercase">NODE: ACTIVE // PORT_443</span>
                   </div>
                 </div>
               </div>
-              <div className="flex items-center gap-2 relative z-10">
-                <button onClick={clearChat} className="p-2 hover:bg-white/10 rounded-xl transition-all" title="Effacer l'historique">
-                  <Trash2 size={18} />
+              <div className="flex items-center gap-1 font-mono">
+                <button 
+                  onClick={clearChat} 
+                  className="p-1.5 border border-border-main/50 rounded text-text-dim hover:text-accent hover:bg-accent-soft transition-colors" 
+                  title="Reset System Cache"
+                >
+                  <Trash2 size={12} />
                 </button>
-                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-xl transition-all">
-                  <X size={20} />
+                <button 
+                  onClick={() => setIsOpen(false)} 
+                  className="p-1.5 border border-border-main/50 rounded text-text-dim hover:text-accent hover:bg-accent-soft transition-colors"
+                >
+                  <X size={12} />
                 </button>
               </div>
             </div>
 
-            {/* Messages */}
-            <div className="flex-1 overflow-y-auto p-8 space-y-8 bg-bg-main/20 scrollbar-hide">
+            {/* Monospace Message Timeline */}
+            <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-bg-main/30 scrollbar-thin">
               {messages.map((msg, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className={cn("flex flex-col gap-2", msg.role === "user" ? "items-end" : "items-start")}
+                  className={cn("flex flex-col gap-1.5", msg.role === "user" ? "items-end" : "items-start")}
                 >
-                  <span className="text-[9px] font-black text-text-dim uppercase tracking-widest px-2">
-                    {msg.role === "assistant" ? "Assistant" : "Vous"}
+                  <span className="font-mono text-[7px] text-text-dim/70 uppercase tracking-widest px-1">
+                    {msg.role === "assistant" ? "■ TELEMETRY_OUT" : "■ CONSOLE_IN"}
                   </span>
+                  
                   <div className={cn(
-                    "max-w-[90%] p-5 rounded-[2rem] backdrop-blur-xl border shadow-sm",
+                    "max-w-[85%] p-4 border shadow-sm font-sans text-xs leading-relaxed font-medium",
                     msg.role === "user" 
-                      ? "bg-accent text-white rounded-tr-none border-white/20" 
-                      : "bg-white/40 dark:bg-white/[0.03] text-text-main rounded-tl-none border-border-main"
+                      ? "bg-text-main text-bg-main border-text-main rounded-l rounded-tr-none" 
+                      : "bg-bg-card text-text-main border-border-main rounded-r rounded-tl-none"
                   )}>
-                    <p className="text-sm md:text-base leading-relaxed font-medium whitespace-pre-wrap">{msg.content}</p>
+                    <p className="whitespace-pre-wrap">{msg.content}</p>
                   </div>
                 </motion.div>
               ))}
+              
               {isLoading && (
-                <div className="flex flex-col gap-2 items-start">
-                  <span className="text-[9px] font-black text-accent uppercase tracking-widest px-2">Réflexion en cours...</span>
-                  <div className="bg-white/40 dark:bg-white/[0.03] p-6 rounded-[2rem] rounded-tl-none border border-border-main backdrop-blur-xl flex gap-2">
-                    <span className="w-2 h-2 bg-accent/40 rounded-full animate-bounce" />
-                    <span className="w-2 h-2 bg-accent/40 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-2 h-2 bg-accent/40 rounded-full animate-bounce [animation-delay:0.4s]" />
+                <div className="flex flex-col gap-1.5 items-start">
+                  <span className="font-mono text-[7px] text-accent uppercase tracking-widest px-1">■ PROCESS: COMPUTE_WEIGHTS</span>
+                  <div className="bg-bg-card text-text-main p-4 border border-border-main rounded-r rounded-tl-none flex gap-1.5">
+                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" />
+                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce [animation-delay:0.2s]" />
+                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce [animation-delay:0.4s]" />
                   </div>
                 </div>
               )}
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Input */}
-            <div className="p-8 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-3xl border-t border-border-main">
-              <div className="relative">
+            {/* Input Dispatch Console */}
+            <div className="p-4 border-t border-border-main bg-bg-card/45 font-mono">
+              <div className="relative flex items-center">
                 <input
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  placeholder="Posez votre question..."
-                  className="w-full pl-6 pr-16 py-5 rounded-[1.5rem] bg-bg-main border border-border-main text-text-main placeholder:text-text-dim/40 focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent/30 transition-all font-bold"
+                  placeholder="Enter system query specs..."
+                  className="w-full pl-3 pr-12 py-3 rounded border border-border-main bg-bg-main/50 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 font-mono text-xs"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isLoading}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 w-12 h-12 rounded-[1.2rem] bg-accent text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-all disabled:opacity-50 shadow-lg shadow-accent/20"
+                  className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded border border-border-main bg-bg-main flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 hover:bg-accent-soft transition-all disabled:opacity-50"
                 >
-                  <Send size={20} />
+                  <Send size={12} />
                 </button>
               </div>
-              <p className="mt-4 text-[9px] text-text-dim text-center uppercase tracking-[0.25em] font-black opacity-40 flex items-center justify-center gap-2">
-                <Sparkles size={10} className="text-accent" /> Intelligence augmentée par Stéphane
+              <p className="mt-3 text-[7px] text-text-dim/80 text-center uppercase tracking-[0.15em] flex items-center justify-center gap-1.5 opacity-65">
+                <Sparkles size={8} className="text-accent" /> SECURE TUNNEL AUGMENTED BY STÉPHANE
               </p>
             </div>
           </motion.div>

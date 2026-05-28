@@ -1,85 +1,107 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Brain, Database, Eye, Sparkles, TrendingUp } from "lucide-react";
+import { Brain, Database, Eye, Wrench, Sparkles, Terminal, Activity } from "lucide-react";
 import { about } from "@/data/content";
 
 const iconMap = {
   database: Database,
-  chart: TrendingUp,
+  chart: Activity,
   brain: Brain,
   eye: Eye,
+  wrench: Wrench,
 };
 
 export default function About() {
   return (
-    <section id="about" className="py-16 md:py-40 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Title on top */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-12 md:mb-24"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-black uppercase tracking-[0.2em] mb-6 md:mb-8">
-            <Sparkles size={14} />
-            À Propos
-          </div>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter text-text-main leading-[1.2] md:leading-[1.1]">
-            Transformer la donnée complexe en <span className="text-accent italic">systèmes intelligents.</span>
-          </h2>
-        </motion.div>
+    <section id="about" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/30">
+      {/* Decorative vertical hairline for architectural framing */}
+      <div className="absolute right-[15%] top-0 bottom-0 w-[1px] bg-border-main/30 pointer-events-none hidden lg:block" />
 
-        <div className="grid lg:grid-cols-12 gap-10 md:gap-20 items-start">
-          {/* Left side: Text Summary */}
+      <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+        
+        {/* Section Header HUD */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
+              <Terminal size={10} /> 01 // CORE RESEARCH SCOPE
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter text-text-main leading-none whitespace-nowrap">
+              Engineering <span className="text-text-dim">Deterministic</span> Systems<span className="text-accent">.</span>
+            </h2>
+          </div>
+          <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
+            FOCUS: SCALE & DETAILED PARITY
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Thesis & Statement */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-5 space-y-6 md:space-y-8"
           >
-            <div className="space-y-4 md:space-y-6 text-base md:text-xl text-text-dim leading-relaxed font-medium">
-              <p>{about.summary}</p>
-              <p>{about.detail}</p>
+            <div className="space-y-4 text-base text-text-dim leading-relaxed font-medium">
+              <p className="text-text-main font-semibold text-lg leading-relaxed">
+                {about.summary}
+              </p>
+              <p>
+                {about.detail}
+              </p>
             </div>
             
-            <div className="p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] glass group hover:border-accent/30 transition-all duration-500">
-               <div className="flex items-center gap-4 md:gap-5 mb-4 md:mb-6">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-accent flex items-center justify-center text-white shadow-lg shadow-accent/20 group-hover:scale-110 transition-transform duration-500">
-                    <Database size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-text-main font-black text-sm md:text-lg uppercase tracking-tight">Approche End-to-End</h3>
-                    <p className="text-[10px] md:text-sm font-bold text-text-dim uppercase tracking-widest opacity-70">De la donnée brute à la production</p>
-                  </div>
-               </div>
-               <p className="text-sm md:text-base text-text-dim leading-relaxed italic border-l-2 border-accent/30 pl-4 md:pl-6 py-1">
-                 &quot;Je ne me contente pas de construire des modèles ; je conçois des architectures robustes qui résolvent des problèmes concrets et passent à l&apos;échelle.&quot;
-               </p>
+            {/* Technical Philosophy Block */}
+            <div className="border border-border-main bg-bg-card p-6 md:p-8 rounded relative overflow-hidden group shadow-sm">
+              {/* Mechanical Corner Overlay */}
+              <div className="absolute top-0 right-0 w-2 h-2 bg-accent opacity-20" />
+              <div className="absolute top-0 left-0 w-0.5 h-full bg-accent" />
+              
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-10 h-10 rounded border border-accent/20 bg-accent-soft flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-bg-main transition-colors duration-300">
+                  <Activity size={18} />
+                </div>
+                <div>
+                  <h3 className="text-text-main font-mono font-bold text-xs uppercase tracking-wider">Systems Architecture Rule</h3>
+                  <span className="text-[8px] font-mono text-text-dim tracking-widest uppercase">FROM METRIC TO MACHINE</span>
+                </div>
+              </div>
+              <p className="text-xs md:text-sm text-text-dim leading-relaxed italic border-l border-border-main pl-4 py-0.5">
+                &quot;I do not merely train models or run queries. I architect complete, self-healing platforms that ensure functional parity, schema safety, and micro-second reliability.&quot;
+              </p>
             </div>
           </motion.div>
 
-          {/* Right side: Expertise Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+          {/* Right Column: High-density Spec Cards */}
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
             {about.expertise.map((item, index) => {
               const Icon = iconMap[item.icon as keyof typeof iconMap] || Brain;
+              
               return (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  className="group p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] glass hover:border-accent/50 transition-all duration-500 hover:shadow-2xl hover:shadow-accent/5"
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="group relative border border-border-main bg-bg-card/40 p-6 md:p-8 rounded hover:border-accent/40 hover:bg-bg-card transition-all duration-300 shadow-sm"
                 >
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-accent/10 border border-accent/10 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-all duration-500 mb-6 md:mb-8">
-                    <Icon size={24} />
+                  {/* Absolute coordinate specs */}
+                  <div className="absolute top-2 right-3 font-mono text-[7px] text-text-dim/40 tracking-wider">
+                    SPEC NODE // 0{index + 1}
                   </div>
-                  <h3 className="text-lg md:text-xl font-black text-text-main mb-3 md:mb-4 tracking-tight uppercase">{item.title}</h3>
-                  <p className="text-xs md:text-sm font-medium text-text-dim leading-relaxed group-hover:text-text-main transition-colors">
+
+                  <div className="w-11 h-11 border border-border-main rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300 mb-6">
+                    <Icon size={20} className="stroke-[1.5]" />
+                  </div>
+                  
+                  <h3 className="text-base font-display font-extrabold text-text-main mb-3 tracking-tight uppercase group-hover:text-accent transition-colors">
+                    {item.title}
+                  </h3>
+                  
+                  <p className="text-xs font-medium text-text-dim leading-relaxed">
                     {item.description}
                   </p>
                 </motion.div>

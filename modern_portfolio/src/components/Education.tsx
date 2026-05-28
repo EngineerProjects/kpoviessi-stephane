@@ -1,104 +1,92 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GraduationCap, Award, ExternalLink } from "lucide-react";
+import { GraduationCap, Award, ExternalLink, Library, Terminal, ShieldAlert } from "lucide-react";
 import { education, certifications } from "@/data/content";
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 md:py-40 relative">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-20">
-          {/* Education */}
-          <div>
-            <div className="flex items-center gap-4 mb-16">
-              <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                <GraduationCap size={28} />
+    <section id="education" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/20">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        
+        {/* Grid Split Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Left Column: Academic Foundations */}
+          <div className="lg:col-span-7 space-y-12">
+            <div className="border-b border-border-main/50 pb-6">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
+                <Library size={10} /> 05 // SCIENTIFIC & MATHEMATICAL RIGOR
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-text-main tracking-tighter uppercase leading-none">Éducation<span className="text-accent">.</span></h2>
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+                Academic <span className="text-text-dim">Foundations</span><span className="text-accent">.</span>
+              </h2>
             </div>
 
             <div className="space-y-10">
               {education.map((item, i) => (
                 <motion.div
                   key={item.degree + item.school}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="group relative pl-10 pb-10 last:pb-0"
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="group relative pl-8 pb-8 last:pb-0"
                 >
-                  <div className="absolute left-0 top-1.5 bottom-0 w-px bg-border-main group-last:hidden" />
-                  <div className="absolute left-[-4px] top-1.5 w-2 h-2 rounded-full bg-accent shadow-[0_0_10px_rgba(99,102,241,0.5)] group-hover:scale-150 transition-transform duration-300" />
+                  {/* Left branch hairline guides */}
+                  <div className="absolute left-[3px] top-[8px] bottom-0 w-[1px] bg-border-main group-last:hidden" />
+                  <div className="absolute left-0 top-[8px] w-2 h-2 rounded-full border border-accent bg-bg-main flex items-center justify-center group-hover:bg-accent transition-colors duration-300" />
                   
-                  <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1">
-                    <h3 className="text-xl font-black text-text-main group-hover:text-accent transition-colors tracking-tight uppercase">
+                  <div className="mb-3 flex flex-wrap items-center gap-3">
+                    <h3 className="text-base font-display font-extrabold text-text-main group-hover:text-accent transition-colors tracking-tight uppercase leading-none">
                       {item.degree}
                     </h3>
-                    <span className="text-[10px] font-mono text-text-dim bg-accent/5 px-3 py-1 rounded-full border border-accent/10">
+                    <span className="text-[8px] font-mono font-bold text-text-dim bg-bg-main border border-border-main px-2 py-0.5 rounded">
                       {item.period}
                     </span>
                     {item.level && (
-                      <span className="text-[10px] font-mono text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">
-                        {item.level}
+                      <span className="text-[8px] font-mono font-bold text-accent bg-accent-soft border border-accent/20 px-2 py-0.5 rounded">
+                        {item.level.toUpperCase()}
                       </span>
                     )}
                   </div>
-                  <p className="text-accent font-bold mb-3">{item.school}</p>
-                  <p className="text-base text-text-dim mb-6 font-medium">{item.specialization}</p>
+                  
+                  <p className="text-xs font-mono font-bold text-text-dim uppercase tracking-wider mb-2">
+                    {item.school} // {item.specialization}
+                  </p>
+                  
+                  <p className="text-xs text-text-dim leading-relaxed mb-4">
+                    {item.description}
+                  </p>
 
-                  {item.description && (
-                    <p className="text-sm text-text-dim leading-relaxed mb-6 font-medium">
-                      {item.description}
-                    </p>
-                  )}
-
+                  {/* Syllabus lists */}
                   {item.courses && (
-                    <div className="mb-6">
-                      <h4 className="text-[10px] font-black text-text-main uppercase tracking-widest mb-3 opacity-70">
-                        Principaux enseignements
-                      </h4>
-                      <ul className="space-y-2">
-                        {item.courses.map((course) => (
-                          <li
-                            key={course}
-                            className="text-xs md:text-sm text-text-dim leading-relaxed flex items-start gap-3"
-                          >
-                            <div className="w-1 h-1 rounded-full bg-accent mt-2 flex-shrink-0" />
-                            {course}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {item.keySkills && (
-                    <div className="mb-6 flex flex-wrap gap-2">
-                      {item.keySkills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-2.5 py-1 rounded-lg bg-accent/5 text-accent text-[9px] font-black uppercase tracking-widest border border-accent/10"
-                        >
-                          {skill}
-                        </span>
+                    <div className="mb-4 pl-3 border-l border-border-main/50 space-y-1.5 font-mono text-[9px] text-text-dim">
+                      <span className="text-accent font-bold block mb-1 text-[8px] tracking-wider uppercase">CORE TECHNICAL SYLLABUS:</span>
+                      {item.courses.map((course) => (
+                        <div key={course} className="flex items-start gap-2 leading-relaxed">
+                          <span className="text-accent font-bold">↳</span>
+                          <span>{course}</span>
+                        </div>
                       ))}
                     </div>
                   )}
 
+                  {/* Distinction telemetry */}
                   {item.distinction && (
-                    <p className="text-sm text-text-main leading-relaxed mb-6 font-bold border-l-2 border-accent pl-4">
-                      Distinction : {item.distinction}
-                    </p>
+                    <div className="border border-accent/20 bg-accent-soft p-3 rounded font-mono text-[9px] text-text-main font-bold tracking-wide mb-4">
+                      [DISTINCTION] {item.distinction.toUpperCase()}
+                    </div>
                   )}
-                  
+
                   {item.link && (
                     <a
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-[10px] font-black text-text-dim hover:text-text-main uppercase tracking-widest transition-all"
+                      className="inline-flex items-center gap-1.5 font-mono text-[9px] font-bold text-text-dim hover:text-text-main uppercase tracking-widest transition-colors mt-2"
                     >
-                      Visiter l&apos;institution <ExternalLink size={14} className="text-accent" />
+                      Verify Institution <ExternalLink size={10} className="text-accent" />
                     </a>
                   )}
                 </motion.div>
@@ -106,43 +94,48 @@ export default function Education() {
             </div>
           </div>
 
-          {/* Certifications */}
-          <div>
-            <div className="flex items-center gap-4 mb-16">
-              <div className="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                <Award size={28} />
+          {/* Right Column: Verified Certifications */}
+          <div className="lg:col-span-5 space-y-12 lg:pl-6">
+            <div className="border-b border-border-main/50 pb-6">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
+                <Award size={10} /> REGISTRY CREDENTIALS
               </div>
-              <h2 className="text-3xl md:text-5xl font-black text-text-main tracking-tighter uppercase leading-none">Certificats<span className="text-accent">.</span></h2>
+              <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+                Verified <span className="text-text-dim">Registry</span><span className="text-accent">.</span>
+              </h2>
             </div>
 
-            <div className="grid gap-6">
+            <div className="space-y-4">
               {certifications.map((cert, i) => (
                 <motion.div
                   key={cert.name}
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-8 rounded-[2rem] glass hover:border-accent/30 hover:bg-white/50 dark:hover:bg-zinc-900/50 transition-all duration-500 flex items-center justify-between group"
+                  transition={{ duration: 0.4, delay: i * 0.08 }}
+                  className="p-5 border border-border-main bg-bg-card/30 rounded hover:border-accent/40 hover:bg-bg-card transition-all duration-300 flex items-center justify-between group shadow-sm"
                 >
-                  <div>
-                    <h3 className="text-lg font-black text-text-main mb-2 group-hover:text-accent transition-colors uppercase tracking-tight">{cert.name}</h3>
-                    <p className="text-[10px] text-text-dim uppercase tracking-[0.2em] font-black opacity-60">{cert.issuer}</p>
+                  <div className="space-y-1.5">
+                    <h3 className="text-xs font-display font-extrabold text-text-main group-hover:text-accent transition-colors uppercase tracking-tight">
+                      {cert.name}
+                    </h3>
+                    <p className="text-[8px] font-mono text-text-dim uppercase tracking-wider font-bold">
+                      ISSUER: {cert.issuer}
+                    </p>
                   </div>
-                  <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center text-text-dim group-hover:bg-accent group-hover:text-white transition-all duration-500">
-                    <Award size={24} />
+                  <div className="w-8 h-8 border border-border-main/60 rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
+                    <Award size={14} className="stroke-[1.5]" />
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            <div className="mt-12 p-10 rounded-[3rem] glass border-dashed relative overflow-hidden group">
-               <div className="relative z-10 text-center">
-                  <p className="text-text-dim text-base md:text-lg leading-relaxed italic font-medium group-hover:text-text-main transition-colors duration-500">
-                    &quot;Apprentissage continu et expansion de mes horizons techniques à travers des certifications professionnelles et de la recherche en laboratoire.&quot;
-                  </p>
-               </div>
-               <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            {/* Continuous Learning statement */}
+            <div className="border border-border-main/50 border-dashed p-6 rounded relative overflow-hidden bg-bg-card/10">
+              <div className="absolute top-0 right-0 w-8 h-8 bg-accent/5 pointer-events-none" />
+              <p className="font-mono text-[10px] text-text-dim leading-relaxed italic text-center">
+                &quot;Continuous alignment with changing cloud paradigms, mathematical operations research, and automated workflow state machines.&quot;
+              </p>
             </div>
           </div>
         </div>

@@ -1,11 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
-import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin } from "lucide-react";
+import { ChevronDown, ChevronUp, Briefcase, Calendar, MapPin, GitBranch, GitCommit, FileText } from "lucide-react";
 import { experiences, associativeExperiences } from "@/data/content";
 import { cn } from "@/lib/utils";
+
+// Mapping experience company to technical commit identifiers
+const commitMap: Record<string, string> = {
+  "Allianz France": "0xALLZ_PROD_MIGRATE",
+  "Hello Pulse": "0xHP_CTO_INITIAL_RELS",
+  "Groupe Sylvagreg": "0xSYL_ML_3D_MESH",
+  "LYNE ET FRERES SARL": "0xLYN_LOG_BI_ANALYST",
+};
 
 function ExperienceCard({
   exp,
@@ -14,190 +21,194 @@ function ExperienceCard({
   exp: (typeof experiences)[0];
   index: number;
 }) {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const isEven = index % 2 === 0;
+  const [isExpanded, setIsExpanded] = useState(index < 2); // First two expanded by default for maximum impact
+  const commitHash = commitMap[exp.company] || `0xGEN_NODE_0${index}`;
 
   return (
-    <div className="relative mb-10 md:mb-32 last:mb-0">
-      {/* Desktop alternating layout */}
-      <div className={cn(
-        "flex flex-col md:flex-row items-center justify-between",
-        isEven ? "md:flex-row" : "md:flex-row-reverse"
-      )}>
-        {/* Card Content */}
-        <div className="w-full md:w-[48%]">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className={cn(
-              "p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] glass transition-all duration-500",
-              exp.featured && "ring-2 ring-accent/20 shadow-xl shadow-accent/5"
-            )}
-          >
-            <div className="flex items-center gap-4 md:gap-5 mb-6 md:mb-8">
-              {exp.logo && (
-                <div className="relative w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-white/50 dark:bg-zinc-800/50 border border-border-main overflow-hidden flex-shrink-0 p-1.5 md:p-2 shadow-sm">
-                  <Image
-                    src={exp.logo}
-                    alt={exp.company}
-                    fill
-                    className="object-contain p-1"
-                  />
-                </div>
-              )}
-              <div>
-                <h3 className="text-lg md:text-2xl font-black text-text-main leading-tight tracking-tight uppercase">{exp.role}</h3>
-                <p className="text-accent font-bold text-sm md:text-base">{exp.company}</p>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap gap-3 md:gap-5 mb-6 md:mb-8 text-[10px] md:text-sm font-mono text-text-dim uppercase tracking-widest">
-              <div className="flex items-center gap-1.5 md:gap-2">
-                <Calendar size={14} className="text-accent" />
-                {exp.period}
-              </div>
-              <div className="flex items-center gap-1.5 md:gap-2 tracking-widest">
-                <MapPin size={14} className="text-accent" />
-                {exp.location}
-              </div>
-            </div>
-
-            <p className="text-sm md:text-lg text-text-dim leading-relaxed mb-6 md:mb-8 font-medium">
-              {exp.summary}
-            </p>
-
-            <button
-              onClick={() => setIsExpanded(!isExpanded)}
-              className="flex items-center gap-2 text-[10px] md:text-xs font-black text-accent hover:opacity-70 uppercase tracking-widest mb-6 md:mb-8 transition-all"
-            >
-              {isExpanded ? (
-                <>Réduire <ChevronUp size={16} /></>
-              ) : (
-                <>Réalisations <ChevronDown size={16} /></>
-              )}
-            </button>
-
-            {isExpanded && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                className="space-y-6 md:space-y-8 overflow-hidden"
-              >
-                {exp.highlights.map((hl) => (
-                  <div key={hl.category}>
-                    <h4 className="text-[10px] md:text-xs font-black text-text-main uppercase tracking-widest mb-3 md:mb-4 opacity-80 border-l-2 border-accent pl-3 md:pl-4">
-                      {hl.category}
-                    </h4>
-                    <ul className="space-y-2 md:space-y-3">
-                      {hl.points.map((point, i) => (
-                        <li
-                          key={i}
-                          className="text-xs md:text-base text-text-dim leading-relaxed flex items-start gap-3 md:gap-4"
-                        >
-                          <div className="w-1 h-1 rounded-full bg-accent mt-1.5 md:mt-2 flex-shrink-0" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-
-            <div className="mt-6 md:mt-8 pt-6 md:pt-8 border-t border-border-main flex flex-wrap gap-2 md:gap-2.5">
-              {exp.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-2.5 py-1 rounded-lg bg-accent/5 text-accent text-[9px] font-black uppercase tracking-widest border border-accent/10"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Center Dot - Desktop only */}
-        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-12 h-12 items-center justify-center z-20">
-            <div className="w-4 h-4 rounded-full bg-bg-main border-4 border-accent shadow-[0_0_15px_rgba(99,102,241,0.5)]" />
-        </div>
-
-        {/* Empty space for alternating - Desktop only */}
-        <div className="hidden md:block md:w-[48%]" />
+    <div className="relative pl-8 md:pl-12 pb-16 last:pb-4 group">
+      {/* Git branch line node representation */}
+      <div className="absolute left-[3px] top-[6px] w-[15px] h-[15px] rounded-full border-2 border-accent bg-bg-main flex items-center justify-center z-10 group-hover:bg-accent transition-colors duration-300">
+        <div className="w-1.5 h-1.5 rounded-full bg-accent group-hover:bg-bg-main transition-colors duration-300" />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 10 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.08 }}
+        className="p-6 md:p-8 border border-border-main bg-bg-card/25 rounded hover:border-accent/30 hover:bg-bg-card transition-all duration-300 shadow-sm"
+      >
+        {/* Telemetry commit badge */}
+        <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/40 tracking-wider">
+          COMMIT // {commitHash}
+        </div>
+
+        {/* Card Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-border-main/40">
+          <div>
+            <h3 className="text-lg font-display font-extrabold text-text-main tracking-tight leading-none uppercase">
+              {exp.role}
+            </h3>
+            <p className="text-sm font-mono font-bold text-accent mt-2 uppercase">
+              @{exp.company}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-3 font-mono text-[9px] text-text-dim uppercase tracking-wider">
+            <span className="flex items-center gap-1.5 bg-bg-main border border-border-main px-2.5 py-1 rounded">
+              <Calendar size={10} className="text-accent" />
+              {exp.period}
+            </span>
+            <span className="flex items-center gap-1.5 bg-bg-main border border-border-main px-2.5 py-1 rounded">
+              <MapPin size={10} className="text-accent" />
+              {exp.location}
+            </span>
+          </div>
+        </div>
+
+        <p className="text-sm text-text-dim leading-relaxed font-medium mb-6 pl-2 border-l border-accent/20">
+          {exp.summary}
+        </p>
+
+        {/* Highlights Expand Button */}
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2 font-mono text-[9px] font-bold text-accent hover:text-text-main transition-colors uppercase tracking-widest mb-6"
+        >
+          {isExpanded ? (
+            <>Collapse Details <ChevronUp size={12} /></>
+          ) : (
+            <>Expand Log Nodes <ChevronDown size={12} /></>
+          )}
+        </button>
+
+        {/* Expanded System Points */}
+        {isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            className="space-y-6 overflow-hidden"
+          >
+            {exp.highlights.map((hl) => (
+              <div key={hl.category} className="space-y-2.5">
+                <h4 className="font-mono text-[9px] font-bold text-text-main uppercase tracking-widest flex items-center gap-1.5 opacity-90">
+                  <span className="text-accent">[{hl.category.toUpperCase()}]</span>
+                </h4>
+                <ul className="space-y-2">
+                  {hl.points.map((point, i) => (
+                    <li
+                      key={i}
+                      className="font-mono text-[10px] text-text-dim leading-relaxed flex items-start gap-2.5 font-medium"
+                    >
+                      <span className="text-accent mt-0.5 font-bold">↳</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </motion.div>
+        )}
+
+        {/* Technical stack logs */}
+        <div className="mt-8 pt-4 border-t border-border-main/50 flex flex-wrap gap-1.5">
+          {exp.stack.map((tech) => (
+            <span
+              key={tech}
+              className="px-2 py-0.5 rounded border border-border-main/50 bg-bg-main text-text-dim text-[8px] font-mono font-bold uppercase tracking-wider"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 }
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-16 md:py-40 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16 md:mb-32">
-          <h2 className="text-3xl md:text-6xl font-black tracking-tighter text-text-main mb-4 md:mb-6 leading-none uppercase">
-            Parcours <span className="text-text-dim">Professionnel.</span>
-          </h2>
-          <p className="text-text-dim max-w-2xl mx-auto text-base md:text-xl font-medium">
-            Mon évolution technique à travers l&apos;ingénierie des données, la recherche en IA et le leadership technique.
-          </p>
+    <section id="experience" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/30">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        
+        {/* Section Header HUD */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
+          <div className="max-w-4xl">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
+              <GitBranch size={10} /> 04 // OPERATIONAL RECORDS & EXPERIENCE
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+              Operational <span className="text-text-dim">Releases</span> & Experience<span className="text-accent">.</span>
+            </h2>
+          </div>
+          <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
+            CHRONOLOGICAL CHANGELOG
+          </div>
         </div>
 
         {/* Timeline Container */}
-        <div className="relative">
-          {/* Vertical Center Line - Desktop */}
-          <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-border-main to-transparent" />
-          
-          {/* Vertical Left Line - Mobile */}
-          <div className="md:hidden absolute left-4 top-0 bottom-0 w-px bg-border-main" />
+        <div className="relative max-w-4xl mx-auto mt-12 md:mt-20">
+          {/* Vertical branch line */}
+          <div className="absolute left-[9px] top-2 bottom-2 w-[1px] bg-border-main/60" />
 
-          <div className="space-y-8 md:space-y-0">
+          <div className="space-y-4">
             {experiences.map((exp, i) => (
               <ExperienceCard key={exp.company + exp.role} exp={exp} index={i} />
             ))}
           </div>
         </div>
 
-        {/* Associative Section */}
-        <div className="mt-24 md:mt-40">
-           <div className="flex flex-col md:flex-row items-center justify-center gap-4 mb-12 md:mb-20">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-accent/10 flex items-center justify-center text-accent">
-                <Briefcase size={24} />
-              </div>
-              <h3 className="text-2xl md:text-5xl font-black text-text-main tracking-tighter uppercase text-center md:text-left">Expériences Associatives</h3>
-           </div>
-           
-           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto">
-             {associativeExperiences.map((exp, i) => (
-               <motion.div
-                 key={exp.organization + exp.role}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: i * 0.1 }}
-                 className="p-6 md:p-10 rounded-[2rem] md:rounded-[3rem] glass hover:border-accent/30 transition-all duration-500 group"
-               >
-                 <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 md:mb-8">
-                    <div>
-                      <h4 className="text-xl md:text-2xl font-black text-text-main mb-1 group-hover:text-accent transition-colors uppercase tracking-tight">{exp.role}</h4>
-                      <p className="text-accent font-bold text-base">{exp.organization}</p>
-                    </div>
-                    <span className="text-[9px] md:text-[10px] font-mono text-text-dim bg-accent/5 px-3 py-1.5 rounded-full border border-accent/10 whitespace-nowrap">
-                      {exp.period}
-                    </span>
-                 </div>
-                 <ul className="space-y-3 md:space-y-4">
-                   {exp.points.map((point, i) => (
-                     <li key={i} className="text-sm md:text-base text-text-dim leading-relaxed flex items-start gap-3 md:gap-4">
-                       <div className="w-1.5 h-px bg-accent mt-2.5 md:mt-3 flex-shrink-0" />
-                       {point}
-                     </li>
-                   ))}
-                 </ul>
-               </motion.div>
-             ))}
-           </div>
+        {/* Associative Timeline releases */}
+        <div className="mt-28 border-t border-border-main/50 pt-20">
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-6 mb-12">
+            <div className="max-w-4xl">
+              <h3 className="text-xl md:text-3xl font-display font-extrabold text-text-main tracking-tight uppercase flex items-center gap-3">
+                <Briefcase size={20} className="text-accent stroke-[1.5]" />
+                Community & Leadership Changelog
+              </h3>
+            </div>
+            <div className="mt-2 md:mt-0 font-mono text-[8px] text-text-dim uppercase tracking-widest">
+              JUNIA ALUMNI NETWORKS
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {associativeExperiences.map((exp, i) => (
+              <motion.div
+                key={exp.organization + exp.role}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="p-6 md:p-8 border border-border-main bg-bg-card/20 rounded hover:border-accent/30 hover:bg-bg-card transition-all duration-300 shadow-sm relative group"
+              >
+                <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/40 tracking-wider">
+                  NODE // COMM_0{i + 1}
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6 pb-4 border-b border-border-main/30">
+                  <div>
+                    <h4 className="text-base font-display font-extrabold text-text-main tracking-tight uppercase group-hover:text-accent transition-colors">
+                      {exp.role}
+                    </h4>
+                    <p className="text-xs font-mono font-bold text-accent mt-1 uppercase">
+                      @{exp.organization}
+                    </p>
+                  </div>
+                  <span className="text-[9px] font-mono text-text-dim bg-bg-main border border-border-main px-2.5 py-1 rounded">
+                    {exp.period}
+                  </span>
+                </div>
+                <ul className="space-y-2.5 font-mono text-[10px] text-text-dim">
+                  {exp.points.map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2 leading-relaxed">
+                      <span className="text-accent font-bold">↳</span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

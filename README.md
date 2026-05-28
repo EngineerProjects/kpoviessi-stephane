@@ -1,30 +1,40 @@
-# Stéphane Kpoviessi - Portfolio Projects 🚀
+# Stéphane KPOVIESSI — Portfolio
 
-This repository hosts the source code for my professional portfolio website. It includes the latest "Terminal" version, a highly interactive and themed showcase of my skills in Data Engineering and AI.
+Personal portfolio website for **Stéphane KPOVIESSI**, AI Systems & Data Infrastructure Engineer.
 
-## 📂 Projects
+## 📂 Repository Structure
 
-### [Terminal Portfolio](./terminal_portfolio)
-**Current Production Version**
-A CLI-themed, interactive React application mimicking a high-tech terminal interface.
-*   **Stack**: React, TypeScript, Vite, TailwindCSS, Gemini AI.
-*   **Features**: AI Chatbot, Matrix-style animations, Command-line navigation.
+### [`modern_portfolio/`](./modern_portfolio) — ✅ Active Production
+**Current version — System:Archetype design system.**
 
-### Legacy Versions & Docs
-*   `stephanePortfolio/`: Previous iteration of the portfolio.
-*   `docs/`: Design documents and assets.
+A high-density, warm-industrial engineering portfolio built with Next.js 16, Tailwind CSS v4, and Framer Motion.
 
-## 📸 Preview
+- **Stack**: Next.js, TypeScript, Tailwind CSS v4, Framer Motion, Lucide React
+- **Design**: "System:Archetype" — dark, warm-industrial, CAD-blueprint aesthetic
+- **Features**: Bilingual (EN/FR), AI Chatbot, animated sections, full case studies grid
+- **Deployment**: Configured for `modern_portfolio` as the root deployment target
 
-![Portfolio Preview](./docs/image_1.png)
+---
+
+### [`legacy_portfolio/`](./legacy_portfolio) — 🗂 Archived (v1)
+Previous Next.js portfolio iteration. Kept for reference only. Not in production.
+
+### [`terminal_portfolio/`](./terminal_portfolio) — 🗂 Archived (v0)
+Original CLI-themed React + Vite terminal interface. Kept for reference only. Not in production.
+
+### [`docs/`](./docs) — 📄 Source Documents
+Career data, project descriptions, and design documents used to build the portfolio content.
+
+---
 
 ## 👤 Author
 
-**Stéphane Kpoviessi**
-*Big Data Engineer | AI Specialist*
+**Stéphane KPOVIESSI**  
+*AI Systems Engineer · Data Infrastructure · Autonomous Systems Builder*
 
-*   [LinkedIn](https://linkedin.com/in/stephanekpoviessi)
-*   [GitHub](https://github.com/Amiche02)
+- [LinkedIn](https://linkedin.com/in/stephanekpoviessi)
+- [GitHub](https://github.com/Amiche02)
+- [GitHub Org](https://github.com/EngineerProjects)
 
 ---
 *Structured for performance. Powered by AI.*

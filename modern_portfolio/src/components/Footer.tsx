@@ -1,46 +1,59 @@
 "use client";
 
 import { personalInfo } from "@/data/content";
+import { Terminal } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-20 relative overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12 p-10 md:p-16 rounded-[3rem] glass shadow-lg shadow-black/5">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center text-white text-sm font-black shadow-lg shadow-accent/20">
-              SK
+    <footer className="py-12 relative overflow-hidden border-t border-border-main bg-bg-main/30 font-mono text-[9px] text-text-dim">
+      <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-6">
+          
+          {/* Logo HUD */}
+          <div className="flex items-center gap-3">
+            <div className="w-7 h-7 border border-accent/30 rounded bg-accent-soft text-accent flex items-center justify-center">
+              <Terminal size={12} />
             </div>
             <div>
-              <span className="text-text-main font-black text-sm uppercase tracking-tight block">
-                Stéphane Kpoviessi
+              <span className="text-text-main font-bold uppercase tracking-widest block leading-tight">
+                STÉPHANE KPOVIESSI
               </span>
-              <span className="text-text-dim font-black text-[10px] uppercase tracking-[0.2em] opacity-60">
-                &copy; {currentYear} — Ingénieur Big Data & IA
+              <span className="tracking-wider uppercase opacity-80 mt-0.5 block">
+                &copy; {currentYear} // REGISTRY RECORD 4022A
               </span>
             </div>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-             <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-xs font-black text-text-dim hover:text-accent uppercase tracking-[0.2em] transition-all">
-                GitHub
-             </a>
-             <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-xs font-black text-text-dim hover:text-accent uppercase tracking-[0.2em] transition-all">
-                LinkedIn
-             </a>
-             <a href={`mailto:${personalInfo.email}`} className="text-xs font-black text-text-dim hover:text-accent uppercase tracking-[0.2em] transition-all">
-                Contact
-             </a>
+          {/* Core Links */}
+          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 font-bold">
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent uppercase tracking-wider transition-colors">
+              GITHUB // SOURCE
+            </a>
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent uppercase tracking-wider transition-colors">
+              LINKEDIN // HUB
+            </a>
+            <a href={`mailto:${personalInfo.email}`} className="hover:text-accent uppercase tracking-wider transition-colors">
+              SMTP // MAIL
+            </a>
           </div>
 
-          <div className="text-center md:text-right">
-             <p className="text-[10px] font-black text-text-dim uppercase tracking-[0.3em] opacity-40">
-               Design & Code by Stéphane K.
-             </p>
+          {/* Right telemetry details */}
+          <div className="text-center md:text-right font-medium opacity-65">
+            <span>COMPILED TARGET: TARGET_X86_64</span>
+            <br />
+            <span>RENDERED IN CUSP LAYOUT ENGINE</span>
           </div>
+
         </div>
+
+        {/* Dynamic sub-footer grid lines */}
+        <div className="border-t border-border-main/50 pt-6 flex flex-col sm:flex-row items-center justify-between text-[8px] opacity-60">
+          <span>HOSTED PLATFORM // SECURE CLUSTER</span>
+          <span className="mt-2 sm:mt-0">DESIGN & CORE ARCHITECTURE BY S. KPOVIESSI</span>
+        </div>
+
       </div>
     </footer>
   );

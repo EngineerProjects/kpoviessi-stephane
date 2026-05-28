@@ -1,7 +1,7 @@
 export const personalInfo = {
   name: "Stéphane KPOVIESSI",
-  title: "Data Engineer / Data Scientist - Big Data & IA",
-  location: "Île-de-France, France (Cergy)",
+  title: "AI Systems & Data Infrastructure Engineer",
+  location: "Paris Metropolitan Area, France",
   email: "oastephanekpoviessi@gmail.com",
   phone: "+33 7 48 59 47 13",
   linkedin: "https://linkedin.com/in/stephanekpoviessi",
@@ -11,268 +11,244 @@ export const personalInfo = {
 
 export const resumeLinks = [
   {
-    label: "CV Data Engineer",
+    label: "Resume: Data Infra & Systems",
     href: "/cv-stephane-kpoviessi-data-engineer.pdf",
   },
   {
-    label: "CV Data Scientist",
+    label: "Resume: AI & Machine Learning",
     href: "/cv-stephane-kpoviessi-data-scientist.pdf",
   },
 ];
 
 export const about = {
   summary:
-    "Data Engineer / Data Scientist spécialisé en Big Data, Intelligence Artificielle et systèmes de données à grande échelle, je conçois des pipelines fiables, des modèles intelligents et des architectures capables de transformer la donnée brute en décisions exploitables.",
+    "AI Systems & Data Infrastructure Engineer specializing in building robust, large-scale data pipelines, autonomous multi-agent workflows, and deterministic runtime systems. I design and build production-grade platforms where analytical rigor meets highly reliable software execution.",
   detail:
-    "Mon parcours combine data engineering, machine learning, computer vision et conception de systèmes IA. J'ai travaillé sur la migration de pipelines legacy SAS vers PySpark chez Allianz France, sur la génération 3D assistée par IA au Groupe Sylvagreg, ainsi que sur des plateformes multi-agents, RAG et outils développeurs orientés LLM.",
+    "My engineering practice lies at the intersection of data platform architecture, machine learning systems, computer vision, and local developer environments. I have architected legacy-to-distributed migrations at Allianz France, engineered core Go-based multi-agent engines as a startup CTO, optimized deep generative vision pipelines (GANs) at Groupe Sylvagreg, and developed experimental local developer toolkits and isolated agent sandboxes.",
   expertise: [
     {
-      title: "Data Engineering",
+      title: "Data Platform Engineering",
       description:
-        "Conception de pipelines de données robustes, architectures Médaillon, traitement distribué, qualité de données et migration de systèmes legacy vers des stacks modernes.",
+        "Architecting highly reliable Bronze/Silver/Gold Medallion pipelines, distributed PySpark systems, data quality validations, and transactional storage structures for massive corporate datasets.",
       icon: "database",
     },
     {
-      title: "Data Science & Machine Learning",
+      title: "Autonomous Agentic Systems",
       description:
-        "Analyse exploratoire, modélisation prédictive, forecasting, feature engineering, visualisation et mise en place de pipelines ML complets.",
-      icon: "chart",
-    },
-    {
-      title: "IA & Systèmes Agentiques",
-      description:
-        "Conception de plateformes multi-agents, systèmes RAG, orchestration LangGraph, intégration MCP, mémoire persistante et workflows IA automatisés.",
+        "Designing multi-agent state machines, context-aware RAG pipelines, LangGraph and Pydantic AI orchestration, Model Context Protocol (MCP) servers, and isolated runtime sandboxes.",
       icon: "brain",
     },
     {
-      title: "Computer Vision & 3D",
+      title: "Computer Vision & Generative AI",
       description:
-        "Développement de solutions de vision par ordinateur, segmentation, analyse vidéo sportive, génération 3D et simulation d'environnements procéduraux.",
+        "Developing real-time video processing pipelines, YOLO object tracking, image segmentation with SAM, GAN optimization with PyTorch, and procedural 3D environment rendering.",
       icon: "eye",
+    },
+    {
+      title: "Systems & Developer Tooling",
+      description:
+        "Building lightweight CLI/TUI developer utilities, custom local repository parsers, gRPC microservices, and desktop system integrations using Go, Rust, and Electron.",
+      icon: "wrench",
     },
   ],
 };
 
 export const skills = {
   programming: {
-    label: "Programmation",
+    label: "Computation & Core",
     items: [
       { name: "Python", level: "Expert" },
-      { name: "SQL", level: "Avancé" },
-      { name: "Go", level: "Avancé" },
-      { name: "TypeScript", level: "Avancé" },
-      { name: "C", level: "Intermédiaire" },
-      { name: "Bash", level: "Intermédiaire" },
-      { name: "React", level: "Intermédiaire" },
-      { name: "Electron", level: "Intermédiaire" },
+      { name: "SQL", level: "Advanced" },
+      { name: "Go (Golang)", level: "Advanced" },
+      { name: "TypeScript", level: "Advanced" },
+      { name: "C / C++", level: "Intermediate" },
+      { name: "Bash Scripting", level: "Advanced" },
+      { name: "React / Next.js", level: "Advanced" },
+      { name: "Electron", level: "Intermediate" },
     ],
   },
   ml_ai: {
-    label: "Machine Learning & IA",
+    label: "Orchestration & Weights",
     items: [
       { name: "PyTorch", level: "Expert" },
-      { name: "Scikit-learn", level: "Expert" },
-      { name: "LangGraph", level: "Avancé" },
-      { name: "RAG", level: "Avancé" },
-      { name: "LLM Workflows", level: "Avancé" },
-      { name: "Computer Vision", level: "Avancé" },
-      { name: "GANs", level: "Avancé" },
-      { name: "MCP", level: "Avancé" },
-      { name: "Hugging Face", level: "Avancé" },
-      { name: "TensorFlow", level: "Intermédiaire" },
-      { name: "Forecasting", level: "Intermédiaire" },
+      { name: "Scikit-Learn", level: "Expert" },
+      { name: "LangGraph / LangChain", level: "Advanced" },
+      { name: "Pydantic AI", level: "Advanced" },
+      { name: "Ollama / LLMs", level: "Advanced" },
+      { name: "Model Context Protocol (MCP)", level: "Advanced" },
+      { name: "Computer Vision (YOLO/OpenCV)", level: "Advanced" },
+      { name: "Generative Adversarial Nets (GANs)", level: "Advanced" },
+      { name: "Vector Search & Embeddings", level: "Advanced" },
+      { name: "Hugging Face Ecosystem", level: "Advanced" },
     ],
   },
   data_engineering: {
-    label: "Data Engineering & Outils",
+    label: "Ingestion & Infrastructure",
     items: [
       { name: "PySpark", level: "Expert" },
+      { name: "Databricks", level: "Advanced" },
+      { name: "Docker", level: "Advanced" },
+      { name: "PostgreSQL / pgvector", level: "Advanced" },
+      { name: "Apache Airflow", level: "Intermediate" },
+      { name: "Azure Data Lake Storage", level: "Advanced" },
+      { name: "Parquet / Delta Lake", level: "Advanced" },
       { name: "Pandas / NumPy", level: "Expert" },
-      { name: "PostgreSQL", level: "Avancé" },
-      { name: "pgvector", level: "Avancé" },
-      { name: "Docker", level: "Avancé" },
-      { name: "Databricks", level: "Avancé" },
-      { name: "Azure Data Lake", level: "Avancé" },
-      { name: "Parquet", level: "Avancé" },
-      { name: "Power BI", level: "Avancé" },
-      { name: "Redis", level: "Intermédiaire" },
-      { name: "SQLite", level: "Intermédiaire" },
-      { name: "SAS", level: "Intermédiaire" },
+      { name: "Redis / In-Memory Cache", level: "Intermediate" },
+      { name: "SQLite / GORM", level: "Advanced" },
     ],
   },
 };
 
 export const experiences = [
   {
-    role: "Data Engineer / Data Scientist (Stage)",
+    role: "Data Platform Engineer (Stage)",
     company: "Allianz France",
-    location: "Courbevoie, France",
-    period: "Novembre 2025 - Avril 2026",
+    location: "Paris La Défense, France",
+    period: "Nov 2025 - Apr 2026",
     summary:
-      "Responsible for the end-to-end migration of DataMart data pipelines (Insurance), transitioning from a legacy SAS environment to a modern PySpark-based architecture.",
+      "Led the end-to-end modernization of critical commercial property and liability data pipelines. Successfully migrated legacy SAS codebases to a distributed PySpark architecture on Databricks with absolute parity.",
     highlights: [
       {
-        category: "Architecture Data",
+        category: "Modern Medallion Architecture",
         points: [
-          "Conception et implémentation d'une architecture Médaillon Bronze / Silver / Gold scalable",
-          "Architecture permettant de structurer efficacement les données liées aux portefeuilles, capitaux et émissions",
+          "Designed and built a modular Bronze/Silver/Gold pipeline structuring portfolios, asset capitals, and operational emissions.",
+          "Restructured transactional staging to store data efficiently in optimized, compressed Parquet tables, improving downstream read times.",
         ],
       },
       {
-        category: "Modernisation Legacy",
+        category: "Legacy Deconstruction",
         points: [
-          "Rétro-ingénierie et documentation de plus de 15 000 lignes de code SAS sur 19 fichiers complexes",
-          "Préservation complète de la logique métier pendant la migration vers Python et PySpark",
+          "Deconstructed, reverse-engineered, and documented over 15,000 lines of legacy SAS scripts across 19 interconnected business modules.",
+          "Preserved 100% of complex insurance accounting and risk business logic during translation to PySpark (Python 3.9+).",
         ],
       },
       {
-        category: "Développement ETL",
+        category: "Functional Parity & Quality Assurance",
         points: [
-          "Conception de pipelines PySpark modulaires et réutilisables en Python 3.9+",
-          "Couverture de 3 flux critiques intégrant plus de 150 règles de gestion métier",
+          "Designed an automated schema validation framework that rejects corrupted or structural-shifting data points at ingestion.",
+          "Implemented functional parity testing pipelines to run SAS and PySpark nodes side-by-side, validating and correcting data down to the float decimal.",
         ],
       },
       {
-        category: "Data Quality",
+        category: "Geospatial Data Cleansing",
         points: [
-          "Pipeline de contrôle qualité sur les données de localisation : GPS, reconstitution d'adresses et détection d'anomalies métier",
-          "Refonte de la logique de validation d'adresse pour réduire les faux positifs et fiabiliser le reporting métier",
-        ],
-      },
-      {
-        category: "Assurance Qualité",
-        points: [
-          "Mise en place d'une stratégie de validation rigoureuse",
-          "Validation automatique des schémas de données",
-          "Tests de parité fonctionnelle stricts entre SAS et Python",
+          "Designed an ETL pipeline for raw coordinates: parsing and reconstructing GPS locations, validating postal address syntax, and resolving outliers.",
+          "Reduced address parsing false positives, establishing a deterministic baseline for geographic risk reporting.",
         ],
       },
     ],
-    stack: ["Python", "PySpark", "SAS", "SQL", "Parquet", "Databricks", "Azure Data Lake", "Git"],
+    stack: ["Python", "PySpark", "Databricks", "Azure Data Lake", "SAS", "SQL", "Parquet", "Git"],
     logo: "/images/allianz-france.png",
     featured: true,
   },
   {
-    role: "Co-fondateur & CTO",
+    role: "Co-Founder & CTO",
     company: "Hello Pulse",
-    location: "France",
-    period: "Septembre 2023 - Présent",
+    location: "France (Remote)",
+    period: "Sep 2023 - Present",
     summary:
-      "Co-fondateur d'une plateforme collaborative augmentée par l'intelligence artificielle, combinant gestion de projet, assistance intelligente et génération de livrables.",
+      "Co-founded and engineered an AI-orchestrated collaborative workspace platform. Led the technical team, designed backend infrastructure, and prototyped agentic engines.",
     highlights: [
       {
-        category: "Architecture & Backend",
+        category: "Infrastructure & Backend",
         points: [
-          "Conception d'une architecture backend scalable basée sur Go, PostgreSQL et Docker",
-          "Pilotage technique du MVP jusqu'aux premières briques de production",
+          "Architected a scalable, low-latency API backend using Go (Golang), PostgreSQL, and Docker.",
+          "Structured database indexes and connection pooling to handle high-frequency transactional data operations safely.",
         ],
       },
       {
-        category: "IA & Multi-Agents",
+        category: "Multi-Agent Automation",
         points: [
-          "Développement de systèmes multi-agents pour l'automatisation et l'assistance",
-          "Création d'outils de validation produit et de génération automatisée de livrables",
+          "Designed multi-agent routing engines to automate product research, feature validation, and deliverable compilation.",
+          "Configured modular agent communication paths, enabling seamless data handover between specialized LLM agents.",
         ],
       },
       {
-        category: "Stratégie Technique",
+        category: "Product & Technical Strategy",
         points: [
-          "Définition de la stratégie technique, choix d'architecture et priorisation produit",
+          "Guided technical direction from initial proof-of-concept (MVP) into scalable production architecture.",
+          "Mentored engineers on system boundaries, API contracts, and clean interface integration patterns.",
         ],
       },
     ],
-    stack: ["Go", "PostgreSQL", "Docker", "LLM", "Agents IA", "Product Engineering"],
+    stack: ["Go", "PostgreSQL", "Docker", "LLMs", "AI Agents", "Product Engineering"],
     logo: "/images/hello_pulse.png",
     featured: true,
   },
   {
-    role: "Ingénieur Machine Learning (Stage)",
+    role: "Machine Learning Engineer (Stage)",
     company: "Groupe Sylvagreg",
     location: "Lille, France",
-    period: "Mai 2024 - Août 2024",
+    period: "May 2024 - Aug 2024",
     summary:
-      "Développement d'une solution de génération et d'impression 3D à partir d'images 2D basée sur l'intelligence artificielle.",
+      "Researched and built a generative computer vision solution to construct printable, geometrically coherent 3D models directly from single 2D structural images.",
     highlights: [
       {
-        category: "Recherche & État de l'art",
+        category: "3D Reconstruction Research",
         points: [
-          "Analyse des méthodes de reconstruction 3D à partir d'images 2D, incluant photogrammétrie et deep learning",
+          "Conducted state-of-the-art benchmarks on deep-learning photogrammetry and single-view 3D mesh synthesis.",
         ],
       },
       {
-        category: "Sélection et évaluation des modèles",
+        category: "Generative Modeling & PyTorch",
         points: [
-          "Identification et benchmark d'algorithmes d'intelligence artificielle adaptés à la génération de modèles 3D fiables à partir de données visuelles",
+          "Designed, optimized, and trained custom Generative Adversarial Networks (GANs) using PyTorch.",
+          "Enforced structural and geometric consistency, reducing deformities in generative meshes.",
         ],
       },
       {
-        category: "Modélisation IA",
+        category: "Image Ingestion Pipelines",
         points: [
-          "Conception, implémentation et optimisation de modèles de deep learning, notamment GANs, avec PyTorch",
-          "Amélioration de la précision, de la cohérence géométrique et de la robustesse des modèles générés",
+          "Built preprocessing and data augmentation workflows using PIL and specialized OpenCV operations.",
+          "Implemented a structured end-to-end pipeline mapping 2D inputs to watertight, printable 3D meshes.",
         ],
       },
       {
-        category: "Pipeline & Produit",
+        category: "Technical Documentation",
         points: [
-          "Pipelines de prétraitement et d'augmentation de données avec PIL et outils de computer vision",
-          "Pipeline complet allant de l'image 2D au modèle 3D exploitable pour l'impression",
-          "Développement d'une solution permettant de transformer des images, objets ou personnages en modèles 3D imprimables",
-        ],
-      },
-      {
-        category: "Documentation",
-        points: [
-          "Rédaction d'une documentation détaillée couvrant architecture, choix techniques et résultats obtenus",
+          "Documented model training parameters, loss curves, and mathematical constraints, enabling smooth knowledge handoff.",
         ],
       },
     ],
-    stack: ["Python", "PyTorch", "PIL", "Computer Vision", "GANs", "Modélisation 3D", "Photogrammétrie"],
+    stack: ["Python", "PyTorch", "OpenCV", "GANs", "3D Modeling", "Photogrammetry", "PIL"],
     logo: "/images/sylvagreg.png",
     featured: false,
   },
   {
-    role: "Analyste de Données Commerciales (Stage)",
+    role: "Business Data Analyst (Stage)",
     company: "LYNE ET FRERES SARL",
-    location: "Bénin",
-    period: "Juin 2022 - Août 2022",
+    location: "Cotonou, Benin",
+    period: "Jun 2021 - Aug 2022",
     summary:
-      "Analyse de données commerciales, import/export, supply chain et reporting pour optimiser les ventes, les stocks et les opérations logistiques.",
+      "Analyzed commercial sales, import/export records, and maritime shipping logistics to optimize supply chain inventory flow and commercial performance.",
     highlights: [
       {
-        category: "Analyse des données de ventes et d'import/export",
+        category: "Sales & Flow Intelligence",
         points: [
-          "Collecter et analyser les données historiques de ventes, de livraisons et de commandes par produit, client, pays, etc.",
-          "Identification des produits, marchés et périodes les plus rentables",
-          "Détection des tendances et comportements d'achat",
-          "Optimiser la gestion des stocks et des approvisionnements",
+          "Structured historic transactional datasets, uncovering seasonal demand trends and highly profitable import routes.",
+          "Assisted inventory managers in establishing minimum safety stock thresholds to reduce transit bottlenecks.",
         ],
       },
       {
-        category: "Analyse de la chaîne d'approvisionnement",
+        category: "Logistics Optimization",
         points: [
-          "Traiter les données liées au transport, à l'expédition et au transit des marchandises",
-          "Optimisation des itinéraires, délais et coûts logistiques",
-          "Simulation de scénarios logistiques",
+          "Analyzed shipping timetables and transit logs, simulating supply chain pathways to decrease delivery latency and shipping costs.",
         ],
       },
       {
-        category: "Exploration des données clients",
+        category: "Customer Analytics",
         points: [
-          "Consolider les données clients dans un fichier analytique",
-          "Segmenter la base de clients et identifier les meilleurs clients",
-          "Recommander des offres et produits pertinents",
+          "Compiled customer purchase behaviors into structured datasets, segmenting buyers to enable personalized campaign routing.",
         ],
       },
       {
-        category: "Reporting et visualisation",
+        category: "BI Dashboarding",
         points: [
-          "Développer des tableaux de bord pour le suivi des activités",
-          "Générer des rapports analytiques ad hoc à la demande",
+          "Built interactive reporting pipelines using Power BI and custom SQL views, providing executives with clean KPI visualizations.",
         ],
       },
     ],
-    stack: ["Data Analysis", "Power BI", "Python", "Excel", "Reporting"],
+    stack: ["Data Analysis", "SQL", "PostgreSQL", "Power BI", "Excel", "Logistics Modeling"],
     logo: "/images/onip-benin.png",
     featured: false,
   },
@@ -280,27 +256,22 @@ export const experiences = [
 
 export const associativeExperiences = [
   {
-    role: "Vice-Président",
+    role: "Vice President",
     organization: "JUNIA Alumni",
-    location: "Lille",
-    period: "2024 - Présent",
+    location: "Lille, France",
+    period: "2024 - Present",
     points: [
-      "Coordination des activités de la commission",
-      "Organisation et planification des événements",
-      "Supervision des équipes communication et événementiel",
-      "Gestion opérationnelle en collaboration avec le BDE",
+      "Coordinated committee operations, organized networking summits, and supervised creative design and event production teams.",
+      "Managed active student and alumni community integrations in partnership with the student union.",
     ],
   },
   {
-    role: "Responsable Communication",
+    role: "Head of Communications",
     organization: "JUNIA Alumni",
-    location: "Lille",
+    location: "Lille, France",
     period: "2023 - 2024",
     points: [
-      "Animation du réseau alumni",
-      "Organisation d'événements et rencontres professionnelles",
-      "Coordination avec les anciens élèves pour le partage d'expérience",
-      "Communication auprès des étudiants",
+      "Orchestrated professional alumni networking events, managed digital community engagement, and synchronized student-alumni experience sharing.",
     ],
   },
 ];
@@ -309,15 +280,15 @@ export const projects = [
   {
     title: "Nexus AI",
     context:
-      "Les assistants IA évoluent vers des environnements capables d'orchestrer des outils, des agents, une mémoire persistante et des workflows complexes.",
+      "Modern AI assistants require isolated runtimes, extensible skills, persistent sessions, and secure local environments to act as true operating systems.",
     solution:
-      "Développement d'un AI Operating System expérimental avec orchestration multi-agents, RAG, sessions persistantes, permissions, sandboxing, streaming SSE, API REST, gRPC et interface desktop Electron.",
+      "Architected an experimental AI Operating System backend in Go. Integrates gRPC microservices, secure local tool sandboxes, persistent sqlite sessions with GORM, RAG pipelines, and a Model Context Protocol (MCP) layer, wrapped in a polished React and Electron desktop client.",
     impact: [
-      "Plateforme modulaire pour agents autonomes",
-      "Architecture extensible basée sur skills et plugins",
-      "Base d'infrastructure IA desktop et backend distribuée",
+      "Established an extensible, secure agent execution runtime.",
+      "Engineered pluggable skills that allow agents to read local files and query external APIs under strict user permission grids.",
+      "Reduced system-to-model overhead by employing lightweight gRPC channels.",
     ],
-    stack: ["Go", "gRPC", "PostgreSQL", "SQLite", "GORM", "React", "Electron", "TypeScript", "RAG", "MCP"],
+    stack: ["Go (Golang)", "gRPC", "PostgreSQL", "SQLite", "GORM", "React", "Electron", "TypeScript", "RAG", "MCP"],
     link: "https://github.com/EngineerProjects/Nexus_ai",
     featured: true,
     category: "AI Systems",
@@ -325,13 +296,12 @@ export const projects = [
   {
     title: "Tech Watch Agent",
     context:
-      "La veille technologique demande de surveiller de nombreuses sources, d'analyser rapidement les signaux utiles et de produire des synthèses exploitables.",
+      "Tracking the rapid pace of open-source research and engineering across multiple channels (GitHub, Reddit, arXiv) leads to critical cognitive overload.",
     solution:
-      "Plateforme autonome de recherche et monitoring multi-agents avec analyse GitHub, Reddit, arXiv et YouTube, génération de rapports, pipelines RAG, notifications et sessions persistantes.",
+      "Built a fully autonomous research platform driven by a LangGraph multi-agent team. It monitors, crawls, and synthesizes technical articles, utilizing pgvector for hybrid semantic searches, Redis for session caches, and FastAPI for real-time Server-Sent Events (SSE) updates.",
     impact: [
-      "Automatisation de workflows de veille et de synthèse",
-      "Analyse multi-sources structurée",
-      "Rapports exploitables pour la décision technique",
+      "Automated complete daily technology summarization and research discovery pipelines.",
+      "Engineered robust multi-agent coordination with designated debate and editing loops, producing high-fidelity technical reports.",
     ],
     stack: ["Python", "FastAPI", "LangGraph", "PostgreSQL", "pgvector", "Redis", "Docker", "React", "TypeScript", "SearXNG"],
     link: "https://github.com/EngineerProjects/tech-watch-agent",
@@ -339,129 +309,122 @@ export const projects = [
     category: "AI Systems",
   },
   {
+    title: "BI Retail",
+    context:
+      "Retail sales datasets, customer transactions, and product histories are typically siloed, preventing executive business exploration and cohort forecasting.",
+    solution:
+      "Developed a complete Business Intelligence & Data Analytics platform. Engineered robust data processing and transformation pipelines in Python, structured clean relational models in SQL, and built automated visual reporting dashboards in Power BI.",
+    impact: [
+      "Aggregated and cleaned multi-channel commercial records into a unified analytical data mart.",
+      "Designed cohort segmentation trackers and sales trend telemetry dashboards, reducing reporting latency.",
+      "Optimized retail stock calculations, providing real-time data support for downstream inventory planning.",
+    ],
+    stack: ["Python", "SQL", "Power BI", "Data Analysis", "Data Visualization", "Business Intelligence"],
+    link: "https://github.com/EngineerProjects/BI_Retail",
+    featured: true,
+    category: "Data Science",
+  },
+  {
     title: "Sylva3D",
     context:
-      "La création d'environnements naturels 3D nécessite des moteurs capables de générer des scènes procédurales et de simuler des écosystèmes en temps réel.",
+      "Generating and rendering realistic, real-time procedural environments requires mathematically robust graphics kernels and ecological simulation logic.",
     solution:
-      "Développement d'un moteur 3D expérimental pour génération procédurale, simulation environnementale, gestion de scènes, visualisation temps réel et systèmes de rendu.",
+      "Developed a custom procedural 3D physics and rendering engine in Python. Built direct OpenGL binding systems, mathematical noise models for terrain generation, and real-time vegetative growth simulations.",
     impact: [
-      "Exploration de pipelines de rendu 3D",
-      "Simulation procédurale d'environnements",
-      "Base technique pour outils créatifs et scientifiques",
+      "Prototyped procedural vegetation structures displaying low vertex overhead.",
+      "Created a robust coordinate rendering pipeline for simulated training environments.",
     ],
-    stack: ["Python", "OpenGL", "Rendering 3D", "Mathématiques 3D", "Simulation procédurale"],
+    stack: ["Python", "OpenGL", "3D Math", "Procedural Modeling", "Simulation Physics"],
     link: "https://github.com/EngineerProjects/sylva3D",
     featured: true,
     category: "3D Systems",
   },
   {
-    title: "Sylva3D GUI",
-    context:
-      "Les systèmes de simulation 3D ont besoin d'interfaces desktop efficaces pour visualiser, contrôler et itérer sur les scènes.",
-    solution:
-      "Création d'une interface desktop moderne pour l'écosystème Sylva3D, orientée visualisation temps réel, contrôle de scènes 3D et tooling créatif.",
-    impact: [
-      "Expérience utilisateur dédiée aux simulations 3D",
-      "Contrôle interactif des scènes",
-      "Interface de travail pour systèmes de visualisation",
-    ],
-    stack: ["Python", "GUI Frameworks", "3D Visualization", "Desktop Engineering"],
-    link: "https://github.com/EngineerProjects/Sylva3dGUI",
-    featured: false,
-    category: "3D Systems",
-  },
-  {
-    title: "PulseStudio",
-    context:
-      "Les workflows créatifs peuvent être enrichis par des outils IA interactifs capables d'automatiser certaines étapes de production multimédia.",
-    solution:
-      "Plateforme expérimentale de création assistée par IA combinant workflows créatifs, interaction utilisateur moderne, traitement multimédia et interfaces interactives.",
-    impact: [
-      "Exploration d'architectures produit IA",
-      "Automatisation de workflows créatifs",
-      "Prototype d'outils interactifs pour médias",
-    ],
-    stack: ["Python", "AI Workflows", "Interactive Systems", "Creative Tooling"],
-    link: "https://github.com/EngineerProjects/PulseStudio",
-    featured: false,
-    category: "AI Product",
-  },
-  {
     title: "Advanced Football Video Analysis",
     context:
-      "L'analyse vidéo sportive manuelle est coûteuse et difficile à rendre accessible pour extraire des informations sur les joueurs, mouvements et événements de jeu.",
+      "Automating soccer tactical analysis is highly challenging due to fast camera motion, rapid player occlusion, and irregular ball tracking.",
     solution:
-      "Système de computer vision pour analyser automatiquement des séquences de football avec détection d'objets, tracking vidéo, analyse de mouvements et traitement vidéo.",
+      "Engineered a computer vision pipeline utilizing YOLO object detection and OpenCV tracking models to isolate players, identify teams based on uniform colors, track ball vectors, and compute tactical heatmaps.",
     impact: [
-      "Automatisation de l'analyse vidéo sportive",
-      "Extraction d'insights exploitables depuis des matchs",
-      "Application concrète de l'IA au sport",
+      "Automated soccer game recording parsing, generating actionable movement charts.",
+      "Provided amateur clubs with high-fidelity coordinate metrics previously limited to professional enterprises.",
     ],
-    stack: ["Python", "OpenCV", "Computer Vision", "Deep Learning", "Video Processing"],
+    stack: ["Python", "OpenCV", "Computer Vision", "YOLO", "Deep Learning", "Video Tracking"],
     link: "https://github.com/EngineerProjects/Advanced-Football-Video-Analysis",
     featured: true,
     category: "Computer Vision",
   },
   {
-    title: "Solar Irradiance Forecasting",
-    context:
-      "La gestion photovoltaïque dépend de prévisions fiables de l'irradiance solaire à partir de données météorologiques.",
-    solution:
-      "Pipeline de machine learning pour prévision énergétique, feature engineering, analyse de données météorologiques et modélisation prédictive.",
-    impact: [
-      "Amélioration des prévisions énergétiques",
-      "Support à la gestion photovoltaïque",
-      "Application ML aux énergies renouvelables",
-    ],
-    stack: ["Python", "Scikit-learn", "Pandas", "Machine Learning", "Forecasting Models"],
-    link: "https://github.com/EngineerProjects/solar-forecasting",
-    featured: true,
-    category: "Data Science",
-  },
-  {
     title: "LocalIngest",
     context:
-      "Les workflows LLM et RAG nécessitent de préparer rapidement une codebase locale sous forme structurée et exploitable.",
+      "Ingesting local codebases into LLM contexts or RAG indexers typically requires manual parsing, which strips structural files of logical sequence.",
     solution:
-      "Outil développeur CLI/TUI pour analyser automatiquement des repositories, extraire leur structure et générer des rapports Markdown optimisés pour les workflows IA.",
+      "Created a high-speed CLI/TUI developer tool that maps complete local folders, generates accurate tree models, and structures complete project files into an optimized markdown digest.",
     impact: [
-      "Accélération de l'analyse de codebases",
-      "Préparation de contexte pour LLM et RAG",
-      "Documentation technique automatisée",
+      "Accelerated LLM codebase onboarding from hours to seconds.",
+      "Features rich interactive TUI controls using Typer and Rich libraries.",
     ],
-    stack: ["Python", "CLI/TUI", "Rich", "Typer", "Markdown Generation"],
+    stack: ["Python", "CLI/TUI", "Rich", "Typer", "AST Parsing", "Developer Tooling"],
     link: "https://github.com/EngineerProjects/LocalIngest",
     featured: false,
     category: "Developer Tooling",
   },
   {
+    title: "Solar Irradiance Forecasting",
+    context:
+      "Predicting solar energy output is highly volatile and heavily reliant on unstable weather metrics.",
+    solution:
+      "Built a machine learning forecasting pipeline. Performed extensive atmospheric feature engineering, processed historic satellite logs, and trained regression models to forecast irradiance rates.",
+    impact: [
+      "Optimized solar grid storage dispatch simulations.",
+      "Designed a robust feature parsing loop that handles missing atmospheric readings safely.",
+    ],
+    stack: ["Python", "Scikit-Learn", "Pandas", "Machine Learning", "Irradiance Forecasting"],
+    link: "https://github.com/EngineerProjects/solar-forecasting",
+    featured: true,
+    category: "Data Science",
+  },
+  {
     title: "Shop App Service",
     context:
-      "Les applications e-commerce ont besoin de services backend modulaires, transactionnels et orientés métier.",
+      "E-commerce backends must maintain transactional integrity, fast product search, and modular service architectures.",
     solution:
-      "Développement d'un service backend e-commerce mettant l'accent sur les APIs, la modularité, la gestion métier et l'architecture orientée services.",
+      "Developed a clean, service-oriented backend API in Go, showcasing modular routing patterns, secure session handling, and transactional database mapping.",
     impact: [
-      "Architecture backend modulaire",
-      "Gestion de logique transactionnelle",
-      "Base de services pour application e-commerce",
+      "Engineered decoupled system layers ready for microservice containerization.",
+      "Implemented strict database locks to prevent race conditions during checkout loops.",
     ],
-    stack: ["Python", "Backend APIs", "Databases", "Service Architecture"],
+    stack: ["Go (Golang)", "GORM", "PostgreSQL", "Clean Architecture", "REST APIs"],
     link: "https://github.com/EngineerProjects/Shop-app-service",
     featured: false,
     category: "Backend",
   },
   {
+    title: "Sylva3D GUI",
+    context:
+      "Procedural 3D scene generators need responsive desktop user interfaces to manipulate environment variables, cameras, and asset densities in real time.",
+    solution:
+      "Designed and coded a high-density, multi-panel desktop control interface for the Sylva3D rendering engine, displaying parameter dials, scene trees, and engine status indicators.",
+    impact: [
+      "Streamlined creative and technical tuning of procedural scene generation parameters.",
+      "Provided real-time engine telemetry and viewport frame indicators.",
+    ],
+    stack: ["Python", "PyQt / PySide", "3D Telemetry", "Desktop GUI Engineering"],
+    link: "https://github.com/EngineerProjects/Sylva3dGUI",
+    featured: false,
+    category: "3D Systems",
+  },
+  {
     title: "SAM Background Remover",
     context:
-      "La suppression de fond automatisée bénéficie des modèles modernes de segmentation d'images pour accélérer les workflows de traitement visuel.",
+      "Professional image segmentation tools are required to extract high-fidelity object layers without manual masking.",
     solution:
-      "Outil basé sur des modèles de segmentation permettant de supprimer automatiquement les arrière-plans à partir de techniques avancées de computer vision.",
+      "Wired Meta's Segment Anything Model (SAM) into a clean desktop vision tool to perform instant, high-contrast foreground isolation and backdrop removal.",
     impact: [
-      "Automatisation du détourage d'images",
-      "Application pratique de la segmentation IA",
-      "Tooling visuel pour workflows créatifs",
+      "Automated precision masking workflows for designers and digital artists.",
+      "Optimized segmentation runtimes using GPU-accelerated PyTorch backends.",
     ],
-    stack: ["Python", "Computer Vision", "Image Segmentation", "Deep Learning"],
+    stack: ["Python", "PyTorch", "Segment Anything (SAM)", "Computer Vision", "UI Masking"],
     link: "https://github.com/EngineerProjects/sam_background_remover",
     featured: false,
     category: "Computer Vision",
@@ -470,125 +433,106 @@ export const projects = [
 
 export const education = [
   {
-    degree: "Diplôme d'Ingénieur",
+    degree: "Master of Science in Engineering (Diplôme d'Ingénieur)",
     school: "JUNIA ISEN Lille",
-    level: "Master's Degree",
+    level: "Master's Degree (BAC+5)",
     specialization: "Big Data & Data Science",
     period: "2023 - 2026",
     description:
-      "Formation d'ingénieur spécialisée en Big Data et Intelligence Artificielle, axée sur l'analyse de données, le machine learning et l'ingénierie des systèmes de données à grande échelle.",
+      "Elite French Graduate School of Engineering. Advanced curriculum specializing in massive data engineering, statistical modeling, distributed systems, and production machine learning.",
     courses: [
-      "Data Engineering : traitement et gestion de données massives, pipelines de données",
-      "Data Science : analyse exploratoire (EDA), modélisation statistique, analyse prédictive",
-      "Intelligence Artificielle : réseaux de neurones, apprentissage supervisé et non supervisé",
-      "Bases de données : SQL et NoSQL, modélisation et gestion des données",
-      "Mathématiques appliquées : probabilités, statistiques, recherche opérationnelle, optimisation",
-      "Visualisation de données : création de dashboards et d'outils d'aide à la décision (Power BI, Matplotlib)",
+      "Data Infrastructure: Distributed processing, batch/streaming ETL, medallion design rules",
+      "Advanced Machine Learning: Neural architectures, supervised/unsupervised training grids",
+      "Stochastic & Applied Mathematics: Probability theory, operations research, optimization theory",
+      "Enterprise Data Platforms: Data warehousing, SQL, NoSQL systems, and BI dash toolkits",
     ],
     keySkills: [
-      "Python (Pandas, NumPy, SciPy)",
-      "SQL",
-      "NoSQL",
-      "Machine Learning",
-      "Data Analysis",
-      "Data Visualization",
-      "Statistical Analysis",
-      "Data Engineering",
-      "Mathematical Modeling",
-      "Power BI",
-      "Deep Learning",
-      "Hadoop",
+      "Python",
+      "SQL / NoSQL",
       "PySpark",
+      "Machine Learning",
+      "Distributed Computing",
+      "Data Platforms",
+      "Statistical Optimization",
+      "Deep Learning",
     ],
     link: "https://www.junia.com",
   },
   {
-    degree: "Licence",
+    degree: "Bachelor of Science in Digital Engineering",
     school: "JUNIA ISEN Rabat",
-    level: "BAC+3",
-    specialization: "Électronique, sciences du numérique et systèmes informatiques",
+    level: "Bachelor's Degree (BAC+3)",
+    specialization: "Electronics, Computer Systems & Digital Sciences",
     period: "2020 - 2023",
     description:
-      "Formation en électronique et sciences du numérique orientée ingénierie et systèmes informatiques, avec une forte composante en mathématiques appliquées, programmation et modélisation.",
+      "Intensive undergraduate engineering program covering foundations of computer science, advanced algebra, embedded computing, and digital systems.",
     courses: [
-      "Mathématiques appliquées : algèbre, analyse, probabilités, recherche opérationnelle",
-      "Informatique : algorithmique, programmation en C, structures de données et bases du développement logiciel",
-      "Data & traitement numérique : analyse de données, modélisation et introduction aux systèmes intelligents",
-      "Électronique : électronique analogique et numérique, systèmes embarqués, traitement du signal",
-      "Physique : physique quantique, électromagnétisme et systèmes physiques",
-      "Sciences de l'ingénieur : automatisme, modélisation de systèmes et résolution de problèmes techniques",
-      "Anglais scientifique et communication technique",
+      "Computer Science: Algorithms, strict C programming, data structures, software foundations",
+      "Mathematics: Multi-variable calculus, linear algebra, vector fields, probability grids",
+      "Signal Processing: Analog/digital signals, systems controls, embedded electronics",
     ],
     keySkills: [
-      "Raisonnement analytique et résolution de problèmes complexes",
-      "Développement logiciel et algorithmique",
-      "Modélisation scientifique et traitement de données",
-      "Rigueur technique et autonomie",
-      "Travail en équipe et gestion de projets techniques",
-      "AI and Machine Learning",
-      "C",
-      "Mathématiques",
-      "Python (Data Science)",
-      "Systèmes électroniques",
+      "Algorithmic Logic",
+      "C Programming",
+      "Applied Mathematics",
+      "Signal Modeling",
+      "Embedded Systems",
     ],
   },
   {
-    degree: "Cycle Préparatoire",
+    degree: "Classe Préparatoire MPSI / MP",
     school: "Marie Stella",
-    specialization: "Mathématiques, physique, chimie, sciences de l'ingénieur et informatique",
+    specialization: "Advanced Mathematics, Physics & Computer Science",
     period: "2020 - 2022",
     description:
-      "Formation scientifique intensive préparant aux concours des grandes écoles d'ingénieurs, avec un fort accent sur la rigueur, l'analyse et la résolution de problèmes complexes.",
+      "Highly selective, intensive two-year undergraduate program preparing candidates for the French Grandes Écoles entrance examinations.",
     courses: [
-      "Mathématiques avancées : algèbre, analyse, probabilités, raisonnement rigoureux",
-      "Physique : mécanique, électromagnétisme, thermodynamique, optique, avec travaux expérimentaux",
-      "Chimie : transformations de la matière, thermochimie, cinétique",
-      "Sciences de l'ingénieur : modélisation de systèmes, automatisme, mécanique",
-      "Informatique : algorithmique et programmation",
-      "Culture générale : français, philosophie, expression écrite et orale",
-      "Anglais : compréhension et communication scientifique",
+      "Pure Mathematics: Abstract algebra, rigorous analysis, topology, probability structures",
+      "Physics & Engineering: Electromagnetism, classical mechanics, thermodynamics, physical modeling",
     ],
     keySkills: [
-      "Raisonnement analytique et résolution de problèmes complexes",
-      "Rigueur scientifique et esprit critique",
-      "Capacité de travail soutenue et gestion de la pression",
-      "Organisation et autonomie",
-      "Python",
-      "Raisonnement mathématique",
+      "Analytical Rigor",
+      "Mathematical Proofs",
+      "Logical Problem Solving",
+      "Mental Stamina & Speed",
     ],
-    distinction: "Major de promotion durant l'ensemble des années préparatoires.",
+    distinction: "Graduated valedictorian (Major de promotion) across all preparatory terms.",
   },
 ];
 
 export const certifications = [
   {
-    name: "AWS Cloud Practitioner",
-    issuer: "Amazon Web Services",
+    name: "Microsoft Certified: Azure Data Scientist Associate",
+    issuer: "Microsoft (Coursera Verify LU2ZQ972BWNF)",
   },
   {
-    name: "Formation Big Data & Data Science",
-    issuer: "JUNIA ISEN Lille",
+    name: "Data Analysis with Python",
+    issuer: "FreeCodeCamp (Verify Certification: Amiche)",
   },
   {
-    name: "Formation Électronique & Sciences du Numérique",
-    issuer: "JUNIA ISEN Rabat",
+    name: "Supervised Machine Learning",
+    issuer: "DeepLearning.AI (Verify MWJS4Q3S2C3L)",
+  },
+  {
+    name: "Artificial Intelligence A-Z",
+    issuer: "Udemy (Verify UC-f0f26f78-fc5e-4cd5-a5f8-7c7f64680774)",
   },
 ];
 
 export const languages = [
-  { name: "Français", level: "Natif" },
-  { name: "Yoruba", level: "Natif" },
-  { name: "Fon", level: "Natif" },
-  { name: "Goun", level: "Natif" },
-  { name: "Anglais", level: "B2 - Usage professionnel" },
+  { name: "French", level: "Native" },
+  { name: "Yoruba", level: "Native" },
+  { name: "Fon", level: "Native" },
+  { name: "Goun", level: "Native" },
+  { name: "English", level: "B2 - Professional Working Proficiency" },
 ];
 
 export const interests = [
-  "Intelligence artificielle & recherche",
-  "Systèmes multi-agents",
-  "Data Engineering",
-  "Computer Vision",
-  "Open source",
-  "Entrepreneuriat",
-  "Musique (batterie)",
+  "Artificial Intelligence & Agentic State Research",
+  "Multi-Agent Communication Networks",
+  "High-Performance Data Infrastructure",
+  "Computer Vision & Generative Graphics",
+  "Open Source Developer Toolkits",
+  "Venture & Technical Entrepreneurship",
+  "Percussion & Drumming (Acoustic Drums)",
 ];

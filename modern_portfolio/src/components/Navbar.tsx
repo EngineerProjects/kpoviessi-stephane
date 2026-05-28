@@ -2,152 +2,193 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Mail } from "lucide-react";
+import { Menu, X, Mail, Layers, Cpu, Terminal } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/lib/utils";
 import { personalInfo } from "@/data/content";
 
 const navLinks = [
-  { label: "À propos", href: "#about" },
-  { label: "Compétences", href: "#skills" },
-  { label: "Expérience", href: "#experience" },
-  { label: "Projets", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { num: "01", label: "SCOPE", href: "#about" },
+  { num: "02", label: "STACK", href: "#skills" },
+  { num: "03", label: "BLUEPRINTS", href: "#projects" },
+  { num: "04", label: "RECORDS", href: "#experience" },
+  { num: "05", label: "HANDSHAKE", href: "#contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [time, setTime] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    
+    // Technical clock for the HUD navigation
+    const updateClock = () => {
+      const d = new Date();
+      const hrs = String(d.getHours()).padStart(2, "0");
+      const mins = String(d.getMinutes()).padStart(2, "0");
+      const secs = String(d.getSeconds()).padStart(2, "0");
+      setTime(`${hrs}:${mins}:${secs} UTC`);
+    };
+    updateClock();
+    const interval = setInterval(updateClock, 1000);
+    
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      clearInterval(interval);
+    };
   }, []);
 
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        scrolled ? "py-4" : "py-8"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+        scrolled ? "py-3" : "py-6"
       )}
     >
-      <nav className="max-w-6xl mx-auto px-6">
+      <nav className="max-w-7xl mx-auto px-4 md:px-8">
         <div
           className={cn(
-            "flex items-center justify-between transition-all duration-500 rounded-2xl",
+            "flex items-center justify-between transition-all duration-300 border border-border-main/0",
             scrolled
-              ? "glass px-6 py-2 shadow-xl shadow-accent/5"
-              : "bg-transparent px-0 py-0"
+              ? "glass px-6 py-2 rounded-xl shadow-lg border-border-main bg-bg-card/70 backdrop-blur-md"
+              : "bg-transparent px-4 py-1"
           )}
         >
-          {/* Logo */}
+          {/* Logo & Operational Status */}
           <a
             href="#"
-            className="group flex items-center gap-2 text-text-main font-bold tracking-tight text-xl"
+            className="flex items-center gap-3 group text-text-main font-mono tracking-tight"
           >
-            <div className="relative w-9 h-9 flex items-center justify-center">
-               <div className="absolute inset-0 bg-accent rounded-xl rotate-6 group-hover:rotate-0 transition-transform duration-300 opacity-20" />
-               <div className="absolute inset-0 bg-accent rounded-xl -rotate-3 group-hover:rotate-0 transition-transform duration-300" />
-               <span className="relative text-white text-sm font-black">SK</span>
+            <div className="relative w-8 h-8 flex items-center justify-center border border-accent/40 rounded bg-accent-soft text-accent group-hover:bg-accent group-hover:text-bg-main transition-all duration-300">
+              <Terminal size={14} className="group-hover:rotate-12 transition-transform" />
             </div>
-            <span className="hidden sm:inline-block text-text-main group-hover:text-accent transition-colors duration-300">
-              Kpoviessi<span className="text-accent">.</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="text-xs font-black uppercase tracking-widest text-text-main group-hover:text-accent transition-colors leading-tight">
+                S. Kpoviessi
+              </span>
+              <span className="text-[8px] font-mono text-text-dim/70 tracking-widest leading-none flex items-center gap-1.5 mt-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                SYS: ACTIVE
+              </span>
+            </div>
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-1">
-            <ul className="flex items-center gap-1">
+          {/* Desktop HUD links */}
+          <div className="hidden lg:flex items-center gap-6">
+            <ul className="flex items-center gap-1.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="px-4 py-2 text-sm font-bold text-text-dim hover:text-text-main transition-all duration-200 rounded-lg hover:bg-accent/5"
+                    className="group relative px-3 py-1.5 text-[10px] font-mono font-bold text-text-dim hover:text-text-main transition-colors flex items-center gap-1"
                   >
-                    {link.label}
+                    <span className="text-[8px] text-accent opacity-60 group-hover:opacity-100 transition-opacity">
+                      {link.num}
+                    </span>
+                    <span className="tracking-[0.15em]">{link.label}</span>
+                    <span className="absolute bottom-0 left-3 right-3 h-[1px] bg-accent scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                   </a>
                 </li>
               ))}
             </ul>
+
+            <div className="w-px h-4 bg-border-main" />
+
+            {/* Time Telemetry */}
+            <span className="text-[9px] font-mono text-text-dim tracking-wider font-medium opacity-80 min-w-[70px]">
+              {time || "00:00:00 UTC"}
+            </span>
+
+            <div className="w-px h-4 bg-border-main" />
             
-            <div className="w-px h-6 bg-border-main mx-4" />
-            
-            <div className="flex items-center gap-2 mr-2">
+            <div className="flex items-center gap-1">
               <a
                 href={personalInfo.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-dim hover:text-accent transition-colors"
+                className="p-1.5 text-text-dim hover:text-accent hover:bg-accent-soft rounded transition-all"
                 aria-label="GitHub"
               >
-                <GithubIcon className="w-5 h-5" />
+                <GithubIcon className="w-4 h-4" />
               </a>
               <a
                 href={personalInfo.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-text-dim hover:text-accent transition-colors"
+                className="p-1.5 text-text-dim hover:text-accent hover:bg-accent-soft rounded transition-all"
                 aria-label="LinkedIn"
               >
-                <LinkedinIcon className="w-5 h-5" />
+                <LinkedinIcon className="w-4 h-4" />
               </a>
             </div>
+
+            <div className="w-px h-4 bg-border-main" />
 
             <ThemeToggle />
           </div>
 
-          {/* Mobile actions */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile HUD actions */}
+          <div className="flex items-center gap-2 lg:hidden">
             <ThemeToggle />
             <button
-              className="p-2 text-text-main hover:text-accent transition-colors"
+              className="p-2 border border-border-main/50 rounded-lg text-text-main hover:bg-accent-soft transition-colors"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile Terminal Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            className="absolute top-24 left-6 right-6 md:hidden glass rounded-3xl p-6 shadow-2xl z-50 overflow-hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="absolute top-[72px] left-4 right-4 lg:hidden glass rounded-xl p-4 shadow-xl z-50 border-border-main bg-bg-main/98"
           >
-            <ul className="relative flex flex-col gap-2">
+            <div className="flex items-center justify-between border-b border-border-main/60 pb-3 mb-3">
+              <span className="text-[9px] font-mono text-text-dim tracking-widest uppercase">HUD NAVIGATION SYSTEM</span>
+              <span className="text-[9px] font-mono text-accent">{time || "UTC"}</span>
+            </div>
+            
+            <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-4 py-4 text-lg font-black text-text-dim hover:text-text-main hover:bg-accent/5 rounded-2xl transition-all"
+                    className="flex items-center gap-3 px-3 py-2 text-xs font-mono font-bold text-text-dim hover:text-text-main hover:bg-accent-soft rounded-lg transition-all"
                   >
-                    {link.label}
+                    <span className="text-[9px] text-accent font-normal">{link.num}</span>
+                    <span className="tracking-[0.1em]">{link.label}</span>
                   </a>
                 </li>
               ))}
-              <li className="mt-4 pt-6 border-t border-border-main flex items-center justify-between px-4">
-                <p className="text-sm font-bold text-text-dim">Socials</p>
-                <div className="flex items-center gap-4">
-                  <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent">
-                    <GithubIcon className="w-6 h-6" />
-                  </a>
-                  <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent">
-                    <LinkedinIcon className="w-6 h-6" />
-                  </a>
-                  <a href={`mailto:${personalInfo.email}`} className="text-text-dim hover:text-accent">
-                    <Mail size={24} />
-                  </a>
-                </div>
-              </li>
             </ul>
+            
+            <div className="mt-4 pt-3 border-t border-border-main/60 flex items-center justify-between px-3">
+              <span className="text-[9px] font-mono text-text-dim">CONNECT LINKS:</span>
+              <div className="flex items-center gap-3">
+                <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent">
+                  <GithubIcon className="w-4 h-4" />
+                </a>
+                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent">
+                  <LinkedinIcon className="w-4 h-4" />
+                </a>
+                <a href={`mailto:${personalInfo.email}`} className="text-text-dim hover:text-accent">
+                  <Mail size={16} />
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

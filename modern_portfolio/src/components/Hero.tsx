@@ -1,139 +1,209 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, MapPin, Download } from "lucide-react";
+import { ArrowRight, MapPin, Download, Terminal, Cpu, Database } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import { personalInfo, resumeLinks } from "@/data/content";
 
 export default function Hero() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 15 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+      },
+    },
+  };
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-main transition-colors duration-500">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <div className="absolute top-[-5%] left-[-5%] w-[70%] h-[50%] bg-accent/10 rounded-full blur-[100px] animate-pulse" />
-        <div className="absolute bottom-[-5%] right-[-5%] w-[70%] h-[50%] bg-accent/5 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute inset-0 bg-grid-soft opacity-20" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-bg-main pt-20 pb-16 transition-colors duration-500">
+      {/* CAD Blueprint Backdrop Grid */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-grid-soft opacity-[0.4] dark:opacity-[0.25]" />
+        
+        {/* Soft Radial Ambient Lighting */}
+        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-accent/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-accent/5 rounded-full blur-[120px]" />
+        
+        {/* Hairline Grid Overlay Guidelines */}
+        <div className="absolute top-[25%] left-0 right-0 h-[1px] bg-border-main/50" />
+        <div className="absolute bottom-[20%] left-0 right-0 h-[1px] bg-border-main/50" />
+        <div className="absolute left-[15%] top-0 bottom-0 w-[1px] bg-border-main/50" />
+        <div className="absolute right-[15%] top-0 bottom-0 w-[1px] bg-border-main/50" />
+
+        {/* CAD Grid Junction Dots */}
+        <div className="absolute top-[25%] left-[15%] -translate-x-1/2 -translate-y-1/2 dot-junction" />
+        <div className="absolute top-[25%] right-[15%] translate-x-1/2 -translate-y-1/2 dot-junction" />
+        <div className="absolute bottom-[20%] left-[15%] -translate-x-1/2 translate-y-1/2 dot-junction" />
+        <div className="absolute bottom-[20%] right-[15%] translate-x-1/2 translate-y-1/2 dot-junction" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24 pb-16 md:pt-32 md:pb-20">
-        <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16">
-          {/* Profile photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="relative group flex-shrink-0"
-          >
-            <div className="absolute -inset-4 bg-accent/10 rounded-full blur-2xl group-hover:bg-accent/20 transition-all duration-1000" />
-            <div className="relative w-40 h-40 md:w-56 md:h-56 rounded-full p-1.5 md:p-2 glass overflow-hidden">
-              <div className="w-full h-full rounded-full overflow-hidden relative bg-accent/5">
-                <Image
-                  src="/images/profile.png"
-                  alt={personalInfo.name}
-                  fill
-                  className="object-cover scale-110 group-hover:scale-105 transition-transform duration-700"
-                  priority
-                />
+      <div className="relative z-10 max-w-7xl w-full mx-auto px-6 md:px-8 pt-16 lg:pt-24">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
+        >
+          {/* Left Column: Image and System Status HUD */}
+          <motion.div variants={itemVariants} className="lg:col-span-4 flex flex-col items-center lg:items-start">
+            <div className="relative group">
+              {/* Mechanical bracket overlay details */}
+              <div className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-accent" />
+              <div className="absolute -top-2 -right-2 w-4 h-4 border-t-2 border-r-2 border-accent" />
+              <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-accent" />
+              <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-accent" />
+
+              <div className="relative w-44 h-44 md:w-60 md:h-60 rounded-none bg-bg-card border border-border-main p-2 overflow-hidden shadow-md">
+                <div className="w-full h-full relative bg-accent-soft overflow-hidden grayscale contrast-[1.05] dark:contrast-[1.1] hover:grayscale-0 transition-all duration-700">
+                  <Image
+                    src="/images/profile.png"
+                    alt={personalInfo.name}
+                    fill
+                    className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                    priority
+                  />
+                </div>
+              </div>
+
+              {/* Float telemetry badge */}
+              <div className="absolute -bottom-3 right-4 glass px-3 py-1 border border-border-main shadow-md flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-[8px] font-mono font-bold tracking-widest text-text-main uppercase">
+                  READY_FOR_DEPLOY
+                </span>
               </div>
             </div>
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.5 }}
-              className="absolute bottom-0 right-0 glass rounded-xl px-3 py-1.5 md:px-4 md:py-2 shadow-xl flex items-center gap-2"
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[9px] md:text-[10px] font-black text-text-main uppercase tracking-widest">Disponible</span>
-            </motion.div>
+
+            {/* Quick Engine Telemetry Specs */}
+            <div className="mt-8 w-full max-w-[240px] md:max-w-[270px] border border-border-main bg-bg-card/45 p-4 rounded font-mono text-[9px] text-text-dim/80 space-y-2.5">
+              <div className="flex justify-between pb-1.5 border-b border-border-main/50">
+                <span className="text-accent uppercase font-bold tracking-wider flex items-center gap-1">
+                  <Cpu size={10} /> ENGINE STATS
+                </span>
+                <span className="text-text-main font-bold">V1.2.6</span>
+              </div>
+              <div className="flex justify-between">
+                <span>RUNTIME ENVIRONMENT</span>
+                <span className="text-text-main font-semibold">NodeJS / Go / Py3</span>
+              </div>
+              <div className="flex justify-between">
+                <span>ORCHESTRATION PIPELINES</span>
+                <span className="text-text-main font-semibold">LangGraph & Pydantic AI</span>
+              </div>
+              <div className="flex justify-between">
+                <span>DATA CLUSTER ENGINE</span>
+                <span className="text-text-main font-semibold">PySpark / Databricks</span>
+              </div>
+              <div className="flex justify-between pt-1.5 border-t border-border-main/50 text-[8px] opacity-60">
+                <span>LATITUDE: 48.8566 N</span>
+                <span>LONGITUDE: 2.3522 E</span>
+              </div>
+            </div>
           </motion.div>
 
-          {/* Name & Title */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left pt-2 md:pt-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="w-full"
-            >
-              <h2 className="text-accent font-black text-[10px] md:text-lg tracking-[0.2em] md:tracking-[0.3em] uppercase mb-3 leading-tight">
-                DATA ENGINEER / DATA SCIENTIST
-              </h2>
-              {/* Correction : suppression du whitespace-nowrap global et gestion précise du wrap */}
-              <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter text-text-main mb-6 md:mb-8 leading-[1.1] md:leading-[1.2] lg:leading-[1.1] px-1">
-                <span className="inline-block md:whitespace-nowrap">
-                  Stéphane <span className="text-text-dim">KPOVIESSI<span className="text-accent">.</span></span>
-                </span>
+          {/* Right Column: Hero Content */}
+          <div className="lg:col-span-8 flex flex-col text-center lg:text-left">
+            <motion.div variants={itemVariants} className="space-y-4">
+              <div className="inline-flex items-center gap-2 px-3 py-1 border border-accent/20 bg-accent-soft rounded text-[9px] font-mono font-bold text-accent uppercase tracking-[0.2em] mx-auto lg:mx-0">
+                <Terminal size={10} /> CORE SYSTEMS PLATFORM
+              </div>
+              
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-display font-extrabold tracking-tighter text-text-main leading-[1.05]">
+                Stéphane <span className="text-text-dim">KPOVIESSI</span><span className="text-accent">.</span>
               </h1>
-            </motion.div>
-
-            {/* Hook phrase */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="max-w-xl"
-            >
-              <p className="text-base md:text-xl text-text-dim leading-relaxed font-medium px-4 md:px-0">
-                Spécialisé en <span className="text-text-main font-bold">Data Engineering</span>, Machine Learning et conception de <span className="text-text-main font-bold">systèmes IA</span> de bout en bout.
+              
+              <p className="text-lg sm:text-xl md:text-2xl font-mono text-accent font-bold tracking-tight mt-2 uppercase">
+                AI Systems & Data Infrastructure Engineer
               </p>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* Hook statement */}
+            <motion.div variants={itemVariants} className="mt-6 max-w-2xl mx-auto lg:mx-0">
+              <p className="text-base md:text-lg text-text-dim leading-relaxed font-medium">
+                Designing scalable multi-agent platforms, deterministic big data pipelines, and high-performance execution runtimes. Dedicated to transforming volatile models into production-grade pipelines.
+              </p>
+            </motion.div>
+
+            {/* Action buttons (CTAs) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-10 md:mt-12 flex flex-col sm:flex-row gap-4 md:gap-5 w-full sm:w-auto px-6 sm:px-0"
+              variants={itemVariants}
+              className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
               <a
                 href="#projects"
-                className="group relative px-8 py-4 md:px-10 md:py-5 rounded-2xl bg-text-main text-bg-main text-sm font-black transition-all hover:scale-105 active:scale-95 shadow-xl shadow-text-main/10 flex justify-center items-center"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-text-main text-bg-main border border-text-main hover:bg-bg-main hover:text-text-main transition-all duration-300 font-mono font-bold text-xs uppercase tracking-widest shadow-md hover:shadow-lg active:scale-98"
               >
-                <span className="flex items-center gap-2 uppercase tracking-widest">
-                  Projets <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                </span>
+                Explore Blueprints
+                <ArrowRight size={14} />
               </a>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {resumeLinks.map((resume) => (
-                  <a
-                    key={resume.href}
-                    href={resume.href}
-                    target="_blank"
-                    className="group px-5 py-4 md:px-6 md:py-5 rounded-2xl glass text-text-main text-xs md:text-sm font-black hover:border-accent/30 transition-all hover:scale-105 active:scale-95 shadow-lg flex justify-center items-center"
-                  >
-                    <span className="flex items-center gap-2 uppercase tracking-widest">
-                      {resume.label} <Download size={18} className="text-accent group-hover:translate-y-0.5 transition-transform" />
-                    </span>
-                  </a>
-                ))}
-              </div>
+
+              {resumeLinks.map((resume) => (
+                <a
+                  key={resume.href}
+                  href={resume.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-4 glass text-text-main border border-border-main hover:border-accent/40 hover:bg-accent-soft transition-all duration-300 font-mono font-bold text-xs uppercase tracking-widest active:scale-98"
+                >
+                  {resume.label}
+                  <Download size={14} className="text-accent" />
+                </a>
+              ))}
             </motion.div>
 
-            {/* Social Links */}
+            {/* Social Coordinates HUD */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 1 }}
-              className="mt-12 md:mt-16 flex flex-col md:flex-row items-center gap-6 md:gap-8"
+              variants={itemVariants}
+              className="mt-12 pt-8 border-t border-border-main/50 flex flex-col sm:flex-row items-center justify-between gap-6"
             >
-              <div className="flex items-center gap-8">
-                <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent transition-colors">
-                  <GithubIcon className="w-6 h-6" />
+              <div className="flex items-center gap-5">
+                <a
+                  href={personalInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-text-dim hover:text-accent hover:bg-accent-soft p-2 rounded transition-all duration-300"
+                  aria-label="Github Profile"
+                >
+                  <GithubIcon className="w-5 h-5" />
                 </a>
-                <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent transition-colors">
-                  <LinkedinIcon className="w-6 h-6" />
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-text-dim hover:text-accent hover:bg-accent-soft p-2 rounded transition-all duration-300"
+                  aria-label="LinkedIn Profile"
+                >
+                  <LinkedinIcon className="w-5 h-5" />
                 </a>
               </div>
-              <div className="hidden md:block w-px h-6 bg-border-main" />
-              <div className="flex items-center gap-2 text-text-dim font-black text-[9px] md:text-[10px] uppercase tracking-[0.2em] opacity-60">
+
+              <div className="flex items-center gap-2 text-[10px] font-mono text-text-dim tracking-wider font-semibold">
                 <MapPin size={12} className="text-accent" />
-                {personalInfo.location}
+                {personalInfo.location.toUpperCase()}
               </div>
             </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

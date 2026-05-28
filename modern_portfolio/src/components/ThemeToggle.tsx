@@ -13,23 +13,22 @@ export function ThemeToggle() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className="p-2 w-10 h-10" />;
+  if (!mounted) return <div className="p-2 w-8 h-8 border border-border-main/50 rounded" />;
 
   return (
     <motion.button
-      whileTap={{ scale: 0.9 }}
+      whileTap={{ scale: 0.95 }}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative p-2 rounded-xl glass hover:bg-accent/10 transition-colors group overflow-hidden"
-      aria-label="Changer de thème"
+      className="relative p-1.5 border border-border-main/50 rounded bg-bg-main hover:border-accent/40 hover:bg-accent-soft transition-all duration-200 group overflow-hidden cursor-pointer"
+      aria-label="Toggle Theme Mode"
     >
-      <div className="relative z-10">
+      <div className="relative z-10 flex items-center justify-center">
         {theme === "dark" ? (
-          <Sun size={20} className="text-accent transition-transform duration-500 rotate-0" />
+          <Sun size={14} className="text-accent transition-transform duration-500 hover:rotate-45" />
         ) : (
-          <Moon size={20} className="text-accent transition-transform duration-500 rotate-0" />
+          <Moon size={14} className="text-accent transition-transform duration-500 hover:-rotate-12" />
         )}
       </div>
-      <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
     </motion.button>
   );
 }
