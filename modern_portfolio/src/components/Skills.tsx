@@ -75,14 +75,14 @@ export default function Skills() {
                           )}
                         </span>
                         
-                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded tracking-wide ${
+                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded tracking-widest ${
                           isExpert
                             ? "bg-accent-soft text-accent border border-accent/20"
                             : isAdvanced
                             ? "bg-text-main/5 text-text-main/80 border border-border-main"
                             : "bg-text-main/[0.02] text-text-dim/60"
                         }`}>
-                          {skill.level === "Intermediate" ? "Inter." : skill.level}
+                          {skill.level.slice(0, 3).toUpperCase()}
                         </span>
                       </div>
                     );
