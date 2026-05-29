@@ -69,9 +69,9 @@ export default function ChatBot() {
     }
   }, [language, ui.chat.initial]);
 
-  // Save chat memory on updates
+  // Save chat memory only when there's a real conversation (not just the initial/cleared message)
   useEffect(() => {
-    if (messages.length > 0) {
+    if (messages.length > 1) {
       localStorage.setItem(`assistant_memory_${language}`, JSON.stringify(messages));
     }
   }, [messages, language]);
