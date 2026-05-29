@@ -134,16 +134,16 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         
         {/* Section Header HUD */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
-          <div className="max-w-4xl">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16 gap-4">
+          <div className="flex-1 min-w-0">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
               <GitBranch size={10} /> {ui.experience.badge}
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none lg:whitespace-nowrap">
               {ui.experience.heading_1} <span className="text-text-dim">{ui.experience.heading_2}</span> {ui.experience.heading_3}<span className="text-accent">.</span>
             </h2>
           </div>
-          <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
+          <div className="shrink-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
             {ui.experience.subheading}
           </div>
         </div>
@@ -162,14 +162,14 @@ export default function Experience() {
 
         {/* Associative Timeline releases */}
         <div className="mt-28 border-t border-border-main/50 pt-20">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-6 mb-12">
-            <div className="max-w-4xl">
-              <h3 className="text-xl md:text-3xl font-display font-extrabold text-text-main tracking-tight uppercase flex items-center gap-3">
-                <Briefcase size={20} className="text-accent stroke-[1.5]" />
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-border-main/50 pb-6 mb-12 gap-3">
+            <div className="flex-1 min-w-0">
+              <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-extrabold text-text-main tracking-tight uppercase flex items-center gap-3 lg:whitespace-nowrap">
+                <Briefcase size={20} className="text-accent stroke-[1.5] shrink-0" />
                 {ui.experience.community_title}
               </h3>
             </div>
-            <div className="mt-2 md:mt-0 font-mono text-[8px] text-text-dim uppercase tracking-widest">
+            <div className="shrink-0 font-mono text-[8px] text-text-dim uppercase tracking-widest">
               {ui.experience.community_sub}
             </div>
           </div>

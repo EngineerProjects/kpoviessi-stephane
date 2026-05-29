@@ -23,16 +23,16 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         
         {/* Section Header HUD */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16">
-          <div className="max-w-4xl">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16 gap-4">
+          <div className="flex-1 min-w-0">
             <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
               <Terminal size={10} /> {ui.about.badge}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-display font-extrabold tracking-tighter text-text-main leading-none whitespace-nowrap">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none lg:whitespace-nowrap">
               {ui.about.heading_1} <span className="text-text-dim">{ui.about.heading_2}</span> {ui.about.heading_suffix}<span className="text-accent">.</span>
             </h2>
           </div>
-          <div className="mt-4 md:mt-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
+          <div className="shrink-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
             {ui.about.focus_label}
           </div>
         </div>

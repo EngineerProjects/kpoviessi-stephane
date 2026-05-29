@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { LanguageProvider } from "@/lib/LanguageContext";
 import ChatBot from "@/components/ChatBot";
+import LanguageModal from "@/components/LanguageModal";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kpoviessi-stephane.vercel.app/"),
@@ -112,13 +113,13 @@ export default function RootLayout({
       <body className="antialiased transition-colors duration-500">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
-          disableTransitionOnChange
+          defaultTheme="system"
+          enableSystem={true}
         >
           <LanguageProvider>
             {children}
             <ChatBot />
+            <LanguageModal />
           </LanguageProvider>
         </ThemeProvider>
       </body>

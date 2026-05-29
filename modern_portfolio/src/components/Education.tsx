@@ -20,7 +20,7 @@ export default function Education() {
               <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
                 <Library size={10} /> {ui.education.badge}
               </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none sm:whitespace-nowrap">
                 {ui.education.heading_1} <span className="text-text-dim">{ui.education.heading_2}</span><span className="text-accent">.</span>
               </h2>
             </div>
@@ -102,7 +102,7 @@ export default function Education() {
               <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
                 <Award size={10} /> {ui.education.cert_badge}
               </div>
-              <h2 className="text-3xl sm:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display font-extrabold tracking-tighter text-text-main leading-none sm:whitespace-nowrap">
                 {ui.education.cert_heading_1} <span className="text-text-dim">{ui.education.cert_heading_2}</span><span className="text-accent">.</span>
               </h2>
             </div>
