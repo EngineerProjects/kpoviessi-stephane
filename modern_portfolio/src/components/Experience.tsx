@@ -22,7 +22,7 @@ function ExperienceCard({
   index: number;
   ui: ReturnType<typeof useContent>["ui"];
 }) {
-  const [isExpanded, setIsExpanded] = useState(index < 2); // First two expanded by default for maximum impact
+  const [isExpanded, setIsExpanded] = useState(index === 0);
   const commitHash = commitMap[exp.company] || `0xGEN_NODE_0${index}`;
 
   return (
@@ -40,8 +40,15 @@ function ExperienceCard({
         className="p-6 md:p-8 border border-border-main bg-bg-card/25 rounded hover:border-accent/30 hover:bg-bg-card transition-all duration-300 shadow-sm"
       >
         {/* Telemetry commit badge */}
-        <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/40 tracking-wider">
-          COMMIT // {commitHash}
+        <div className="absolute top-2 right-4 flex items-center gap-2">
+          {exp.internship && (
+            <span className="font-mono text-[7px] font-bold text-accent/60 border border-accent/20 bg-accent-soft px-1.5 py-0.5 rounded tracking-wider uppercase">
+              Internship
+            </span>
+          )}
+          <span className="font-mono text-[7px] text-text-dim/40 tracking-wider">
+            COMMIT // {commitHash}
+          </span>
         </div>
 
         {/* Card Header */}
@@ -51,11 +58,11 @@ function ExperienceCard({
               {exp.role}
             </h3>
             {exp.logo ? (
-              <div className="mt-3 h-7 flex items-center">
+              <div className="mt-3 h-8 flex items-center">
                 <img
                   src={exp.logo}
                   alt={exp.company}
-                  className="h-full w-auto object-contain dark:invert opacity-75 dark:opacity-50"
+                  className="h-full w-auto object-contain opacity-90"
                 />
               </div>
             ) : (

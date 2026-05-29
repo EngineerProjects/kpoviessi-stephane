@@ -103,7 +103,8 @@ export const skills = {
 
 export const experiences = [
   {
-    role: "Data Platform Engineer (Stage)",
+    role: "Data Engineer",
+    internship: true,
     company: "Allianz France",
     location: "Paris La Défense, France",
     period: "Nov 2025 - Apr 2026",
@@ -140,7 +141,7 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PySpark", "Databricks", "Azure Data Lake", "SAS", "SQL", "Parquet", "Git"],
-    logo: "/images/allianz_france.svg",
+    logo: "/images/allianz_france.png",
     featured: true,
   },
   {
@@ -174,11 +175,12 @@ export const experiences = [
       },
     ],
     stack: ["Go", "PostgreSQL", "Docker", "LLMs", "AI Agents", "Product Engineering"],
-    logo: "/images/hello_pulse.svg",
+    logo: "/images/hello_pulse.png",
     featured: true,
   },
   {
-    role: "Machine Learning Engineer (Stage)",
+    role: "Machine Learning Engineer",
+    internship: true,
     company: "Groupe Sylvagreg",
     location: "Lille, France",
     period: "May 2024 - Aug 2024",
@@ -213,11 +215,12 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PyTorch", "OpenCV", "GANs", "3D Modeling", "Photogrammetry", "PIL"],
-    logo: "/images/sylvagreg.svg",
+    logo: "/images/sylvagreg.png",
     featured: false,
   },
   {
-    role: "Business Data Analyst (Stage)",
+    role: "Business Data Analyst",
+    internship: true,
     company: "LYNE ET FRERES SARL",
     location: "Cotonou, Benin",
     period: "Jun 2021 - Aug 2022",

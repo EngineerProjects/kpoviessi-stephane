@@ -109,7 +109,8 @@ export const skills = {
 
 export const experiences = [
   {
-    role: "Ingénieur Plateforme de Données (Stage)",
+    role: "Data Engineer",
+    internship: true,
     company: "Allianz France",
     location: "Paris La Défense, France",
     period: "Nov 2025 - Avr 2026",
@@ -146,11 +147,11 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PySpark", "Databricks", "Azure Data Lake", "SAS", "SQL", "Parquet", "Git"],
-    logo: "/images/allianz_france.svg",
+    logo: "/images/allianz_france.png",
     featured: true,
   },
   {
-    role: "Co-Fondateur & CTO",
+    role: "Co-Founder & CTO",
     company: "Hello Pulse",
     location: "France (Télétravail)",
     period: "Sep 2023 - Présent",
@@ -180,11 +181,12 @@ export const experiences = [
       },
     ],
     stack: ["Go", "PostgreSQL", "Docker", "LLMs", "Agents IA", "Ingénierie Produit"],
-    logo: "/images/hello_pulse.svg",
+    logo: "/images/hello_pulse.png",
     featured: true,
   },
   {
-    role: "Ingénieur Machine Learning (Stage)",
+    role: "Machine Learning Engineer",
+    internship: true,
     company: "Groupe Sylvagreg",
     location: "Lille, France",
     period: "Mai 2024 - Août 2024",
@@ -219,11 +221,12 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PyTorch", "OpenCV", "GANs", "Modélisation 3D", "Photogrammétrie", "PIL"],
-    logo: "/images/sylvagreg.svg",
+    logo: "/images/sylvagreg.png",
     featured: false,
   },
   {
-    role: "Analyste de Données Commerciales (Stage)",
+    role: "Business Data Analyst",
+    internship: true,
     company: "LYNE ET FRERES SARL",
     location: "Cotonou, Bénin",
     period: "Juin 2021 - Août 2022",
