@@ -18,9 +18,9 @@ export default function Navbar() {
 
   const navLinks = [
     { num: "01", label: ui.nav.scope, href: "#about" },
-    { num: "02", label: ui.nav.stack, href: "#skills" },
+    { num: "02", label: ui.nav.records, href: "#experience" },
     { num: "03", label: ui.nav.blueprints, href: "#projects" },
-    { num: "04", label: ui.nav.records, href: "#experience" },
+    { num: "04", label: ui.nav.stack, href: "#skills" },
     { num: "05", label: ui.nav.handshake, href: "#contact" },
   ];
 
