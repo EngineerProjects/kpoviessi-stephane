@@ -211,6 +211,41 @@ ${ctx}
 `.trim();
 }
 
+// Providers tried in order — skipped if no key, rotated on quota errors
+const PROVIDERS = [
+  {
+    name: "Groq",
+    url: "https://api.groq.com/openai/v1/chat/completions",
+    keyEnv: "GROQ_API_KEY",
+    model: "llama-3.1-8b-instant",
+  },
+  {
+    name: "Gemini",
+    url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
+    keyEnv: "GEMINI_API_KEY",
+    model: "gemini-2.0-flash",
+  },
+  {
+    name: "ZhipuAI",
+    url: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    keyEnv: "ZHIPUAI_API_KEY",
+    model: "glm-4-flash",
+  },
+];
+
+function isQuotaError(status: number, data: unknown): boolean {
+  const d = data as Record<string, unknown> | null;
+  const err = d?.error as Record<string, unknown> | null;
+  return (
+    status === 429 ||
+    err?.code === "rate_limit_exceeded" ||
+    err?.code === "model_decommissioned" ||
+    err?.type === "tokens" ||
+    String(err?.message ?? "").toLowerCase().includes("quota") ||
+    String(err?.message ?? "").toLowerCase().includes("rate limit")
+  );
+}
+
 export async function POST(req: NextRequest) {
   let language: Language = "en";
   try {
@@ -218,38 +253,62 @@ export async function POST(req: NextRequest) {
     const messages = body.messages ?? [];
     language = body.language === "fr" ? "fr" : "en";
     const content = getContent(language);
-
-    if (!process.env.GROQ_API_KEY) {
-      return NextResponse.json({ content: "Config error: API key missing." }, { status: 500 });
-    }
-
     const systemPrompt = buildSystemPrompt(language, content);
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.GROQ_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
-        messages: [{ role: "system", content: systemPrompt }, ...messages],
-        temperature: 0.6,
-        max_tokens: 600,
-      }),
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Groq API error:", data);
-      throw new Error(data?.error?.message || "Groq API error");
+    const activeProviders = PROVIDERS.filter((p) => !!process.env[p.keyEnv]);
+    if (activeProviders.length === 0) {
+      return NextResponse.json({ content: "Config error: no API key configured." }, { status: 500 });
     }
 
-    const answer = data?.choices?.[0]?.message?.content as string | undefined;
-    if (!answer) throw new Error("Empty response from Groq");
+    for (const provider of activeProviders) {
+      const key = process.env[provider.keyEnv]!;
+      let data: unknown;
+      let status: number;
 
-    return NextResponse.json({ content: answer });
+      try {
+        const response = await fetch(provider.url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+          body: JSON.stringify({
+            model: provider.model,
+            messages: [{ role: "system", content: systemPrompt }, ...messages],
+            temperature: 0.6,
+            max_tokens: 600,
+          }),
+        });
+        status = response.status;
+        data = await response.json();
+      } catch {
+        // Network error — try next provider
+        console.warn(`[${provider.name}] network error, trying next provider`);
+        continue;
+      }
+
+      if (status !== 200 && isQuotaError(status, data)) {
+        console.warn(`[${provider.name}] quota/rate error (${status}), trying next provider`);
+        continue;
+      }
+
+      if (status !== 200) {
+        const d = data as Record<string, unknown>;
+        const msg = (d?.error as Record<string, unknown>)?.message as string;
+        console.error(`[${provider.name}] API error:`, data);
+        throw new Error(msg || `${provider.name} error`);
+      }
+
+      const d = data as Record<string, unknown>;
+      const choices = d?.choices as Array<{ message: { content: string } }> | undefined;
+      const answer = choices?.[0]?.message?.content;
+      if (!answer) {
+        console.warn(`[${provider.name}] empty response, trying next provider`);
+        continue;
+      }
+
+      return NextResponse.json({ content: answer });
+    }
+
+    // All providers exhausted
+    throw new Error("All providers failed or quota exceeded");
   } catch (error) {
     console.error("Chat agent error:", error);
     return NextResponse.json(
