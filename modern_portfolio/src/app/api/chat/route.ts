@@ -212,6 +212,7 @@ ${ctx}
 }
 
 // Providers tried in order — skipped if no key, rotated on quota errors
+// Gemini free key: aistudio.google.com/app/apikey (project WITHOUT billing, key starts with AIza)
 const PROVIDERS = [
   {
     name: "Groq",
@@ -229,7 +230,7 @@ const PROVIDERS = [
     name: "ZhipuAI",
     url: "https://open.bigmodel.cn/api/paas/v4/chat/completions",
     keyEnv: "ZHIPUAI_API_KEY",
-    model: "glm-4-flash",
+    model: "glm-4.5-air",
   },
 ];
 
