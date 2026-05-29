@@ -47,14 +47,41 @@ function renderMessage(content: string, isUser: boolean) {
   });
 }
 
+const NOTIF_KEY = "sk_chat_notif_seen";
+
 export default function ChatBot() {
   const { ui } = useContent();
   const { language } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  // Show notification bubble once, 6 seconds after mount
+  useEffect(() => {
+    if (localStorage.getItem(NOTIF_KEY)) return;
+    const t = setTimeout(() => setShowNotif(true), 6000);
+    return () => clearTimeout(t);
+  }, []);
+
+  // Auto-hide after 8 seconds
+  useEffect(() => {
+    if (!showNotif) return;
+    const t = setTimeout(() => dismissNotif(), 8000);
+    return () => clearTimeout(t);
+  }, [showNotif]);
+
+  const dismissNotif = () => {
+    setShowNotif(false);
+    localStorage.setItem(NOTIF_KEY, "1");
+  };
+
+  const openChat = () => {
+    dismissNotif();
+    setIsOpen(true);
+  };
 
   // Load chat memory on mount
   useEffect(() => {
@@ -121,8 +148,38 @@ export default function ChatBot() {
     }
   };
 
+  const notifText = language === "fr"
+    ? "👋 Salut ! Des questions sur Stéphane ? Je suis là !"
+    : "👋 Hi! Want to know more about Stéphane? Ask me!";
+
   return (
     <>
+      {/* Notification bubble */}
+      <AnimatePresence>
+        {showNotif && !isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: 8, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 6, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="fixed bottom-24 right-6 z-[61] max-w-[220px] cursor-pointer"
+            onClick={openChat}
+          >
+            <div className="relative bg-bg-card border border-accent/30 shadow-lg rounded-lg px-4 py-3">
+              <button
+                onClick={(e) => { e.stopPropagation(); dismissNotif(); }}
+                className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-bg-card border border-border-main text-text-dim hover:text-accent flex items-center justify-center text-[10px] leading-none"
+              >
+                ×
+              </button>
+              <p className="text-xs font-medium text-text-main leading-snug">{notifText}</p>
+              {/* Tail pointing down toward chat button */}
+              <div className="absolute -bottom-[7px] right-5 w-3 h-3 bg-bg-card border-r border-b border-accent/30 rotate-45" />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Floating Activation Button */}
       <motion.button
         initial={{ scale: 0, opacity: 0 }}
