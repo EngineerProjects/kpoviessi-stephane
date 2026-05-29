@@ -71,7 +71,7 @@ export default function Hero() {
               <div className="absolute -bottom-2 -left-2 w-4 h-4 border-b-2 border-l-2 border-accent" />
               <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-accent" />
 
-              <div className="relative w-44 h-44 md:w-60 md:h-60 rounded-none bg-bg-card border border-border-main p-2 overflow-hidden shadow-md">
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 rounded-none bg-bg-card border border-border-main p-2 overflow-hidden shadow-md">
                 <div className="w-full h-full relative bg-accent-soft overflow-hidden grayscale contrast-[1.05] dark:contrast-[1.1] hover:grayscale-0 transition-all duration-700">
                   <Image
                     src="/images/profile.png"

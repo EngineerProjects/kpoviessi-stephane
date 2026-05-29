@@ -205,8 +205,10 @@ function ProjectCard({
         </div>
       </div>
 
-      {/* Embedded Visual System Diagram */}
-      <SystemDiagram title={project.title} />
+      {/* Embedded Visual System Diagram — hidden on mobile, shown sm+ */}
+      <div className="hidden sm:block">
+        <SystemDiagram title={project.title} />
+      </div>
 
       {/* Technical Specifications Columns */}
       <div className="space-y-4 font-mono text-[10px] text-text-dim leading-relaxed mb-6">
@@ -338,7 +340,7 @@ export default function Projects() {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 p-8 md:p-16 border border-accent/20 bg-accent-soft relative overflow-hidden group shadow-sm rounded"
+          className="mt-20 p-6 sm:p-8 md:p-12 border border-accent/20 bg-accent-soft relative overflow-hidden group shadow-sm rounded"
         >
           <div className="absolute top-0 right-0 p-10 text-accent/5 pointer-events-none group-hover:scale-105 transition-transform duration-1000">
             <Code2 size={240} className="stroke-[1]" />

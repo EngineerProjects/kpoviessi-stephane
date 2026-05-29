@@ -37,7 +37,7 @@ export default function Skills() {
             const Icon = categoryIcons[key as keyof typeof categoryIcons] || Code2;
             
             return (
-              <div key={key} className="p-8 md:p-10 flex flex-col relative group">
+              <div key={key} className="p-6 md:p-8 lg:p-10 flex flex-col relative group">
                 {/* Visual grid indicators */}
                 <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/35 tracking-wider">
                   SYSTEM LAYER // 0{catIndex + 1}

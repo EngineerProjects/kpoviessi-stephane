@@ -178,7 +178,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="absolute top-[72px] left-4 right-4 lg:hidden glass rounded-xl p-4 shadow-xl z-50 border-border-main bg-bg-main/98"
+            className="absolute top-full mt-2 left-4 right-4 lg:hidden glass rounded-xl p-4 shadow-xl z-50 border-border-main bg-bg-main/98"
           >
             <div className="flex items-center justify-between border-b border-border-main/60 pb-3 mb-3">
               <span className="text-[9px] font-mono text-text-dim tracking-widest uppercase">{ui.nav.mobile_title}</span>

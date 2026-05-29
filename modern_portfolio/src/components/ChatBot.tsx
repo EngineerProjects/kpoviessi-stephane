@@ -117,7 +117,7 @@ export default function ChatBot() {
             initial={{ opacity: 0, y: 12, scale: 0.98, transformOrigin: "bottom right" }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            className="fixed bottom-24 right-6 z-[60] w-[92vw] sm:w-[420px] h-[580px] max-h-[72vh] border border-border-main bg-bg-main/98 backdrop-blur-md shadow-xl flex flex-col overflow-hidden"
+            className="fixed bottom-20 right-3 sm:bottom-24 sm:right-6 z-[60] w-[calc(100vw-1.5rem)] sm:w-[420px] h-[60vh] sm:h-[580px] max-h-[85vh] border border-border-main bg-bg-main/98 backdrop-blur-md shadow-xl flex flex-col overflow-hidden"
             style={{ borderRadius: "8px" }}
           >
             {/* HUD Terminal Header */}

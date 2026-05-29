@@ -28,7 +28,7 @@ export default function Footer() {
           </div>
 
           {/* Core Links */}
-          <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 font-bold">
+          <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8 font-bold">
             <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent uppercase tracking-wider transition-colors">
               GITHUB {"//"} {ui.footer.registry}
             </a>
