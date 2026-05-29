@@ -212,19 +212,12 @@ ${ctx}
 }
 
 // Providers tried in order — skipped if no key, rotated on quota errors
-// Gemini free key: aistudio.google.com/app/apikey (project WITHOUT billing, key starts with AIza)
 const PROVIDERS = [
   {
     name: "Groq",
     url: "https://api.groq.com/openai/v1/chat/completions",
     keyEnv: "GROQ_API_KEY",
     model: "llama-3.1-8b-instant",
-  },
-  {
-    name: "Gemini",
-    url: "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
-    keyEnv: "GEMINI_API_KEY",
-    model: "gemini-2.0-flash",
   },
   {
     name: "ZhipuAI",
