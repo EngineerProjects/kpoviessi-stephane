@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -58,6 +58,20 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const iconControls = useAnimation();
+
+  // Periodic icon shake every 8 seconds when chat is closed
+  useEffect(() => {
+    if (isOpen) return;
+    const shake = () =>
+      iconControls.start({
+        rotate: [0, -18, 18, -10, 10, -4, 4, 0],
+        transition: { duration: 0.6, ease: "easeInOut" },
+      });
+    const t = setTimeout(shake, 3000);
+    const interval = setInterval(shake, 8000);
+    return () => { clearTimeout(t); clearInterval(interval); };
+  }, [isOpen, iconControls]);
 
   // Show notification bubble once, 6 seconds after mount
   useEffect(() => {
@@ -181,26 +195,43 @@ export default function ChatBot() {
       </AnimatePresence>
 
       {/* Floating Activation Button */}
-      <motion.button
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-[60] w-14 h-14 border border-accent bg-bg-card text-accent shadow-lg flex items-center justify-center group cursor-pointer"
-        style={{ borderRadius: "4px" }}
-      >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div key="close"><X size={20} /></motion.div>
-          ) : (
-            <motion.div key="open" className="relative flex items-center justify-center">
-              <MessageSquare size={20} />
-              <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 border border-bg-card rounded-full animate-pulse" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
+      <div className="fixed bottom-6 right-6 z-[60]">
+        {/* Sonar rings — only when chat is closed */}
+        {!isOpen && (
+          <>
+            {[0, 0.9, 1.8].map((delay) => (
+              <motion.span
+                key={delay}
+                className="absolute inset-0 border border-accent/40 pointer-events-none"
+                style={{ borderRadius: "4px" }}
+                animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
+                transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2.6, delay, ease: "easeOut" }}
+              />
+            ))}
+          </>
+        )}
+
+        <motion.button
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => setIsOpen(!isOpen)}
+          className="relative w-14 h-14 border border-accent bg-bg-card text-accent shadow-lg flex items-center justify-center cursor-pointer"
+          style={{ borderRadius: "4px" }}
+        >
+          <AnimatePresence mode="wait">
+            {isOpen ? (
+              <motion.div key="close"><X size={20} /></motion.div>
+            ) : (
+              <motion.div key="open" animate={iconControls} className="relative flex items-center justify-center">
+                <MessageSquare size={20} />
+                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 border border-bg-card rounded-full animate-pulse" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.button>
+      </div>
 
       {/* CAD Terminal Chat Window */}
       <AnimatePresence>
