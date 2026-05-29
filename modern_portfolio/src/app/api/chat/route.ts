@@ -239,8 +239,8 @@ export async function POST(req: NextRequest) {
       {
         content:
           language === "fr"
-            ? "Une erreur technique est survenue. Stéphane reste joignable via le formulaire de contact ou LinkedIn."
-            : "A technical error occurred. Stéphane remains reachable via the contact form or LinkedIn.",
+            ? "Une erreur technique est survenue — désolé pour la gêne.\n\nTu peux contacter Stéphane directement ici :\n📧 oastephanekpoviessi@gmail.com\n🔗 https://linkedin.com/in/stephanekpoviessi\n📞 +33 7 48 59 47 13\n\nOu via le formulaire de contact en bas de page."
+            : "A technical error occurred — sorry for the inconvenience.\n\nYou can reach Stéphane directly here:\n📧 oastephanekpoviessi@gmail.com\n🔗 https://linkedin.com/in/stephanekpoviessi\n📞 +33 7 48 59 47 13\n\nOr through the contact form at the bottom of the page.",
       },
       { status: 200 },
     );

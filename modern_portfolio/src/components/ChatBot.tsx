@@ -12,6 +12,39 @@ interface Message {
   content: string;
 }
 
+// Renders message text with URLs, emails and phone numbers as colored clickable links
+function renderMessage(content: string, isUser: boolean) {
+  const pattern = /(https?:\/\/[^\s]+|[\w.+-]+@[\w-]+\.[a-z]{2,}|\+\d[\d\s\-]{7,}\d)/g;
+  const parts = content.split(pattern);
+  return parts.map((part, i) => {
+    if (/^https?:\/\//.test(part)) {
+      return (
+        <a key={i} href={part} target="_blank" rel="noopener noreferrer"
+          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
+          {part}
+        </a>
+      );
+    }
+    if (/^[\w.+-]+@[\w-]+\.[a-z]{2,}$/.test(part)) {
+      return (
+        <a key={i} href={`mailto:${part}`}
+          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
+          {part}
+        </a>
+      );
+    }
+    if (/^\+\d[\d\s\-]{7,}\d$/.test(part)) {
+      return (
+        <a key={i} href={`tel:${part.replace(/[\s\-]/g, "")}`}
+          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
+          {part}
+        </a>
+      );
+    }
+    return <span key={i}>{part}</span>;
+  });
+}
+
 export default function ChatBot() {
   const { ui } = useContent();
   const { language } = useLanguage();
@@ -170,7 +203,7 @@ export default function ChatBot() {
                       ? "bg-text-main text-bg-main border-text-main rounded-l rounded-tr-none" 
                       : "bg-bg-card text-text-main border-border-main rounded-r rounded-tl-none"
                   )}>
-                    <p className="whitespace-pre-wrap">{msg.content}</p>
+                    <p className="whitespace-pre-wrap">{renderMessage(msg.content, msg.role === "user")}</p>
                   </div>
                 </motion.div>
               ))}
