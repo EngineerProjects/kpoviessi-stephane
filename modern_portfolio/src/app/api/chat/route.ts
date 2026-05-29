@@ -14,62 +14,51 @@ function getContent(language: Language): PortfolioContent {
 function buildPortfolioContext(content: PortfolioContent): string {
   const { about, education, experiences, personalInfo, projects, resumeLinks, skills } = content;
 
+  // Skills: name only, no level, grouped by category
   const skillSummary = Object.values(skills)
-    .map((cat) => `${cat.label}: ${cat.items.map((i) => `${i.name} (${i.level})`).join(", ")}`)
+    .map((cat) => `${cat.label}: ${cat.items.map((i) => i.name).join(", ")}`)
     .join("\n");
 
+  // Experiences: 2 key points max per role to stay within token budget
   const experienceSummary = experiences
     .map((exp) => {
-      const points = exp.highlights.flatMap((h) => h.points).slice(0, 4).join("; ");
-      const internshipTag = exp.internship ? " [Internship]" : "";
-      return `• ${exp.role}${internshipTag} @ ${exp.company} (${exp.period}, ${exp.location})\n  ${exp.summary}\n  Key work: ${points}\n  Stack: ${exp.stack.join(", ")}`;
+      const points = exp.highlights.flatMap((h) => h.points).slice(0, 2).join("; ");
+      const tag = exp.internship ? " [Internship]" : "";
+      return `• ${exp.role}${tag} @ ${exp.company} (${exp.period}) — ${exp.summary} | ${points} | Stack: ${exp.stack.join(", ")}`;
     })
-    .join("\n\n");
+    .join("\n");
 
+  // Projects: featured only, condensed to one line each
   const projectSummary = projects
-    .map((p) => {
-      return `• ${p.title} [${p.category}]\n  Context: ${p.context}\n  Solution: ${p.solution}\n  Impact: ${p.impact.join("; ")}\n  Stack: ${p.stack.join(", ")}\n  GitHub: ${p.link}`;
-    })
-    .join("\n\n");
+    .filter((p) => p.featured)
+    .map((p) => `• ${p.title} [${p.category}]: ${p.solution.slice(0, 120)}... Stack: ${p.stack.join(", ")}. GitHub: ${p.link}`)
+    .join("\n");
 
+  // Education: one line per entry
   const educationSummary = education
     .map((e) => {
-      const extras = [
-        e.courses ? `Courses: ${e.courses.join(", ")}` : "",
-        e.keySkills ? `Key skills: ${e.keySkills.join(", ")}` : "",
-        e.distinction ? `Distinction: ${e.distinction}` : "",
-      ]
-        .filter(Boolean)
-        .join(" | ");
-      return `• ${e.degree} — ${e.school}, ${e.specialization} (${e.period}). ${extras}`;
+      const dist = e.distinction ? ` — ${e.distinction}` : "";
+      return `• ${e.degree}, ${e.school} (${e.period})${dist}`;
     })
     .join("\n");
 
   return `
-━━ IDENTITY ━━
-Name: ${personalInfo.name}
-Title: ${personalInfo.title}
-Location: ${personalInfo.location}
-Email: ${personalInfo.email}
-LinkedIn: ${personalInfo.linkedin}
-GitHub personal: ${personalInfo.github}
-GitHub org (projects): ${personalInfo.githubOrg}
-Résumés: ${resumeLinks.map((r) => `${r.label} → ${r.href}`).join(" | ")}
+IDENTITY: ${personalInfo.name} | ${personalInfo.title} | ${personalInfo.location}
+Email: ${personalInfo.email} | LinkedIn: ${personalInfo.linkedin} | GitHub: ${personalInfo.githubOrg}
+Résumés: ${resumeLinks.map((r) => `${r.label} (${r.href})`).join(" | ")}
 
-━━ PROFILE SUMMARY ━━
-${about.summary}
-${about.detail}
+SUMMARY: ${about.summary}
 
-━━ SKILLS ━━
+SKILLS:
 ${skillSummary}
 
-━━ PROFESSIONAL EXPERIENCE ━━
+EXPERIENCE:
 ${experienceSummary}
 
-━━ PROJECTS ━━
+FEATURED PROJECTS:
 ${projectSummary}
 
-━━ EDUCATION ━━
+EDUCATION:
 ${educationSummary}
 `.trim();
 }
@@ -92,11 +81,14 @@ Qualifier le visiteur, comprendre son besoin, présenter le profil de Stéphane 
 - Ne promets jamais de disponibilité, de tarif ou d'info absente du contexte
 
 ## QUALIFIER LE VISITEUR — RÈGLES DE CONVERSATION
-Sur le premier échange (ou si le visiteur pose une question générale type "c'est quoi ce portfolio ?"), donne toujours une courte présentation générale de Stéphane — utile pour tout visiteur — puis termine par UNE seule question de qualification.
+Sur le premier échange (ou si le visiteur pose une question générale), écris une présentation courte et naturelle — comme si un collègue de Stéphane présentait rapidement son profil à quelqu'un — puis glisse une question de qualification à la fin, de façon fluide et humaine.
 
-Format attendu pour le premier échange :
-1. Présentation générale (3-4 lignes max) : qui est Stéphane, son domaine, ses points forts clés (data engineering à l'échelle industrielle + systèmes IA autonomes), et 1-2 réalisations emblématiques (Allianz, Hello Pulse CTO, Nexus AI).
-2. Question de qualification naturelle, ex : "Et toi, tu viens avec quel contexte — recrutement, projet technique, ou simple curiosité ?"
+Règles pour la présentation d'ouverture :
+- MAXIMUM 2-3 phrases courtes — pas plus, pas de paragraphes, ton naturel et conversationnel
+- PAS de liste ni de bullet points, PAS d'énumération de compétences
+- Parle de ce qu'il a fait concrètement (ex : "chez Allianz il a migré des pipelines industriels PySpark/Azure" plutôt que "compétences : PySpark, Azure")
+- 1 projet phare max, glissé naturellement (Nexus AI ou Tech Watch Agent)
+- Conclure avec une question qui justifie pourquoi tu la poses, ex : "Pour vous présenter ce qui sera le plus pertinent pour vous, j'aurais une petite question : vous êtes plutôt recruteur, CTO, client ou simple curieux ?"
 
 Ne pose jamais plusieurs questions à la fois. Une fois le profil compris, adapte tout ce que tu dis à ce contexte.
 
@@ -150,11 +142,14 @@ Qualify the visitor, understand their need, present Stéphane's profile in a tar
 - Never promise availability, rates, or information not found in the context
 
 ## QUALIFYING THE VISITOR — CONVERSATION RULES
-On the first exchange (or if the visitor asks a general question like "what is this portfolio?"), always give a short general intro about Stéphane — useful for any visitor — then close with ONE qualifying question.
+On the first exchange (or if the visitor asks a general question), write a short, natural intro — like a colleague briefly introducing Stéphane to someone — then smoothly close with a qualifying question.
 
-Expected format for the first exchange:
-1. General intro (3-4 lines max): who Stéphane is, his domain, key strengths (industrial-scale data engineering + autonomous AI systems), and 1-2 signature achievements (Allianz, Hello Pulse CTO, Nexus AI).
-2. One natural qualifying question, e.g.: "What's your context — hiring, a technical project, or just exploring?"
+Rules for the opening intro:
+- MAXIMUM 2-3 short sentences — no more, no paragraphs, conversational tone
+- NO bullet lists, NO skill enumerations whatsoever
+- Talk about what he's actually done (e.g. "at Allianz he migrated industrial PySpark/Azure pipelines" rather than "skills: PySpark, Azure")
+- At most 1 flagship project slipped in naturally (Nexus AI or Tech Watch Agent)
+- End with a question that justifies itself, e.g.: "To make sure I point you to what's most relevant — are you here for hiring, a technical project, or just exploring?"
 
 Never ask multiple questions at once. Once you understand the visitor, tailor everything you say to that context.
 

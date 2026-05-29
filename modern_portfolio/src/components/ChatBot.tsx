@@ -3,6 +3,8 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 import { useContent } from "@/lib/useContent";
 import { useLanguage } from "@/lib/LanguageContext";
@@ -203,7 +205,34 @@ export default function ChatBot() {
                       ? "bg-text-main text-bg-main border-text-main rounded-l rounded-tr-none" 
                       : "bg-bg-card text-text-main border-border-main rounded-r rounded-tl-none"
                   )}>
-                    <p className="whitespace-pre-wrap">{renderMessage(msg.content, msg.role === "user")}</p>
+                    {msg.role === "user" ? (
+                      <p className="whitespace-pre-wrap">{renderMessage(msg.content, true)}</p>
+                    ) : (
+                      <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                          p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
+                          ul: ({ children }) => <ul className="list-disc list-inside space-y-0.5 my-1.5">{children}</ul>,
+                          ol: ({ children }) => <ol className="list-decimal list-inside space-y-0.5 my-1.5">{children}</ol>,
+                          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                          strong: ({ children }) => <strong className="font-bold text-text-main">{children}</strong>,
+                          em: ({ children }) => <em className="italic opacity-80">{children}</em>,
+                          a: ({ href, children }) => (
+                            <a href={href} target="_blank" rel="noopener noreferrer"
+                              className="text-accent underline hover:opacity-80 transition-opacity">
+                              {children}
+                            </a>
+                          ),
+                          code: ({ children }) => (
+                            <code className="font-mono text-[10px] bg-bg-main/60 px-1 py-0.5 rounded border border-border-main/40">
+                              {children}
+                            </code>
+                          ),
+                        }}
+                      >
+                        {msg.content}
+                      </ReactMarkdown>
+                    )}
                   </div>
                 </motion.div>
               ))}
