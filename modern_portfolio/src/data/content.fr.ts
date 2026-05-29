@@ -146,7 +146,7 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PySpark", "Databricks", "Azure Data Lake", "SAS", "SQL", "Parquet", "Git"],
-    logo: "/images/allianz-france.png",
+    logo: "/images/allianz_france.svg",
     featured: true,
   },
   {
@@ -180,7 +180,7 @@ export const experiences = [
       },
     ],
     stack: ["Go", "PostgreSQL", "Docker", "LLMs", "Agents IA", "Ingénierie Produit"],
-    logo: "/images/hello_pulse.png",
+    logo: "/images/hello_pulse.svg",
     featured: true,
   },
   {
@@ -219,7 +219,7 @@ export const experiences = [
       },
     ],
     stack: ["Python", "PyTorch", "OpenCV", "GANs", "Modélisation 3D", "Photogrammétrie", "PIL"],
-    logo: "/images/sylvagreg.png",
+    logo: "/images/sylvagreg.svg",
     featured: false,
   },
   {
@@ -257,7 +257,7 @@ export const experiences = [
       },
     ],
     stack: ["Analyse de Données", "SQL", "PostgreSQL", "Power BI", "Excel", "Modélisation Logistique"],
-    logo: "/images/onip-benin.png",
+    logo: "",
     featured: false,
   },
 ];
