@@ -58,12 +58,17 @@ function ExperienceCard({
               {exp.role}
             </h3>
             {exp.logo ? (
-              <div className="mt-3 h-8 flex items-center">
-                <img
-                  src={exp.logo}
-                  alt={exp.company}
-                  className="h-full w-auto object-contain opacity-90"
-                />
+              <div className="mt-3 flex items-center gap-2.5">
+                <div className="h-7 flex items-center">
+                  <img
+                    src={exp.logo}
+                    alt={exp.company}
+                    className="h-full w-auto object-contain opacity-90"
+                  />
+                </div>
+                <span className="text-sm font-mono font-bold text-accent uppercase tracking-tight">
+                  {exp.company}
+                </span>
               </div>
             ) : (
               <p className="text-sm font-mono font-bold text-accent mt-2 uppercase">
