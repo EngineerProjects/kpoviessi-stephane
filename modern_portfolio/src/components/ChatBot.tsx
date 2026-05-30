@@ -73,9 +73,8 @@ export default function ChatBot() {
     return () => { clearTimeout(t); clearInterval(interval); };
   }, [isOpen, iconControls]);
 
-  // Show notification bubble once, 6 seconds after mount
+  // Show notification bubble, 6 seconds after mount
   useEffect(() => {
-    if (localStorage.getItem(NOTIF_KEY)) return;
     const t = setTimeout(() => setShowNotif(true), 6000);
     return () => clearTimeout(t);
   }, []);
@@ -83,17 +82,12 @@ export default function ChatBot() {
   // Auto-hide after 8 seconds
   useEffect(() => {
     if (!showNotif) return;
-    const t = setTimeout(() => dismissNotif(), 8000);
+    const t = setTimeout(() => setShowNotif(false), 8000);
     return () => clearTimeout(t);
   }, [showNotif]);
 
-  const dismissNotif = () => {
-    setShowNotif(false);
-    localStorage.setItem(NOTIF_KEY, "1");
-  };
-
   const openChat = () => {
-    dismissNotif();
+    setShowNotif(false);
     setIsOpen(true);
   };
 
@@ -181,7 +175,7 @@ export default function ChatBot() {
           >
             <div className="relative bg-bg-card border border-accent/30 shadow-lg rounded-lg px-4 py-3">
               <button
-                onClick={(e) => { e.stopPropagation(); dismissNotif(); }}
+                onClick={(e) => { e.stopPropagation(); setShowNotif(false); }}
                 className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-bg-card border border-border-main text-text-dim hover:text-accent flex items-center justify-center text-[10px] leading-none"
               >
                 ×

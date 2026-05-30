@@ -7,7 +7,7 @@ import LanguageModal from "@/components/LanguageModal";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kpoviessi-stephane.vercel.app/"),
-  title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
+  title: "Stéphane KPOVIESSI | AI Systems & Data Engineer",
   description:
     "Portfolio of Stéphane KPOVIESSI, AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, multi-agent systems, RAG, and computer vision.",
   keywords: [
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
     "Big Data Engineer",
     "Ingénieur Big Data",
     "Data Engineer PySpark",
-    "Data Scientist IA",
+    "Data Engineer AI",
+    "AI Systems Engineer",
     "AI Specialist",
     "Expert IA",
     "Machine Learning Engineer",
@@ -85,14 +86,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://kpoviessi-stephane.vercel.app/",
-    title: "Stéphane KPOVIESSI | Data Engineer & Data Scientist",
+    title: "Stéphane KPOVIESSI | AI Systems & Data Engineer",
     description:
       "Explore his work in Data Engineering, PySpark, AI systems, RAG, multi-agent architectures, and computer vision.",
     images: [{ url: "/images/profile.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Stéphane Kpoviessi | Data Engineer & Data Scientist",
+    title: "Stéphane Kpoviessi | AI Systems & Data Engineer",
     description:
       "AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, RAG, and multi-agent systems.",
     images: ["/images/profile.png"],
