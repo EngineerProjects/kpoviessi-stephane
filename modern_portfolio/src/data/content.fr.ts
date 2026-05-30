@@ -576,9 +576,9 @@ export const ui = {
   },
   about: {
     badge: "01 // PÉRIMÈTRE DE RECHERCHE CŒUR",
-    heading_1: "Ingénierie",
-    heading_2: "Systèmes",
-    heading_suffix: "Déterministes",
+    heading_1: "Profil",
+    heading_2: "Ingénierie",
+    heading_suffix: "& Intérêts",
     focus_label: "FOCUS: ÉCHELLE & PARITÉ DÉTAILLÉE",
     philosophy_title: "Règle d'Architecture Systèmes",
     philosophy_sub: "DE LA MÉTRIQUE À LA MACHINE",
@@ -650,7 +650,7 @@ export const ui = {
     form_name_placeholder: "Ident: Jean Dupont",
     form_email_placeholder: "Ident: jean@net.com",
     form_message_placeholder: "Entrez les specs du message...",
-    submit_idle: "Transmettre le Paquet de Données",
+    submit_idle: "Envoyer",
     submit_sending: "Transmission en cours...",
     submit_sent: "Poignée de Main Établie",
     submit_error: "Transmission Interrompue",
@@ -668,8 +668,7 @@ export const ui = {
   chat: {
     title: "ASSISTANT SYSTÈME",
     initial:
-      "Bonjour ! Je suis l'assistant système de Stéphane. Je peux décrire ses pipelines Big Data chez Allianz, ses architectures backend Go chez Hello Pulse, sa modélisation générative PyTorch et ses systèmes multi-agents. Quel axe souhaitez-vous explorer ?",
-    cleared: "Historique de conversation effacé. Système en attente. Comment puis-je vous aider ?",
+      "Salut 👋 Je suis Lys, l'assistante IA de Stéphane. Comment puis-je vous aider ?",
     error: "Désolé, une interruption de communication s'est produite. Relançons la requête.",
     reset_title: "Réinitialiser le cache système",
     assistant_label: "■ TÉLÉMÉTRIE_SORTIE",

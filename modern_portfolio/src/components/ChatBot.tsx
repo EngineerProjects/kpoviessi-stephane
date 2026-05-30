@@ -130,7 +130,7 @@ export default function ChatBot() {
   const clearChat = () => {
     const initialMessage: Message[] = [{
       role: "assistant",
-      content: ui.chat.cleared,
+      content: ui.chat.initial,
     }];
     setMessages(initialMessage);
     localStorage.removeItem(`assistant_memory_${language}`);
@@ -163,8 +163,8 @@ export default function ChatBot() {
   };
 
   const notifText = language === "fr"
-    ? "👋 Salut ! Des questions sur Stéphane ? Je suis là !"
-    : "👋 Hi! Want to know more about Stéphane? Ask me!";
+    ? "👋 Salut ! Je suis Lys. Des questions sur Stéphane ? Je suis là !"
+    : "👋 Hi! I'm Lys. Want to know more about Stéphane? Ask me!";
 
   return (
     <>

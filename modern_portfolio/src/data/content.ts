@@ -571,8 +571,8 @@ export const ui = {
   about: {
     badge: "01 // CORE RESEARCH SCOPE",
     heading_1: "Engineering",
-    heading_2: "Deterministic",
-    heading_suffix: "Systems",
+    heading_2: "Profile",
+    heading_suffix: "& Interests",
     focus_label: "FOCUS: SCALE & DETAILED PARITY",
     philosophy_title: "Systems Architecture Rule",
     philosophy_sub: "FROM METRIC TO MACHINE",
@@ -644,7 +644,7 @@ export const ui = {
     form_name_placeholder: "Ident: John Doe",
     form_email_placeholder: "Ident: john@net.com",
     form_message_placeholder: "Enter payload message specs...",
-    submit_idle: "Transmit Data Package",
+    submit_idle: "Submit",
     submit_sending: "Transmitting Datapack...",
     submit_sent: "Handshake Established",
     submit_error: "Transmission Interrupted",
@@ -662,8 +662,7 @@ export const ui = {
   chat: {
     title: "SYSTEM ASSISTANT",
     initial:
-      "Hello! I am Stéphane's System Assistant. I can describe his Big Data pipelines at Allianz, Go backend architectures at Hello Pulse, generative PyTorch modeling, and agentic multi-agent systems. What coordinate would you like to explore?",
-    cleared: "Conversation history cleared. System standby. How can I assist you?",
+      "Hi 👋 I'm Lys, Stéphane's AI assistant. How can I help you?",
     error: "Apologies, a communication timeout occurred. Let us re-try the query.",
     reset_title: "Reset System Cache",
     assistant_label: "■ TELEMETRY_OUT",
