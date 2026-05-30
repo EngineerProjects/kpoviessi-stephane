@@ -28,9 +28,9 @@ export const resumeLinks = [
 
 export const about = {
   summary:
-    "Ingénieur Systèmes IA & Infrastructure de Données, spécialisé dans la construction de pipelines de données robustes à grande échelle, de workflows multi-agents autonomes et de systèmes d'exécution déterministes. Je conçois et développe des plateformes de niveau production où la rigueur analytique rencontre l'exécution logicielle fiable.",
+    "Ingénieur Systèmes IA & Infrastructure de Données, spécialisé dans l'architecture de pipelines Big Data distribués et l'orchestration de systèmes multi-agents autonomes. Mon expertise se situe au cœur du cycle de vie des données, garantissant leur intégrité, leur transformation et leur exploitation via des infrastructures robustes et scalables.",
   detail:
-    "Ma pratique de l'ingénierie se situe à l'intersection de l'architecture de plateformes de données, des systèmes de machine learning, de la computer vision et des environnements de développement local. J'ai architecturé des migrations legacy-vers-distribué chez Allianz France, conçu des moteurs multi-agents en Go en tant que CTO de startup, optimisé des pipelines de vision générative (GANs) chez Groupe Sylvagreg, et développé des outils de développement local et des sandboxes d'agents isolés.",
+    "Mon parcours est ancré dans la conception d'environnements de données complexes. J'ai notamment piloté la modernisation de pipelines critiques chez Allianz France (migration SAS vers PySpark/Databricks en architecture Medallion) et développé des systèmes de vision générative (GANs) chez Groupe Sylvagreg. Passionné par l'IA agentique, je conçois des systèmes d'orchestration avancés intégrant LangGraph et le Model Context Protocol (MCP) pour transformer la recherche en solutions opérationnelles.",
   expertise: [
     {
       title: "Ingénierie de Plateformes de Données",
@@ -51,9 +51,9 @@ export const about = {
       icon: "eye",
     },
     {
-      title: "Systèmes & Outils Développeurs",
+      title: "Automatisation & Performance Data",
       description:
-        "Construction d'utilitaires CLI/TUI légers, parseurs de dépôts locaux, microservices gRPC et intégrations système desktop en Go, Rust et Electron.",
+        "Développement d'outils d'ingestion automatisés, optimisation de workflows de traitement, et mise en place de structures de données analytiques pour transformer les flux bruts en insights actionnables.",
       icon: "wrench",
     },
   ],
@@ -583,7 +583,7 @@ export const ui = {
     philosophy_title: "Règle d'Architecture Systèmes",
     philosophy_sub: "DE LA MÉTRIQUE À LA MACHINE",
     philosophy_quote:
-      "Je ne me contente pas d'entraîner des modèles ou d'exécuter des requêtes. J'architecture des plateformes complètes et auto-réparatrices garantissant la parité fonctionnelle, la sécurité des schémas et la fiabilité à la microseconde.",
+      "Je ne me contente pas d'entraîner des modèles. J'architecture les infrastructures qui permettent aux données et à l'IA de fonctionner avec fiabilité, garantissant la qualité des flux et la cohérence des systèmes à grande échelle.",
   },
   skills: {
     badge: "02 // SPÉCIFICATIONS DE CALIBRATION DU MOTEUR",

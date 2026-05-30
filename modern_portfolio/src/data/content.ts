@@ -22,9 +22,9 @@ export const resumeLinks = [
 
 export const about = {
   summary:
-    "AI Systems & Data Infrastructure Engineer specializing in building robust, large-scale data pipelines, autonomous multi-agent workflows, and deterministic runtime systems. I design and build production-grade platforms where analytical rigor meets highly reliable software execution.",
+    "AI Systems & Data Infrastructure Engineer specializing in architecting distributed Big Data pipelines and orchestrating autonomous multi-agent systems. My expertise focuses on the data lifecycle core, ensuring data integrity, transformation, and leverage through robust and scalable infrastructures.",
   detail:
-    "My engineering practice lies at the intersection of data platform architecture, machine learning systems, computer vision, and local developer environments. I have architected legacy-to-distributed migrations at Allianz France, engineered core Go-based multi-agent engines as a startup CTO, optimized deep generative vision pipelines (GANs) at Groupe Sylvagreg, and developed experimental local developer toolkits and isolated agent sandboxes.",
+    "My engineering practice is rooted in designing complex data environments. I have driven the modernization of critical pipelines at Allianz France (SAS to PySpark/Databricks migration using Medallion architecture) and developed generative vision systems (GANs) at Groupe Sylvagreg. Deeply interested in agentic AI, I build advanced orchestration systems using LangGraph and the Model Context Protocol (MCP) to bridge the gap between research and operational systems.",
   expertise: [
     {
       title: "Data Platform Engineering",
@@ -45,9 +45,9 @@ export const about = {
       icon: "eye",
     },
     {
-      title: "Systems & Developer Tooling",
+      title: "Automation & Data Performance",
       description:
-        "Building lightweight CLI/TUI developer utilities, custom local repository parsers, gRPC microservices, and desktop system integrations using Go, Rust, and Electron.",
+        "Developing automated ingestion tools, optimizing processing workflows, and building analytical data structures to transform raw streams into actionable business insights.",
       icon: "wrench",
     },
   ],
@@ -577,7 +577,7 @@ export const ui = {
     philosophy_title: "Systems Architecture Rule",
     philosophy_sub: "FROM METRIC TO MACHINE",
     philosophy_quote:
-      "I do not merely train models or run queries. I architect complete, self-healing platforms that ensure functional parity, schema safety, and micro-second reliability.",
+      "I don't just train models. I architect the infrastructures that allow data and AI to operate reliably, ensuring stream quality and system consistency at scale.",
   },
   skills: {
     badge: "02 // ENGINE CALIBRATION SPECIFICATIONS",
