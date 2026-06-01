@@ -77,7 +77,7 @@ export default function Hero() {
                     src="/images/profile.png"
                     alt={personalInfo.name}
                     fill
-                    className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
+                    className="object-cover object-top scale-105 group-hover:scale-100 transition-transform duration-700"
                     priority
                   />
                 </div>
