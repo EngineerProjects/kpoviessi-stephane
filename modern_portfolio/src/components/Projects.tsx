@@ -49,9 +49,9 @@ export default function Projects() {
 
       <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
-          {items.map((p, i) => {
+          {items.map((p) => {
             const Tag = p.href ? "a" : "div";
-            const wide = filter === "all" && i === 0;
+            const wide = !!p.wide && filter === "all";
             return (
               <motion.div
                 key={p.title}

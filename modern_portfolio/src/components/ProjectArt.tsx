@@ -221,7 +221,42 @@ function Skills() {
   );
 }
 
-const arts = { watch: TechWatch, terminal: Terminal, football: Football, retail: Retail, cube: Cube3D, robot: Robot, solar: Solar, skills: Skills } as const;
+function Canvas() {
+  const notes = [
+    [40, 36, -4, "fill-sun"],
+    [112, 70, 3, "fill-leaf/70"],
+    [58, 96, 2, "fill-accent/70"],
+  ] as const;
+  return (
+    <>
+      <Doc x={22} y={18} w={276} h={124} />
+      {notes.map(([x, y, r, c], i) => (
+        <g key={i} transform={`rotate(${r} ${x + 26} ${y + 22})`} className="art-bob" style={{ animationDelay: `${i * 0.6}s` }}>
+          <rect x={x} y={y} width={52} height={44} rx={3} className={c} />
+          <rect x={x + 8} y={y + 12} width={32} height={3.5} rx={1.7} className="fill-ink/35" />
+          <rect x={x + 8} y={y + 21} width={22} height={3.5} rx={1.7} className="fill-ink/25" />
+        </g>
+      ))}
+      <path d="M92,58 C108,58 100,92 112,92 M164,92 C190,92 190,56 214,56" className="art-flow stroke-ink/40" strokeWidth={1.4} fill="none" />
+      <rect x={214} y={38} width={64} height={36} rx={8} className="fill-surface stroke-accent" strokeWidth={1.5} />
+      <text x={246} y={54} textAnchor="middle" className="fill-accent" style={{ font: "600 8px var(--font-mono)" }}>@assistant</text>
+      <rect x={224} y={60} width={44} height={3.5} rx={1.7} className="fill-ink/25" />
+      {/* collaborators */}
+      <g>
+        <path d="M0,0 l0,14 l4,-4 l4,8 l3,-1.5 l-4,-8 l6,0 Z" className="fill-leaf" />
+        <rect x={10} y={14} width={34} height={11} rx={5} className="fill-leaf" />
+        <animateMotion dur="5s" repeatCount="indefinite" path="M200,112 C230,100 250,126 270,108 C250,96 220,120 200,112" />
+      </g>
+      <g>
+        <path d="M0,0 l0,14 l4,-4 l4,8 l3,-1.5 l-4,-8 l6,0 Z" className="fill-accent" />
+        <rect x={10} y={14} width={30} height={11} rx={5} className="fill-accent" />
+        <animateMotion dur="6.5s" begin="-2s" repeatCount="indefinite" path="M150,112 C170,120 186,100 160,96 C140,92 130,106 150,112" />
+      </g>
+    </>
+  );
+}
+
+const arts = { canvas: Canvas, watch: TechWatch, terminal: Terminal, football: Football, retail: Retail, cube: Cube3D, robot: Robot, solar: Solar, skills: Skills } as const;
 export type ArtName = keyof typeof arts;
 
 export default function ProjectArt({ name, className }: { name: ArtName; className?: string }) {

@@ -113,13 +113,17 @@ export const seshat = {
 export interface Role {
   company: string;
   role: L;
+  kind: L;
   period: L;
   place: L;
   summary: L;
+  metric: { v: string; l: L };
+  art: "agent" | "medallion" | "chart" | "cube";
   points: L[];
   stack: string[];
   links?: { label: string; href: string }[];
   current?: boolean;
+  open?: boolean;
 }
 
 export const experience = {
@@ -128,16 +132,21 @@ export const experience = {
     en: "From industrial data pipelines to my own agent platform.",
     fr: "Des pipelines de données industriels à ma propre plateforme d'agents.",
   } as L,
+  more: { en: "Details", fr: "Détails" } as L,
+  less: { en: "Hide details", fr: "Masquer" } as L,
   roles: [
     {
       company: "Seshat AI",
       role: { en: "Founder & AI Engineer", fr: "Fondateur & ingénieur IA" },
+      kind: { en: "Founder", fr: "Fondateur" },
       period: { en: "Sep 2026 – Present", fr: "Sept. 2026 – Aujourd'hui" },
       place: { en: "Île-de-France", fr: "Île-de-France" },
       summary: {
         en: "Open-source agentic AI and automation platform, plus AI integration work for teams that want to keep control of their data.",
         fr: "Plateforme open source d'IA agentique et d'automatisation, et missions d'intégration d'IA pour des équipes qui veulent garder la main sur leurs données.",
       },
+      metric: { v: "4", l: { en: "repositories, one released runtime", fr: "dépôts, dont un runtime publié" } },
+      art: "agent",
       points: [
         { en: "Architecture of a modular platform: Go runtime, local and multi-tenant cloud backends, Electron/React desktop app, admin console.", fr: "Architecture d'une plateforme modulaire : runtime Go, backends local et cloud multi-organisations, application Electron/React, console d'administration." },
         { en: "Hybrid RAG engine and agent orchestration with tool calling, MCP, permissions, audit and scheduled tasks.", fr: "Moteur de RAG hybride et orchestration d'agents avec appel d'outils, MCP, permissions, audit et tâches planifiées." },
@@ -146,16 +155,20 @@ export const experience = {
       stack: ["Go", "Python", "TypeScript", "PostgreSQL", "pgvector", "MCP", "Electron"],
       links: [{ label: "seshat-ai.com", href: "https://seshat-ai.com" }, { label: "GitHub", href: "https://github.com/KPO-Tech" }],
       current: true,
+      open: true,
     },
     {
       company: "Allianz France",
-      role: { en: "Data Engineer / Data Scientist (internship)", fr: "Ingénieur data / data scientist (stage)" },
+      role: { en: "Data Engineer / Data Scientist", fr: "Ingénieur data / data scientist" },
+      kind: { en: "Internship", fr: "Stage" },
       period: { en: "Nov 2025 – Apr 2026", fr: "Nov. 2025 – Avr. 2026" },
       place: { en: "Paris · P4D, Advanced Data & Climate", fr: "Paris · P4D, Advanced Data & Climate" },
       summary: {
         en: "Owned the end-to-end migration of an insurance datamart from a legacy SAS environment to a modern PySpark architecture.",
         fr: "Responsable de la migration de bout en bout d'un datamart d'assurance d'un environnement SAS historique vers une architecture PySpark moderne.",
       },
+      metric: { v: "15 000+", l: { en: "lines of SAS migrated", fr: "lignes SAS migrées" } },
+      art: "medallion",
       points: [
         { en: "Medallion architecture (Bronze / Silver / Gold) on Azure Databricks, integrating 150+ business rules across portfolios, capital and premiums.", fr: "Architecture Médaillon (Bronze / Silver / Gold) sur Azure Databricks, intégrant plus de 150 règles métier sur portefeuilles, capitaux et émissions." },
         { en: "Reverse-engineered and documented 15,000+ lines of SAS (19 files) to preserve every piece of business logic.", fr: "Rétro-ingénierie et documentation de plus de 15 000 lignes de SAS (19 fichiers) pour préserver toute la logique métier." },
@@ -163,53 +176,44 @@ export const experience = {
         { en: "Geospatial data quality pipeline: GPS validation, address reconstruction, fewer false positives in reporting.", fr: "Pipeline de qualité de données géospatiales : validation GPS, reconstitution d'adresses, moins de faux positifs dans le reporting." },
       ],
       stack: ["PySpark", "Azure Databricks", "Python", "SAS", "SQL", "Parquet"],
-    },
-    {
-      company: "Hello Pulse",
-      role: { en: "Co-founder & CTO", fr: "Co-fondateur & CTO" },
-      period: { en: "Sep 2023 – Present", fr: "Sept. 2023 – Aujourd'hui" },
-      place: { en: "France", fr: "France" },
-      summary: {
-        en: "AI-augmented collaborative platform for brainstorming, facilitation and prototyping. I lead the technical strategy and wrote most of the codebase.",
-        fr: "Plateforme collaborative augmentée par l'IA pour le brainstorming, la facilitation et le prototypage. Je pilote la stratégie technique et ai écrit l'essentiel du code.",
-      },
-      points: [
-        { en: "Go (Fiber) backend with WebSocket real-time collaboration, PostgreSQL, Redis pub/sub and S3-compatible storage.", fr: "Backend Go (Fiber) avec collaboration temps réel WebSocket, PostgreSQL, Redis pub/sub et stockage compatible S3." },
-        { en: "Collaborative canvas (Next.js, Konva), rich-text documents, team calendar and AI assistant streaming over SSE.", fr: "Canvas collaboratif (Next.js, Konva), documents riches, calendrier d'équipe et assistant IA en streaming SSE." },
-        { en: "Auth stack built in-house: JWT, HttpOnly cookies, revocable sessions, TOTP MFA. CI with vet, tests and govulncheck.", fr: "Authentification maison : JWT, cookies HttpOnly, sessions révocables, MFA TOTP. CI avec vet, tests et govulncheck." },
-      ],
-      stack: ["Go", "Next.js", "TypeScript", "PostgreSQL", "Redis", "Docker"],
-    },
-    {
-      company: "Groupe Sylvagreg",
-      role: { en: "Machine Learning Engineer (internship)", fr: "Ingénieur machine learning (stage)" },
-      period: { en: "May – Aug 2024", fr: "Mai – Août 2024" },
-      place: { en: "Lille", fr: "Lille" },
-      summary: {
-        en: "R&D on a 3D reconstruction solution from 2D images for a construction group.",
-        fr: "R&D sur une solution de reconstruction 3D à partir d'images 2D pour un groupe de construction.",
-      },
-      points: [
-        { en: "State-of-the-art review and benchmark, then generative models (GANs) in PyTorch combined with photogrammetry.", fr: "État de l'art et benchmark, puis modèles génératifs (GANs) sous PyTorch combinés à la photogrammétrie." },
-        { en: "Automated preprocessing, augmentation and inference pipelines; Docker, AWS deployment and a visualization interface.", fr: "Automatisation des chaînes de prétraitement, d'augmentation et d'inférence ; Docker, déploiement AWS et interface de visualisation." },
-      ],
-      stack: ["PyTorch", "Computer Vision", "Photogrammetry", "Docker", "AWS"],
-      links: [{ label: "Sylva3D", href: "https://github.com/EngineerProjects/sylva3D" }, { label: "Sylva3D GUI", href: "https://github.com/EngineerProjects/Sylva3dGUI" }],
+      open: true,
     },
     {
       company: "Lyne et Frères",
       role: { en: "Data Analyst", fr: "Data analyst" },
+      kind: { en: "Missions", fr: "Missions" },
       period: { en: "2023 – 2025", fr: "2023 – 2025" },
       place: { en: "Benin · remote", fr: "Bénin · à distance" },
       summary: {
         en: "Strategic support missions for a family business in agriculture and trade: my first real-world deployments with non-technical teams.",
         fr: "Missions d'appui stratégique pour une entreprise familiale d'agriculture et de commerce : mes premiers déploiements en conditions réelles auprès d'équipes non techniques.",
       },
+      metric: { v: "2023–25", l: { en: "recurring analysis missions", fr: "missions d'analyse récurrentes" } },
+      art: "chart",
       points: [
         { en: "Commercial, operational and agricultural analysis with Python/Pandas to track KPIs and support decisions.", fr: "Analyse commerciale, opérationnelle et agricole avec Python/Pandas pour suivre les indicateurs et éclairer les décisions." },
         { en: "Dashboards and reports in Streamlit and web interfaces; internal open-source AI tools (OpenWebUI) with staff onboarding.", fr: "Tableaux de bord et rapports Streamlit et web ; outils d'IA internes open source (OpenWebUI) avec accompagnement des équipes." },
       ],
       stack: ["Python", "Pandas", "Streamlit", "OpenWebUI"],
+    },
+    {
+      company: "Groupe Sylvagreg",
+      role: { en: "Machine Learning Engineer", fr: "Ingénieur machine learning" },
+      kind: { en: "Internship", fr: "Stage" },
+      period: { en: "May – Aug 2024", fr: "Mai – Août 2024" },
+      place: { en: "Lille", fr: "Lille" },
+      summary: {
+        en: "R&D on a 3D reconstruction solution from 2D images for a construction group.",
+        fr: "R&D sur une solution de reconstruction 3D à partir d'images 2D pour un groupe de construction.",
+      },
+      metric: { v: "2D → 3D", l: { en: "reconstruction from photos", fr: "reconstruction à partir de photos" } },
+      art: "cube",
+      points: [
+        { en: "State-of-the-art review and benchmark, then generative models (GANs) in PyTorch combined with photogrammetry.", fr: "État de l'art et benchmark, puis modèles génératifs (GANs) sous PyTorch combinés à la photogrammétrie." },
+        { en: "Automated preprocessing, augmentation and inference pipelines; Docker, AWS deployment and a visualization interface.", fr: "Automatisation des chaînes de prétraitement, d'augmentation et d'inférence ; Docker, déploiement AWS et interface de visualisation." },
+      ],
+      stack: ["PyTorch", "Computer Vision", "Photogrammetry", "Docker", "AWS"],
+      links: [{ label: "Sylva3D", href: "https://github.com/EngineerProjects/sylva3D" }, { label: "Sylva3D GUI", href: "https://github.com/EngineerProjects/Sylva3dGUI" }],
     },
   ] as Role[],
 };
@@ -222,8 +226,9 @@ export interface Project {
   href?: string;
   note?: L;
   featured?: boolean;
-  art: "watch" | "terminal" | "football" | "retail" | "cube" | "robot" | "solar" | "skills";
-  cat: "agents" | "data" | "vision" | "tools";
+  wide?: boolean;
+  art: "canvas" | "watch" | "terminal" | "football" | "retail" | "cube" | "robot" | "solar" | "skills";
+  cat: "founded" | "agents" | "data" | "vision" | "tools";
 }
 
 export const projects = {
@@ -234,6 +239,7 @@ export const projects = {
   } as L,
   filters: {
     all: { en: "All", fr: "Tout" } as L,
+    founded: { en: "Co-founded", fr: "Co-fondé" } as L,
     agents: { en: "Agents", fr: "Agents" } as L,
     data: { en: "Data", fr: "Data" } as L,
     vision: { en: "Vision", fr: "Vision" } as L,
@@ -254,6 +260,18 @@ export const projects = {
       stack: ["LangGraph", "FastAPI", "pgvector", "React", "Docker"],
       href: "https://github.com/EngineerProjects/tech-watch-agent",
       featured: true,
+      wide: true,
+    },
+    {
+      title: "Hello Pulse",
+      art: "canvas",
+      cat: "founded",
+      tag: { en: "Co-founded · private", fr: "Co-fondé · privé" },
+      text: {
+        en: "Collaborative platform for brainstorming and prototyping with an AI that asks the right questions. Real-time canvas, rich documents, team calendar, AI assistant over SSE. Advanced prototype: Go (Fiber) backend, Next.js, PostgreSQL, Redis, in-house auth with TOTP MFA. Private repository.",
+        fr: "Plateforme collaborative de brainstorming et de prototypage, avec une IA qui pose les bonnes questions. Canvas temps réel, documents riches, calendrier d'équipe, assistant IA en SSE. Prototype avancé : backend Go (Fiber), Next.js, PostgreSQL, Redis, authentification maison avec MFA TOTP. Dépôt privé.",
+      },
+      stack: ["Go", "Next.js", "PostgreSQL", "Redis", "Konva"],
     },
     {
       title: "LocalIngest",
