@@ -19,7 +19,7 @@ export default function Background() {
   const { t } = useLang();
   return (
     <section id="background" className="mx-auto max-w-6xl px-5 py-24 md:px-8 md:py-32">
-      <SectionHead index="05" title={t(b.title)} />
+      <SectionHead index="06" title={t(b.title)} />
       <div className="grid gap-4 md:grid-cols-2">
         <Card label={t(b.education.label)}>
           <ul className="space-y-5">

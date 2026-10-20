@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { experience } from "@/data/site";
 import { useLang } from "@/lib/i18n";
@@ -8,13 +10,18 @@ import SectionHead from "./SectionHead";
 
 export default function Experience() {
   const { t } = useLang();
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLOListElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 70%", "end 60%"] });
+  const grow = useSpring(scrollYProgress, { stiffness: 90, damping: 22 });
   return (
     <section id="experience" className="border-y border-line bg-surface/50 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
         <SectionHead index="02" title={t(experience.title)} lead={t(experience.lead)} />
 
-        <ol className="relative">
-          <span className="absolute left-[7px] top-2 bottom-2 w-px bg-line md:left-[11.5rem]" aria-hidden />
+        <ol ref={ref} className="relative">
+          <span className="absolute bottom-2 left-[7px] top-2 w-px bg-line md:left-[11.5rem]" aria-hidden />
+          <motion.span className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-accent md:left-[11.5rem]" style={reduce ? undefined : { scaleY: grow }} aria-hidden />
           {experience.roles.map((r) => (
             <li key={r.company} className="relative pb-14 last:pb-0">
               <Reveal className="grid gap-4 pl-8 md:grid-cols-[11rem_1fr] md:gap-12 md:pl-0">
@@ -24,7 +31,7 @@ export default function Experience() {
                 </div>
                 <div className="relative md:pl-12">
                   <span
-                    className={`absolute -left-8 top-1.5 h-[15px] w-[15px] rounded-full border-2 md:left-[-0.4rem] ${r.current ? "border-accent bg-accent" : "border-dim/50 bg-bg"}`}
+                    className={`absolute -left-8 top-1.5 h-[15px] w-[15px] rounded-full border-2 md:left-[-0.4rem] ${r.current ? "border-accent bg-accent shadow-[0_0_0_4px_var(--accent-soft)]" : "border-dim/50 bg-bg"}`}
                     aria-hidden
                   />
                   <h3 className="text-2xl font-medium tracking-tight">

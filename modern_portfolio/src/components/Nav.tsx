@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { nav, ui, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { unlock } from "@/lib/game";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
@@ -12,6 +13,13 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("");
+  const clicks = useRef({ n: 0, t: 0 });
+
+  const onLogo = () => {
+    const now = Date.now();
+    clicks.current = { n: now - clicks.current.t < 1200 ? clicks.current.n + 1 : 1, t: now };
+    if (clicks.current.n >= 5) unlock("logo");
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -40,7 +48,7 @@ export default function Nav() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
-        <a href="#top" className="flex items-center gap-2.5 font-medium tracking-tight" aria-label={person.name}>
+        <a href="#top" onClick={onLogo} className="flex items-center gap-2.5 font-medium tracking-tight" aria-label={person.name}>
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink font-mono text-xs font-semibold text-bg">SK</span>
           <span className="hidden sm:inline">Stéphane Kpoviessi</span>
         </a>
@@ -59,7 +67,10 @@ export default function Nav() {
               <button
                 key={l}
                 type="button"
-                onClick={() => setLang(l)}
+                onClick={() => {
+                  setLang(l);
+                  if (l !== lang) unlock("lang");
+                }}
                 aria-pressed={lang === l}
                 className={cn("rounded-full px-2.5 py-1 uppercase transition", lang === l ? "bg-ink text-bg" : "text-dim hover:text-ink")}
               >

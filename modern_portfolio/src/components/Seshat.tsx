@@ -4,6 +4,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { seshat } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { unlock } from "@/lib/game";
 import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
 
@@ -19,7 +20,7 @@ export default function Seshat() {
           return (
             <Reveal key={p.name} delay={i * 0.08} className="h-full">
               <Tag
-                {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+                {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer", onClick: () => unlock("repo") } : {})}
                 className={cn(
                   "group flex h-full flex-col rounded-2xl border border-line bg-surface p-6 transition",
                   p.href && "hover:-translate-y-1 hover:border-accent",
@@ -27,7 +28,7 @@ export default function Seshat() {
               >
                 <div className="mb-5 flex items-center justify-between">
                   <span className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-dim">
-                    <span className={cn("mr-1.5 inline-block h-1.5 w-1.5 rounded-full align-middle", p.tone === "live" ? "bg-emerald-500" : "bg-amber-500")} />
+                    <span className={cn("mr-1.5 inline-block h-1.5 w-1.5 rounded-full align-middle", p.tone === "live" ? "bg-leaf" : "bg-sun")} />
                     {t(p.status)}
                   </span>
                   {p.href && <ArrowUpRight size={18} className="text-dim transition group-hover:text-accent" />}

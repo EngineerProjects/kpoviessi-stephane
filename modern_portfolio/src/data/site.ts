@@ -18,6 +18,7 @@ export const nav: { id: string; label: L }[] = [
   { id: "experience", label: { en: "Experience", fr: "Parcours" } },
   { id: "projects", label: { en: "Projects", fr: "Projets" } },
   { id: "skills", label: { en: "Skills", fr: "Compétences" } },
+  { id: "journey", label: { en: "Journey", fr: "Trajet" } },
   { id: "contact", label: { en: "Contact", fr: "Contact" } },
 ];
 
@@ -38,11 +39,19 @@ export const hero = {
     en: "Founder of Seshat, an open-source Go agent runtime. Engineer in Big Data & Data Science, trained on insurance-grade pipelines at Allianz. I design the whole chain: data, retrieval, agents, and the product around them.",
     fr: "Fondateur de Seshat, un runtime d'agents open source en Go. Ingénieur Big Data & Data Science, formé sur des pipelines de niveau assurance chez Allianz. Je conçois toute la chaîne : données, recherche, agents et produit autour.",
   } as L,
+  building: {
+    label: { en: "currently building", fr: "en construction" } as L,
+    words: {
+      en: ["an open-source agent runtime in Go", "hybrid RAG for real documents", "governed multi-agent workflows", "data pipelines that pass parity tests"],
+      fr: ["un runtime d'agents open source en Go", "du RAG hybride sur de vrais documents", "des workflows multi-agents gouvernés", "des pipelines qui passent les tests de parité"],
+    },
+  },
+  chips: ["Go", "RAG", "MCP", "PySpark", "PyTorch"],
   stats: [
-    { v: "15 000+", l: { en: "lines of SAS migrated to PySpark", fr: "lignes SAS migrées vers PySpark" } as L },
-    { v: "150+", l: { en: "business rules in production", fr: "règles métier en production" } as L },
-    { v: "15+", l: { en: "LLM providers in Seshat", fr: "fournisseurs LLM dans Seshat" } as L },
-    { v: "60+", l: { en: "built-in agent tools", fr: "outils d'agents intégrés" } as L },
+    { n: 15000, suffix: "+", l: { en: "lines of SAS migrated to PySpark", fr: "lignes SAS migrées vers PySpark" } as L },
+    { n: 150, suffix: "+", l: { en: "business rules in production", fr: "règles métier en production" } as L },
+    { n: 15, suffix: "+", l: { en: "LLM providers in Seshat", fr: "fournisseurs LLM dans Seshat" } as L },
+    { n: 60, suffix: "+", l: { en: "built-in agent tools", fr: "outils d'agents intégrés" } as L },
   ],
 };
 
@@ -321,6 +330,30 @@ export const skills = {
     { name: { en: "Machine learning & vision", fr: "Machine learning & vision" } as L, items: ["PyTorch", "Scikit-learn", "TensorFlow", "YOLO / OpenCV", "GANs", "Photogrammetry", "Reinforcement learning"] },
     { name: { en: "Cloud & delivery", fr: "Cloud & livraison" } as L, items: ["Docker", "Azure", "AWS", "Git & GitHub Actions", "CI/CD", "Power BI", "Streamlit"] },
   ],
+};
+
+export const journey = {
+  title: { en: "From Cotonou to Paris.", fr: "De Cotonou à Paris." } as L,
+  lead: {
+    en: "Four cities, three languages learned on the way, and one constant: building things people can use.",
+    fr: "Quatre villes, des langues apprises en chemin, et une constante : construire des choses utiles.",
+  } as L,
+  stops: [
+    { city: "Cotonou", country: { en: "Benin", fr: "Bénin" } as L, years: "2020 – 2022", text: { en: "Native speaker of Fon, Yoruba and Goun. Preparatory class in maths and physics (MPSI) at Marie Stella.", fr: "Langues maternelles : fon, yoruba et goun. Classe préparatoire MPSI (maths et physique) à Marie Stella." } as L },
+    { city: "Rabat", country: { en: "Morocco", fr: "Maroc" } as L, years: "2022 – 2023", text: { en: "Bachelor in Electronics & Digital Systems at JUNIA ISEN. Where the code started to meet hardware.", fr: "Licence Électronique & Systèmes numériques à JUNIA ISEN. Là où le code a rencontré le matériel." } as L },
+    { city: "Lille", country: { en: "France", fr: "France" } as L, years: "2023 – 2026", text: { en: "Engineering degree in Big Data & Data Science, a first ML internship, the alumni network, and the first lines of Hello Pulse.", fr: "Diplôme d'ingénieur Big Data & Data Science, un premier stage en ML, le réseau alumni et les premières lignes de Hello Pulse." } as L },
+    { city: "Île-de-France", country: { en: "France", fr: "France" } as L, years: "2025 –", text: { en: "Insurance-grade data at Allianz, then Seshat full time. Building from here.", fr: "Data de niveau assurance chez Allianz, puis Seshat à plein temps. On construit d'ici." } as L },
+  ],
+  quests: {
+    label: { en: "Side quests", fr: "Quêtes annexes" } as L,
+    items: [
+      { en: "Drumming", fr: "Batterie" },
+      { en: "Strategy games", fr: "Jeux de stratégie" },
+      { en: "Open source", fr: "Open source" },
+      { en: "Building communities", fr: "Construire des communautés" },
+      { en: "Entrepreneurship", fr: "Entrepreneuriat" },
+    ] as L[],
+  },
 };
 
 export const background = {

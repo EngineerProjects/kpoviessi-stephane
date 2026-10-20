@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { unlock } from "@/lib/game";
 import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
 
@@ -19,7 +20,7 @@ export default function Projects() {
           return (
             <Reveal key={p.title} delay={(i % 3) * 0.07} className={cn("h-full", p.featured && i === 0 && "lg:col-span-2")}>
               <Tag
-                {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer" } : {})}
+                {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer", onClick: () => unlock("repo") } : {})}
                 className={cn(
                   "group flex h-full flex-col rounded-2xl border border-line bg-surface p-6 transition",
                   p.href && "hover:-translate-y-1 hover:border-accent",

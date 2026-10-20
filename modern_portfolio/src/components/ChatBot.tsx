@@ -8,6 +8,7 @@ import remarkGfm from "remark-gfm";
 import { chat } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
+import { unlock } from "@/lib/game";
 
 interface Message {
   role: "user" | "assistant";
@@ -51,6 +52,10 @@ export default function ChatBot() {
       } catch {}
     }
   }, [messages, lang]);
+
+  useEffect(() => {
+    if (open) unlock("chat");
+  }, [open]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -110,7 +115,7 @@ export default function ChatBot() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? t(chat.close) : t(chat.open)}
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-ink text-bg shadow-xl transition hover:scale-105"
+        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-accent text-accent-ink shadow-xl transition hover:scale-105"
       >
         {open ? <X size={22} /> : <MessageCircle size={22} />}
       </button>

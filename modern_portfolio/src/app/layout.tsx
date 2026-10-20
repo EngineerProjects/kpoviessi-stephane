@@ -35,15 +35,15 @@ export const metadata: Metadata = {
     "Ingénieur Big Data",
   ],
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: person.site, title, description, images: [{ url: "/images/profile.png" }] },
-  twitter: { card: "summary", title, description, images: ["/images/profile.png"] },
+  openGraph: { type: "website", url: person.site, title, description, images: [{ url: "/images/stephane.jpg" }] },
+  twitter: { card: "summary", title, description, images: ["/images/stephane.jpg"] },
   verification: { google: "G4GoMHBsqSjeIC6E4J19MxsS8o-3lTkmcTvbu435CC0" },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f6f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#090b11" },
+    { media: "(prefers-color-scheme: light)", color: "#fbf6ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#15100b" },
   ],
 };
 
@@ -53,7 +53,7 @@ const jsonLd = {
   name: "Stéphane Kpoviessi",
   jobTitle: "AI & Data Engineer, Founder of Seshat",
   url: person.site,
-  image: `${person.site}/images/profile.png`,
+  image: `${person.site}/images/stephane.jpg`,
   sameAs: [person.linkedin, person.github, person.org, person.seshat],
   alumniOf: [{ "@type": "CollegeOrUniversity", name: "JUNIA ISEN" }],
   worksFor: { "@type": "Organization", name: "Seshat AI", url: person.seshat },

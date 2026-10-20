@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowDownToLine, Check, Copy, Loader2, Mail } from "lucide-react";
 import { contact, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
+import { unlock } from "@/lib/game";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
@@ -32,6 +33,7 @@ export default function Contact() {
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("sent");
+      unlock("message");
       form.reset();
     } catch {
       setStatus("error");
@@ -49,7 +51,7 @@ export default function Contact() {
   return (
     <section id="contact" className="border-t border-line bg-surface/50 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-5 md:px-8">
-        <SectionHead index="06" title={t(contact.title)} lead={t(contact.lead)} />
+        <SectionHead index="07" title={t(contact.title)} lead={t(contact.lead)} />
 
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
           <Reveal className="space-y-8">
@@ -76,7 +78,7 @@ export default function Contact() {
               <ul className="divide-y divide-line border-y border-line">
                 {contact.resumes.items.map((r) => (
                   <li key={r.en}>
-                    <a href={r[lang]} download className="group flex items-center justify-between gap-4 py-3.5">
+                    <a href={r[lang]} download onClick={() => unlock("cv")} className="group flex items-center justify-between gap-4 py-3.5">
                       <span className="font-medium transition group-hover:text-accent">{t(r.name)}</span>
                       <span className="inline-flex items-center gap-2 font-mono text-xs text-dim">
                         PDF · {lang.toUpperCase()} <ArrowDownToLine size={14} />

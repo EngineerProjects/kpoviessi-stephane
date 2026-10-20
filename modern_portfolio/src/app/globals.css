@@ -11,6 +11,8 @@
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
+  --color-leaf: var(--leaf);
+  --color-sun: var(--sun);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
@@ -18,25 +20,29 @@
 }
 
 :root {
-  --bg: #f5f6f8;
-  --surface: #ffffff;
-  --ink: #0c1020;
-  --dim: #596073;
-  --line: #e0e4ec;
-  --accent: #2447f5;
+  --bg: #fbf6ee;
+  --surface: #fffdf9;
+  --ink: #241a12;
+  --dim: #6e5f50;
+  --line: #eadfcd;
+  --accent: #c46f0a;
   --accent-ink: #ffffff;
-  --accent-soft: rgba(36, 71, 245, 0.08);
+  --accent-soft: rgba(196, 111, 10, 0.1);
+  --leaf: #3f7d4a;
+  --sun: #f0a93b;
 }
 
 .dark {
-  --bg: #090b11;
-  --surface: #10131b;
-  --ink: #eceff6;
-  --dim: #8b93a7;
-  --line: #1f2430;
-  --accent: #7c96ff;
-  --accent-ink: #0a0d18;
-  --accent-soft: rgba(124, 150, 255, 0.1);
+  --bg: #15100b;
+  --surface: #1e1711;
+  --ink: #f7ecdd;
+  --dim: #ab9983;
+  --line: #342a1f;
+  --accent: #f2a93b;
+  --accent-ink: #1d1208;
+  --accent-soft: rgba(242, 169, 59, 0.12);
+  --leaf: #7cc58b;
+  --sun: #f2a93b;
 }
 
 html {
@@ -88,6 +94,13 @@ body {
   background-size: 22px 22px;
   mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
 }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float { animation: float 6s ease-in-out infinite; }
 
 .prose-chat p { margin: 0 0 0.5rem; }
 .prose-chat p:last-child { margin-bottom: 0; }
