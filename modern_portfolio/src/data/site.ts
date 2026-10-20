@@ -222,6 +222,8 @@ export interface Project {
   href?: string;
   note?: L;
   featured?: boolean;
+  art: "watch" | "terminal" | "football" | "retail" | "cube" | "robot" | "solar" | "skills";
+  cat: "agents" | "data" | "vision" | "tools";
 }
 
 export const projects = {
@@ -230,10 +232,20 @@ export const projects = {
     en: "Agents, data pipelines and computer vision. Most of it is open source.",
     fr: "Agents, pipelines de données et vision par ordinateur. Presque tout est open source.",
   } as L,
+  filters: {
+    all: { en: "All", fr: "Tout" } as L,
+    agents: { en: "Agents", fr: "Agents" } as L,
+    data: { en: "Data", fr: "Data" } as L,
+    vision: { en: "Vision", fr: "Vision" } as L,
+    tools: { en: "Tools", fr: "Outils" } as L,
+  },
+  open: { en: "View on GitHub", fr: "Voir sur GitHub" } as L,
   viewAll: { en: "All repositories on GitHub", fr: "Tous les dépôts sur GitHub" } as L,
   items: [
     {
       title: "Tech Watch Agent",
+      art: "watch",
+      cat: "agents",
       tag: { en: "Agents", fr: "Agents" },
       text: {
         en: "Multi-agent research and technology watch: topic planning, multi-source collection, key-point extraction, sourced summaries and targeted reports. LangGraph workflows, FastAPI backend, pgvector semantic memory, React control UI.",
@@ -245,6 +257,8 @@ export const projects = {
     },
     {
       title: "LocalIngest",
+      art: "terminal",
+      cat: "tools",
       tag: { en: "Developer tool", fr: "Outil développeur" },
       text: {
         en: "CLI and terminal UI that analyzes a code repository and generates a Markdown report (structure, source preview, statistics) for documentation or LLM ingestion.",
@@ -256,6 +270,8 @@ export const projects = {
     },
     {
       title: "Advanced Football Video Analysis",
+      art: "football",
+      cat: "vision",
       tag: { en: "Computer vision", fr: "Vision par ordinateur" },
       text: {
         en: "Detection and tracking of players and ball on match footage, movement analysis and extraction of usable data for amateur sport.",
@@ -267,6 +283,8 @@ export const projects = {
     },
     {
       title: "BI Retail",
+      art: "retail",
+      cat: "data",
       tag: { en: "Data engineering", fr: "Data engineering" },
       text: {
         en: "Sales and supply-chain data pipeline: generation and ingestion, PySpark transformations, PostgreSQL warehouse, Airflow orchestration and Power BI dashboards.",
@@ -277,6 +295,8 @@ export const projects = {
     },
     {
       title: "Sylva3D",
+      art: "cube",
+      cat: "vision",
       tag: { en: "Computer vision", fr: "Vision par ordinateur" },
       text: {
         en: "2D-to-3D reconstruction engine and its desktop interface, built during the Sylvagreg internship: photogrammetry plus PyTorch generative models.",
@@ -287,6 +307,8 @@ export const projects = {
     },
     {
       title: "Waste-collection robot",
+      art: "robot",
+      cat: "vision",
       tag: { en: "Robotics & vision", fr: "Robotique & vision" },
       text: {
         en: "AceObject: detects, classifies and tracks waste while distinguishing it from obstacles, then plans a collection route with Dijkstra. Reinforcement learning explored for obstacle avoidance.",
@@ -296,6 +318,8 @@ export const projects = {
     },
     {
       title: "Solar irradiance forecasting",
+      art: "solar",
+      cat: "data",
       tag: { en: "Machine learning", fr: "Machine learning" },
       text: {
         en: "Weather data preparation, temporal features and forecasting model evaluation, with a REST API serving the results.",
@@ -306,6 +330,8 @@ export const projects = {
     },
     {
       title: "Job-hunting skills",
+      art: "skills",
+      cat: "agents",
       tag: { en: "Agent skills", fr: "Skills d'agents" },
       text: {
         en: "A suite of skills for Claude Code and MCP-compatible runtimes: deterministic browser automation, job analysis, CV adaptation and application tracking with a human in the loop.",
