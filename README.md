@@ -1,40 +1,32 @@
 # Stéphane KPOVIESSI — Portfolio
 
-Personal portfolio website for **Stéphane KPOVIESSI**, AI Systems & Data Infrastructure Engineer.
+Personal portfolio of Stéphane Kpoviessi, founder of Seshat and AI & Data Engineer.
+Bilingual (EN/FR), light and dark themes, with a small AI assistant (Lys).
 
-## 📂 Repository Structure
+## Stack
 
-### [`modern_portfolio/`](./modern_portfolio) — ✅ Active Production
-**Current version — System:Archetype design system.**
+Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v4, Framer Motion.
 
-A high-density, warm-industrial engineering portfolio built with Next.js 16, Tailwind CSS v4, and Framer Motion.
+## Run
 
-- **Stack**: Next.js, TypeScript, Tailwind CSS v4, Framer Motion, Lucide React
-- **Design**: "System:Archetype" — dark, warm-industrial, CAD-blueprint aesthetic
-- **Features**: Bilingual (EN/FR), AI Chatbot, animated sections, full case studies grid
-- **Deployment**: Configured for `modern_portfolio` as the root deployment target
+```bash
+cd modern_portfolio
+npm install
+npm run dev      # http://localhost:3000
+npm run build
+```
 
----
+## Content
 
-### [`legacy_portfolio/`](./legacy_portfolio) — 🗂 Archived (v1)
-Previous Next.js portfolio iteration. Kept for reference only. Not in production.
+All text lives in [`modern_portfolio/src/data/site.ts`](modern_portfolio/src/data/site.ts), each string with an `en` and `fr` version.
+The chat assistant builds its context from the same file, so the page and the assistant stay in sync.
 
-### [`terminal_portfolio/`](./terminal_portfolio) — 🗂 Archived (v0)
-Original CLI-themed React + Vite terminal interface. Kept for reference only. Not in production.
+Résumés are in `modern_portfolio/public/cv/` (generated from the LaTeX sources kept outside this repo).
 
-### [`docs/`](./docs) — 📄 Source Documents
-Career data, project descriptions, and design documents used to build the portfolio content.
+## Chat assistant
 
----
+`/api/chat` tries Groq, then ZhipuAI. Copy `.env.example` to `.env.local` and set at least one key.
 
-## 👤 Author
+## Deploy
 
-**Stéphane KPOVIESSI**  
-*AI Systems Engineer · Data Infrastructure · Autonomous Systems Builder*
-
-- [LinkedIn](https://linkedin.com/in/stephanekpoviessi)
-- [GitHub](https://github.com/Amiche02)
-- [GitHub Org](https://github.com/EngineerProjects)
-
----
-*Structured for performance. Powered by AI.*
+Vercel, root directory `modern_portfolio`.

@@ -1,225 +1,124 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
-import { Mail, Phone, Send, MessageSquare, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { ArrowDownToLine, Check, Copy, Loader2, Mail } from "lucide-react";
+import { contact, person } from "@/data/site";
+import { useLang } from "@/lib/i18n";
 import { GithubIcon, LinkedinIcon } from "./Icons";
-import { useContent } from "@/lib/useContent";
+import Reveal from "./Reveal";
+import SectionHead from "./SectionHead";
+
+type Status = "idle" | "sending" | "sent" | "error";
+
+const field =
+  "w-full rounded-xl border border-line bg-bg px-4 py-3 text-[15px] outline-none transition placeholder:text-dim/60 focus:border-accent";
 
 export default function Contact() {
-  const { personalInfo, ui } = useContent();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [status, setStatus] = useState<"IDLE" | "SENDING" | "SENT" | "ERROR">("IDLE");
+  const { t, lang } = useLang();
+  const [status, setStatus] = useState<Status>("idle");
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("SENDING");
-
-    const submissionData = {
-      ...formData,
-      _subject: `[System:Archetype Portfolio] Message from ${formData.name}`,
-      _template: "table",
-      _captcha: "false",
-    };
-
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form));
+    if (data.company) return; // honeypot
+    setStatus("sending");
     try {
-      const response = await fetch(`https://formsubmit.co/ajax/${personalInfo.email}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/${person.email}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(submissionData),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name: data.name, email: data.email, message: data.message, _subject: `[Portfolio] Message from ${data.name}`, _template: "table", _captcha: "false" }),
       });
-
-      if (response.ok) {
-        setStatus("SENT");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setStatus("IDLE"), 5000);
-      } else {
-        throw new Error("Transmission interrupted");
-      }
-    } catch (error) {
-      console.error("Transmission Error:", error);
-      setStatus("ERROR");
-      setTimeout(() => setStatus("IDLE"), 4000);
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
     }
-  };
+  }
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(person.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {}
+  }
 
   return (
-    <section id="contact" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/10 text-text-main">
-      <div className="max-w-7xl mx-auto px-6 md:px-8">
-        
-        {/* Section Header HUD */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16 gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <MessageSquare size={10} /> {ui.contact.badge}
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none lg:whitespace-nowrap">
-              {ui.contact.heading_1} <span className="text-text-dim">{ui.contact.heading_2}</span> {ui.contact.heading_3}<span className="text-accent">.</span>
-            </h2>
-          </div>
-          <div className="shrink-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            {ui.contact.subheading}
-          </div>
-        </div>
+    <section id="contact" className="border-t border-line bg-surface/50 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <SectionHead index="06" title={t(contact.title)} lead={t(contact.lead)} />
 
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-          
-          {/* Left Column: Coordinates */}
-          <div className="lg:col-span-5 space-y-8 text-center lg:text-left">
-            <p className="text-text-dim text-base leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
-              {ui.contact.intro}
-            </p>
-
-            <div className="space-y-4 max-w-md mx-auto lg:mx-0">
-              <a
-                href={`mailto:${personalInfo.email}`}
-                className="group flex items-center gap-4 p-5 border border-border-main bg-bg-card/20 rounded hover:border-accent/40 hover:bg-bg-card transition-all duration-300 shadow-sm"
-              >
-                <div className="w-10 h-10 border border-border-main/60 rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
-                  <Mail size={16} />
-                </div>
-                <div className="text-left overflow-hidden font-mono">
-                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">{ui.contact.email_label}</p>
-                  <p className="text-xs font-bold text-text-main group-hover:text-accent transition-colors truncate">{personalInfo.email}</p>
-                </div>
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <Reveal className="space-y-8">
+            <div>
+              <a href={`mailto:${person.email}`} className="display break-all text-3xl hover:text-accent sm:text-4xl">
+                {person.email}
               </a>
-
-              <a
-                href={`tel:${personalInfo.phone}`}
-                className="group flex items-center gap-4 p-5 border border-border-main bg-bg-card/20 rounded hover:border-accent/40 hover:bg-bg-card transition-all duration-300 shadow-sm"
-              >
-                <div className="w-10 h-10 border border-border-main/60 rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
-                  <Phone size={16} />
-                </div>
-                <div className="text-left font-mono">
-                  <p className="text-[8px] font-bold text-text-dim uppercase tracking-wider mb-0.5 opacity-60">{ui.contact.phone_label}</p>
-                  <p className="text-xs font-bold text-text-main group-hover:text-accent transition-colors">{personalInfo.phone}</p>
-                </div>
-              </a>
-            </div>
-
-            <div className="flex items-center justify-center lg:justify-start gap-6 px-2">
-              <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent p-2 hover:bg-accent-soft rounded transition-all">
-                <LinkedinIcon className="w-5 h-5" />
-              </a>
-              <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="text-text-dim hover:text-accent p-2 hover:bg-accent-soft rounded transition-all">
-                <GithubIcon className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Terminal Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-7 w-full"
-          >
-            <div className="p-6 md:p-10 border border-border-main bg-bg-card/25 rounded relative overflow-hidden shadow-sm">
-              <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/40 tracking-wider">
-                TRANSMISSION GRID // FORM_302
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label htmlFor="name" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                      {ui.contact.form_name}
-                    </label>
-                    <input 
-                      type="text" 
-                      name="name"
-                      id="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      disabled={status === "SENDING"}
-                      placeholder={ui.contact.form_name_placeholder}
-                      className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all font-mono text-xs disabled:opacity-50"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                      {ui.contact.form_email}
-                    </label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      id="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      disabled={status === "SENDING"}
-                      placeholder={ui.contact.form_email_placeholder}
-                      className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all font-mono text-xs disabled:opacity-50"
-                    />
-                  </div>
-                </div>
-                
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-[9px] font-mono font-bold text-text-dim uppercase tracking-wider block opacity-75">
-                    {ui.contact.form_message}
-                  </label>
-                  <textarea 
-                    name="message"
-                    id="message"
-                    required
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleChange}
-                    disabled={status === "SENDING"}
-                    placeholder={ui.contact.form_message_placeholder}
-                    className="w-full px-4 py-3 rounded border border-border-main/80 bg-bg-main/30 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 focus:bg-bg-main transition-all resize-none font-mono text-xs disabled:opacity-50"
-                  />
-                </div>
-                
-                <button 
-                  type="submit"
-                  disabled={status === "SENDING" || status === "SENT"}
-                  className={`w-full py-4 border font-mono font-bold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2.5 rounded active:scale-98 ${
-                    status === "SENT" 
-                      ? "bg-emerald-500 text-white border-emerald-500" 
-                      : status === "ERROR" 
-                      ? "bg-red-500 text-white border-red-500"
-                      : "bg-text-main text-bg-main border-text-main hover:bg-bg-main hover:text-text-main"
-                  }`}
-                >
-                  {status === "IDLE" && (
-                    <>{ui.contact.submit_idle} <Send size={12} /></>
-                  )}
-                  {status === "SENDING" && (
-                    <>{ui.contact.submit_sending} <Loader2 size={12} className="animate-spin" /></>
-                  )}
-                  {status === "SENT" && (
-                    <>{ui.contact.submit_sent} <CheckCircle size={12} /></>
-                  )}
-                  {status === "ERROR" && (
-                    <>{ui.contact.submit_error} <AlertCircle size={12} /></>
-                  )}
+              <div className="mt-4 flex flex-wrap gap-3">
+                <button type="button" onClick={copy} className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm transition hover:border-accent">
+                  {copied ? <Check size={15} /> : <Copy size={15} />}
+                  {copied ? t(contact.copied) : t(contact.copy)}
                 </button>
-
-                {status === "SENT" && (
-                  <p className="text-[9px] font-mono text-emerald-500 text-center font-bold uppercase tracking-widest animate-pulse">
-                    {ui.contact.success_msg}
-                  </p>
-                )}
-              </form>
+                <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm transition hover:border-accent">
+                  <LinkedinIcon size={15} /> LinkedIn
+                </a>
+                <a href={person.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2 text-sm transition hover:border-accent">
+                  <GithubIcon size={15} /> GitHub
+                </a>
+              </div>
             </div>
-          </motion.div>
+
+            <div>
+              <h3 className="eyebrow mb-4 text-ink">{t(contact.resumes.label)}</h3>
+              <ul className="divide-y divide-line border-y border-line">
+                {contact.resumes.items.map((r) => (
+                  <li key={r.en}>
+                    <a href={r[lang]} download className="group flex items-center justify-between gap-4 py-3.5">
+                      <span className="font-medium transition group-hover:text-accent">{t(r.name)}</span>
+                      <span className="inline-flex items-center gap-2 font-mono text-xs text-dim">
+                        PDF · {lang.toUpperCase()} <ArrowDownToLine size={14} />
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <form onSubmit={submit} className="space-y-4 rounded-2xl border border-line bg-surface p-6 md:p-8">
+              <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <label className="block">
+                  <span className="eyebrow mb-2 block">{t(contact.form.name)}</span>
+                  <input required name="name" autoComplete="name" className={field} />
+                </label>
+                <label className="block">
+                  <span className="eyebrow mb-2 block">{t(contact.form.email)}</span>
+                  <input required type="email" name="email" autoComplete="email" className={field} />
+                </label>
+              </div>
+              <label className="block">
+                <span className="eyebrow mb-2 block">{t(contact.form.message)}</span>
+                <textarea required name="message" rows={6} className={field} />
+              </label>
+              <button
+                type="submit"
+                disabled={status === "sending"}
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-ink transition hover:opacity-90 disabled:opacity-60"
+              >
+                {status === "sending" ? <Loader2 size={16} className="animate-spin" /> : <Mail size={16} />}
+                {status === "sending" ? t(contact.form.sending) : t(contact.form.send)}
+              </button>
+              <p role="status" aria-live="polite" className={`min-h-5 text-sm ${status === "error" ? "text-red-500" : "text-dim"}`}>
+                {status === "sent" && t(contact.form.sent)}
+                {status === "error" && t(contact.form.error)}
+              </p>
+            </form>
+          </Reveal>
         </div>
       </div>
     </section>
