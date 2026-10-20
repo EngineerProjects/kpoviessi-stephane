@@ -317,19 +317,106 @@ export const projects = {
   ] as Project[],
 };
 
+export interface Skill {
+  n: string;
+  /** Where it was actually used: roles and projects from this page. */
+  used?: string[];
+}
+
 export const skills = {
   title: { en: "Skills", fr: "Compétences" } as L,
   lead: {
-    en: "The tools I reach for, grouped by what they are used for.",
-    fr: "Les outils que j'utilise, regroupés selon leur usage.",
+    en: "Not a list of keywords: pick a skill to see where I actually used it.",
+    fr: "Pas une liste de mots-clés : choisissez une compétence pour voir où je l'ai vraiment utilisée.",
   } as L,
+  usedIn: { en: "Used in", fr: "Utilisé dans" } as L,
+  none: { en: "Hands-on practice and courses, no production project listed here.", fr: "Pratique et formations, pas de projet de production listé ici." } as L,
+  pick: { en: "Select a skill", fr: "Choisissez une compétence" } as L,
+  skills: { en: "skills", fr: "compétences" } as L,
   groups: [
-    { name: { en: "Agents & LLM systems", fr: "Agents & systèmes LLM" } as L, items: ["Seshat runtime", "MCP", "Tool calling", "LangGraph", "LangChain", "Pydantic AI", "RAG & hybrid search", "Embeddings", "Ollama", "Hugging Face"] },
-    { name: { en: "Backend & product", fr: "Backend & produit" } as L, items: ["Go", "Python", "FastAPI", "TypeScript", "Next.js / React", "Electron", "gRPC", "REST & SSE", "WebSocket"] },
-    { name: { en: "Data engineering", fr: "Data engineering" } as L, items: ["PySpark", "Azure Databricks", "Medallion architecture", "PostgreSQL / pgvector", "Airflow", "Pandas / NumPy", "SQL", "Parquet", "Data quality"] },
-    { name: { en: "Machine learning & vision", fr: "Machine learning & vision" } as L, items: ["PyTorch", "Scikit-learn", "TensorFlow", "YOLO / OpenCV", "GANs", "Photogrammetry", "Reinforcement learning"] },
-    { name: { en: "Cloud & delivery", fr: "Cloud & livraison" } as L, items: ["Docker", "Azure", "AWS", "Git & GitHub Actions", "CI/CD", "Power BI", "Streamlit"] },
-  ],
+    {
+      id: "agents",
+      icon: "bot",
+      name: { en: "Agents & LLM systems", fr: "Agents & systèmes LLM" } as L,
+      tagline: { en: "The core of my work today.", fr: "Le cœur de mon travail aujourd'hui." } as L,
+      items: [
+        { n: "Seshat runtime", used: ["Seshat", "Hello Pulse"] },
+        { n: "MCP", used: ["Seshat", "Job-hunting skills"] },
+        { n: "Tool calling", used: ["Seshat"] },
+        { n: "RAG & hybrid search", used: ["Seshat", "Tech Watch Agent"] },
+        { n: "Embeddings", used: ["Seshat", "Tech Watch Agent"] },
+        { n: "LangGraph", used: ["Tech Watch Agent"] },
+        { n: "LangChain", used: ["Tech Watch Agent"] },
+        { n: "Pydantic AI", used: ["Hello Pulse"] },
+        { n: "Ollama", used: ["Seshat"] },
+        { n: "Hugging Face" },
+      ],
+    },
+    {
+      id: "backend",
+      icon: "server",
+      name: { en: "Backend & product", fr: "Backend & produit" } as L,
+      tagline: { en: "From the API to the desktop app.", fr: "De l'API à l'application de bureau." } as L,
+      items: [
+        { n: "Go", used: ["Seshat", "Hello Pulse"] },
+        { n: "Python", used: ["Seshat", "Allianz", "Tech Watch Agent"] },
+        { n: "TypeScript", used: ["Seshat", "Hello Pulse"] },
+        { n: "Next.js / React", used: ["Hello Pulse", "Tech Watch Agent"] },
+        { n: "FastAPI", used: ["Tech Watch Agent", "Solar forecasting"] },
+        { n: "Electron", used: ["SeshatOS"] },
+        { n: "gRPC", used: ["Seshat"] },
+        { n: "REST & SSE", used: ["Hello Pulse"] },
+        { n: "WebSocket", used: ["Hello Pulse"] },
+      ],
+    },
+    {
+      id: "data",
+      icon: "database",
+      name: { en: "Data engineering", fr: "Data engineering" } as L,
+      tagline: { en: "Pipelines that pass parity tests.", fr: "Des pipelines qui passent les tests de parité." } as L,
+      items: [
+        { n: "PySpark", used: ["Allianz", "BI Retail"] },
+        { n: "Azure Databricks", used: ["Allianz"] },
+        { n: "Medallion architecture", used: ["Allianz"] },
+        { n: "PostgreSQL / pgvector", used: ["Seshat", "Hello Pulse", "Tech Watch Agent", "BI Retail"] },
+        { n: "SQL", used: ["Allianz", "BI Retail"] },
+        { n: "Airflow", used: ["BI Retail"] },
+        { n: "Pandas / NumPy", used: ["Lyne et Frères", "Solar forecasting"] },
+        { n: "Parquet", used: ["Allianz"] },
+        { n: "Data quality", used: ["Allianz"] },
+      ],
+    },
+    {
+      id: "ml",
+      icon: "eye",
+      name: { en: "Machine learning & vision", fr: "Machine learning & vision" } as L,
+      tagline: { en: "Where I started.", fr: "Là où j'ai commencé." } as L,
+      items: [
+        { n: "PyTorch", used: ["Sylvagreg"] },
+        { n: "GANs", used: ["Sylvagreg"] },
+        { n: "Photogrammetry", used: ["Sylvagreg", "Sylva3D"] },
+        { n: "YOLO / OpenCV", used: ["Football video analysis", "Waste-collection robot"] },
+        { n: "Scikit-learn", used: ["Solar forecasting"] },
+        { n: "Reinforcement learning", used: ["Waste-collection robot"] },
+        { n: "TensorFlow" },
+      ],
+    },
+    {
+      id: "cloud",
+      icon: "cloud",
+      name: { en: "Cloud & delivery", fr: "Cloud & livraison" } as L,
+      tagline: { en: "Shipping it, and keeping it running.", fr: "Le livrer, et le garder en route." } as L,
+      items: [
+        { n: "Docker", used: ["Hello Pulse", "BI Retail", "Sylvagreg", "Tech Watch Agent"] },
+        { n: "Azure", used: ["Allianz"] },
+        { n: "AWS", used: ["Sylvagreg"] },
+        { n: "Git & GitHub Actions", used: ["Hello Pulse", "Seshat"] },
+        { n: "CI/CD", used: ["Hello Pulse", "Seshat"] },
+        { n: "Power BI", used: ["BI Retail"] },
+        { n: "Streamlit", used: ["Lyne et Frères"] },
+      ],
+    },
+  ] as { id: string; icon: string; name: L; tagline: L; items: Skill[] }[],
 };
 
 export const journey = {

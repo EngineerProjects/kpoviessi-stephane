@@ -17,6 +17,7 @@ export const achievements: Achievement[] = [
   { id: "seen-contact", xp: 10, title: { en: "Last stop", fr: "Terminus" }, desc: { en: "Reach the contact section.", fr: "Atteindre la section contact." } },
   { id: "lang", xp: 10, title: { en: "Polyglot", fr: "Polyglotte" }, desc: { en: "Switch the language.", fr: "Changer de langue." } },
   { id: "theme", xp: 10, title: { en: "Night owl", fr: "Oiseau de nuit" }, desc: { en: "Switch the theme.", fr: "Changer de thème." } },
+  { id: "inspect", xp: 15, title: { en: "Skill inspector", fr: "Inspecteur de compétences" }, desc: { en: "Inspect five skills to see where they were used.", fr: "Inspecter cinq compétences pour voir où elles ont servi." } },
   { id: "chat", xp: 15, title: { en: "Say hello", fr: "Dire bonjour" }, desc: { en: "Open a chat with Lys.", fr: "Ouvrir le chat avec Lys." } },
   { id: "repo", xp: 15, title: { en: "Code reader", fr: "Lecteur de code" }, desc: { en: "Open a project on GitHub.", fr: "Ouvrir un projet sur GitHub." } },
   { id: "cv", xp: 20, title: { en: "Résumé hunter", fr: "Chasseur de CV" }, desc: { en: "Download a résumé.", fr: "Télécharger un CV." } },
@@ -30,7 +31,7 @@ export const levels: { xp: number; name: L }[] = [
   { xp: 30, name: { en: "Curious", fr: "Curieux" } },
   { xp: 80, name: { en: "Explorer", fr: "Explorateur" } },
   { xp: 140, name: { en: "Insider", fr: "Initié" } },
-  { xp: 210, name: { en: "Legend", fr: "Légende" } },
+  { xp: 225, name: { en: "Legend", fr: "Légende" } },
 ];
 
 export const gameUi = {

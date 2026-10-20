@@ -13,7 +13,7 @@ function buildContext(l: Lang): string {
     .join("\n");
   const prods = seshat.products.map((p) => `• ${p.name} [${p.status[l]}]: ${p.text[l]}`).join("\n");
   const projs = projects.items.map((p) => `• ${p.title} [${p.tag[l]}]: ${p.text[l]} Stack: ${p.stack.join(", ")}${p.href ? ` | ${p.href}` : ""}`).join("\n");
-  const sk = skills.groups.map((g) => `${g.name[l]}: ${g.items.join(", ")}`).join("\n");
+  const sk = skills.groups.map((g) => `${g.name[l]}: ${g.items.map((i) => i.n).join(", ")}`).join("\n");
   const edu = background.education.items.map((e) => `• ${e.t[l]}, ${e.s} (${e.p})`).join("\n");
   const certs = background.certs.items.map((c) => `• ${c.t} (${c.s}, ${c.p[l]})`).join("\n");
   const cvs = contact.resumes.items.map((r) => `${r.name[l]}: ${person.site}${r[l]}`).join(" | ");
