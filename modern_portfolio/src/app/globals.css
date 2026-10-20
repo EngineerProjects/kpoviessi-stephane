@@ -127,6 +127,16 @@ body {
 .art:not(.in) .art-draw,
 .art:not(.in) .art-check { animation-play-state: paused; }
 
+/* Portrait that dissolves into the page: soft top (under the header), sides and bottom. */
+.fade-photo {
+  --fade-v: linear-gradient(to bottom, transparent 0, #000 16%, #000 72%, transparent 100%);
+  --fade-h: linear-gradient(to right, transparent 0, #000 32%, #000 68%, transparent 100%);
+  -webkit-mask-image: var(--fade-v), var(--fade-h);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--fade-v), var(--fade-h);
+  mask-composite: intersect;
+}
+
 .prose-chat p { margin: 0 0 0.5rem; }
 .prose-chat p:last-child { margin-bottom: 0; }
 .prose-chat ul { margin: 0.25rem 0 0.5rem 1.1rem; list-style: disc; }
