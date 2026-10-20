@@ -32,7 +32,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden">
-      <div className="relative mx-auto grid max-w-6xl items-end gap-4 px-5 pt-24 md:px-8 lg:min-h-[46rem] lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:pt-20">
+      <div className="relative mx-auto grid max-w-6xl items-end gap-4 px-5 pt-24 md:px-8 lg:min-h-[44rem] lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:pt-20">
         {/* Social rail, down the left edge. */}
         <ul className="absolute left-2 top-1/2 hidden -translate-y-1/2 flex-col gap-4 2xl:flex 2xl:-left-12" aria-label="Social">
           {social.map(({ href, label, Icon }) => (
@@ -45,7 +45,7 @@ export default function Hero() {
         </ul>
 
         {/* Cut-out portrait standing on the stats row, with a warm arch behind. */}
-        <motion.div {...rise(0.15)} className="relative order-2 mx-auto w-full max-w-sm self-end lg:order-1 lg:max-w-none">
+        <motion.div {...rise(0.15)} className="relative order-2 mx-auto w-full max-w-sm self-end lg:order-1 lg:-ml-10 lg:w-[calc(100%+2.5rem)] lg:max-w-none">
           <div className="absolute inset-x-[4%] bottom-0 top-[6%] rounded-t-[999px] bg-gradient-to-b from-sun/55 via-sun/25 to-accent/5" aria-hidden />
           <div className="absolute -left-6 bottom-[16%] h-44 w-44 rounded-full bg-leaf/25 blur-3xl" aria-hidden />
           <Image
@@ -54,13 +54,14 @@ export default function Hero() {
             width={745}
             height={1152}
             priority
-            sizes="(min-width:1024px) 32rem, 24rem"
-            className="relative mx-auto h-auto w-full max-w-[28rem] drop-shadow-[0_24px_30px_rgba(120,70,10,0.28)]"
+            sizes="(min-width:1024px) 34rem, 24rem"
+            className="relative mx-auto h-auto w-full max-w-[28rem] lg:max-w-none drop-shadow-[0_24px_30px_rgba(120,70,10,0.28)]"
           />
         </motion.div>
 
-        <div className="relative order-1 min-w-0 pb-10 lg:order-2 lg:self-center lg:pb-24">
-          <motion.p {...rise(0)} className="mb-7 flex w-fit max-w-full items-center gap-2.5 rounded-2xl border border-line bg-surface px-3.5 py-1.5 text-xs text-dim sm:rounded-full">
+        <div className="relative order-1 flex min-w-0 flex-col gap-10 pb-8 lg:order-2 lg:justify-between lg:gap-8 lg:self-stretch lg:pb-6 lg:pt-2">
+          <div>
+          <motion.p {...rise(0)} className="mb-5 flex w-fit max-w-full items-center gap-2.5 rounded-2xl border border-line bg-surface px-3.5 py-1.5 text-xs text-dim sm:rounded-full">
             <span className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-leaf opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-leaf" />
@@ -74,16 +75,16 @@ export default function Hero() {
             {t(hero.titleA)} <em className="text-accent">{t(hero.titleB)}</em>
           </motion.h1>
 
-          <motion.p {...rise(0.2)} className="mt-7 max-w-xl text-lg leading-relaxed text-dim">
+          <motion.p {...rise(0.2)} className="mt-5 max-w-xl text-lg leading-relaxed text-dim">
             {t(hero.lead)}
           </motion.p>
 
-          <motion.p {...rise(0.25)} className="mt-6 min-h-7 font-mono text-sm text-ink">
+          <motion.p {...rise(0.25)} className="mt-4 min-h-7 font-mono text-sm text-ink">
             <span className="text-leaf">$</span> <span className="text-dim">{t(hero.building.label)}:</span>{" "}
             <Typewriter words={hero.building.words[lang]} />
           </motion.p>
 
-          <motion.div {...rise(0.3)} className="mt-9 flex flex-wrap items-center gap-3">
+          <motion.div {...rise(0.3)} className="mt-6 flex flex-wrap items-center gap-3">
             <a href="#contact" className="group inline-flex items-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-medium text-accent-ink shadow-[0_8px_24px_-8px_var(--accent)] transition hover:-translate-y-0.5">
               {t(ui.cta.contact)}
               <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
@@ -105,8 +106,9 @@ export default function Hero() {
               ))}
             </span>
           </motion.div>
+          </div>
 
-          <motion.div {...rise(0.4)} className="mt-10">
+          <motion.div {...rise(0.4)}>
             <TechCloud />
           </motion.div>
         </div>
