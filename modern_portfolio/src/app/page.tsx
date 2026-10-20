@@ -1,25 +1,31 @@
-import Navbar from "@/components/Navbar";
+import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
+import Seshat from "@/components/Seshat";
 import Experience from "@/components/Experience";
 import Projects from "@/components/Projects";
-import Education from "@/components/Education";
+import Skills from "@/components/Skills";
+import Journey from "@/components/Journey";
+import GameHud from "@/components/GameHud";
+import Background from "@/components/Background";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
-      <Navbar />
-      <Hero />
-      <About />
-      <Experience />
-      <Projects />
-      <Skills />
-      <Education />
-      <Contact />
+    <>
+      <Nav />
+      <main>
+        <Hero />
+        <Seshat />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Journey />
+        <Background />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+      <GameHud />
+    </>
   );
 }

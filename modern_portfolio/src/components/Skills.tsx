@@ -1,97 +1,132 @@
 "use client";
 
-import { Code2, Cpu, Database, Terminal, Settings } from "lucide-react";
-import { useContent } from "@/lib/useContent";
+import { useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { Bot, Cloud, Database, Eye, Server, type LucideIcon } from "lucide-react";
+import { skills } from "@/data/site";
+import { useLang } from "@/lib/i18n";
+import { unlock } from "@/lib/game";
+import { cn } from "@/lib/utils";
+import Reveal from "./Reveal";
+import SectionHead from "./SectionHead";
 
-const categoryIcons = {
-  programming: Terminal,
-  ml_ai: Cpu,
-  data_engineering: Database,
-};
+const icons: Record<string, LucideIcon> = { bot: Bot, server: Server, database: Database, eye: Eye, cloud: Cloud };
 
 export default function Skills() {
-  const { skills, ui } = useContent();
+  const { t } = useLang();
+  const [gi, setGi] = useState(0);
+  const [picked, setPicked] = useState<string | null>(null);
+  const seen = useRef(new Set<string>());
+
+  const group = skills.groups[gi];
+  const skill = group.items.find((i) => i.n === picked) ?? group.items[0];
+
+  function pick(name: string) {
+    setPicked(name);
+    seen.current.add(name);
+    if (seen.current.size >= 5) unlock("inspect");
+  }
 
   return (
-    <section id="skills" className="py-20 md:py-36 relative border-b border-border-main bg-bg-main/20">
-      <div className="max-w-7xl mx-auto px-6 md:px-8">
-        
-        {/* Section Header HUD */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between border-b border-border-main/50 pb-8 mb-12 md:mb-16 gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 border border-accent/20 bg-accent-soft text-accent text-[9px] font-mono font-bold uppercase tracking-[0.2em] mb-4">
-              <Settings size={10} /> {ui.skills.badge}
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-extrabold tracking-tighter text-text-main leading-none lg:whitespace-nowrap">
-              {ui.skills.heading_1} <span className="text-text-dim">{ui.skills.heading_2}</span> {ui.skills.heading_3}<span className="text-accent">.</span>
-            </h2>
-          </div>
-          <div className="shrink-0 font-mono text-[9px] text-text-dim uppercase tracking-widest">
-            {ui.skills.subheading}
-          </div>
-        </div>
+    <section id="skills" className="border-y border-line bg-surface/50 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl px-5 md:px-8">
+        <SectionHead index="04" title={t(skills.title)} lead={t(skills.lead)} />
 
-        {/* 3-Column Architectural Specs Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 border border-border-main rounded bg-bg-card/25 shadow-sm divide-y lg:divide-y-0 lg:divide-x divide-border-main">
-          {Object.entries(skills).map(([key, category], catIndex) => {
-            const Icon = categoryIcons[key as keyof typeof categoryIcons] || Code2;
-            
-            return (
-              <div key={key} className="p-6 md:p-8 lg:p-10 flex flex-col relative group">
-                {/* Visual grid indicators */}
-                <div className="absolute top-2 right-4 font-mono text-[7px] text-text-dim/35 tracking-wider">
-                  SYSTEM LAYER // 0{catIndex + 1}
-                </div>
-
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-9 h-9 border border-border-main rounded bg-bg-main flex items-center justify-center text-text-dim group-hover:border-accent/30 group-hover:text-accent transition-colors duration-300">
-                    <Icon size={16} />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-display font-extrabold text-text-main tracking-tight uppercase">
-                      {category.label}
-                    </h3>
-                    <span className="text-[7px] font-mono text-text-dim/80 tracking-widest uppercase">
-                      {ui.skills.ready}
+        <Reveal className="grid gap-4 lg:grid-cols-[18rem_1fr]">
+          {/* Domains */}
+          <div role="tablist" aria-label={t(skills.title)} className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
+            {skills.groups.map((g, i) => {
+              const Icon = icons[g.icon];
+              const active = i === gi;
+              return (
+                <button
+                  key={g.id}
+                  role="tab"
+                  aria-selected={active}
+                  type="button"
+                  onClick={() => {
+                    setGi(i);
+                    setPicked(null);
+                  }}
+                  className={cn(
+                    "group relative flex shrink-0 items-center gap-3 rounded-2xl border p-3.5 text-left transition lg:p-4",
+                    active ? "border-accent bg-surface shadow-sm" : "border-line hover:border-accent/50",
+                  )}
+                >
+                  {active && <motion.span layoutId="skill-tab" className="absolute inset-y-3 left-0 w-[3px] rounded-full bg-accent" />}
+                  <span className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl transition", active ? "bg-accent text-accent-ink" : "bg-bg text-dim group-hover:text-ink")}>
+                    <Icon size={18} />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block whitespace-nowrap text-[15px] font-medium leading-tight lg:whitespace-normal">{t(g.name)}</span>
+                    <span className="mt-0.5 block font-mono text-[11px] text-dim">
+                      {g.items.length} {t(skills.skills)}
                     </span>
-                  </div>
-                </div>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-                {/* Highly structured list of capabilities */}
-                <div className="space-y-2 mt-auto">
-                  {category.items.map((skill) => {
-                    const isExpert = skill.level === "Expert";
-                    const isAdvanced = skill.level === "Advanced" || skill.level === "Advanced";
-                    
+          {/* Skills of the selected domain */}
+          <div className="rounded-2xl border border-line bg-surface p-6 md:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div key={group.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.22 }}>
+                <p className="display text-3xl md:text-4xl">{t(group.name)}</p>
+                <p className="mt-1 text-dim">{t(group.tagline)}</p>
+
+                <ul className="mt-7 flex flex-wrap gap-2.5">
+                  {group.items.map((s, i) => {
+                    const on = skill.n === s.n;
                     return (
-                      <div
-                        key={skill.name}
-                        className="flex items-center justify-between p-2 border border-border-main/40 bg-bg-main/30 hover:bg-bg-main/80 hover:border-accent/20 transition-all duration-200 rounded font-mono text-xs"
-                      >
-                        <span className="text-text-main font-semibold flex items-center gap-2">
-                          {skill.name}
-                          {isExpert && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      <motion.li key={s.n} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.03 }}>
+                        <button
+                          type="button"
+                          aria-pressed={on}
+                          onClick={() => pick(s.n)}
+                          className={cn(
+                            "relative rounded-full border px-4 py-2 text-sm transition",
+                            on ? "border-accent bg-accent text-accent-ink" : "border-line bg-bg hover:-translate-y-0.5 hover:border-accent",
                           )}
-                        </span>
-                        
-                        <span className={`text-[8px] font-bold px-1.5 py-0.5 rounded tracking-widest ${
-                          isExpert
-                            ? "bg-accent-soft text-accent border border-accent/20"
-                            : isAdvanced
-                            ? "bg-text-main/5 text-text-main/80 border border-border-main"
-                            : "bg-text-main/[0.02] text-text-dim/60"
-                        }`}>
-                          {skill.level.slice(0, 3).toUpperCase()}
-                        </span>
-                      </div>
+                        >
+                          {s.n}
+                          {s.used && !on && <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-leaf ring-2 ring-surface" aria-hidden />}
+                        </button>
+                      </motion.li>
                     );
                   })}
+                </ul>
+
+                <div className="mt-8 min-h-28 rounded-xl border border-dashed border-line bg-bg/60 p-5" aria-live="polite">
+                  <AnimatePresence mode="wait">
+                    {skill ? (
+                      <motion.div key={skill.n} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }}>
+                        <p className="eyebrow mb-3">
+                          <span className="text-ink">{skill.n}</span> · {t(skills.usedIn)}
+                        </p>
+                        {skill.used ? (
+                          <ul className="flex flex-wrap gap-2">
+                            {skill.used.map((u) => (
+                              <li key={u} className="rounded-lg bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent">
+                                {u}
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm text-dim">{t(skills.none)}</p>
+                        )}
+                      </motion.div>
+                    ) : (
+                      <motion.p key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex h-full items-center gap-2 pt-2 text-sm text-dim">
+                        <span className="h-2 w-2 rounded-full bg-leaf" /> {t(skills.pick)}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

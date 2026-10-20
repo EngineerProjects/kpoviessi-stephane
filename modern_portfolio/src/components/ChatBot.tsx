@@ -1,360 +1,199 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
-import { MessageSquare, X, Send, Bot, Sparkles, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { MessageCircle, Send, Trash2, X } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { chat } from "@/data/site";
+import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-import { useContent } from "@/lib/useContent";
-import { useLanguage } from "@/lib/LanguageContext";
+import { unlock } from "@/lib/game";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-// Renders message text with URLs, emails and phone numbers as colored clickable links
-function renderMessage(content: string, isUser: boolean) {
-  const pattern = /(https?:\/\/[^\s]+|[\w.+-]+@[\w-]+\.[a-z]{2,}|\+\d[\d\s\-]{7,}\d)/g;
-  const parts = content.split(pattern);
-  return parts.map((part, i) => {
-    if (/^https?:\/\//.test(part)) {
-      return (
-        <a key={i} href={part} target="_blank" rel="noopener noreferrer"
-          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
-          {part}
-        </a>
-      );
-    }
-    if (/^[\w.+-]+@[\w-]+\.[a-z]{2,}$/.test(part)) {
-      return (
-        <a key={i} href={`mailto:${part}`}
-          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
-          {part}
-        </a>
-      );
-    }
-    if (/^\+\d[\d\s\-]{7,}\d$/.test(part)) {
-      return (
-        <a key={i} href={`tel:${part.replace(/[\s\-]/g, "")}`}
-          className={isUser ? "underline opacity-80 hover:opacity-100" : "text-accent underline hover:opacity-80 transition-opacity"}>
-          {part}
-        </a>
-      );
-    }
-    return <span key={i}>{part}</span>;
-  });
-}
-
-const NOTIF_KEY = "sk_chat_notif_seen";
+const memoryKey = (lang: string) => `sk_chat_${lang}`;
 
 export default function ChatBot() {
-  const { ui } = useContent();
-  const { language } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false);
-  const [showNotif, setShowNotif] = useState(false);
+  const { lang, t } = useLang();
+  const [open, setOpen] = useState(false);
+  const [bubble, setBubble] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-  const iconControls = useAnimation();
+  const [loading, setLoading] = useState(false);
+  const endRef = useRef<HTMLDivElement>(null);
 
-  // Periodic icon shake every 8 seconds when chat is closed
   useEffect(() => {
-    if (isOpen) return;
-    const shake = () =>
-      iconControls.start({
-        rotate: [0, -18, 18, -10, 10, -4, 4, 0],
-        transition: { duration: 0.6, ease: "easeInOut" },
-      });
-    const t = setTimeout(shake, 3000);
-    const interval = setInterval(shake, 8000);
-    return () => { clearTimeout(t); clearInterval(interval); };
-  }, [isOpen, iconControls]);
-
-  // Show notification bubble, 6 seconds after mount
-  useEffect(() => {
-    const t = setTimeout(() => setShowNotif(true), 6000);
-    return () => clearTimeout(t);
+    const show = setTimeout(() => setBubble(true), 7000);
+    return () => clearTimeout(show);
   }, []);
-
-  // Auto-hide after 8 seconds
   useEffect(() => {
-    if (!showNotif) return;
-    const t = setTimeout(() => setShowNotif(false), 8000);
-    return () => clearTimeout(t);
-  }, [showNotif]);
+    if (!bubble) return;
+    const hide = setTimeout(() => setBubble(false), 8000);
+    return () => clearTimeout(hide);
+  }, [bubble]);
 
-  const openChat = () => {
-    setShowNotif(false);
-    setIsOpen(true);
-  };
-
-  // Load chat memory on mount
   useEffect(() => {
-    const saved = localStorage.getItem(`assistant_memory_${language}`);
-    if (saved) {
-      setMessages(JSON.parse(saved));
-    } else {
-      setMessages([
-        {
-          role: "assistant",
-          content: ui.chat.initial,
-        },
-      ]);
-    }
-  }, [language, ui.chat.initial]);
+    let saved: Message[] | null = null;
+    try {
+      const raw = localStorage.getItem(memoryKey(lang));
+      if (raw) saved = JSON.parse(raw);
+    } catch {}
+    setMessages(saved?.length ? saved : [{ role: "assistant", content: chat.initial[lang] }]);
+  }, [lang]);
 
-  // Save chat memory only when there's a real conversation (not just the initial/cleared message)
   useEffect(() => {
     if (messages.length > 1) {
-      localStorage.setItem(`assistant_memory_${language}`, JSON.stringify(messages));
+      try {
+        localStorage.setItem(memoryKey(lang), JSON.stringify(messages));
+      } catch {}
     }
-  }, [messages, language]);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages, lang]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages, isLoading]);
+    if (open) unlock("chat");
+  }, [open]);
 
-  const clearChat = () => {
-    const initialMessage: Message[] = [{
-      role: "assistant",
-      content: ui.chat.initial,
-    }];
-    setMessages(initialMessage);
-    localStorage.removeItem(`assistant_memory_${language}`);
-  };
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading, open]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const userMessage = input.trim();
-    setInput("");
-    const newMessages = [...messages, { role: "user", content: userMessage } as Message];
-    setMessages(newMessages);
-    setIsLoading(true);
-
+  function clear() {
+    setMessages([{ role: "assistant", content: chat.initial[lang] }]);
     try {
-      const response = await fetch("/api/chat", {
+      localStorage.removeItem(memoryKey(lang));
+    } catch {}
+  }
+
+  async function send() {
+    const text = input.trim();
+    if (!text || loading) return;
+    const next: Message[] = [...messages, { role: "user", content: text }];
+    setMessages(next);
+    setInput("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: newMessages, language }),
+        body: JSON.stringify({ messages: next, language: lang }),
       });
-
-      const data = await response.json();
-      setMessages([...newMessages, { role: "assistant", content: data.content }]);
-    } catch (error) {
-      console.error("Chat Error:", error);
-      setMessages([...newMessages, { role: "assistant", content: ui.chat.error }]);
+      const data = await res.json();
+      setMessages([...next, { role: "assistant", content: data.content }]);
+    } catch {
+      setMessages([...next, { role: "assistant", content: t(chat.error) }]);
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  };
-
-  const notifText = language === "fr"
-    ? "👋 Salut ! Je suis Lys. Des questions sur Stéphane ? Je suis là !"
-    : "👋 Hi! I'm Lys. Want to know more about Stéphane? Ask me!";
+  }
 
   return (
     <>
-      {/* Notification bubble */}
       <AnimatePresence>
-        {showNotif && !isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
-            className="fixed bottom-24 right-6 z-[61] max-w-[220px] cursor-pointer"
-            onClick={openChat}
+        {bubble && !open && (
+          <motion.button
+            type="button"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            onClick={() => {
+              setBubble(false);
+              setOpen(true);
+            }}
+            className="fixed bottom-24 right-5 z-40 max-w-[15rem] rounded-2xl rounded-br-md border border-line bg-surface px-4 py-3 text-left text-sm shadow-lg"
           >
-            <div className="relative bg-bg-card border border-accent/30 shadow-lg rounded-lg px-4 py-3">
-              <button
-                onClick={(e) => { e.stopPropagation(); setShowNotif(false); }}
-                className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-bg-card border border-border-main text-text-dim hover:text-accent flex items-center justify-center text-[10px] leading-none"
-              >
-                ×
-              </button>
-              <p className="text-xs font-medium text-text-main leading-snug">{notifText}</p>
-              {/* Tail pointing down toward chat button */}
-              <div className="absolute -bottom-[7px] right-5 w-3 h-3 bg-bg-card border-r border-b border-accent/30 rotate-45" />
-            </div>
-          </motion.div>
+            {t(chat.notif)}
+          </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Floating Activation Button */}
-      <div className="fixed bottom-6 right-6 z-[60]">
-        {/* Sonar rings — only when chat is closed */}
-        {!isOpen && (
-          <>
-            {[0, 0.9, 1.8].map((delay) => (
-              <motion.span
-                key={delay}
-                className="absolute inset-0 border border-accent/40 pointer-events-none"
-                style={{ borderRadius: "4px" }}
-                animate={{ scale: [1, 2.2], opacity: [0.5, 0] }}
-                transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 2.6, delay, ease: "easeOut" }}
-              />
-            ))}
-          </>
-        )}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-label={open ? t(chat.close) : t(chat.open)}
+        aria-expanded={open}
+        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-accent text-accent-ink shadow-xl transition hover:scale-105"
+      >
+        {open ? <X size={22} /> : <MessageCircle size={22} />}
+      </button>
 
-        <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 border border-accent bg-bg-card text-accent shadow-lg flex items-center justify-center cursor-pointer"
-          style={{ borderRadius: "4px" }}
-        >
-          <AnimatePresence mode="wait">
-            {isOpen ? (
-              <motion.div key="close"><X size={20} /></motion.div>
-            ) : (
-              <motion.div key="open" animate={iconControls} className="relative flex items-center justify-center">
-                <MessageSquare size={20} />
-                <span className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-emerald-500 border border-bg-card rounded-full animate-pulse" />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.button>
-      </div>
-
-      {/* CAD Terminal Chat Window */}
       <AnimatePresence>
-        {isOpen && (
+        {open && (
           <motion.div
-            initial={{ opacity: 0, y: 12, scale: 0.98, transformOrigin: "bottom right" }}
+            role="dialog"
+            aria-label={t(chat.title)}
+            initial={{ opacity: 0, y: 16, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.98 }}
-            className="fixed bottom-20 right-3 sm:bottom-24 sm:right-6 z-[60] w-[calc(100vw-1.5rem)] sm:w-[420px] h-[60vh] sm:h-[580px] max-h-[85vh] border border-border-main bg-bg-main/98 backdrop-blur-md shadow-xl flex flex-col overflow-hidden"
-            style={{ borderRadius: "8px" }}
+            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-3 bottom-24 z-50 flex h-[min(34rem,calc(100dvh-8rem))] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl sm:inset-x-auto sm:right-5 sm:w-[24rem]"
           >
-            {/* HUD Terminal Header */}
-            <div className="px-5 py-4 border-b border-border-main flex items-center justify-between bg-bg-card/45 relative">
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 border border-accent/20 bg-accent-soft rounded flex items-center justify-center text-accent">
-                  <Bot size={16} />
-                </div>
-                <div className="font-mono">
-                  <h3 className="text-[10px] font-bold text-text-main uppercase tracking-wider leading-none">{ui.chat.title}</h3>
-                  <div className="flex items-center gap-1.5 mt-1 leading-none">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[7px] font-bold text-text-dim/80 tracking-widest uppercase">NODE: ACTIVE // PORT_443</span>
-                  </div>
-                </div>
+            <div className="flex items-center justify-between border-b border-line px-4 py-3">
+              <div>
+                <p className="font-medium leading-tight">{t(chat.title)}</p>
+                <p className="text-xs text-dim">{t(chat.sub)}</p>
               </div>
-              <div className="flex items-center gap-1 font-mono">
-                <button 
-                  onClick={clearChat} 
-                  className="p-1.5 border border-border-main/50 rounded text-text-dim hover:text-accent hover:bg-accent-soft transition-colors" 
-                  title={ui.chat.reset_title}
-                >
-                  <Trash2 size={12} />
-                </button>
-                <button 
-                  onClick={() => setIsOpen(false)} 
-                  className="p-1.5 border border-border-main/50 rounded text-text-dim hover:text-accent hover:bg-accent-soft transition-colors"
-                >
-                  <X size={12} />
-                </button>
-              </div>
+              <button type="button" onClick={clear} aria-label={t(chat.reset)} title={t(chat.reset)} className="grid h-8 w-8 place-items-center rounded-full text-dim transition hover:bg-bg hover:text-ink">
+                <Trash2 size={15} />
+              </button>
             </div>
 
-            {/* Monospace Message Timeline */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-6 bg-bg-main/30 scrollbar-thin">
-              {messages.map((msg, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={cn("flex flex-col gap-1.5", msg.role === "user" ? "items-end" : "items-start")}
-                >
-                  <span className="font-mono text-[7px] text-text-dim/70 uppercase tracking-widest px-1">
-                    {msg.role === "assistant" ? ui.chat.assistant_label : ui.chat.user_label}
-                  </span>
-                  
-                  <div className={cn(
-                    "max-w-[85%] p-4 border shadow-sm font-sans text-xs leading-relaxed font-medium",
-                    msg.role === "user" 
-                      ? "bg-text-main text-bg-main border-text-main rounded-l rounded-tr-none" 
-                      : "bg-bg-card text-text-main border-border-main rounded-r rounded-tl-none"
-                  )}>
-                    {msg.role === "user" ? (
-                      <p className="whitespace-pre-wrap">{renderMessage(msg.content, true)}</p>
-                    ) : (
-                      <ReactMarkdown
-                        remarkPlugins={[remarkGfm]}
-                        components={{
-                          p: ({ children }) => <p className="mb-1.5 last:mb-0">{children}</p>,
-                          ul: ({ children }) => <ul className="list-disc list-inside space-y-0.5 my-1.5">{children}</ul>,
-                          ol: ({ children }) => <ol className="list-decimal list-inside space-y-0.5 my-1.5">{children}</ol>,
-                          li: ({ children }) => <li className="leading-relaxed">{children}</li>,
-                          strong: ({ children }) => <strong className="font-bold text-text-main">{children}</strong>,
-                          em: ({ children }) => <em className="italic opacity-80">{children}</em>,
-                          a: ({ href, children }) => (
-                            <a href={href} target="_blank" rel="noopener noreferrer"
-                              className="text-accent underline hover:opacity-80 transition-opacity">
-                              {children}
-                            </a>
-                          ),
-                          code: ({ children }) => (
-                            <code className="font-mono text-[10px] bg-bg-main/60 px-1 py-0.5 rounded border border-border-main/40">
-                              {children}
-                            </code>
-                          ),
-                        }}
-                      >
-                        {msg.content}
-                      </ReactMarkdown>
+            <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
+              {messages.map((m, i) => (
+                <div key={i} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}>
+                  <div
+                    className={cn(
+                      "prose-chat max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
+                      m.role === "user" ? "rounded-br-md bg-accent text-accent-ink" : "rounded-bl-md bg-bg",
                     )}
+                  >
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        a: ({ children, ...props }) => (
+                          <a {...props} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+                            {children}
+                          </a>
+                        ),
+                      }}
+                    >
+                      {m.content}
+                    </ReactMarkdown>
                   </div>
-                </motion.div>
+                </div>
               ))}
-              
-              {isLoading && (
-                <div className="flex flex-col gap-1.5 items-start">
-                  <span className="font-mono text-[7px] text-accent uppercase tracking-widest px-1">{ui.chat.loading_label}</span>
-                  <div className="bg-bg-card text-text-main p-4 border border-border-main rounded-r rounded-tl-none flex gap-1.5">
-                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce" />
-                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce [animation-delay:0.2s]" />
-                    <span className="w-1.5 h-1.5 bg-accent/60 rounded-full animate-bounce [animation-delay:0.4s]" />
+              {loading && (
+                <div className="flex justify-start">
+                  <div className="flex gap-1 rounded-2xl rounded-bl-md bg-bg px-4 py-3" aria-label="…">
+                    {[0, 1, 2].map((d) => (
+                      <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-dim" style={{ animationDelay: `${d * 0.15}s` }} />
+                    ))}
                   </div>
                 </div>
               )}
-              <div ref={messagesEndRef} />
+              <div ref={endRef} />
             </div>
 
-            {/* Input Dispatch Console */}
-            <div className="p-4 border-t border-border-main bg-bg-card/45 font-mono">
-              <div className="relative flex items-center">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
-                  placeholder={ui.chat.placeholder}
-                  className="w-full pl-3 pr-12 py-3 rounded border border-border-main bg-bg-main/50 text-text-main placeholder:text-text-dim/40 focus:outline-none focus:border-accent/40 font-mono text-xs"
-                />
-                <button
-                  onClick={handleSend}
-                  disabled={!input.trim() || isLoading}
-                  className="absolute right-1.5 top-1/2 -translate-y-1/2 w-8 h-8 rounded border border-border-main bg-bg-main flex items-center justify-center text-text-dim hover:text-accent hover:border-accent/30 hover:bg-accent-soft transition-all disabled:opacity-50"
-                >
-                  <Send size={12} />
-                </button>
-              </div>
-              <p className="mt-3 text-[7px] text-text-dim/80 text-center uppercase tracking-[0.15em] flex items-center justify-center gap-1.5 opacity-65">
-                <Sparkles size={8} className="text-accent" /> {ui.chat.footer}
-              </p>
-            </div>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                send();
+              }}
+              className="flex items-center gap-2 border-t border-line p-3"
+            >
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t(chat.placeholder)}
+                className="min-w-0 flex-1 rounded-full border border-line bg-bg px-4 py-2.5 text-sm outline-none transition focus:border-accent"
+              />
+              <button type="submit" disabled={!input.trim() || loading} aria-label="Send" className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent text-accent-ink transition disabled:opacity-40">
+                <Send size={16} />
+              </button>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

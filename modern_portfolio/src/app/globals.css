@@ -1,115 +1,153 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
-  --color-bg-main: var(--bg-main);
-  --color-bg-card: var(--bg-card);
-  --color-text-main: var(--text-main);
-  --color-text-dim: var(--text-dim);
-  --color-border-main: var(--border-main);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-dim: var(--dim);
+  --color-line: var(--line);
   --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
-  
-  --font-sans: "Inter", "Segoe UI", Arial, sans-serif;
-  --font-display: "Plus Jakarta Sans", "Inter", sans-serif;
-  --font-mono: "JetBrains Mono", Consolas, monospace;
+  --color-leaf: var(--leaf);
+  --color-sun: var(--sun);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, Consolas, monospace;
 }
 
 :root {
-  /* Nordic Gallery & Alabaster (Light Mode) */
-  --bg-main: #FAF9F6;
-  --bg-card: rgba(241, 237, 232, 0.6);
-  --text-main: #2A2724;
-  --text-dim: #7A746E;
-  --border-main: #DCD5CE;
-  --accent: #A88E67;
-  --accent-soft: rgba(168, 142, 103, 0.08);
+  color-scheme: light;
+  --bg: #fbf6ee;
+  --surface: #fffdf9;
+  --ink: #241a12;
+  --dim: #6e5f50;
+  --line: #eadfcd;
+  --accent: #c46f0a;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(196, 111, 10, 0.1);
+  --leaf: #3f7d4a;
+  --sun: #f0a93b;
 }
 
 .dark {
-  /* Warm Cybernetic Charcoal (Dark Mode) */
-  --bg-main: #1A191E;
-  --bg-card: rgba(36, 35, 42, 0.65);
-  --text-main: #ECF1F0;
-  --text-dim: #8E8D99;
-  --border-main: rgba(236, 241, 240, 0.07);
-  --accent: #B58282;
-  --accent-soft: rgba(181, 130, 130, 0.08);
-}
-
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --bg: #15100b;
+  --surface: #1e1711;
+  --ink: #f7ecdd;
+  --dim: #ab9983;
+  --line: #342a1f;
+  --accent: #f2a93b;
+  --accent-ink: #1d1208;
+  --accent-soft: rgba(242, 169, 59, 0.12);
+  --leaf: #7cc58b;
+  --sun: #f2a93b;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px;
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--bg-main);
-  color: var(--text-main);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
-  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Glassmorphism base with high-end ambient occlusion */
-.glass {
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  background: var(--bg-card);
-  border: 1px solid var(--border-main);
-}
-
-/* Selection */
 ::selection {
-  background: var(--accent-soft);
-  color: var(--accent);
-}
-
-/* Custom Scrollbar - CAD layout styling */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-main);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border-main);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
+  color: var(--accent-ink);
 }
 
-/* Exposed Grid Pattern for CAD Blueprinting */
-.bg-grid-soft {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, var(--border-main) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--border-main) 1px, transparent 1px);
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
-/* Horizontal & Vertical Architectural Grid Lines */
-.grid-line-h {
-  width: 100%;
-  height: 1px;
-  background: var(--border-main);
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
 }
 
-.grid-line-v {
-  width: 1px;
-  height: 100%;
-  background: var(--border-main);
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
 }
 
-/* Micro-dots for grid junctions */
-.dot-junction {
-  width: 4px;
-  height: 4px;
-  background: var(--accent);
-  border-radius: 50%;
-  opacity: 0.4;
+.dots::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--line) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.float { animation: float 6s ease-in-out infinite; }
+
+
+/* Project illustrations: one-shot animations wait until the card is in view (.in). */
+@keyframes art-flow { to { stroke-dashoffset: -24; } }
+@keyframes art-grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+@keyframes art-type { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes art-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes art-check { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+@keyframes art-spin { to { transform: rotate(360deg); } }
+@keyframes art-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+@keyframes art-pulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+
+.art-flow { stroke-dasharray: 5 7; animation: art-flow 1.6s linear infinite; }
+.art-grow { transform-box: fill-box; transform-origin: bottom; animation: art-grow 1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.art-type { transform-box: fill-box; transform-origin: left; animation: art-type 0.8s steps(10) both; }
+.art-draw { stroke-dasharray: 1; animation: art-draw 1.6s ease-out both; }
+.art-check { stroke-dasharray: 24; animation: art-check 0.45s ease-out both; }
+.art-spin { animation: art-spin 28s linear infinite; }
+.art-bob { animation: art-bob 3.6s ease-in-out infinite; }
+.art-pulse { transform-box: fill-box; transform-origin: center; animation: art-pulse 2.8s ease-in-out infinite; }
+
+.art:not(.in) .art-grow,
+.art:not(.in) .art-type,
+.art:not(.in) .art-draw,
+.art:not(.in) .art-check { animation-play-state: paused; }
+
+/* Portrait: sharp and bright, only the edge facing the text dissolves into the page. */
+.fade-left {
+  --m-h: linear-gradient(to right, transparent 0, #000 42%);
+  --m-v: linear-gradient(to bottom, transparent 0, #000 20%);
+  -webkit-mask-image: var(--m-h), var(--m-v);
+  -webkit-mask-composite: source-in;
+  mask-image: var(--m-h), var(--m-v);
+  mask-composite: intersect;
+}
+.fade-top {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+}
+
+.prose-chat p { margin: 0 0 0.5rem; }
+.prose-chat p:last-child { margin-bottom: 0; }
+.prose-chat ul { margin: 0.25rem 0 0.5rem 1.1rem; list-style: disc; }
+.prose-chat strong { font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
 }

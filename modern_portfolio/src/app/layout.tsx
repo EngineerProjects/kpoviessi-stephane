@@ -1,126 +1,70 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { LanguageProvider } from "@/lib/LanguageContext";
+import { ThemeProvider } from "next-themes";
+import { LanguageProvider } from "@/lib/i18n";
 import ChatBot from "@/components/ChatBot";
-import LanguageModal from "@/components/LanguageModal";
+import { person } from "@/data/site";
+
+const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
+const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
+const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument" });
+
+const title = "Stéphane KPOVIESSI | Founder of Seshat, AI & Data Engineer";
+const description =
+  "Founder of Seshat, an open-source Go agent runtime. AI and Data Engineer: agents, hybrid RAG, PySpark pipelines, computer vision. Based in Île-de-France.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kpoviessi-stephane.vercel.app/"),
-  title: "Stéphane KPOVIESSI | AI Systems & Data Engineer",
-  description:
-    "Portfolio of Stéphane KPOVIESSI, AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, multi-agent systems, RAG, and computer vision.",
+  metadataBase: new URL(person.site),
+  title,
+  description,
+  applicationName: "Stéphane KPOVIESSI",
+  authors: [{ name: "Stéphane Kpoviessi", url: person.site }],
   keywords: [
     "Stéphane Kpoviessi",
-    "Stephane Kpoviessi",
-    "KPOVIESSI",
-    "Amiche",
-    "Olaolouwa",
-    "Big Data Engineer",
-    "Ingénieur Big Data",
-    "Data Engineer PySpark",
-    "Data Engineer AI",
-    "AI Systems Engineer",
-    "AI Specialist",
-    "Expert IA",
-    "Machine Learning Engineer",
-    "Data Scientist",
-    "Statistics Data Analytics",
-    "Data Engineer",
-    "Data Science",
-    "Portfolio",
-    "SK-OS",
-    "Lille",
-    "Paris",
-    "Hauts-de-France",
-    "Île-de-France",
-    "Cergy",
-    "Europe",
-    "Junia ISEN",
-    "Allianz",
-    "Sylvagreg",
-    "Python",
-    "Go",
-    "Golang",
-    "SQL",
-    "PySpark",
+    "AI engineer",
+    "GenAI engineer",
+    "Data engineer",
+    "AI agents",
     "RAG",
-    "LLM",
-    "Generative AI",
-    "GANs",
-    "Computer Vision",
-    "NLP",
-    "Multi-agent systems",
-    "Azure",
-    "AWS",
-    "Docker",
-    "Databricks",
-    "Azure Data Lake",
-    "Vector DB",
-    "PyTorch",
-    "TensorFlow",
-    "Scikit-learn",
-    "Medallion Architecture",
-    "Data Engineering",
-    "MLOps",
-    "Freelance IA",
-    "Recrutement Big Data",
-    "AI Research",
-    "Open Source",
-    "Community Building",
-    "Music & Drumming",
-    "Entrepreneurship",
-    "CDI",
-    "Remote",
-    "workflow",
-    "Algorithm",
-    "Operationnal research",
-    "AI/ML",
-    "Engineer",
-    "Auto-Entrepreneur",
+    "MCP",
+    "Go",
+    "PySpark",
+    "Seshat",
+    "Ingénieur IA",
+    "Ingénieur Big Data",
   ],
-  authors: [{ name: "Stéphane Kpoviessi" }],
-  verification: {
-    google: "G4GoMHBsqSjeIC6E4J19MxsS8o-3lTkmcTvbu435CC0",
-  },
-  openGraph: {
-    type: "website",
-    url: "https://kpoviessi-stephane.vercel.app/",
-    title: "Stéphane KPOVIESSI | AI Systems & Data Engineer",
-    description:
-      "Explore his work in Data Engineering, PySpark, AI systems, RAG, multi-agent architectures, and computer vision.",
-    images: [{ url: "/images/profile.png" }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Stéphane Kpoviessi | AI Systems & Data Engineer",
-    description:
-      "AI Systems & Data Infrastructure Engineer specializing in Big Data, PySpark, RAG, and multi-agent systems.",
-    images: ["/images/profile.png"],
-  },
+  alternates: { canonical: "/" },
+  openGraph: { type: "website", url: person.site, title, description, images: [{ url: "/images/stephane.jpg" }] },
+  twitter: { card: "summary", title, description, images: ["/images/stephane.jpg"] },
+  verification: { google: "G4GoMHBsqSjeIC6E4J19MxsS8o-3lTkmcTvbu435CC0" },
 };
 
-export const viewport = {
-  themeColor: "#0a0a12",
+export const viewport: Viewport = {
+  themeColor: "#fbf6ee",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Stéphane Kpoviessi",
+  jobTitle: "AI & Data Engineer, Founder of Seshat",
+  url: person.site,
+  image: `${person.site}/images/stephane.jpg`,
+  sameAs: [person.linkedin, person.github, person.org, person.seshat],
+  alumniOf: [{ "@type": "CollegeOrUniversity", name: "JUNIA ISEN" }],
+  worksFor: { "@type": "Organization", name: "Seshat AI", url: person.seshat },
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="scroll-smooth">
-      <body className="antialiased transition-colors duration-500">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
-        >
+    <html lang="en" suppressHydrationWarning className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
+      <body>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
           <LanguageProvider>
             {children}
             <ChatBot />
-            <LanguageModal />
           </LanguageProvider>
         </ThemeProvider>
       </body>
