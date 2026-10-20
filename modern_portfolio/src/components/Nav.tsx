@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { nav, ui, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -61,6 +61,9 @@ export default function Nav() {
               {t(n.label)}
             </a>
           ))}
+          <a href="https://seshat-ai.com/blog" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 text-sm text-dim transition-colors hover:text-ink">
+            Blog <ArrowUpRight size={13} />
+          </a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -106,6 +109,11 @@ export default function Nav() {
                 </a>
               </li>
             ))}
+            <li>
+              <a href="https://seshat-ai.com/blog" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 rounded-lg px-3 py-2.5 text-base text-dim hover:bg-surface hover:text-ink">
+                Blog <ArrowUpRight size={14} />
+              </a>
+            </li>
           </ul>
         </nav>
       )}

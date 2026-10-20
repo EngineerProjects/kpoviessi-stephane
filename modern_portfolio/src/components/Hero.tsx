@@ -9,6 +9,7 @@ import { unlock } from "@/lib/game";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import CountUp from "./CountUp";
 import Typewriter from "./Typewriter";
+import TechCloud from "./TechCloud";
 
 const social = [
   { href: person.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
@@ -103,6 +104,10 @@ export default function Hero() {
                 </a>
               ))}
             </span>
+          </motion.div>
+
+          <motion.div {...rise(0.4)} className="mt-10">
+            <TechCloud />
           </motion.div>
         </div>
       </div>

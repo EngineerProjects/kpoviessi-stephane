@@ -22,6 +22,7 @@ export const achievements: Achievement[] = [
   { id: "repo", xp: 15, title: { en: "Code reader", fr: "Lecteur de code" }, desc: { en: "Open a project on GitHub.", fr: "Ouvrir un projet sur GitHub." } },
   { id: "cv", xp: 20, title: { en: "Résumé hunter", fr: "Chasseur de CV" }, desc: { en: "Download a résumé.", fr: "Télécharger un CV." } },
   { id: "message", xp: 30, title: { en: "Reached out", fr: "Premier contact" }, desc: { en: "Send a message. The best quest.", fr: "Envoyer un message. La meilleure quête." } },
+  { id: "juggle", xp: 10, hidden: true, title: { en: "Juggler", fr: "Jongleur" }, desc: { en: "Grab one of the floating technologies.", fr: "Attraper une des technologies qui flottent." } },
   { id: "logo", xp: 20, hidden: true, title: { en: "Curious mind", fr: "Esprit curieux" }, desc: { en: "Click the logo five times.", fr: "Cliquer cinq fois sur le logo." } },
   { id: "konami", xp: 50, hidden: true, title: { en: "Old school", fr: "Old school" }, desc: { en: "Enter the Konami code.", fr: "Entrer le Konami code." } },
 ];
