@@ -81,6 +81,9 @@ export default function Nav() {
             ))}
           </div>
           <ThemeToggle />
+          <a href="#contact" className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:opacity-90 lg:inline-block">
+            {t(ui.cta.contact)}
+          </a>
           <button
             type="button"
             className="grid h-9 w-9 place-items-center rounded-full border border-line text-dim md:hidden"
