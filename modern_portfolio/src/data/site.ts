@@ -119,6 +119,7 @@ export interface Role {
   summary: L;
   metric: { v: string; l: L };
   art: "agent" | "medallion" | "chart" | "cube";
+  logo?: string;
   points: L[];
   stack: string[];
   links?: { label: string; href: string }[];
@@ -137,6 +138,7 @@ export const experience = {
   roles: [
     {
       company: "Seshat AI",
+      logo: "/logos/seshat.png",
       role: { en: "Founder & AI Engineer", fr: "Fondateur & ingénieur IA" },
       kind: { en: "Founder", fr: "Fondateur" },
       period: { en: "Sep 2026 – Present", fr: "Sept. 2026 – Aujourd'hui" },
@@ -159,6 +161,7 @@ export const experience = {
     },
     {
       company: "Allianz France",
+      logo: "/logos/allianz.png",
       role: { en: "Data Engineer / Data Scientist", fr: "Ingénieur data / data scientist" },
       kind: { en: "Internship", fr: "Stage" },
       period: { en: "Nov 2025 – Apr 2026", fr: "Nov. 2025 – Avr. 2026" },
@@ -198,6 +201,7 @@ export const experience = {
     },
     {
       company: "Groupe Sylvagreg",
+      logo: "/logos/sylvagreg.png",
       role: { en: "Machine Learning Engineer", fr: "Ingénieur machine learning" },
       kind: { en: "Internship", fr: "Stage" },
       period: { en: "May – Aug 2024", fr: "Mai – Août 2024" },

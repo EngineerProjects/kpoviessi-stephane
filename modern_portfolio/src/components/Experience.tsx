@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { experience, type Role } from "@/data/site";
@@ -113,7 +114,12 @@ export default function Experience() {
             <li key={r.company} className="relative pb-8 last:pb-0">
               <Reveal className="grid gap-4 pl-8 md:grid-cols-[11rem_1fr] md:gap-12 md:pl-0">
                 <div className="md:pt-6 md:text-right">
-                  <p className="font-mono text-xs text-dim">{t(r.period)}</p>
+                  {r.logo && (
+                    <span className="mb-3 inline-flex h-12 items-center rounded-xl border border-line bg-white px-3 shadow-sm">
+                      <Image src={r.logo} alt={r.company} width={140} height={48} style={{ height: "2rem", width: "auto" }} />
+                    </span>
+                  )}
+                  <p className="block font-mono text-xs text-dim">{t(r.period)}</p>
                   <p className="mt-1 text-xs text-dim/80">{t(r.place)}</p>
                 </div>
                 <div className="relative md:pl-12">
