@@ -127,14 +127,18 @@ body {
 .art:not(.in) .art-draw,
 .art:not(.in) .art-check { animation-play-state: paused; }
 
-/* Portrait that dissolves into the page: soft top (under the header), sides and bottom. */
-.fade-photo {
-  --fade-v: linear-gradient(to bottom, transparent 0, #000 16%, #000 72%, transparent 100%);
-  --fade-h: linear-gradient(to right, transparent 0, #000 32%, #000 68%, transparent 100%);
-  -webkit-mask-image: var(--fade-v), var(--fade-h);
+/* Portrait: sharp and bright, only the edge facing the text dissolves into the page. */
+.fade-left {
+  --m-h: linear-gradient(to right, transparent 0, #000 42%);
+  --m-v: linear-gradient(to bottom, transparent 0, #000 20%);
+  -webkit-mask-image: var(--m-h), var(--m-v);
   -webkit-mask-composite: source-in;
-  mask-image: var(--fade-v), var(--fade-h);
+  mask-image: var(--m-h), var(--m-v);
   mask-composite: intersect;
+}
+.fade-top {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
 }
 
 .prose-chat p { margin: 0 0 0.5rem; }

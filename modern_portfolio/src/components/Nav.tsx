@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { nav, ui, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
@@ -49,7 +50,8 @@ export default function Nav() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
         <a href="#top" onClick={onLogo} className="flex items-center gap-2.5 font-medium tracking-tight" aria-label={person.name}>
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink font-mono text-xs font-semibold text-bg">SK</span>
+          <Image src="/logos/kpo-mark-light.svg" alt="" width={34} height={34} className="dark:hidden" />
+          <Image src="/logos/kpo-mark-dark.svg" alt="" width={34} height={34} className="hidden dark:block" />
           <span className="hidden sm:inline">Stéphane Kpoviessi</span>
         </a>
 
