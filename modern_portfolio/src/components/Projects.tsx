@@ -51,7 +51,6 @@ export default function Projects() {
         <AnimatePresence mode="popLayout">
           {items.map((p) => {
             const Tag = p.href ? "a" : "div";
-            const wide = !!p.wide && filter === "all";
             return (
               <motion.div
                 key={p.title}
@@ -60,17 +59,16 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.3 }}
-                className={cn(wide && "lg:col-span-2")}
               >
                 <Tag
                   {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer", onClick: () => unlock("repo") } : {})}
                   className={cn(
                     "group flex h-full overflow-hidden rounded-2xl border border-line bg-surface transition",
-                    wide ? "flex-col sm:flex-row" : "flex-col",
+                    "flex-col",
                     p.href && "hover:-translate-y-1 hover:border-accent hover:shadow-[0_20px_40px_-24px_var(--accent)]",
                   )}
                 >
-                  <ProjectArt name={p.art} className={cn("border-b border-line", wide ? "aspect-[2/1] sm:aspect-auto sm:w-[44%] sm:border-b-0 sm:border-r" : "aspect-[2/1]")} />
+                  <ProjectArt name={p.art} className="aspect-[2/1] border-b border-line" />
                   <div className="flex flex-1 flex-col p-6">
                     <div className="mb-3 flex items-center justify-between">
                       <span className="eyebrow">{t(p.tag)}</span>

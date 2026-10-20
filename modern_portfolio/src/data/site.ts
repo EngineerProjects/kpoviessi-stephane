@@ -226,7 +226,6 @@ export interface Project {
   href?: string;
   note?: L;
   featured?: boolean;
-  wide?: boolean;
   art: "canvas" | "watch" | "terminal" | "football" | "retail" | "cube" | "robot" | "solar" | "skills";
   cat: "founded" | "agents" | "data" | "vision" | "tools";
 }
@@ -260,7 +259,6 @@ export const projects = {
       stack: ["LangGraph", "FastAPI", "pgvector", "React", "Docker"],
       href: "https://github.com/EngineerProjects/tech-watch-agent",
       featured: true,
-      wide: true,
     },
     {
       title: "Hello Pulse",
