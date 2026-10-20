@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDownToLine, ArrowRight, Mail } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { hero, person, ui } from "@/data/site";
 import { useLang } from "@/lib/i18n";
-import { unlock } from "@/lib/game";
 import { GithubIcon, LinkedinIcon } from "./Icons";
 import CountUp from "./CountUp";
 import Typewriter from "./Typewriter";
 import TechCloud from "./TechCloud";
+import CvMenu from "./CvMenu";
 
 const social = [
   { href: person.linkedin, label: "LinkedIn", Icon: LinkedinIcon },
@@ -89,15 +89,7 @@ export default function Hero() {
               {t(ui.cta.contact)}
               <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
             </a>
-            <a
-              href={lang === "fr" ? "/cv/cv-genai-engineer-fr.pdf" : "/cv/cv-genai-engineer-en.pdf"}
-              download
-              onClick={() => unlock("cv")}
-              className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-6 py-3 text-sm font-medium transition hover:border-accent"
-            >
-              <ArrowDownToLine size={16} />
-              {t(ui.cta.cv)}
-            </a>
+            <CvMenu />
             <span className="ml-1 flex items-center gap-1 2xl:hidden">
               {social.map(({ href, label, Icon }) => (
                 <a key={label} href={href} target={href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer" aria-label={label} className="grid h-10 w-10 place-items-center text-dim transition hover:text-accent">

@@ -41,10 +41,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbf6ee" },
-    { media: "(prefers-color-scheme: dark)", color: "#15100b" },
-  ],
+  themeColor: "#fbf6ee",
 };
 
 const jsonLd = {
@@ -64,7 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en" suppressHydrationWarning className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
           <LanguageProvider>
             {children}
             <ChatBot />

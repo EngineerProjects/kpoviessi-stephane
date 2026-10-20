@@ -1,7 +1,7 @@
 # Stéphane KPOVIESSI — Portfolio
 
 Personal portfolio of Stéphane Kpoviessi, founder of Seshat and AI & Data Engineer.
-Bilingual (EN/FR), light and dark themes, with a small AI assistant (Lys).
+Bilingual (EN/FR), light theme, with a small AI assistant (Lys).
 
 ## Stack
 
@@ -21,7 +21,7 @@ npm run build
 All text lives in [`modern_portfolio/src/data/site.ts`](modern_portfolio/src/data/site.ts), each string with an `en` and `fr` version.
 The chat assistant builds its context from the same file, so the page and the assistant stay in sync.
 
-Résumés are in `modern_portfolio/public/cv/` (generated from the LaTeX sources kept outside this repo).
+Résumés (four profiles, FR and EN) are in `modern_portfolio/public/cv/`, copied from the LaTeX outputs kept outside this repo. The download menu lives in `components/CvMenu.tsx`, the list in `data/site.ts`.
 
 ## Chat assistant
 

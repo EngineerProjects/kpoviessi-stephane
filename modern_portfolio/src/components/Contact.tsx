@@ -15,7 +15,7 @@ const field =
   "w-full rounded-xl border border-line bg-bg px-4 py-3 text-[15px] outline-none transition placeholder:text-dim/60 focus:border-accent";
 
 export default function Contact() {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const [status, setStatus] = useState<Status>("idle");
   const [copied, setCopied] = useState(false);
 
@@ -77,13 +77,24 @@ export default function Contact() {
               <h3 className="eyebrow mb-4 text-ink">{t(contact.resumes.label)}</h3>
               <ul className="divide-y divide-line border-y border-line">
                 {contact.resumes.items.map((r) => (
-                  <li key={r.en}>
-                    <a href={r[lang]} download onClick={() => unlock("cv")} className="group flex items-center justify-between gap-4 py-3.5">
-                      <span className="font-medium transition group-hover:text-accent">{t(r.name)}</span>
-                      <span className="inline-flex items-center gap-2 font-mono text-xs text-dim">
-                        PDF · {lang.toUpperCase()} <ArrowDownToLine size={14} />
-                      </span>
-                    </a>
+                  <li key={r.en} className="flex items-center justify-between gap-4 py-3.5">
+                    <div className="min-w-0">
+                      <p className="font-medium leading-snug">{t(r.name)}</p>
+                      <p className="text-xs text-dim">{t(r.tag)}</p>
+                    </div>
+                    <div className="flex shrink-0 gap-2">
+                      {(["en", "fr"] as const).map((l) => (
+                        <a
+                          key={l}
+                          href={r[l]}
+                          download
+                          onClick={() => unlock("cv")}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 font-mono text-xs transition hover:border-accent hover:text-accent"
+                        >
+                          <ArrowDownToLine size={13} /> {l.toUpperCase()}
+                        </a>
+                      ))}
+                    </div>
                   </li>
                 ))}
               </ul>

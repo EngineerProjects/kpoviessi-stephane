@@ -545,10 +545,33 @@ export const contact = {
   copied: { en: "Copied", fr: "Copié" } as L,
   resumes: {
     label: { en: "Résumés", fr: "CV" } as L,
+    title: { en: "Choose a profile", fr: "Choisir un profil" } as L,
+    hint: { en: "Same person, tailored emphasis. Pick the one closest to your need.", fr: "Même parcours, accent différent. Choisissez le plus proche de votre besoin." } as L,
     items: [
-      { name: { en: "AI / GenAI Engineer", fr: "AI / GenAI Engineer" } as L, en: "/cv/cv-genai-engineer-en.pdf", fr: "/cv/cv-genai-engineer-fr.pdf" },
-      { name: { en: "Machine Learning / AI Engineer", fr: "Machine Learning / AI Engineer" } as L, en: "/cv/cv-ml-ai-engineer-en.pdf", fr: "/cv/cv-ml-ai-engineer-fr.pdf" },
-      { name: { en: "Data Analyst / Data Engineer", fr: "Data Analyst / Data Engineer" } as L, en: "/cv/cv-data-engineer-en.pdf", fr: "/cv/cv-data-engineer-fr.pdf" },
+      {
+        name: { en: "AI / GenAI Engineer", fr: "AI / GenAI Engineer" } as L,
+        tag: { en: "Agents, RAG, LLM systems", fr: "Agents, RAG, systèmes LLM" } as L,
+        en: "/cv/Stephane-Kpoviessi-CV-AI-GenAI-Engineer-EN.pdf",
+        fr: "/cv/Stephane-Kpoviessi-CV-AI-GenAI-Engineer-FR.pdf",
+      },
+      {
+        name: { en: "Machine Learning / AI Engineer", fr: "Machine Learning / AI Engineer" } as L,
+        tag: { en: "Models to integrated AI apps", fr: "Des modèles aux applications IA" } as L,
+        en: "/cv/Stephane-Kpoviessi-CV-ML-AI-Engineer-EN.pdf",
+        fr: "/cv/Stephane-Kpoviessi-CV-ML-AI-Engineer-FR.pdf",
+      },
+      {
+        name: { en: "Data Analyst / Data Engineer", fr: "Data Analyst / Data Engineer" } as L,
+        tag: { en: "SQL, Python, BI, Databricks", fr: "SQL, Python, BI, Databricks" } as L,
+        en: "/cv/Stephane-Kpoviessi-CV-Data-Engineer-EN.pdf",
+        fr: "/cv/Stephane-Kpoviessi-CV-Data-Engineer-FR.pdf",
+      },
+      {
+        name: { en: "Freelance AI Engineer", fr: "AI Engineer Freelance" } as L,
+        tag: { en: "AI integration missions", fr: "Missions d'intégration d'IA" } as L,
+        en: "/cv/Stephane-Kpoviessi-CV-Freelance-AI-Engineer-EN.pdf",
+        fr: "/cv/Stephane-Kpoviessi-CV-Freelance-AI-Engineer-FR.pdf",
+      },
     ],
   },
 };

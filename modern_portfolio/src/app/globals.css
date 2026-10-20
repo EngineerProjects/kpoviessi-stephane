@@ -20,6 +20,7 @@
 }
 
 :root {
+  color-scheme: light;
   --bg: #fbf6ee;
   --surface: #fffdf9;
   --ink: #241a12;

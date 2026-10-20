@@ -16,7 +16,6 @@ export const achievements: Achievement[] = [
   { id: "seen-journey", xp: 10, title: { en: "Roots", fr: "Racines" }, desc: { en: "Follow the journey from Cotonou.", fr: "Suivre le trajet depuis Cotonou." } },
   { id: "seen-contact", xp: 10, title: { en: "Last stop", fr: "Terminus" }, desc: { en: "Reach the contact section.", fr: "Atteindre la section contact." } },
   { id: "lang", xp: 10, title: { en: "Polyglot", fr: "Polyglotte" }, desc: { en: "Switch the language.", fr: "Changer de langue." } },
-  { id: "theme", xp: 10, title: { en: "Night owl", fr: "Oiseau de nuit" }, desc: { en: "Switch the theme.", fr: "Changer de thème." } },
   { id: "inspect", xp: 15, title: { en: "Skill inspector", fr: "Inspecteur de compétences" }, desc: { en: "Inspect five skills to see where they were used.", fr: "Inspecter cinq compétences pour voir où elles ont servi." } },
   { id: "chat", xp: 15, title: { en: "Say hello", fr: "Dire bonjour" }, desc: { en: "Open a chat with Lys.", fr: "Ouvrir le chat avec Lys." } },
   { id: "repo", xp: 15, title: { en: "Code reader", fr: "Lecteur de code" }, desc: { en: "Open a project on GitHub.", fr: "Ouvrir un projet sur GitHub." } },

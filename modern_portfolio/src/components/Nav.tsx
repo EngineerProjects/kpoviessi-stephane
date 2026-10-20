@@ -7,7 +7,6 @@ import { nav, ui, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { unlock } from "@/lib/game";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Nav() {
   const { lang, setLang, t } = useLang();
@@ -83,7 +82,6 @@ export default function Nav() {
               </button>
             ))}
           </div>
-          <ThemeToggle />
           <a href="#contact" className="hidden rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:opacity-90 lg:inline-block">
             {t(ui.cta.contact)}
           </a>
