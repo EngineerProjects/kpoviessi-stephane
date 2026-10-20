@@ -473,9 +473,9 @@ export const background = {
   languages: {
     label: { en: "Languages", fr: "Langues" } as L,
     items: [
-      { t: { en: "French", fr: "Français" } as L, d: { en: "Native", fr: "Langue maternelle" } as L },
-      { t: { en: "English", fr: "Anglais" } as L, d: { en: "B2, Linguaskill Business", fr: "B2, Linguaskill Business" } as L },
-      { t: { en: "Yoruba, Fon, Goun", fr: "Yoruba, fon, goun" } as L, d: { en: "Native", fr: "Langues maternelles" } as L },
+      { lvl: 6, t: { en: "French", fr: "Français" } as L, d: { en: "Native", fr: "Langue maternelle" } as L },
+      { lvl: 4, t: { en: "English", fr: "Anglais" } as L, d: { en: "B2, Linguaskill Business", fr: "B2, Linguaskill Business" } as L },
+      { lvl: 6, t: { en: "Yoruba, Fon, Goun", fr: "Yoruba, fon, goun" } as L, d: { en: "Native", fr: "Langues maternelles" } as L },
     ],
   },
 };
