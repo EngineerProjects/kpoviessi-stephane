@@ -124,7 +124,6 @@ export interface Role {
   stack: string[];
   links?: { label: string; href: string }[];
   current?: boolean;
-  open?: boolean;
 }
 
 export const experience = {
@@ -157,7 +156,6 @@ export const experience = {
       stack: ["Go", "Python", "TypeScript", "PostgreSQL", "pgvector", "MCP", "Electron"],
       links: [{ label: "seshat-ai.com", href: "https://seshat-ai.com" }, { label: "GitHub", href: "https://github.com/KPO-Tech" }],
       current: true,
-      open: true,
     },
     {
       company: "Allianz France",
@@ -179,25 +177,28 @@ export const experience = {
         { en: "Geospatial data quality pipeline: GPS validation, address reconstruction, fewer false positives in reporting.", fr: "Pipeline de qualité de données géospatiales : validation GPS, reconstitution d'adresses, moins de faux positifs dans le reporting." },
       ],
       stack: ["PySpark", "Azure Databricks", "Python", "SAS", "SQL", "Parquet"],
-      open: true,
     },
     {
-      company: "Lyne et Frères",
-      role: { en: "Data Analyst", fr: "Data analyst" },
-      kind: { en: "Missions", fr: "Missions" },
+      company: "Lyne et Frères SARL",
+      role: { en: "Data Analyst", fr: "Data Analyst" },
+      kind: { en: "Part-time", fr: "Temps partiel" },
       period: { en: "2023 – 2025", fr: "2023 – 2025" },
-      place: { en: "Benin · remote", fr: "Bénin · à distance" },
+      place: { en: "Benin · remote from France", fr: "Bénin · à distance depuis la France" },
       summary: {
-        en: "Strategic support missions for a family business in agriculture and trade: my first real-world deployments with non-technical teams.",
-        fr: "Missions d'appui stratégique pour une entreprise familiale d'agriculture et de commerce : mes premiers déploiements en conditions réelles auprès d'équipes non techniques.",
+        en: "Two years of part-time data analysis for the family business alongside my studies in France, mainly during my free time and on weekends.",
+        fr: "Deux ans d'activité de Data Analyst à temps partiel dans l'entreprise familiale, en parallèle de mes études en France, principalement sur mon temps libre et le week-end.",
       },
-      metric: { v: "2023–25", l: { en: "recurring analysis missions", fr: "missions d'analyse récurrentes" } },
+      metric: { v: "2", l: { en: "years alongside my studies", fr: "ans en parallèle des études" } },
       art: "chart",
       points: [
-        { en: "Commercial, operational and agricultural analysis with Python/Pandas to track KPIs and support decisions.", fr: "Analyse commerciale, opérationnelle et agricole avec Python/Pandas pour suivre les indicateurs et éclairer les décisions." },
-        { en: "Dashboards and reports in Streamlit and web interfaces; internal open-source AI tools (OpenWebUI) with staff onboarding.", fr: "Tableaux de bord et rapports Streamlit et web ; outils d'IA internes open source (OpenWebUI) avec accompagnement des équipes." },
+        { en: "Structured commercial, operational and agricultural data with Python/Pandas to make it usable for business monitoring.", fr: "Structuration des données commerciales, opérationnelles et agricoles avec Python/Pandas pour les rendre exploitables dans le suivi de l'activité." },
+        { en: "Tracked business KPIs and analysed volumes, trends and deviations to identify changes and issues requiring attention.", fr: "Suivi des KPI d'activité et analyse des volumes, des tendances et des écarts pour identifier les évolutions et les points d'attention." },
+        { en: "Produced performance reports, interpreted results and presented findings to business stakeholders to support management decisions.", fr: "Production de reportings de performance, interprétation des résultats et restitution aux interlocuteurs métier pour appuyer les décisions de pilotage." },
+        { en: "Automated recurring data processing with Python/Pandas to streamline the preparation of analyses and reports.", fr: "Automatisation de traitements récurrents avec Python/Pandas pour faciliter la préparation des analyses et des reportings." },
+        { en: "Shared analyses through reports and Streamlit / web interfaces, with regular discussions with the teams to explain findings and business implications.", fr: "Restitution des analyses via des rapports et des interfaces Streamlit / web, avec des échanges réguliers avec les équipes pour expliquer les résultats et leurs implications métier." },
+        { en: "Carried out these responsibilities remotely from France for two years alongside my studies, mainly during my free time and on weekends.", fr: "Réalisation de ces missions à distance depuis la France pendant deux ans, en parallèle de mes études, principalement sur mon temps libre et le week-end." },
       ],
-      stack: ["Python", "Pandas", "Streamlit", "OpenWebUI"],
+      stack: ["Python", "Pandas", "Streamlit"],
     },
     {
       company: "Groupe Sylvagreg",

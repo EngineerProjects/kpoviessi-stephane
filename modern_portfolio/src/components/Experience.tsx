@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
@@ -11,14 +11,44 @@ import Reveal from "./Reveal";
 import RoleArt from "./RoleArt";
 import SectionHead from "./SectionHead";
 
-function RoleCard({ r }: { r: Role }) {
+function RoleCard({ r, index, open, onActivate, onToggle }: {
+  r: Role;
+  index: number;
+  open: boolean;
+  onActivate: (index: number) => void;
+  onToggle: (index: number) => void;
+}) {
   const { t } = useLang();
-  const [open, setOpen] = useState(!!r.open);
+  const reduce = useReducedMotion();
+  const focusRef = useRef<HTMLSpanElement>(null);
+  const detailsId = `experience-details-${index}`;
+
+  useEffect(() => {
+    const target = focusRef.current;
+    if (!target) return;
+    let observer: IntersectionObserver;
+    const observe = () => {
+      observer?.disconnect();
+      observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) onActivate(index);
+      }, {
+        rootMargin: `-${window.innerHeight * 0.2}px 0px -${window.innerHeight * 0.5}px 0px`,
+      });
+      observer.observe(target);
+    };
+    observe();
+    window.addEventListener("resize", observe);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", observe);
+    };
+  }, [index, onActivate]);
   const ref = useRef<HTMLDivElement>(null);
   const seen = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <div ref={ref} className={cn("rounded-2xl border bg-surface p-5 transition-colors md:p-6", open ? "border-accent/50" : "border-line hover:border-accent/40")}>
+    <div ref={ref} className={cn("relative rounded-2xl border bg-surface p-5 transition-colors md:p-6", open ? "border-accent/50" : "border-line hover:border-accent/40")}>
+      <span ref={focusRef} className="pointer-events-none absolute left-0 top-6 h-px w-px" aria-hidden />
       <div className="flex gap-4 md:gap-5">
         <RoleArt name={r.art} play={seen} className="h-16 w-16 md:h-20 md:w-20" />
         <div className="min-w-0 flex-1">
@@ -46,10 +76,13 @@ function RoleCard({ r }: { r: Role }) {
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
+            id={detailsId}
+            role="region"
+            aria-label={`${t(r.role)} · ${r.company}`}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: reduce ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
             <ul className="mt-4 max-w-2xl space-y-2.5">
@@ -83,8 +116,9 @@ function RoleCard({ r }: { r: Role }) {
         </div>
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => onToggle(index)}
           aria-expanded={open}
+          aria-controls={detailsId}
           className="inline-flex items-center gap-1.5 rounded-full border border-line px-3.5 py-1.5 text-sm transition hover:border-accent"
         >
           {open ? t(experience.less) : t(experience.more)}
@@ -96,6 +130,11 @@ function RoleCard({ r }: { r: Role }) {
 }
 
 export default function Experience() {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const activate = useCallback((index: number) => setActiveIndex(index), []);
+  const toggle = useCallback((index: number) => {
+    setActiveIndex((current) => current === index ? null : index);
+  }, []);
   const { t } = useLang();
   const reduce = useReducedMotion();
   const ref = useRef<HTMLOListElement>(null);
@@ -110,8 +149,8 @@ export default function Experience() {
         <ol ref={ref} className="relative">
           <span className="absolute bottom-2 left-[7px] top-2 w-px bg-line md:left-[11.5rem]" aria-hidden />
           <motion.span className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-accent md:left-[11.5rem]" style={reduce ? undefined : { scaleY: grow }} aria-hidden />
-          {experience.roles.map((r) => (
-            <li key={r.company} className="relative pb-8 last:pb-0">
+          {experience.roles.map((r, index) => (
+            <li key={`${r.company}-${r.period.en}-${r.role.en}`} className="relative pb-8 last:pb-0">
               <Reveal className="grid gap-4 pl-8 md:grid-cols-[11rem_1fr] md:gap-12 md:pl-0">
                 <div className="md:pt-6 md:text-right">
                   {r.logo && (
@@ -130,7 +169,7 @@ export default function Experience() {
                     )}
                     aria-hidden
                   />
-                  <RoleCard r={r} />
+                  <RoleCard r={r} index={index} open={activeIndex === index} onActivate={activate} onToggle={toggle} />
                 </div>
               </Reveal>
             </li>
