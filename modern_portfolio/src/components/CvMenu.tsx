@@ -11,12 +11,21 @@ import { cn } from "@/lib/utils";
 export default function CvMenu() {
   const { lang: siteLang, t } = useLang();
   const [open, setOpen] = useState(false);
+  const [menuLeft, setMenuLeft] = useState(0);
   const [pick, setPick] = useState<Lang | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const lang = pick ?? siteLang;
 
   useEffect(() => {
     if (!open) return;
+    const reposition = () => {
+      const rect = root.current?.getBoundingClientRect();
+      if (!rect) return;
+      const width = Math.min(352, window.innerWidth - 40);
+      setMenuLeft(Math.max(20 - rect.left, Math.min(0, window.innerWidth - 20 - rect.left - width)));
+    };
+    reposition();
+    window.addEventListener("resize", reposition);
     const onDown = (e: PointerEvent) => {
       if (!root.current?.contains(e.target as Node)) setOpen(false);
     };
@@ -24,6 +33,7 @@ export default function CvMenu() {
     document.addEventListener("pointerdown", onDown);
     document.addEventListener("keydown", onKey);
     return () => {
+      window.removeEventListener("resize", reposition);
       document.removeEventListener("pointerdown", onDown);
       document.removeEventListener("keydown", onKey);
     };
@@ -47,6 +57,7 @@ export default function CvMenu() {
         {open && (
           <motion.div
             role="menu"
+            style={{ left: menuLeft }}
             initial={{ opacity: 0, y: -6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.98 }}

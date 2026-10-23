@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useInView, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll, useSpring } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { experience, type Role } from "@/data/site";
 import { useLang } from "@/lib/i18n";
@@ -70,6 +71,8 @@ function RoleCard({ r, index, open, onActivate, onToggle }: {
           <p className="mt-1.5 max-w-[10rem] text-xs leading-snug text-dim">{t(r.metric.l)}</p>
         </div>
       </div>
+
+      <p className="mt-4 text-sm font-medium text-accent sm:hidden">{r.metric.v} · {t(r.metric.l)}</p>
 
       <p className="mt-5 max-w-2xl text-[15px] leading-relaxed">{t(r.summary)}</p>
 

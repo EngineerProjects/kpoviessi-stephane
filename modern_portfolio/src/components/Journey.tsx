@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { journey } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import Reveal from "./Reveal";

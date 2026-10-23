@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate, useInView, useReducedMotion } from "framer-motion";
+import { animate, useInView } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { useLang } from "@/lib/i18n";
 
 export default function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {

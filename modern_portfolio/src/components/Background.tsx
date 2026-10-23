@@ -1,6 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ArrowUpRight, Award, GraduationCap, Megaphone, Users } from "lucide-react";
 import { background as b } from "@/data/site";
 import { useLang } from "@/lib/i18n";

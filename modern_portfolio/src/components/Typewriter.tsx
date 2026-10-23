@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 
 export default function Typewriter({ words }: { words: string[] }) {
   const reduce = useReducedMotion();

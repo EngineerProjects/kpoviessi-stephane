@@ -50,7 +50,6 @@ export default function Projects() {
       <motion.div layout className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {items.map((p) => {
-            const Tag = p.href ? "a" : "div";
             return (
               <motion.div
                 key={p.title}
@@ -60,8 +59,7 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.3 }}
               >
-                <Tag
-                  {...(p.href ? { href: p.href, target: "_blank", rel: "noopener noreferrer", onClick: () => unlock("repo") } : {})}
+                <article
                   className={cn(
                     "group flex h-full overflow-hidden rounded-2xl border border-line bg-surface transition",
                     "flex-col",
@@ -73,9 +71,9 @@ export default function Projects() {
                     <div className="mb-3 flex items-center justify-between">
                       <span className="eyebrow">{t(p.tag)}</span>
                       {p.href && (
-                        <span className="inline-flex items-center gap-1 text-xs text-dim transition group-hover:text-accent">
+                        <a href={p.href} target="_blank" rel="noopener noreferrer" onClick={() => unlock("repo")} aria-label={`GitHub · ${p.title}`} className="inline-flex items-center gap-1 text-xs text-dim transition hover:text-accent">
                           GitHub <ArrowUpRight size={14} className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                        </span>
+                        </a>
                       )}
                     </div>
                     <h3 className="text-xl font-medium tracking-tight">{p.title}</h3>
@@ -87,8 +85,23 @@ export default function Projects() {
                         </span>
                       ))}
                     </div>
+                    {p.caseStudy && (
+                      <details className="group/case mt-5 border-t border-line pt-4">
+                        <summary className="cursor-pointer text-sm font-medium text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                          {t(projects.caseStudy.open)}
+                        </summary>
+                        <dl className="mt-4 space-y-4 text-sm leading-relaxed">
+                          {(["challenge", "approach", "outcome"] as const).map((key) => (
+                            <div key={key}>
+                              <dt className="mb-1 font-medium text-ink">{t(projects.caseStudy[key])}</dt>
+                              <dd className="text-dim">{t(p.caseStudy![key])}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </details>
+                    )}
                   </div>
-                </Tag>
+                </article>
               </motion.div>
             );
           })}

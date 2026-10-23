@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { ArrowRight, Mail } from "lucide-react";
 import { hero, person, ui } from "@/data/site";
 import { useLang } from "@/lib/i18n";
@@ -31,7 +32,7 @@ export default function Hero() {
   });
 
   return (
-    <section id="top" className="relative overflow-hidden">
+    <section id="top" className="relative overflow-x-clip">
       <div className="relative mx-auto grid max-w-6xl items-end gap-4 px-5 pt-24 md:px-8 lg:min-h-[44rem] lg:grid-cols-[0.9fr_1.1fr] lg:gap-10 lg:pt-20">
         {/* Social rail, down the left edge. */}
         <ul className="absolute left-2 top-1/2 hidden -translate-y-1/2 flex-col gap-4 2xl:flex 2xl:-left-12" aria-label="Social">
@@ -110,12 +111,13 @@ export default function Hero() {
         {hero.stats.map((s) => (
           <div key={s.l.en} className="bg-bg px-5 py-7 md:px-8">
             <dt className="display text-4xl md:text-5xl">
-              <CountUp to={s.n} suffix={s.suffix} />
+              {s.prefix}<CountUp to={s.n} suffix={s.suffix} />
             </dt>
             <dd className="mt-2 text-sm text-dim">{t(s.l)}</dd>
           </div>
         ))}
       </dl>
+      <p className="mx-auto max-w-6xl px-5 pt-4 text-xs leading-relaxed text-dim md:px-8">{t(hero.measurementNote)}</p>
     </section>
   );
 }

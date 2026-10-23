@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useReducedMotion } from "@/lib/useReducedMotion";
 import { Check, Lock, Trophy, X } from "lucide-react";
 import { achievements, gameUi } from "@/data/game";
 import { dismissToast, resetGame, unlock, useGame } from "@/lib/game";
