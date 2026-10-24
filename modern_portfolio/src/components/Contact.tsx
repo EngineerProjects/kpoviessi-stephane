@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowDownToLine, Check, Copy, Loader2, Mail } from "lucide-react";
+import { ArrowDownToLine, Check, Copy, Eye, Loader2, Mail } from "lucide-react";
 import { contact, person } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { unlock } from "@/lib/game";
@@ -75,24 +75,39 @@ export default function Contact() {
 
             <div>
               <h3 className="eyebrow mb-4 text-ink">{t(contact.resumes.label)}</h3>
+              <p className="-mt-2 mb-4 text-sm leading-relaxed text-dim">{t(contact.resumes.hint)}</p>
               <ul className="divide-y divide-line border-y border-line">
                 {contact.resumes.items.map((r) => (
-                  <li key={r.en} className="flex items-center justify-between gap-4 py-3.5">
+                  <li key={r.en} className="flex flex-col items-start justify-between gap-3 py-3.5 sm:flex-row sm:items-center sm:gap-4">
                     <div className="min-w-0">
                       <p className="font-medium leading-snug">{t(r.name)}</p>
                       <p className="text-xs text-dim">{t(r.tag)}</p>
                     </div>
                     <div className="flex shrink-0 gap-2">
                       {(["en", "fr"] as const).map((l) => (
-                        <a
-                          key={l}
-                          href={r[l]}
-                          download
-                          onClick={() => unlock("cv")}
-                          className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 font-mono text-xs transition hover:border-accent hover:text-accent"
-                        >
-                          <ArrowDownToLine size={13} /> {l.toUpperCase()}
-                        </a>
+                        <div key={l} role="group" aria-label={`${t(r.name)} · ${l.toUpperCase()}`} className="inline-flex items-center rounded-full border border-line font-mono text-xs">
+                          <a
+                            href={r[l]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`${t(contact.resumes.view)} ${t(r.name)} · ${l.toUpperCase()} (${t(contact.resumes.newTab)})`}
+                            title={`${t(contact.resumes.view)} · ${t(contact.resumes.newTab)}`}
+                            onClick={() => unlock("cv")}
+                            className="inline-flex min-h-10 items-center gap-1.5 rounded-l-full pl-3 pr-2 transition hover:bg-accent-soft hover:text-accent focus-visible:outline-2 focus-visible:outline-accent"
+                          >
+                            <Eye size={14} aria-hidden="true" /> {l.toUpperCase()}
+                          </a>
+                          <a
+                            href={r[l]}
+                            download
+                            aria-label={`${t(contact.resumes.download)} ${t(r.name)} · ${l.toUpperCase()}`}
+                            title={`${t(contact.resumes.download)} · PDF ${l.toUpperCase()}`}
+                            onClick={() => unlock("cv")}
+                            className="grid h-10 w-10 place-items-center rounded-r-full border-l border-line transition hover:bg-accent-soft hover:text-accent focus-visible:outline-2 focus-visible:outline-accent"
+                          >
+                            <ArrowDownToLine size={15} aria-hidden="true" />
+                          </a>
+                        </div>
                       ))}
                     </div>
                   </li>

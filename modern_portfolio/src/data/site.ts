@@ -1003,9 +1003,12 @@ export const contact = {
   copy: { en: "Copy email", fr: "Copier l'email" } as L,
   copied: { en: "Copied", fr: "Copié" } as L,
   resumes: {
+    view: { en: "View", fr: "Voir" } as L,
+    download: { en: "Download", fr: "Télécharger" } as L,
+    newTab: { en: "opens in a new tab", fr: "s’ouvre dans un nouvel onglet" } as L,
     label: { en: "Résumés", fr: "CV" } as L,
     title: { en: "Choose a profile", fr: "Choisir un profil" } as L,
-    hint: { en: "Same person, tailored emphasis. Pick the one closest to your need.", fr: "Même parcours, accent différent. Choisissez le plus proche de votre besoin." } as L,
+    hint: { en: "Open a résumé to read it, or use the download icon to save a copy.", fr: "Ouvrez un CV pour le consulter, ou utilisez l’icône de téléchargement pour le conserver." } as L,
     items: [
       {
         name: { en: "AI / GenAI Engineer", fr: "AI / GenAI Engineer" } as L,

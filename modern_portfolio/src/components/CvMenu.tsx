@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowDownToLine, ChevronDown, FileText } from "lucide-react";
+import { ArrowDownToLine, ChevronDown, Eye, FileText } from "lucide-react";
 import { contact, ui, type Lang } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { unlock } from "@/lib/game";
@@ -48,7 +48,7 @@ export default function CvMenu() {
         aria-expanded={open}
         className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-6 py-3 text-sm font-medium transition hover:border-accent"
       >
-        <ArrowDownToLine size={16} />
+        <FileText size={16} />
         {t(ui.cta.cv)}
         <ChevronDown size={15} className={cn("transition-transform", open && "rotate-180")} />
       </button>
@@ -86,16 +86,19 @@ export default function CvMenu() {
 
             <ul className="p-2">
               {contact.resumes.items.map((r) => (
-                <li key={r.en}>
+                <li key={r.en} className="flex items-center gap-1">
                   <a
                     role="menuitem"
                     href={r[lang]}
-                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${t(contact.resumes.view)} ${t(r.name)} · ${lang.toUpperCase()} (${t(contact.resumes.newTab)})`}
+                    title={`${t(contact.resumes.view)} · ${t(contact.resumes.newTab)}`}
                     onClick={() => {
                       unlock("cv");
                       setOpen(false);
                     }}
-                    className="group flex items-center gap-3 rounded-xl p-3 transition hover:bg-accent-soft"
+                    className="group flex min-w-0 flex-1 items-center gap-3 rounded-xl p-3 transition hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-accent"
                   >
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-bg text-dim transition group-hover:bg-accent group-hover:text-accent-ink">
                       <FileText size={18} />
@@ -105,8 +108,22 @@ export default function CvMenu() {
                       <span className="block text-xs text-dim">{t(r.tag)}</span>
                     </span>
                     <span className="inline-flex items-center gap-1 font-mono text-[11px] text-dim group-hover:text-accent">
-                      PDF · {lang.toUpperCase()} <ArrowDownToLine size={13} />
+                      PDF · {lang.toUpperCase()} <Eye size={15} aria-hidden="true" />
                     </span>
+                  </a>
+                  <a
+                    role="menuitem"
+                    href={r[lang]}
+                    download
+                    aria-label={`${t(contact.resumes.download)} ${t(r.name)} · ${lang.toUpperCase()}`}
+                    title={`${t(contact.resumes.download)} · PDF ${lang.toUpperCase()}`}
+                    onClick={() => {
+                      unlock("cv");
+                      setOpen(false);
+                    }}
+                    className="mr-1 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line text-dim transition hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent"
+                  >
+                    <ArrowDownToLine size={17} aria-hidden="true" />
                   </a>
                 </li>
               ))}
