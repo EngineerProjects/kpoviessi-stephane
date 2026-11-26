@@ -264,7 +264,7 @@ export default function ProjectArt({ name, className }: { name: ArtName; classNa
   const seen = useInView(ref, { once: true, margin: "-40px" });
   const Art = arts[name];
   return (
-    <div ref={ref} className={cn("art relative overflow-hidden bg-accent-soft", seen && "in", className)} aria-hidden>
+    <div ref={ref} className={cn("art relative overflow-hidden bg-surface-2", seen && "in", className)} aria-hidden>
       <div className="absolute inset-0 opacity-70 [background-image:radial-gradient(var(--line)_1px,transparent_1px)] [background-size:16px_16px]" />
       <svg viewBox="0 0 320 160" className="relative h-full w-full" preserveAspectRatio="xMidYMid meet" fill="none">
         <Art />

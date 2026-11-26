@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/lib/i18n";
@@ -8,7 +8,6 @@ import { person } from "@/data/site";
 
 const sans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 const mono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
-const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: ["normal", "italic"], variable: "--font-instrument" });
 
 const title = "Stéphane KPOVIESSI | Founder of Seshat, AI & Data Engineer";
 const description =
@@ -28,6 +27,7 @@ export const metadata: Metadata = {
     "AI agents",
     "RAG",
     "MCP",
+    "Rust",
     "Go",
     "PySpark",
     "Seshat",
@@ -35,13 +35,27 @@ export const metadata: Metadata = {
     "Ingénieur Big Data",
   ],
   alternates: { canonical: "/" },
-  openGraph: { type: "website", url: person.site, title, description, images: [{ url: "/images/stephane.jpg" }] },
-  twitter: { card: "summary", title, description, images: ["/images/stephane.jpg"] },
+  openGraph: {
+    type: "website",
+    url: person.site,
+    title,
+    description,
+    images: [{ url: "/images/portrait-og.jpg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/images/portrait-og.jpg"],
+  },
   verification: { google: "G4GoMHBsqSjeIC6E4J19MxsS8o-3lTkmcTvbu435CC0" },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fbf6ee",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f8fa" },
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+  ],
 };
 
 const jsonLd = {
@@ -50,7 +64,7 @@ const jsonLd = {
   name: "Stéphane Kpoviessi",
   jobTitle: "AI & Data Engineer, Founder of Seshat",
   url: person.site,
-  image: `${person.site}/images/stephane.jpg`,
+  image: `${person.site}/images/portrait-og.jpg`,
   sameAs: [person.linkedin, person.github, person.org, person.seshat],
   alumniOf: [{ "@type": "CollegeOrUniversity", name: "JUNIA ISEN" }],
   worksFor: { "@type": "Organization", name: "Seshat AI", url: person.seshat },
@@ -58,12 +72,13 @@ const jsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${sans.variable} ${mono.variable} ${serif.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${sans.variable} ${mono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <ThemeProvider attribute="class" forcedTheme="light" disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
           <LanguageProvider>
-            {children}
+            <div className="grid-field" aria-hidden />
+            <div className="relative z-10">{children}</div>
             <ChatBot />
           </LanguageProvider>
         </ThemeProvider>

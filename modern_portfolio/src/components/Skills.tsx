@@ -1,131 +1,128 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Bot, Cloud, Database, Eye, Server, type LucideIcon } from "lucide-react";
-import { skills } from "@/data/site";
+import {
+  AppWindow,
+  Bot,
+  BrainCircuit,
+  Cloud,
+  Database,
+  Layers,
+  Server,
+  type LucideIcon,
+} from "lucide-react";
+import { skills, type Skill } from "@/data/site";
 import { useLang } from "@/lib/i18n";
 import { unlock } from "@/lib/game";
 import { cn } from "@/lib/utils";
 import Reveal from "./Reveal";
 import SectionHead from "./SectionHead";
+import TechCloud from "./TechCloud";
+import TechIcon from "./TechIcon";
 
-const icons: Record<string, LucideIcon> = { bot: Bot, server: Server, database: Database, eye: Eye, cloud: Cloud };
+const icons: Record<string, LucideIcon> = {
+  bot: Bot,
+  brain: BrainCircuit,
+  database: Database,
+  server: Server,
+  app: AppWindow,
+  cloud: Cloud,
+  layers: Layers,
+};
 
 export default function Skills() {
   const { t } = useLang();
-  const [gi, setGi] = useState(0);
-  const [picked, setPicked] = useState<string | null>(null);
+  const [picked, setPicked] = useState<Skill | null>(null);
   const seen = useRef(new Set<string>());
 
-  const group = skills.groups[gi];
-  const skill = group.items.find((i) => i.n === picked) ?? group.items[0];
-
-  function pick(name: string) {
-    setPicked(name);
-    seen.current.add(name);
+  function pick(s: Skill) {
+    setPicked(s);
+    seen.current.add(s.n);
     if (seen.current.size >= 5) unlock("inspect");
   }
 
   return (
-    <section id="skills" className="border-y border-line bg-surface/50 py-24 md:py-32">
-      <div className="mx-auto max-w-6xl px-5 md:px-8">
+    <section id="skills" className="border-t border-line">
+      <div className="mx-auto max-w-[1180px] px-5 py-20 md:px-8 md:py-28">
         <SectionHead index="04" title={t(skills.title)} lead={t(skills.lead)} />
 
-        <Reveal className="grid gap-4 lg:grid-cols-[18rem_1fr]">
-          {/* Domains */}
-          <div role="tablist" aria-label={t(skills.title)} className="-mx-5 flex gap-2 overflow-x-auto px-5 pb-1 lg:mx-0 lg:flex-col lg:overflow-visible lg:px-0">
-            {skills.groups.map((g, i) => {
-              const Icon = icons[g.icon];
-              const active = i === gi;
-              return (
-                <button
-                  key={g.id}
-                  role="tab"
-                  aria-selected={active}
-                  type="button"
-                  onClick={() => {
-                    setGi(i);
-                    setPicked(null);
-                  }}
-                  className={cn(
-                    "group relative flex shrink-0 items-center gap-3 rounded-2xl border p-3.5 text-left transition lg:p-4",
-                    active ? "border-accent bg-surface shadow-sm" : "border-line hover:border-accent/50",
-                  )}
-                >
-                  {active && <motion.span layoutId="skill-tab" className="absolute inset-y-3 left-0 w-[3px] rounded-full bg-accent" />}
-                  <span className={cn("grid h-10 w-10 shrink-0 place-items-center rounded-xl transition", active ? "bg-accent text-accent-ink" : "bg-bg text-dim group-hover:text-ink")}>
-                    <Icon size={18} />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block whitespace-nowrap text-[15px] font-medium leading-tight lg:whitespace-normal">{t(g.name)}</span>
-                    <span className="mt-0.5 block font-mono text-[11px] text-dim">
-                      {g.items.length} {t(skills.skills)}
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.groups.map((g, gi) => {
+            const Icon = icons[g.icon] ?? Layers;
+            return (
+              <Reveal key={g.id} delay={gi * 0.03} className="h-full">
+                <div className="flex h-full flex-col rounded-xl border border-line bg-surface p-5 transition-colors duration-300 hover:border-line-strong">
+                  <div className="flex items-start justify-between gap-3">
+                    <span className="grid h-9 w-9 place-items-center rounded-md border border-line bg-surface-2 text-ink-2">
+                      <Icon size={16} aria-hidden />
                     </span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                    <span className="font-mono text-[11.5px] text-ink-3">
+                      {String(g.items.length).padStart(2, "0")}
+                    </span>
+                  </div>
 
-          {/* Skills of the selected domain */}
-          <div className="rounded-2xl border border-line bg-surface p-6 md:p-8">
-            <AnimatePresence mode="wait">
-              <motion.div key={group.id} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.22 }}>
-                <p className="display text-3xl md:text-4xl">{t(group.name)}</p>
-                <p className="mt-1 text-dim">{t(group.tagline)}</p>
+                  <h3 className="mt-4 text-[15px] font-medium leading-tight tracking-tight">{t(g.name)}</h3>
+                  <p className="mt-1 text-[12px] leading-snug text-ink-3">{t(g.tagline)}</p>
 
-                <ul className="mt-7 flex flex-wrap gap-2.5">
-                  {group.items.map((s, i) => {
-                    const on = skill.n === s.n;
-                    return (
-                      <motion.li key={s.n} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: i * 0.03 }}>
-                        <button
-                          type="button"
-                          aria-pressed={on}
-                          onClick={() => pick(s.n)}
-                          className={cn(
-                            "relative rounded-full border px-4 py-2 text-sm transition",
-                            on ? "border-accent bg-accent text-accent-ink" : "border-line bg-bg hover:-translate-y-0.5 hover:border-accent",
-                          )}
-                        >
-                          {s.n}
-                          {s.used && !on && <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-leaf ring-2 ring-surface" aria-hidden />}
-                        </button>
-                      </motion.li>
-                    );
-                  })}
-                </ul>
-
-                <div className="mt-8 min-h-28 rounded-xl border border-dashed border-line bg-bg/60 p-5" aria-live="polite">
-                  <AnimatePresence mode="wait">
-                    {skill ? (
-                      <motion.div key={skill.n} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }}>
-                        <p className="eyebrow mb-3">
-                          <span className="text-ink">{skill.n}</span> · {t(skills.usedIn)}
-                        </p>
-                        {skill.used ? (
-                          <ul className="flex flex-wrap gap-2">
-                            {skill.used.map((u) => (
-                              <li key={u} className="rounded-lg bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent">
-                                {u}
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="text-sm text-dim">{t(skills.none)}</p>
-                        )}
-                      </motion.div>
-                    ) : (
-                      <motion.p key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex h-full items-center gap-2 pt-2 text-sm text-dim">
-                        <span className="h-2 w-2 rounded-full bg-leaf" /> {t(skills.pick)}
-                      </motion.p>
-                    )}
-                  </AnimatePresence>
+                  <ul className="mt-4 flex flex-wrap gap-1.5">
+                    {g.items.map((s) => {
+                      const on = picked?.n === s.n;
+                      return (
+                        <li key={s.n}>
+                          <button
+                            type="button"
+                            aria-pressed={on}
+                            onClick={() => pick(s)}
+                            className={cn(
+                              "inline-flex items-center gap-1.5 rounded-md border px-1.5 py-1 font-mono text-[11.5px] transition-colors duration-200",
+                              on
+                                ? "border-accent bg-accent-soft text-accent"
+                                : "border-line bg-surface text-ink-2 hover:border-line-strong hover:text-ink",
+                            )}
+                          >
+                            <TechIcon name={s.n} />
+                            {s.n}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
-              </motion.div>
-            </AnimatePresence>
-          </div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <div className="mt-3 flex min-h-[3.25rem] items-center rounded-xl border border-dashed border-line bg-surface/60 px-5 py-3" aria-live="polite">
+          {picked ? (
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="inline-flex items-center gap-1.5 font-mono text-[11.5px] uppercase tracking-[0.14em] text-accent">
+                <TechIcon name={picked.n} size={12} />
+                {picked.n}
+              </span>
+              <span className="h-3 w-px bg-line" aria-hidden />
+              <span className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-ink-3">{t(skills.usedIn)}</span>
+              {picked.used?.length ? (
+                picked.used.map((u) => (
+                  <span key={u} className="rounded border border-line bg-surface px-1.5 py-0.5 text-[12px] text-ink-2">
+                    {u}
+                  </span>
+                ))
+              ) : (
+                <span className="text-[12px] text-ink-3">{t(skills.none)}</span>
+              )}
+            </div>
+          ) : (
+            <p className="flex items-center gap-2 text-[12px] text-ink-3">
+              <span className="h-1 w-1 rounded-full bg-leaf" aria-hidden />
+              {t(skills.pick)}
+            </p>
+          )}
+        </div>
+
+        <Reveal className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line pt-6">
+          <p className="font-mono text-[11.5px] uppercase tracking-[0.16em] text-ink-3">Toolkit</p>
+          <TechCloud />
         </Reveal>
       </div>
     </section>

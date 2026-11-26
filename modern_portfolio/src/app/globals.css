@@ -5,47 +5,61 @@
 @theme inline {
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-ink: var(--ink);
-  --color-dim: var(--dim);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-dim: var(--ink-2);
   --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-leaf: var(--leaf);
-  --color-sun: var(--sun);
+  --color-sun: var(--accent);
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, Consolas, monospace;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
+/* ---------------------------------------------------------------- tokens */
 :root {
   color-scheme: light;
-  --bg: #fbf6ee;
-  --surface: #fffdf9;
-  --ink: #241a12;
-  --dim: #6e5f50;
-  --line: #eadfcd;
-  --accent: #c46f0a;
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --line: #e2e5e9;
+  --line-strong: #d2d6dc;
+  --ink: #18181b;
+  --ink-2: #52525b;
+  --ink-3: #71717a;
+  --accent: #d97706;
   --accent-ink: #ffffff;
-  --accent-soft: rgba(196, 111, 10, 0.1);
-  --leaf: #3f7d4a;
-  --sun: #f0a93b;
+  --accent-soft: rgba(217, 119, 6, 0.1);
+  --leaf: #16a34a;
+  --grid: rgba(24, 24, 27, 0.055);
+  --nav: rgba(247, 248, 250, 0.78);
 }
 
 .dark {
-  --bg: #15100b;
-  --surface: #1e1711;
-  --ink: #f7ecdd;
-  --dim: #ab9983;
-  --line: #342a1f;
-  --accent: #f2a93b;
-  --accent-ink: #1d1208;
-  --accent-soft: rgba(242, 169, 59, 0.12);
-  --leaf: #7cc58b;
-  --sun: #f2a93b;
+  color-scheme: dark;
+  --bg: #09090b;
+  --surface: #111113;
+  --surface-2: #17171a;
+  --line: #27272a;
+  --line-strong: #3a3a40;
+  --ink: #fafafa;
+  --ink-2: #a1a1aa;
+  --ink-3: #8b8b94;
+  --accent: #f59e0b;
+  --accent-ink: #18181b;
+  --accent-soft: rgba(245, 158, 11, 0.13);
+  --leaf: #22c55e;
+  --grid: rgba(250, 250, 250, 0.055);
+  --nav: rgba(9, 9, 11, 0.72);
 }
 
+/* ------------------------------------------------------------------ base */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
@@ -58,6 +72,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 ::selection {
@@ -71,38 +86,69 @@ body {
   border-radius: 4px;
 }
 
+/* The engineering grid: two CSS gradients, no image, theme aware. */
+.grid-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: center top;
+  transition: background-image 0.35s ease;
+}
+
+/* Small crosshair markers that sit on the grid, like registration marks. */
+.plus {
+  position: absolute;
+  display: block;
+  width: 9px;
+  height: 9px;
+  color: var(--line-strong);
+  pointer-events: none;
+}
+.plus::before,
+.plus::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.plus::before {
+  left: 50%;
+  top: 0;
+  width: 1px;
+  height: 100%;
+}
+.plus::after {
+  top: 50%;
+  left: 0;
+  height: 1px;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------ typography */
 .display {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  letter-spacing: -0.02em;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.038em;
   line-height: 1.02;
+  text-wrap: balance;
 }
 
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--dim);
+  color: var(--ink-3);
 }
 
-.dots::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image: radial-gradient(var(--line) 1px, transparent 1px);
-  background-size: 22px 22px;
-  mask-image: radial-gradient(ellipse 70% 60% at 70% 30%, #000 20%, transparent 75%);
+.hairline {
+  height: 1px;
+  background: var(--line);
 }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.float { animation: float 6s ease-in-out infinite; }
-
 
 /* Project illustrations: one-shot animations wait until the card is in view (.in). */
 @keyframes art-flow { to { stroke-dashoffset: -24; } }
@@ -128,26 +174,21 @@ body {
 .art:not(.in) .art-draw,
 .art:not(.in) .art-check { animation-play-state: paused; }
 
-/* Portrait: sharp and bright, only the edge facing the text dissolves into the page. */
-.fade-left {
-  --m-h: linear-gradient(to right, transparent 0, #000 42%);
-  --m-v: linear-gradient(to bottom, transparent 0, #000 20%);
-  -webkit-mask-image: var(--m-h), var(--m-v);
-  -webkit-mask-composite: source-in;
-  mask-image: var(--m-h), var(--m-v);
-  mask-composite: intersect;
-}
-.fade-top {
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-}
-
+/* Chat markdown */
 .prose-chat p { margin: 0 0 0.5rem; }
 .prose-chat p:last-child { margin-bottom: 0; }
 .prose-chat ul { margin: 0.25rem 0 0.5rem 1.1rem; list-style: disc; }
+.prose-chat ol { margin: 0.25rem 0 0.5rem 1.2rem; list-style: decimal; }
 .prose-chat strong { font-weight: 600; }
+.prose-chat code { font-family: var(--font-mono); font-size: 0.85em; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

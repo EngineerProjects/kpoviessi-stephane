@@ -46,11 +46,11 @@ export default function CvMenu() {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface px-6 py-3 text-sm font-medium transition hover:border-accent"
+        className="inline-flex h-11 items-center gap-2 rounded-lg border border-line bg-surface px-4 text-[15px] font-medium text-ink transition-colors duration-200 hover:border-line-strong"
       >
-        <FileText size={16} />
+        <ArrowDownToLine size={15} aria-hidden />
         {t(ui.cta.cv)}
-        <ChevronDown size={15} className={cn("transition-transform", open && "rotate-180")} />
+        <ChevronDown size={14} aria-hidden className={cn("text-ink-3 transition-transform duration-200", open && "rotate-180")} />
       </button>
 
       <AnimatePresence>
@@ -58,25 +58,28 @@ export default function CvMenu() {
           <motion.div
             role="menu"
             style={{ left: menuLeft }}
-            initial={{ opacity: 0, y: -6, scale: 0.98 }}
+            initial={{ opacity: 0, y: -6, scale: 0.99 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.98 }}
+            exit={{ opacity: 0, y: -6, scale: 0.99 }}
             transition={{ duration: 0.16 }}
-            className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-2.5rem))] origin-top-left overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl"
+            className="absolute left-0 top-full z-40 mt-2 w-[min(22rem,calc(100vw-2.5rem))] origin-top-left overflow-hidden rounded-xl border border-line bg-surface shadow-[0_20px_50px_-30px_rgba(0,0,0,0.45)]"
           >
             <div className="flex items-start justify-between gap-3 border-b border-line p-4">
               <div>
-                <p className="font-medium">{t(contact.resumes.title)}</p>
-                <p className="mt-0.5 text-xs leading-snug text-dim">{t(contact.resumes.hint)}</p>
+                <p className="text-[15px] font-medium">{t(contact.resumes.title)}</p>
+                <p className="mt-0.5 text-[12.5px] leading-snug text-ink-3">{t(contact.resumes.hint)}</p>
               </div>
-              <div className="flex shrink-0 rounded-full border border-line p-0.5 font-mono text-[11px]" role="group" aria-label="Language">
+              <div className="flex shrink-0 rounded-md border border-line p-0.5 font-mono text-[11.5px]" role="group" aria-label="Language">
                 {(["en", "fr"] as const).map((l) => (
                   <button
                     key={l}
                     type="button"
                     aria-pressed={lang === l}
                     onClick={() => setPick(l)}
-                    className={cn("rounded-full px-2.5 py-1 uppercase transition", lang === l ? "bg-ink text-bg" : "text-dim hover:text-ink")}
+                    className={cn(
+                      "rounded px-2 py-1 uppercase transition-colors",
+                      lang === l ? "bg-ink text-bg" : "text-ink-3 hover:text-ink",
+                    )}
                   >
                     {l}
                   </button>
@@ -84,7 +87,7 @@ export default function CvMenu() {
               </div>
             </div>
 
-            <ul className="p-2">
+            <ul className="p-1.5">
               {contact.resumes.items.map((r) => (
                 <li key={r.en} className="flex items-center gap-1">
                   <a
@@ -98,17 +101,17 @@ export default function CvMenu() {
                       unlock("cv");
                       setOpen(false);
                     }}
-                    className="group flex min-w-0 flex-1 items-center gap-3 rounded-xl p-3 transition hover:bg-accent-soft focus-visible:outline-2 focus-visible:outline-accent"
+                    className="group flex min-w-0 flex-1 items-center gap-3 rounded-lg p-2.5 transition-colors hover:bg-surface-2 focus-visible:outline-2 focus-visible:outline-accent"
                   >
-                    <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-bg text-dim transition group-hover:bg-accent group-hover:text-accent-ink">
-                      <FileText size={18} />
+                    <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-line bg-surface-2 text-ink-3 transition-colors group-hover:text-accent">
+                      <FileText size={15} />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-medium leading-tight">{t(r.name)}</span>
-                      <span className="block text-xs text-dim">{t(r.tag)}</span>
+                      <span className="block text-[14.5px] font-medium leading-tight">{t(r.name)}</span>
+                      <span className="block text-[12px] text-ink-3">{t(r.tag)}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 font-mono text-[11px] text-dim group-hover:text-accent">
-                      PDF · {lang.toUpperCase()} <Eye size={15} aria-hidden="true" />
+                    <span className="inline-flex shrink-0 items-center gap-1 font-mono text-[11.5px] text-ink-3 group-hover:text-ink">
+                      PDF · {lang.toUpperCase()} <Eye size={13} aria-hidden />
                     </span>
                   </a>
                   <a
@@ -121,9 +124,9 @@ export default function CvMenu() {
                       unlock("cv");
                       setOpen(false);
                     }}
-                    className="mr-1 grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line text-dim transition hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-accent"
+                    className="mr-1 grid h-9 w-9 shrink-0 place-items-center rounded-md border border-line text-ink-3 transition-colors hover:border-line-strong hover:text-ink focus-visible:outline-2 focus-visible:outline-accent"
                   >
-                    <ArrowDownToLine size={17} aria-hidden="true" />
+                    <ArrowDownToLine size={15} aria-hidden />
                   </a>
                 </li>
               ))}

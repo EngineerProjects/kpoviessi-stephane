@@ -27,7 +27,7 @@ export default function ChatBot() {
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const show = setTimeout(() => setBubble(true), 7000);
+    const show = setTimeout(() => setBubble(true), 8000);
     return () => clearTimeout(show);
   }, []);
   useEffect(() => {
@@ -96,14 +96,14 @@ export default function ChatBot() {
         {bubble && !open && (
           <motion.button
             type="button"
-            initial={{ opacity: 0, y: 8 }}
+            initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
+            exit={{ opacity: 0, y: 6 }}
             onClick={() => {
               setBubble(false);
               setOpen(true);
             }}
-            className="fixed bottom-24 right-5 z-40 max-w-[15rem] rounded-2xl rounded-br-md border border-line bg-surface px-4 py-3 text-left text-sm shadow-lg"
+            className="fixed bottom-[4.75rem] right-4 z-40 max-w-[14rem] rounded-lg rounded-br-sm border border-line bg-surface px-3 py-2.5 text-left text-[12.5px] leading-snug text-ink-2 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.5)]"
           >
             {t(chat.notif)}
           </motion.button>
@@ -115,9 +115,9 @@ export default function ChatBot() {
         onClick={() => setOpen((v) => !v)}
         aria-label={open ? t(chat.close) : t(chat.open)}
         aria-expanded={open}
-        className="fixed bottom-5 right-5 z-50 grid h-14 w-14 place-items-center rounded-full bg-accent text-accent-ink shadow-xl transition hover:scale-105"
+        className="fixed bottom-4 right-4 z-50 grid h-11 w-11 place-items-center rounded-full border border-line bg-surface text-ink-2 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.5)] transition-colors duration-200 hover:border-line-strong hover:text-ink"
       >
-        {open ? <X size={22} /> : <MessageCircle size={22} />}
+        {open ? <X size={18} /> : <MessageCircle size={18} />}
       </button>
 
       <AnimatePresence>
@@ -125,19 +125,28 @@ export default function ChatBot() {
           <motion.div
             role="dialog"
             aria-label={t(chat.title)}
-            initial={{ opacity: 0, y: 16, scale: 0.97 }}
+            initial={{ opacity: 0, y: 12, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
+            exit={{ opacity: 0, y: 12, scale: 0.98 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-3 bottom-24 z-50 flex h-[min(34rem,calc(100dvh-8rem))] flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-2xl sm:inset-x-auto sm:right-5 sm:w-[24rem]"
+            className="fixed inset-x-3 bottom-[4.25rem] z-50 flex h-[min(32rem,calc(100dvh-7rem))] flex-col overflow-hidden rounded-xl border border-line bg-surface shadow-[0_30px_80px_-40px_rgba(0,0,0,0.55)] sm:inset-x-auto sm:right-4 sm:w-[23rem]"
           >
-            <div className="flex items-center justify-between border-b border-line px-4 py-3">
+            <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3">
               <div>
-                <p className="font-medium leading-tight">{t(chat.title)}</p>
-                <p className="text-xs text-dim">{t(chat.sub)}</p>
+                <p className="flex items-center gap-2 text-[14px] font-medium leading-tight">
+                  {t(chat.title)}
+                  <span className="h-1 w-1 rounded-full bg-leaf" aria-hidden />
+                </p>
+                <p className="mt-0.5 font-mono text-[11.5px] uppercase tracking-[0.12em] text-ink-3">{t(chat.sub)}</p>
               </div>
-              <button type="button" onClick={clear} aria-label={t(chat.reset)} title={t(chat.reset)} className="grid h-8 w-8 place-items-center rounded-full text-dim transition hover:bg-bg hover:text-ink">
-                <Trash2 size={15} />
+              <button
+                type="button"
+                onClick={clear}
+                aria-label={t(chat.reset)}
+                title={t(chat.reset)}
+                className="grid h-7 w-7 place-items-center rounded-md text-ink-3 transition-colors hover:bg-surface-2 hover:text-ink"
+              >
+                <Trash2 size={13} />
               </button>
             </div>
 
@@ -146,8 +155,8 @@ export default function ChatBot() {
                 <div key={i} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}>
                   <div
                     className={cn(
-                      "prose-chat max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed",
-                      m.role === "user" ? "rounded-br-md bg-accent text-accent-ink" : "rounded-bl-md bg-bg",
+                      "prose-chat max-w-[86%] rounded-lg px-3 py-2 text-[14px] leading-relaxed",
+                      m.role === "user" ? "bg-ink text-bg" : "bg-surface-2 text-ink",
                     )}
                   >
                     <ReactMarkdown
@@ -167,9 +176,13 @@ export default function ChatBot() {
               ))}
               {loading && (
                 <div className="flex justify-start">
-                  <div className="flex gap-1 rounded-2xl rounded-bl-md bg-bg px-4 py-3" aria-label="…">
+                  <div className="flex gap-1 rounded-lg bg-surface-2 px-3 py-2.5" aria-label="…">
                     {[0, 1, 2].map((d) => (
-                      <span key={d} className="h-1.5 w-1.5 animate-bounce rounded-full bg-dim" style={{ animationDelay: `${d * 0.15}s` }} />
+                      <span
+                        key={d}
+                        className="h-1 w-1 animate-bounce rounded-full bg-ink-3"
+                        style={{ animationDelay: `${d * 0.15}s` }}
+                      />
                     ))}
                   </div>
                 </div>
@@ -182,16 +195,22 @@ export default function ChatBot() {
                 e.preventDefault();
                 send();
               }}
-              className="flex items-center gap-2 border-t border-line p-3"
+              className="flex items-center gap-2 border-t border-line p-2.5"
             >
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={t(chat.placeholder)}
-                className="min-w-0 flex-1 rounded-full border border-line bg-bg px-4 py-2.5 text-sm outline-none transition focus:border-accent"
+                aria-label={t(chat.placeholder)}
+                className="min-w-0 flex-1 rounded-md border border-line bg-bg px-3 py-2 text-[14px] outline-none transition-colors placeholder:text-ink-3/70 focus:border-ink/35"
               />
-              <button type="submit" disabled={!input.trim() || loading} aria-label="Send" className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent text-accent-ink transition disabled:opacity-40">
-                <Send size={16} />
+              <button
+                type="submit"
+                disabled={!input.trim() || loading}
+                aria-label="Send"
+                className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-ink text-bg transition-colors disabled:opacity-40"
+              >
+                <Send size={14} />
               </button>
             </form>
           </motion.div>

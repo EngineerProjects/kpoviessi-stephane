@@ -1,7 +1,7 @@
 # Stéphane KPOVIESSI — Portfolio
 
 Personal portfolio of Stéphane Kpoviessi, founder of Seshat and AI & Data Engineer.
-Bilingual (EN/FR), light theme, with a small AI assistant (Lys).
+Bilingual (EN/FR), light and dark themes, with a small AI assistant (Lys).
 
 ## Stack
 

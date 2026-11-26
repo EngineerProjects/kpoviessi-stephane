@@ -14,6 +14,7 @@ export const person = {
 };
 
 export const nav: { id: string; label: L }[] = [
+  { id: "about", label: { en: "About", fr: "À propos" } },
   { id: "seshat", label: { en: "Seshat", fr: "Seshat" } },
   { id: "experience", label: { en: "Experience", fr: "Parcours" } },
   { id: "projects", label: { en: "Projects", fr: "Projets" } },
@@ -23,30 +24,44 @@ export const nav: { id: string; label: L }[] = [
 ];
 
 export const ui = {
-  cta: { contact: { en: "Get in touch", fr: "Me contacter" } as L, cv: { en: "Résumé", fr: "CV" } as L },
-  nav: { menu: { en: "Menu", fr: "Menu" } as L },
+  cta: {
+    contact: { en: "Get in touch", fr: "Me contacter" } as L,
+    cv: { en: "Résumé", fr: "CV" } as L,
+    explore: { en: "Explore my work", fr: "Explorer mon travail" } as L,
+    blog: { en: "Blog", fr: "Blog" } as L,
+  },
+  nav: { menu: { en: "Menu", fr: "Menu" } as L, close: { en: "Close menu", fr: "Fermer le menu" } as L },
+  theme: {
+    toggle: { en: "Toggle theme", fr: "Changer de thème" } as L,
+    light: { en: "Light", fr: "Clair" } as L,
+    dark: { en: "Dark", fr: "Sombre" } as L,
+  },
 };
 
 export const hero = {
   "eyebrow": {
-    "en": "Founder · AI & Data Engineer",
-    "fr": "Fondateur · Ingénieur IA & Data"
+    "en": "Founder / AI & Data Engineer",
+    "fr": "Fondateur / Ingénieur IA & Data"
+  },
+  "portrait": {
+    "caption": { "en": "Île-de-France · France", "fr": "Île-de-France · France" },
+    "alt": { "en": "Stéphane Kpoviessi, founder of Seshat", "fr": "Stéphane Kpoviessi, fondateur de Seshat" }
   },
   "available": {
     "en": "Open to full-time roles, freelance missions and collaborations",
     "fr": "Disponible pour un CDI, des missions freelance et des collaborations"
   },
   "titleA": {
-    "en": "I build AI systems that",
-    "fr": "Je construis des systèmes d'IA qui"
+    "en": "Engineering AI.",
+    "fr": "Ingénierie de l'IA."
   },
   "titleB": {
-    "en": "solve practical problems.",
-    "fr": "répondent à un besoin concret."
+    "en": "Building the future.",
+    "fr": "Construire la suite."
   },
   "lead": {
-    "en": "I turn complex technology into tools people can use: agents that act under control, document search with sources, and data workflows with validated results. I founded Seshat after working on data modernization at Allianz and experimental 3D reconstruction at Sylvagreg.",
-    "fr": "Je transforme des technologies complexes en outils utilisables : des agents dont on contrôle les actions, une recherche documentaire sourcée et des traitements de données aux résultats vérifiés. J'ai fondé Seshat après une expérience en modernisation data chez Allianz et en reconstruction 3D expérimentale chez Sylvagreg."
+    "en": "I design intelligent systems, autonomous agents and reliable data platforms to solve real-world problems. I'm the founder of Seshat, an ecosystem of AI-powered tools and infrastructure.",
+    "fr": "Je conçois des systèmes intelligents, des agents autonomes et des plateformes de données fiables pour résoudre des problèmes concrets. Je suis le fondateur de Seshat, un écosystème d'outils et d'infrastructures fondés sur l'IA."
   },
   "building": {
     "label": {
@@ -74,11 +89,26 @@ export const hero = {
     "MCP",
     "PySpark",
     "PyTorch"
-  ],
+  ]
+};
+
+export const about = {
+  "title": {
+    "en": "Engineer first. Founder by necessity.",
+    "fr": "Ingénieur d'abord. Fondateur par nécessité."
+  },
+  "lead": {
+    "en": "I work where AI engineering meets data engineering: agent runtimes, source-backed retrieval and pipelines whose results are verified. Two years of data work alongside my studies, an internship in insurance data, one in computer vision, then Seshat.",
+    "fr": "Je travaille à la rencontre de l'ingénierie IA et de l'ingénierie data : runtimes d'agents, recherche documentaire sourcée et pipelines aux résultats vérifiés. Deux ans de data en parallèle des études, un stage dans la data assurance, un autre en vision par ordinateur, puis Seshat."
+  },
+  "statsLabel": {
+    "en": "Measured, not estimated",
+    "fr": "Mesuré, pas estimé"
+  },
   "stats": [
     {
       "n": 8,
-      "prefix": ">",
+      "prefix": "> ",
       "suffix": "×",
       "l": {
         "en": "speedup on the measured Allianz workflow",
@@ -119,6 +149,32 @@ export const hero = {
   }
 };
 
+export const highlights = {
+  items: [
+    {
+      index: "01",
+      label: { en: "Currently building", fr: "En construction" } as L,
+      title: { en: "Seshat AI", fr: "Seshat AI" } as L,
+      text: { en: "Agentic systems & infrastructure", fr: "Systèmes agentiques & infrastructure" } as L,
+      href: "#seshat",
+    },
+    {
+      index: "02",
+      label: { en: "Engineering", fr: "Ingénierie" } as L,
+      title: { en: "AI & Data", fr: "IA & Data" } as L,
+      text: { en: "Rust · Python · Data platforms", fr: "Rust · Python · plateformes data" } as L,
+      href: "#skills",
+    },
+    {
+      index: "03",
+      label: { en: "Experience", fr: "Expérience" } as L,
+      title: { en: "Allianz France", fr: "Allianz France" } as L,
+      text: { en: "Data engineering & modernization", fr: "Data engineering & modernisation" } as L,
+      href: "#experience",
+    },
+  ] as { index: string; label: L; title: L; text: L; href: string }[],
+};
+
 export const seshat = {
   "kicker": {
     "en": "Flagship project",
@@ -129,20 +185,103 @@ export const seshat = {
     "fr": "Seshat : des agents que l'on gouverne."
   },
   "lead": {
-    "en": "An AI agent needs more than a model: it needs tools, execution controls and a way to integrate into an application. I built an open-source Go runtime around these requirements. It is the foundation of SeshatOS and SeshatCloud, two products still in development.",
-    "fr": "Un agent IA a besoin de plus qu'un modèle : des outils, des contrôles d'exécution et un moyen de s'intégrer à une application. J'ai conçu un runtime open source en Go autour de ces besoins. Il sert de fondation à SeshatOS et SeshatCloud, deux produits encore en développement."
+    "en": "An AI agent needs more than a model: it needs tools, execution controls and a way to integrate into an application. I built an open-source Go runtime around these requirements. It is the foundation of SeshatOS and SeshatCloud, two products still in construction.",
+    "fr": "Un agent IA a besoin de plus qu'un modèle : des outils, des contrôles d'exécution et un moyen de s'intégrer à une application. J'ai conçu un runtime open source en Go autour de ces besoins. Il sert de fondation à SeshatOS et SeshatCloud, deux produits encore en construction."
+  },
+  "founder": {
+    "name": "Stéphane Kpoviessi",
+    "role": { "en": "Founder, Seshat AI", "fr": "Fondateur, Seshat AI" },
+    "caption": {
+      "en": "Building an agent runtime and the products around it, from Île-de-France.",
+      "fr": "Construire un runtime d'agents et les produits qui l'entourent, depuis l'Île-de-France."
+    },
+    "alt": { "en": "Stéphane Kpoviessi in the Seshat AI studio", "fr": "Stéphane Kpoviessi dans le studio Seshat AI" }
+  },
+  "architecture": {
+    "label": { "en": "How it fits together", "fr": "Comment l'ensemble s'articule" },
+    "note": {
+      "en": "Schematic view of the runtime as documented in its source and docs.",
+      "fr": "Vue schématique du runtime, telle que documentée dans ses sources et sa documentation."
+    },
+    "layers": [
+      {
+        "label": "01 / Surfaces",
+        "items": ["SeshatOS desktop", "CLI / TUI", "Go SDK", "gRPC clients"]
+      },
+      {
+        "label": "02 / Runtime",
+        "items": ["Execution loop", "Sub-agents", "Tool calls", "Permissions"]
+      },
+      {
+        "label": "03 / Context",
+        "items": ["Document ingestion", "Hybrid retrieval", "pgvector", "Source-backed answers"]
+      },
+      {
+        "label": "04 / Models",
+        "items": ["Local models (Ollama)", "Hosted endpoints", "Multiple providers"]
+      }
+    ]
+  },
+  "ecosystem": {
+    "label": { "en": "Ecosystem", "fr": "Écosystème" },
+    "lead": {
+      "en": "Three products, not a catalogue: the runtime ships, the two others are in construction. Statuses are the ones published on seshat-ai.com.",
+      "fr": "Trois produits, pas un catalogue : le runtime est disponible, les deux autres sont en construction. Les statuts sont ceux publiés sur seshat-ai.com."
+    },
+    "items": [
+      {
+        "name": "Documents",
+        "tag": "Seshat",
+        "status": { "en": "Available", "fr": "Disponible" },
+        "tone": "live",
+        "text": {
+          "en": "Document ingestion and hybrid retrieval give agents relevant passages to build source-backed answers.",
+          "fr": "Ingestion documentaire et recherche hybride fournissent aux agents les passages utiles à une réponse sourcée."
+        }
+      },
+      {
+        "name": "Orchestration",
+        "tag": "Seshat",
+        "status": { "en": "Available", "fr": "Disponible" },
+        "tone": "live",
+        "text": {
+          "en": "Sub-agents, dependency-based workflows and tool calls, under permissions and human approval.",
+          "fr": "Sous-agents, workflows à dépendances et appels d'outils, encadrés par des permissions et une validation humaine."
+        }
+      },
+      {
+        "name": "Local workspace",
+        "tag": "SeshatOS",
+        "status": { "en": "In construction", "fr": "En construction" },
+        "tone": "wip",
+        "text": {
+          "en": "Chat, Projects and skills already run locally, on your machine or your server.",
+          "fr": "Chat, Projets et skills s'utilisent déjà en local, sur votre poste ou votre serveur."
+        }
+      },
+      {
+        "name": "Multi-user",
+        "tag": "SeshatCloud",
+        "status": { "en": "In construction", "fr": "En construction" },
+        "tone": "wip",
+        "text": {
+          "en": "Organizations, access rights and central administration.",
+          "fr": "Organisations, droits d'accès et administration centrale."
+        }
+      }
+    ]
   },
   "products": [
     {
       "name": "Seshat Runtime",
       "status": {
-        "en": "Released",
-        "fr": "Publié"
+        "en": "Available",
+        "fr": "Disponible"
       },
       "tone": "live",
       "text": {
-        "en": "An embeddable Go engine with an SDK, gRPC API and terminal interface. Delegates tasks to sub-agents, connects tools via MCP and supports local and hosted models. Apache-2.0.",
-        "fr": "Un moteur Go intégrable par SDK et API gRPC, avec interface terminal. Il délègue des tâches à des sous-agents, connecte des outils via MCP et prend en charge des modèles locaux ou hébergés. Apache-2.0."
+        "en": "The Go agent runtime: tools, sessions, permissions and a sandbox. Embeddable through an SDK and gRPC API, installable today with a terminal interface. MCP support, local and hosted models. Apache-2.0.",
+        "fr": "Le runtime d'agents en Go : outils, sessions, permissions et sandbox. Intégrable par SDK et API gRPC, installable dès aujourd'hui avec une interface terminal. Support MCP, modèles locaux et hébergés. Apache-2.0."
       },
       "href": "https://github.com/KPO-Tech/seshat-runtime",
       "cta": {
@@ -153,13 +292,13 @@ export const seshat = {
     {
       "name": "SeshatOS",
       "status": {
-        "en": "In development",
-        "fr": "En développement"
+        "en": "In construction",
+        "fr": "En construction"
       },
       "tone": "wip",
       "text": {
-        "en": "Desktop product in development, built on the runtime: an Electron/React interface and local backend to bring chat and document workflows into a self-hosted environment. Source-available.",
-        "fr": "Produit desktop en développement, construit sur le runtime : interface Electron/React et backend local pour proposer le chat et des usages documentaires dans un environnement auto-hébergé. Source disponible."
+        "en": "Local AI environment, on your machine or your server, built on the runtime: Electron/React interface and local backend. Chat, Projects and skills already run locally. Source-available.",
+        "fr": "Environnement d'IA local, sur votre poste ou votre serveur, construit sur le runtime : interface Electron/React et backend local. Chat, Projets et skills s'utilisent déjà en local. Source disponible."
       },
       "href": "https://github.com/KPO-Tech/SeshatOS",
       "cta": {
@@ -175,8 +314,8 @@ export const seshat = {
       },
       "tone": "wip",
       "text": {
-        "en": "Organizational product in development: a multi-tenant server, administration and document-intelligence services. Work focuses on integration and packaging; it is not yet a packaged commercial offer.",
-        "fr": "Produit pour les organisations en développement : serveur multi-organisations, administration et services d'intelligence documentaire. Le travail porte sur l'intégration et le packaging ; l'offre commerciale n'est pas encore finalisée."
+        "en": "The multi-user layer: organizations, access rights and central administration. Source-available, with a commercial agreement beyond a threshold.",
+        "fr": "La couche multi-utilisateurs : organisations, droits d'accès et administration centrale. Source disponible, avec un accord commercial au-delà d'un seuil."
       },
       "href": "",
       "cta": {
@@ -281,8 +420,8 @@ export const experience = {
         "fr": "Île-de-France"
       },
       "summary": {
-        "en": "I design and build the execution layer that turns an LLM conversation into controlled actions. The released Go runtime handles tools and sub-agents; the desktop and organizational products built on it remain in development.",
-        "fr": "Je conçois et développe la couche d'exécution qui transforme une conversation LLM en actions contrôlées. Le runtime Go publié gère les outils et les sous-agents ; les produits desktop et organisationnels construits dessus restent en développement."
+        "en": "I design and build the execution layer that turns an LLM conversation into controlled actions. The Go runtime is available today; the desktop and multi-user products built on it remain in construction.",
+        "fr": "Je conçois et développe la couche d'exécution qui transforme une conversation LLM en actions contrôlées. Le runtime Go est disponible aujourd'hui ; les produits desktop et multi-utilisateurs construits dessus restent en construction."
       },
       "metric": {
         "v": "SDK + gRPC",
@@ -831,18 +970,18 @@ export interface Skill {
 export const skills = {
   title: { en: "Skills", fr: "Compétences" } as L,
   lead: {
-    en: "Not a list of keywords: pick a skill to see where I actually used it.",
-    fr: "Pas une liste de mots-clés : choisissez une compétence pour voir où je l'ai vraiment utilisée.",
+    en: "Seven domains, and where each technology was actually used. No percentages, no invented proficiency.",
+    fr: "Sept domaines, et où chaque technologie a réellement servi. Pas de pourcentages ni de niveau inventé.",
   } as L,
   usedIn: { en: "Used in", fr: "Utilisé dans" } as L,
   none: { en: "Hands-on practice and courses, no production project listed here.", fr: "Pratique et formations, pas de projet de production listé ici." } as L,
-  pick: { en: "Select a skill", fr: "Choisissez une compétence" } as L,
-  skills: { en: "skills", fr: "compétences" } as L,
+  pick: { en: "Select a technology to see where it was used.", fr: "Choisissez une technologie pour voir où elle a servi." } as L,
+  skills: { en: "technologies", fr: "technologies" } as L,
   groups: [
     {
-      id: "agents",
+      id: "ai",
       icon: "bot",
-      name: { en: "Agents & LLM systems", fr: "Agents & systèmes LLM" } as L,
+      name: { en: "AI & Agentic Systems", fr: "IA & systèmes agentiques" } as L,
       tagline: { en: "The core of my work today.", fr: "Le cœur de mon travail aujourd'hui." } as L,
       items: [
         { n: "Seshat runtime", used: ["Seshat", "Hello Pulse"] },
@@ -858,58 +997,69 @@ export const skills = {
       ],
     },
     {
-      id: "backend",
-      icon: "server",
-      name: { en: "Backend & product", fr: "Backend & produit" } as L,
-      tagline: { en: "From the API to the desktop app.", fr: "De l'API à l'application de bureau." } as L,
-      items: [
-        { n: "Go", used: ["Seshat", "Hello Pulse"] },
-        { n: "Python", used: ["Seshat", "Allianz", "Tech Watch Agent"] },
-        { n: "TypeScript", used: ["Seshat", "Hello Pulse"] },
-        { n: "Next.js / React", used: ["Hello Pulse", "Tech Watch Agent"] },
-        { n: "FastAPI", used: ["Tech Watch Agent", "Solar forecasting"] },
-        { n: "Electron", used: ["SeshatOS"] },
-        { n: "gRPC", used: ["Seshat"] },
-        { n: "REST & SSE", used: ["Hello Pulse"] },
-        { n: "WebSocket", used: ["Hello Pulse"] },
-      ],
-    },
-    {
-      id: "data",
-      icon: "database",
-      name: { en: "Data engineering", fr: "Data engineering" } as L,
-      tagline: { en: "Pipelines that pass parity tests.", fr: "Des pipelines qui passent les tests de parité." } as L,
-      items: [
-        { n: "PySpark", used: ["Allianz", "BI Retail"] },
-        { n: "Azure Databricks", used: ["Allianz"] },
-        { n: "Medallion architecture", used: ["Allianz"] },
-        { n: "PostgreSQL / pgvector", used: ["Seshat", "Hello Pulse", "Tech Watch Agent", "BI Retail"] },
-        { n: "SQL", used: ["Allianz", "BI Retail"] },
-        { n: "Airflow", used: ["BI Retail"] },
-        { n: "Pandas / NumPy", used: ["Lyne et Frères", "Solar forecasting"] },
-        { n: "Parquet", used: ["Allianz"] },
-        { n: "Data quality", used: ["Allianz"] },
-      ],
-    },
-    {
       id: "ml",
-      icon: "eye",
-      name: { en: "Machine learning & vision", fr: "Machine learning & vision" } as L,
+      icon: "brain",
+      name: { en: "Machine Learning & Data Science", fr: "Machine learning & data science" } as L,
       tagline: { en: "Where I started.", fr: "Là où j'ai commencé." } as L,
       items: [
         { n: "PyTorch", used: ["Sylvagreg"] },
+        { n: "Scikit-learn", used: ["Solar forecasting"] },
+        { n: "Pandas / NumPy", used: ["Lyne et Frères", "Solar forecasting"] },
+        { n: "YOLO / OpenCV", used: ["Football video analysis", "Waste-collection robot"] },
         { n: "GANs", used: ["Sylvagreg"] },
         { n: "Photogrammetry", used: ["Sylvagreg", "Sylva3D"] },
-        { n: "YOLO / OpenCV", used: ["Football video analysis", "Waste-collection robot"] },
-        { n: "Scikit-learn", used: ["Solar forecasting"] },
         { n: "Reinforcement learning", used: ["Waste-collection robot"] },
         { n: "TensorFlow" },
       ],
     },
     {
+      id: "data",
+      icon: "database",
+      name: { en: "Data Engineering", fr: "Data engineering" } as L,
+      tagline: { en: "Pipelines that pass parity tests.", fr: "Des pipelines qui passent les tests de parité." } as L,
+      items: [
+        { n: "PySpark", used: ["Allianz", "BI Retail"] },
+        { n: "Azure Databricks", used: ["Allianz"] },
+        { n: "Medallion architecture", used: ["Allianz"] },
+        { n: "Airflow", used: ["BI Retail"] },
+        { n: "Parquet", used: ["Allianz"] },
+        { n: "Data quality", used: ["Allianz"] },
+        { n: "SQL", used: ["Allianz", "BI Retail"] },
+        { n: "Power BI", used: ["BI Retail"] },
+        { n: "Streamlit", used: ["Lyne et Frères"] },
+      ],
+    },
+    {
+      id: "backend",
+      icon: "server",
+      name: { en: "Backend & Systems Engineering", fr: "Backend & ingénierie système" } as L,
+      tagline: { en: "From the API down to the runtime.", fr: "De l'API jusqu'au runtime." } as L,
+      items: [
+        { n: "Go", used: ["Seshat", "Hello Pulse"] },
+        { n: "Python", used: ["Seshat", "Allianz", "Tech Watch Agent"] },
+        { n: "Rust" },
+        { n: "gRPC", used: ["Seshat"] },
+        { n: "REST & SSE", used: ["Hello Pulse"] },
+        { n: "WebSocket", used: ["Hello Pulse"] },
+        { n: "FastAPI", used: ["Tech Watch Agent", "Solar forecasting"] },
+      ],
+    },
+    {
+      id: "frontend",
+      icon: "app",
+      name: { en: "Frontend & Desktop Applications", fr: "Frontend & applications desktop" } as L,
+      tagline: { en: "Interfaces that make the engine usable.", fr: "Des interfaces qui rendent le moteur utilisable." } as L,
+      items: [
+        { n: "TypeScript", used: ["Seshat", "Hello Pulse"] },
+        { n: "Next.js / React", used: ["Hello Pulse", "Tech Watch Agent"] },
+        { n: "Electron", used: ["SeshatOS"] },
+        { n: "Konva", used: ["Hello Pulse"] },
+      ],
+    },
+    {
       id: "cloud",
       icon: "cloud",
-      name: { en: "Cloud & delivery", fr: "Cloud & livraison" } as L,
+      name: { en: "Cloud & Infrastructure", fr: "Cloud & infrastructure" } as L,
       tagline: { en: "Shipping it, and keeping it running.", fr: "Le livrer, et le garder en route." } as L,
       items: [
         { n: "Docker", used: ["Hello Pulse", "BI Retail", "Sylvagreg", "Tech Watch Agent"] },
@@ -917,8 +1067,18 @@ export const skills = {
         { n: "AWS", used: ["Sylvagreg"] },
         { n: "Git & GitHub Actions", used: ["Hello Pulse", "Seshat"] },
         { n: "CI/CD", used: ["Hello Pulse", "Seshat"] },
-        { n: "Power BI", used: ["BI Retail"] },
-        { n: "Streamlit", used: ["Lyne et Frères"] },
+      ],
+    },
+    {
+      id: "storage",
+      icon: "layers",
+      name: { en: "Databases & Retrieval Systems", fr: "Bases de données & recherche" } as L,
+      tagline: { en: "Where the answers come from.", fr: "D'où viennent les réponses." } as L,
+      items: [
+        { n: "PostgreSQL / pgvector", used: ["Seshat", "Hello Pulse", "Tech Watch Agent", "BI Retail"] },
+        { n: "SQL", used: ["Allianz", "BI Retail"] },
+        { n: "Redis", used: ["Hello Pulse"] },
+        { n: "Vector search", used: ["Seshat", "Tech Watch Agent"] },
       ],
     },
   ] as { id: string; icon: string; name: L; tagline: L; items: Skill[] }[],
